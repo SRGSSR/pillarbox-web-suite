@@ -1,0 +1,36 @@
+name: Quality
+
+on:
+  merge_group:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          always-auth: true
+          registry-url: https://npm.pkg.github.com/
+          scope: '@srgssr'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        env:
+          CI: true
+        run: |
+          npm pkg delete scripts.prepare
+          npm ci
+
+      - name: Run JS and CSS linters
+        run: |
+          npm run eslint && npm run stylelint

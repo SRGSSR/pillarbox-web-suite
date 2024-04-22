@@ -1,0 +1,91 @@
+# Pillarbox Web: {{titleCase name}}
+
+<!--
+Introduce your plugin with a clear overview of its goals, providing
+essential context and addressing fundamental questions.
+-->
+
+## Requirements
+
+To use this component, you need the following installed on your system:
+
+- Node.js
+
+## Quick Start
+
+To get started with this plugin, follow these steps:
+
+Add the `@srgssr` registry to your `.npmrc` file:
+
+```plaintext
+//npm.pkg.github.com/:_authToken=TOKEN
+@srgssr:registry=https://npm.pkg.github.com
+```
+
+Generate a personal access token on the [Personal Access Tokens page][token-settings]. For more
+information on using tokens with GitHub packages,
+visit: [Authenticating with a Personal Access Token][token-guide].
+
+You can now install it through `npm` the following command:
+
+```bash
+npm install --save @srgssr/pillarbox-web @srgssr/{{kebabCase name}}
+```
+
+For instructions on setting up Pillarbox, see the [Quick Start guide](SRGSSR/pillarbox-web#quick-start).
+
+Once the player is installed you can activate the plugin as follows:
+
+```javascript
+import Pillarbox from '@srgssr/pillarbox-web';
+import '@srgssr/{{kebabCase name}}';
+
+const player = new Pillarbox('my-player', { plugins: { '{{kebabCase name}}': true } });
+player.src({
+  src: 'urn:swi:video:48115940',
+  type: 'srgssr/urn'
+});
+```
+
+## Contributing
+
+For detailed contribution guidelines, refer to the main project’s [README file][main-readme]. Please
+adhere to the specified guidelines.
+
+### Setting up a development server
+
+Start the development server:
+
+```bash
+npm run start
+```
+
+This will start the server on `http://localhost:4200`. Open this URL in your browser to view the
+demo page.
+
+The video player (`player`) and the Pillarbox library (`pillarbox`) are exposed on the `window`
+object, making it easy to access and manipulate from the browser's developer console for debugging.
+
+#### Available URL parameters
+
+The demo page supports several URL parameters that modify the behavior of the video player:
+
+- `debug`: Set this to enable debugging mode.
+- `ilHost`: Specifies the host for the data provider.
+- `language`: Sets the language for the player interface.
+- `urn`: Specifies the URN of the video to load. Default is `urn:rts:video:14683290`.
+
+You can combine parameters in the URL like so:
+
+```plaintext
+http://localhost:4200/?language=fr&urn=urn:rts:video:14318206
+```
+
+## Licensing
+
+This project is licensed under the MIT License. See the [LICENSE](../../LICENSE) file for more
+details.
+
+[main-readme]: ../../docs/README.md#Contributing
+
+[generate-token]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-with-a-personal-access-token

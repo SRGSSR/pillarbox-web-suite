@@ -32,6 +32,9 @@ jspm_packages/
 # Optional stylelint cache
 .stylelintcache
 
+# Parcel cache
+.parcel-cache
+
 # Output of 'npm pack'
 *.tgz
 
@@ -44,6 +47,7 @@ jspm_packages/
 
 # Generated output
 dist
+coverage
 
 # Intellij
 .idea

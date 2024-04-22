@@ -1,0 +1,22 @@
+import pillarbox from '@srgssr/pillarbox-web';
+
+const Plugin = pillarbox.getPlugin('plugin');
+
+/**
+ * Represents a {{properCase name}} plugin for the pillarbox player.
+ *
+ * @extends Plugin
+ */
+export default class {{properCase name}} extends Plugin {
+  /**
+   * Creates an instance of a {{properCase name}}.
+   *
+   * @param {import('@srgssr/pillarbox-web').Player} player The player instance.
+   * @param {Object} options Configuration options for the plugin.
+   */
+  constructor(player, options) {
+    super(player, options);
+  }
+}
+
+pillarbox.registerPlugin('{{camelCase name}}', {{properCase name}});
