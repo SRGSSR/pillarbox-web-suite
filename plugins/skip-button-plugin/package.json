@@ -1,10 +1,10 @@
 {
-  "name": "@srgssr/{{kebabCase name}}",
+  "name": "@srgssr/skip-button-plugin",
   "version": "0.0.1",
   "type": "module",
-  "main": "dist/{{kebabCase name}}.umd.js",
-  "module": "dist/{{kebabCase name}}.es.js",
-  "style": "./dist/{{kebabCase name}}.min.css",
+  "main": "dist/skip-button-plugin.umd.js",
+  "module": "dist/skip-button-plugin.es.js",
+  "style": "./dist/skip-button-plugin.min.css",
   "files": [
     "dist/*",
     "scss/*"
@@ -19,10 +19,10 @@
   },
   "scripts": {
     "build": "npm run build:lib && npm run build:css",
-    "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules",
+    "build:css": "sass ./scss/skip-button-plugin.scss:dist/skip-button-plugin.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "rollup -c",
     "github:page": "parcel build index.html --target github-page",
-    "start": "parcel -p 4200 index.html",
+    "start": "parcel -p 4200 index.html --open",
     "test": "jest --verbose"
   },
   "peerDependencies": {

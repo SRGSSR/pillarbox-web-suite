@@ -1,15 +1,18 @@
-name: Quality
+name: Deploy PR previews
 
 on:
-  merge_group:
   pull_request:
-    branches:
-      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency: preview-${{ github.ref }}
 
 jobs:
-  quality:
+  deploy-preview:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,20 +27,23 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+
       - name: Install dependencies
+        if: github.event.action != 'closed'
         env:
           CI: true
         run: |
           npm pkg delete scripts.prepare
           npm ci
 
-      - name: Run JS and CSS linters
+      - name: Run build
+        if: github.event.action != 'closed'
         run: |
-          npm run eslint && npm run stylelint
+          npm run github:page
 
-      - name: Run unit tests
-        run: |
-          npm test
-
-      - name: Coverage
-        uses: ArtiomTr/jest-coverage-report-action@v2
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: dist
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview

@@ -1,4 +1,5 @@
 import pillarbox from '@srgssr/pillarbox-web';
+import SkipButton from './skip-button.js';'./skip-button.js';
 
 /**
  * @ignore
@@ -7,20 +8,21 @@ import pillarbox from '@srgssr/pillarbox-web';
 const Plugin = pillarbox.getPlugin('plugin');
 
 /**
- * Represents a {{properCase name}} plugin for the pillarbox player.
+ * Represents a SkipButtonPlugin plugin for the pillarbox player.
  */
-class {{properCase name}} extends Plugin {
+class SkipButtonPlugin extends Plugin {
   /**
-   * Creates an instance of a {{properCase name}}.
+   * Creates an instance of a SkipButtonPlugin.
    *
    * @param {import('@srgssr/pillarbox-web').Player} player The player instance.
    * @param {Object} options Configuration options for the plugin.
    */
   constructor(player, options) {
     super(player, options);
+    this.player.addChild('SkipButton');
   }
 }
 
-pillarbox.registerPlugin('{{camelCase name}}', {{properCase name}});
+pillarbox.registerPlugin('skipButtonPlugin', SkipButtonPlugin);
 
-export default {{propertCase name}};
+export {SkipButtonPlugin, SkipButton};

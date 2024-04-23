@@ -1,15 +1,13 @@
-name: Quality
+name: Github Page
 
 on:
-  merge_group:
-  pull_request:
+  push:
     branches:
       - main
 
 jobs:
-  quality:
+  github-page:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,20 +22,23 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+
       - name: Install dependencies
-        env:
+        env :
           CI: true
         run: |
           npm pkg delete scripts.prepare
           npm ci
 
-      - name: Run JS and CSS linters
+      - name: Run build Github Page
         run: |
-          npm run eslint && npm run stylelint
+          npm run github:page
 
-      - name: Run unit tests
-        run: |
-          npm test
-
-      - name: Coverage
-        uses: ArtiomTr/jest-coverage-report-action@v2
+      - name: Deploy GitHub Page 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages
+          folder: dist
+          force: false
+          clean-exclude: pr-preview/
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
