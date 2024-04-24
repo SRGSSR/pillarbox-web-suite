@@ -39,5 +39,5 @@ jobs:
         run: |
           npm test
 
-      - name: Coverage
-        uses: ArtiomTr/jest-coverage-report-action@v2
+      - name: Report Coverage
+        uses: davelosert/vitest-coverage-report-action@v2

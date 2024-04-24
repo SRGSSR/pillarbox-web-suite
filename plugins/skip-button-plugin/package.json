@@ -2,9 +2,15 @@
   "name": "@srgssr/skip-button-plugin",
   "version": "0.0.1",
   "type": "module",
-  "main": "dist/skip-button-plugin.umd.js",
+  "main": "dist/skip-button-plugin.cjs.js",
   "module": "dist/skip-button-plugin.es.js",
   "style": "./dist/skip-button-plugin.min.css",
+  "exports": {
+    ".": {
+      "import": "./dist/skip-button-plugin.es.js",
+      "require": "./dist/skip-button-plugin.cjs.js"
+    }
+  },
   "files": [
     "dist/*",
     "scss/*"
@@ -23,7 +29,7 @@
     "build:lib": "rollup -c",
     "github:page": "parcel build index.html --target github-page",
     "start": "parcel -p 4200 index.html --open",
-    "test": "jest --verbose"
+    "test": "vitest run --silent --coverage --coverage.reporter text"
   },
   "peerDependencies": {
     "@srgssr/pillarbox-web": "^1.0.0"
