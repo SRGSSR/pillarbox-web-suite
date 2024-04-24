@@ -13,14 +13,19 @@ const Button = pillarbox.getComponent('Button');
  */
 class SkipButton extends Button {
   /**
-   * @type {TextTrackCue}
+   * The currently active interval.
+   *
+   * @type {VTTCue}
    */
   activeInterval;
 
   constructor(player, options) {
     super(player, options);
-    this.addClass('pbw-skip-button', 'vjs-hidden', 'vjs-visible-text');
     this.player().on('srgssr/interval', ({ data }) => this.handleTimeIntervalChange(data));
+  }
+
+  buildCSSClass() {
+    return `${super.buildCSSClass()} pbw-skip-button vjs-hidden vjs-visible-text`;
   }
 
   handleClick(event) {
@@ -28,8 +33,16 @@ class SkipButton extends Button {
     this.player().currentTime(this.activeInterval.endTime);
   }
 
+  /**
+   * Handles the time interval change and updates the currently active interval.
+   * If there is no currently active interval the component is hidden, otherwise
+   * it is shown.
+   *
+   * @param {VTTCue} data
+   */
   handleTimeIntervalChange(data) {
     this.activeInterval = data;
+
     if (!this.activeInterval) {
       this.hide();
 
@@ -39,11 +52,10 @@ class SkipButton extends Button {
     /**
      * @type {import('@srgssr/pillarbox-web/dist/types/src/dataProvider/model/typedef').TimeInterval}
      */
-    const timeInterval = JSON.parse(data.text);
+    const timeInterval = JSON.parse(this.activeInterval.text);
     const text = timeInterval.type === 'OPENING_CREDITS' ? 'Skip intro' : 'Skip credits';
 
     this.controlText(this.localize(text));
-    this.activeInterval = data;
     this.show();
   }
 }

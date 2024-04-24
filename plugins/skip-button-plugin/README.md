@@ -37,7 +37,7 @@ Once the player is installed you can activate the plugin as follows:
 import Pillarbox from '@srgssr/pillarbox-web';
 import '@srgssr/skip-button-plugin';
 
-const player = new Pillarbox('my-player', { plugins: { 'skip-button-plugin': true } });
+const player = new Pillarbox('my-player', { plugins: { 'skipButtonPlugin': true } });
 player.src({
   src: 'urn:swi:video:48115940',
   type: 'srgssr/urn'

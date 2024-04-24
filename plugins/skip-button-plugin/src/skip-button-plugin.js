@@ -1,5 +1,5 @@
 import pillarbox from '@srgssr/pillarbox-web';
-import SkipButton from './skip-button.js';'./skip-button.js';
+import SkipButton from './skip-button.js';
 
 /**
  * @ignore
@@ -25,4 +25,4 @@ class SkipButtonPlugin extends Plugin {
 
 pillarbox.registerPlugin('skipButtonPlugin', SkipButtonPlugin);
 
-export {SkipButtonPlugin, SkipButton};
+export { SkipButtonPlugin, SkipButton };
