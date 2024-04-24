@@ -42,15 +42,15 @@ export default [
     })]
   },
   /**
-   * Rollup build configuration for the UMD build.
+   * Rollup build configuration for the CJS build.
    *
    * Outputs:
-   * - 'dist/skip-button-plugin.umd.min.js': Minified UMD version with sourcemaps.
-   * - 'dist/skip-button-plugin.umd.js': Non-minified UMD.
+   * - 'dist/skip-button-plugin.cjs.min.js': Minified UMD version with sourcemaps.
+   * - 'dist/skip-button-plugin.cjs.js': Non-minified UMD.
    *
    * @example
    * ```html
-   * <script src="skip-button-plugin.umd.min.js"></script>
+   * <script src="skip-button-plugin.cjs.min.js"></script>
    * ```
    *
    * @type {import('rollup').RollupOptions}
@@ -60,8 +60,8 @@ export default [
     output: [
       {
         name: 'SkipButtonPlugin',
-        file: 'dist/skip-button-plugin.umd.min.js',
-        format: 'umd',
+        file: 'dist/skip-button-plugin.cjs.min.js',
+        format: 'cjs',
         sourcemap: true,
         globals: {
           '@srgssr/pillarbox-web': 'pillarbox'
@@ -70,8 +70,8 @@ export default [
       },
       {
         name: 'SkipButtonPlugin',
-        file: 'dist/skip-button-plugin.umd.js',
-        format: 'umd',
+        file: 'dist/skip-button-plugin.cjs.js',
+        format: 'cjs',
         globals: {
           '@srgssr/pillarbox-web': 'pillarbox'
         },

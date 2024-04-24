@@ -42,15 +42,15 @@ export default [
     })]
   },
   /**
-   * Rollup build configuration for the UMD build.
+   * Rollup build configuration for the CJS build.
    *
    * Outputs:
-   * - 'dist/{{kebabCase name}}.umd.min.js': Minified UMD version with sourcemaps.
-   * - 'dist/{{kebabCase name}}.umd.js': Non-minified UMD.
+   * - 'dist/{{kebabCase name}}.cjs.min.js': Minified UMD version with sourcemaps.
+   * - 'dist/{{kebabCase name}}.cjs.js': Non-minified UMD.
    *
    * @example
    * ```html
-   * <script src="{{kebabCase name}}.umd.min.js"></script>
+   * <script src="{{kebabCase name}}.cjs.min.js"></script>
    * ```
    *
    * @type {import('rollup').RollupOptions}
@@ -60,8 +60,8 @@ export default [
     output: [
       {
         name: '{{properCase name}}',
-        file: 'dist/{{kebabCase name}}.umd.min.js',
-        format: 'umd',
+        file: 'dist/{{kebabCase name}}.cjs.min.js',
+        format: 'cjs',
         sourcemap: true,
         globals: {
           '@srgssr/pillarbox-web': 'pillarbox'
@@ -70,8 +70,8 @@ export default [
       },
       {
         name: '{{properCase name}}',
-        file: 'dist/{{kebabCase name}}.umd.js',
-        format: 'umd',
+        file: 'dist/{{kebabCase name}}.cjs.js',
+        format: 'cjs',
         globals: {
           '@srgssr/pillarbox-web': 'pillarbox'
         },

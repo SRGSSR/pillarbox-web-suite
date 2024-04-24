@@ -1,20 +1,21 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
-    "jest/globals": true
+    "es2021": true
   },
-  "plugins": [
-    "jest"
-  ],
   "extends": [
-    "eslint:recommended",
-    "plugin:jest/recommended"
+    "eslint:recommended"
   ],
   "overrides": [
     {
       "files": [
         "plugins/**/test/**"
+      ],
+      "plugins": [
+        "vitest"
+      ],
+      "extends": [
+        "plugin:vitest/recommended"
       ],
       "rules": {
         "complexity": "off",
@@ -26,7 +27,9 @@
       }
     },
     {
-      "files": ["scripts/**/*.js"],
+      "files": [
+        "scripts/**/*.js"
+      ],
       "env": {
         "browser": false,
         "node": true

@@ -1,3 +1,4 @@
+import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import pillarbox from '@srgssr/pillarbox-web';
 import { SkipButtonPlugin } from '../src/skip-button-plugin.js';
 
