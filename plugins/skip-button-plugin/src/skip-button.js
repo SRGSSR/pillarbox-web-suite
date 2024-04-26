@@ -19,10 +19,24 @@ class SkipButton extends Button {
    * @type {VTTCue}
    */
   activeInterval;
+  /**
+   * Handles the event triggered on changing the time interval.
+   * This method serves as a proxy to the main time interval change handler,
+   * ensuring that additional logic can be executed or making it easier to
+   * detach the event listener later.
+   *
+   * @private
+   */
+  onTimeIntervalChange_ = ({ data }) => this.handleTimeIntervalChange(data);
 
   constructor(player, options) {
     super(player, options);
-    this.player().on('srgssr/interval', ({ data }) => this.handleTimeIntervalChange(data));
+    this.player().on('srgssr/interval', this.onTimeIntervalChange_);
+  }
+
+  dispose() {
+    this.player().off('srgssr/interval', this.onTimeIntervalChange_);
+    super.dispose();
   }
 
   buildCSSClass() {
@@ -39,10 +53,10 @@ class SkipButton extends Button {
    * If there is no currently active interval the component is hidden, otherwise
    * it is shown.
    *
-   * @param {VTTCue} data
+   * @param {VTTCue} cue The cue for the current time interval.
    */
-  handleTimeIntervalChange(data) {
-    this.activeInterval = data;
+  handleTimeIntervalChange(cue) {
+    this.activeInterval = cue;
 
     if (!this.activeInterval) {
       this.hide();
