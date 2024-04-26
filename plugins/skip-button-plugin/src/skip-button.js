@@ -1,4 +1,5 @@
 import pillarbox from '@srgssr/pillarbox-web';
+import './lang';
 
 /**
  * @ignore
@@ -61,26 +62,5 @@ class SkipButton extends Button {
 }
 
 pillarbox.registerComponent('SkipButton', SkipButton);
-
-pillarbox.addLanguage('en', {
-  'Skip credits': 'Skip credits',
-  'Skip intro': 'Skip intro',
-});
-pillarbox.addLanguage('fr', {
-  'Skip credits': 'Passer',
-  'Skip intro': 'Passer l’intro',
-});
-pillarbox.addLanguage('de', {
-  'Skip credits': 'Abspann überspringen',
-  'Skip intro': 'Intro überspringen'
-});
-pillarbox.addLanguage('it', {
-  'Skip credits': 'Salta i credits',
-  'Skip intro': 'Salta l\'intro',
-});
-pillarbox.addLanguage('rm', {
-  'Skip credits': 'Sursiglir credentials',
-  'Skip intro': 'Sursiglir intro',
-});
 
 export default SkipButton;

@@ -1,4 +1,5 @@
 import pillarbox from '@srgssr/pillarbox-web';
+{{#if wantLocalization}}import './lang';{{/if}}
 
 /**
  * @ignore
@@ -23,4 +24,4 @@ class {{properCase name}} extends Plugin {
 
 pillarbox.registerPlugin('{{camelCase name}}', {{properCase name}});
 
-export default {{propertCase name}};
+export default {{properCase name}};

@@ -1,8 +1,9 @@
-import resolve from '@rollup/plugin-node-resolve';
-import terser from '@rollup/plugin-terser';
+import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
-import babel from '@rollup/plugin-babel';
+import json from '@rollup/plugin-json';
+import resolve from '@rollup/plugin-node-resolve';
+import terser from '@rollup/plugin-terser';
 
 /**
  * Rollup build configurations for the Skip button Plugin.
@@ -36,7 +37,7 @@ export default [
       }
     ],
     external: ['@srgssr/pillarbox-web'],
-    plugins: [resolve(), babel({
+    plugins: [json(), resolve(), babel({
       babelHelpers: 'bundled',
       exclude: 'node_modules/**'
     })]
@@ -79,7 +80,7 @@ export default [
       }
     ],
     external: ['@srgssr/pillarbox-web'],
-    plugins: [commonjs(), resolve(), babel({
+    plugins: [commonjs(), json(), resolve(), babel({
       babelHelpers: 'bundled',
       exclude: 'node_modules/**'
     })]
