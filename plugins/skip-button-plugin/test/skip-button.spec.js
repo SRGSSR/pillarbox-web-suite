@@ -76,4 +76,19 @@ describe('SkipButton', () => {
     // Then
     expect(currentTime).toHaveBeenCalledWith(endTime);
   });
+
+  it('should unregister the time interval change event listener upon disposal', () => {
+    // Given
+    const player = { on: vi.fn(), off: vi.fn(), currentTime: vi.fn() };
+    const skipButtonInstance = Object.create(SkipButton.prototype);
+
+    skipButtonInstance.player = () => player;
+    player.on('srgssr/interval', skipButtonInstance.onTimeIntervalChange_);
+
+    // When
+    SkipButton.prototype.dispose.call(skipButtonInstance);
+
+    // Then
+    expect(player.off).toHaveBeenCalledWith('srgssr/interval', skipButtonInstance.onTimeIntervalChange_);
+  });
 });
