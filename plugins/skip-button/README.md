@@ -1,7 +1,8 @@
-# Pillarbox Web: SkipButtonPlugin
+# Pillarbox Web: SkipButton
 
-> Introduce your plugin with a clear overview of its goals, providing
-> essential context and addressing fundamental questions.
+A custom component that extends the pillarbox-web player allowing users to skip certain parts of the
+video content, such as opening credits or end credits, by listening to
+the [`srgssr/interval` event](https://srgssr.github.io/pillarbox-web/api/tutorial-Events.html#srgssr%2Finterval-event).
 
 ## Requirements
 
@@ -11,7 +12,7 @@ To use this component, you need the following installed on your system:
 
 ## Quick Start
 
-To get started with this plugin, follow these steps:
+To get started with this component, follow these steps:
 
 Add the `@srgssr` registry to your `.npmrc` file:
 
@@ -26,18 +27,19 @@ guide: [Authenticating with a personal access token][generate-token]
 You can now install it through `npm` the following command:
 
 ```bash
-npm install --save @srgssr/pillarbox-web @srgssr/skip-button-plugin
+npm install --save @srgssr/pillarbox-web @srgssr/skip-button
 ```
 
-For instructions on setting up Pillarbox, see the [Quick Start guide](SRGSSR/pillarbox-web#quick-start).
+For instructions on setting up Pillarbox, see
+the [Quick Start guide](SRGSSR/pillarbox-web#quick-start).
 
-Once the player is installed you can activate the plugin as follows:
+Once the player is installed you can activate the button as follows:
 
 ```javascript
 import Pillarbox from '@srgssr/pillarbox-web';
-import '@srgssr/skip-button-plugin';
+import '@srgssr/skip-button';
 
-const player = new Pillarbox('my-player', { plugins: { 'skipButtonPlugin': true } });
+const player = new Pillarbox('my-player', { SkipButton: true });
 player.src({
   src: 'urn:swi:video:48115940',
   type: 'srgssr/urn'

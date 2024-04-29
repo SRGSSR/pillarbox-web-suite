@@ -13,25 +13,25 @@ export default [
    * Rollup build configuration for the ESModule build.
    *
    * Outputs:
-   * - 'dist/skip-button-plugin.es.min.js': Minified ESModule version with sourcemaps.
-   * - 'dist/skip-button-plugin.es.js': Non-minified ESModule.
+   * - 'dist/skip-button.es.min.js': Minified ESModule version with sourcemaps.
+   * - 'dist/skip-button.es.js': Non-minified ESModule.
    *
    * @example
    * ```javascript
-   * import '@srgssr/skip-button-plugin'
+   * import '@srgssr/skip-button'
    * ```
    */
   {
-    input: 'src/skip-button-plugin.js',
+    input: 'src/skip-button.js',
     output: [
       {
-        file: 'dist/skip-button-plugin.es.min.js',
+        file: 'dist/skip-button.es.min.js',
         format: 'es',
         sourcemap: true,
         plugins: [terser()],
       },
       {
-        file: 'dist/skip-button-plugin.es.js',
+        file: 'dist/skip-button.es.js',
         format: 'es',
         plugins: [filesize()]
       }
@@ -46,22 +46,22 @@ export default [
    * Rollup build configuration for the CJS build.
    *
    * Outputs:
-   * - 'dist/skip-button-plugin.cjs.min.js': Minified UMD version with sourcemaps.
-   * - 'dist/skip-button-plugin.cjs.js': Non-minified UMD.
+   * - 'dist/skip-button.cjs.min.js': Minified UMD version with sourcemaps.
+   * - 'dist/skip-button.cjs.js': Non-minified UMD.
    *
    * @example
    * ```html
-   * <script src="skip-button-plugin.cjs.min.js"></script>
+   * <script src="skip-button.cjs.min.js"></script>
    * ```
    *
    * @type {import('rollup').RollupOptions}
    */
   {
-    input: 'src/skip-button-plugin.js',
+    input: 'src/skip-button.js',
     output: [
       {
         name: 'SkipButtonPlugin',
-        file: 'dist/skip-button-plugin.cjs.min.js',
+        file: 'dist/skip-button.cjs.min.js',
         format: 'cjs',
         sourcemap: true,
         globals: {
@@ -71,7 +71,7 @@ export default [
       },
       {
         name: 'SkipButtonPlugin',
-        file: 'dist/skip-button-plugin.cjs.js',
+        file: 'dist/skip-button.cjs.js',
         format: 'cjs',
         globals: {
           '@srgssr/pillarbox-web': 'pillarbox'

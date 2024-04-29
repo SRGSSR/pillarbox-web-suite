@@ -4,9 +4,9 @@
   <meta charset="UTF-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SkipButtonPlugin Demo</title>
+  <title>SkipButton Demo</title>
   <link rel="stylesheet" href="npm:@srgssr/pillarbox-web/dist/pillarbox.min.css"/>
-  <link rel="stylesheet" href="./scss/skip-button-plugin.scss"/>
+  <link rel="stylesheet" href="scss/skip-button.scss"/>
   <style>
     html,
     body {
@@ -24,7 +24,7 @@
 
 <script type="module">
   import pillarbox from '@srgssr/pillarbox-web';
-  import './src/skip-button-plugin.js';
+  import './src/skip-button.js';
 
   // Handle URL parameters
   const searchParams = new URLSearchParams(location.search);
@@ -33,14 +33,14 @@
   const language = searchParams.get('language');
   const urn = searchParams.get('urn') || 'urn:rts:video:14683290';
 
-  // Create a pillarbox player instance with the SkipButtonPlugin plugin
+  // Create a pillarbox player instance with the SkipButton enabled
   window.player = pillarbox('player', {
     debug,
     language,
     srgOptions: {
       dataProviderHost: ilHost
     },
-    plugins: { 'skipButtonPlugin': true }
+    SkipButton: true
   });
 
   // Load the video source for the player
