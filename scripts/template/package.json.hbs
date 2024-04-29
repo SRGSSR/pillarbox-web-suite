@@ -1,14 +1,14 @@
 {
-  "name": "@srgssr/skip-button-plugin",
+  "name": "@srgssr/{{kebabCase name}}",
   "version": "0.0.1",
   "type": "module",
-  "main": "dist/skip-button-plugin.cjs.js",
-  "module": "dist/skip-button-plugin.es.js",
-  "style": "./dist/skip-button-plugin.min.css",
+  "main": "dist/{{kebabCase name}}.cjs.js",
+  "module": "dist/{{kebabCase name}}.es.js",
+  "style": "./dist/{{kebabCase name}}.min.css",
   "exports": {
     ".": {
-      "import": "./dist/skip-button-plugin.es.js",
-      "require": "./dist/skip-button-plugin.cjs.js"
+      "import": "./dist/{{kebabCase name}}.es.js",
+      "require": "./dist/{{kebabCase name}}.cjs.js"
     }
   },
   "files": [
@@ -25,13 +25,13 @@
   },
   "scripts": {
     "build": "npm run build:lib && npm run build:css",
-    "build:css": "sass ./scss/skip-button-plugin.scss:dist/skip-button-plugin.min.css --style compressed --source-map --load-path node_modules",
+    "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "rollup -c",
     "github:page": "parcel build index.html --target github-page",
-    "start": "parcel -p 4200 index.html --open",
+    "start": "parcel -p 4200 index.html",
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
   "peerDependencies": {
-    "@srgssr/pillarbox-web": "^1.0.0"
+    "@srgssr/pillarbox-web": "^1.12.0"
   }
 }

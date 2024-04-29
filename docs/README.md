@@ -45,7 +45,7 @@ npm install
 Open your terminal and execute the following command:
 
 ```bash
-npm run create:plugin
+npm run create
 ```
 
 After running the command, you will be prompted to enter the name of your plugin. A new plugin

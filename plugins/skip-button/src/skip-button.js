@@ -8,7 +8,8 @@ import './lang';
 const Button = pillarbox.getComponent('Button');
 
 /**
- * Represents a SkipButton component for the pillarbox player.
+ * Represents a SkipButton component for the pillarbox player. Allows skipping
+ * opening credits and end credits detected through the 'srgssr/interval' event.
  *
  * @class SkipButton
  */

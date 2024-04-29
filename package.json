@@ -13,7 +13,7 @@
     "themes/*"
   ],
   "scripts": {
-    "create:plugin": "plop --plopfile scripts/create-plugin.js",
+    "create": "plop --plopfile scripts/create.js",
     "eslint": "eslint {plugins/**/{src,test}/**/*.{js,jsx},scripts/*.{js,jsx}}",
     "outdated": "npm outdated",
     "prepare": "husky",

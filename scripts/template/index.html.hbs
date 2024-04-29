@@ -23,7 +23,7 @@
 
 <script type="module">
   import pillarbox from '@srgssr/pillarbox-web';
-  import './src/skip-button-plugin.js';
+  import './src/{{kebabCase name}}.js';
 
   // Handle URL parameters
   const searchParams = new URLSearchParams(location.search);
@@ -32,14 +32,18 @@
   const language = searchParams.get('language');
   const urn = searchParams.get('urn') || 'urn:rts:video:14683290';
 
-  // Create a pillarbox player instance with the {{properCase name}} plugin
+  // Create a pillarbox player instance with the {{properCase name}} enabled
   window.player = pillarbox('player', {
     debug,
     language,
     srgOptions: {
       dataProviderHost: ilHost
     },
-    plugins: { '{{camelCase name}}': true }
+{{#ifEq type 'plugin'}}
+    plugins: { {{camelCase name}}: true }
+{{else}}
+    {{properCase name}}: true
+{{/ifEq}}
   });
 
   // Load the video source for the player

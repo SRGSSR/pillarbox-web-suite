@@ -13,11 +13,17 @@ describe('{{properCase name}}', () => {
   });
 
   beforeEach(() => {
+{{#ifEq type 'Plugin'}}
     player = pillarbox(videoElement, {
       plugins: {
         {{camelCase name}}: true
       }
     });
+{{else}}
+    player = pillarbox(videoElement, {
+      {{properCase name}}: true
+    });
+{{/ifEq}}
   });
 
   afterEach(() => {
@@ -25,7 +31,12 @@ describe('{{properCase name}}', () => {
   });
 
   it('should be registered and attached to the player', () => {
+{{#ifEq type 'Plugin'}}
     expect(pillarbox.getPlugin('{{camelCase name}}')).toBe({{properCase name}});
     expect(player.{{camelCase name}}).toBeDefined();
+{{else}}
+    expect(pillarbox.getComponent('{{properCase name}}')).toBe({{properCase name}});
+    expect(player.{{properCase name}}).toBeDefined();
+{{/ifEq}}
   });
 });
