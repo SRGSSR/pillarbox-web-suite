@@ -40,7 +40,7 @@ Install the dependencies:
 npm install
 ```
 
-### Adding a new plugin
+### Adding a new element
 
 Open your terminal and execute the following command:
 
@@ -48,31 +48,32 @@ Open your terminal and execute the following command:
 npm run create
 ```
 
-After running the command, you will be prompted to enter the name of your plugin. A new plugin
-directory will be generated in the monorepo with the following structure:
+After running the command, you will be prompted to enter the type and name of your element. A new 
+element directory will be generated in the monorepo with the following structure:
 
 ```
-/plugins/your-plugin-name
+/plugins/your-element-name
 |-- src
-|   `-- your-plugin-name.js       # Main JavaScript file for the plugin
+|   |-- lang                      # Folder containing localization files (only if selected)
+|   `-- your-element-name.js      # Main JavaScript file for the element
 |-- test
-|   `-- your-plugin-name.test.js  # Jest tests for your plugin
-|-- .babelrc                      # Babel configuration specific to this plugin
-|-- index.html                    # Demo page to showcase the plugin
-|-- jest.config.js                # Jest configuration specific to this plugin
+|   `-- your-element-name.test.js # A default vitest test for your element
+|-- .babelrc                      # Babel configuration specific to this element
+|-- index.html                    # Demo page to showcase the element
 |-- package.json                  # NPM package file, you might need to install additional dependencies
-|-- README.md                     # Documentation file for the plugin
-`-- rollup.config.js              # Rollup configuration for building the plugin
+|-- README.md                     # Documentation file for the element
+|-- vite.config.lib.js            # Vite configuration for building the element as a library
+`-- vite.config.js                # Vite configuration for building the element demo page
 ```
 
-After the structure is generated, navigate into the plugin's directory:
+After the structure is generated, navigate into the element's directory:
 
 ```bash
-cd plugins/your-plugin-name
+cd plugins/your-element-name
 ```
 
-The README.md file included in your plugin's directory provides detailed instructions on building
-and testing the plugin.
+The README.md file included in your element's directory provides detailed instructions on building
+and testing the element.
 
 ## Contributing
 
@@ -110,7 +111,7 @@ Ensure your code builds correctly before submitting a pull request:
 
 ```shell
 npm run build -ws # Build all the packages in the workspace
-npm run build -w @srgssr/your-plugin-name # Build a single page by name
+npm run build -w @srgssr/your-element-name # Build a single page by name
 ```
 
 Refer to our [Contribution Guide](CONTRIBUTING.md) for more detailed information.

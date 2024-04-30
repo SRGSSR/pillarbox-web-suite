@@ -1,0 +1,28 @@
+import { defineConfig } from 'vite';
+import babel from '@rollup/plugin-babel';
+
+/**
+ * Vite's configuration for the lib build.
+ *
+ * Outputs:
+ * - 'dist/{{kebabCase name}}.es.js': ESModule version with sourcemaps.
+ * - 'dist/{{kebabCase name}}.cjs.js': CommonJS version with sourcemaps.
+ */
+export default defineConfig({
+  esbuild: false,
+  build: {
+    sourcemap: true,
+    lib: {
+      formats: ['es', 'cjs'],
+      name: '{{properCase name}}',
+      entry: 'src/{{kebabCase name}}.js'
+    },
+    rollupOptions: {
+      external: ['@srgssr/pillarbox-web'],
+      plugins: [babel({
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**'
+      })]
+    }
+  }
+});

@@ -9,29 +9,22 @@
     ".": {
       "import": "./dist/skip-button.es.js",
       "require": "./dist/skip-button.cjs.js"
-    }
+    },
+    "./*": "./*"
   },
   "files": [
     "dist/*",
     "scss/*"
   ],
-  "targets": {
-    "main": false,
-    "github-page": {
-      "publicUrl": "./",
-      "isLibrary": false,
-      "outputFormat": "esmodule"
-    }
-  },
   "scripts": {
     "build": "npm run build:lib && npm run build:css",
     "build:css": "sass ./scss/skip-button.scss:dist/skip-button.min.css --style compressed --source-map --load-path node_modules",
-    "build:lib": "rollup -c",
-    "github:page": "parcel build index.html --target github-page",
-    "start": "parcel -p 4200 index.html --open",
+    "build:lib": "vite build --config vite.config.lib.js",
+    "github:page": "vite build",
+    "start": " vite --port 4200 --open",
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
   "peerDependencies": {
-    "@srgssr/pillarbox-web": "^1.12.0"
+    "@srgssr/pillarbox-web": "^1.12.1"
   }
 }
