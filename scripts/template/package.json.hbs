@@ -9,7 +9,8 @@
     ".": {
       "import": "./dist/{{kebabCase name}}.es.js",
       "require": "./dist/{{kebabCase name}}.cjs.js"
-    }
+    },
+    "./*": "./*"
   },
   "files": [
     "dist/*",
@@ -26,12 +27,12 @@
   "scripts": {
     "build": "npm run build:lib && npm run build:css",
     "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules",
-    "build:lib": "rollup -c",
-    "github:page": "parcel build index.html --target github-page",
-    "start": "parcel -p 4200 index.html",
+    "build:lib": "vite build --config vite.config.lib.js",
+    "github:page": "vite build",
+    "start": " vite --port 4200 --open",
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
   "peerDependencies": {
-    "@srgssr/pillarbox-web": "^1.12.0"
+    "@srgssr/pillarbox-web": "^1.12.1"
   }
 }

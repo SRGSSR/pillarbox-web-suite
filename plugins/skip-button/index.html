@@ -5,7 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SkipButton Demo</title>
-  <link rel="stylesheet" href="npm:@srgssr/pillarbox-web/dist/pillarbox.min.css"/>
   <link rel="stylesheet" href="scss/skip-button.scss"/>
   <style>
     html,
@@ -23,6 +22,7 @@
 <video id="player" class="pillarbox-js" controls muted></video>
 
 <script type="module">
+  import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
   import pillarbox from '@srgssr/pillarbox-web';
   import './src/skip-button.js';
 
