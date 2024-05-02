@@ -6,7 +6,7 @@ export default defineConfig({
       reporter: ['text', 'json-summary', 'json'],
       reportOnFailure: true,
       clean: true,
-      include: ['plugins/**/src/**']
+      include: ['packages/**/src/**']
     }
   }
 });

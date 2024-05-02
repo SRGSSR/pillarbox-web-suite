@@ -32,7 +32,7 @@ export default function(plop) {
     actions: data => [
       {
         type: 'addMany',
-        destination: '../plugins/{{kebabCase name}}',
+        destination: '../packages/{{kebabCase name}}',
         base: './template',
         templateFiles: './template/**',
         globOptions: {
