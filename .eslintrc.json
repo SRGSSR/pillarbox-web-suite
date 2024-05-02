@@ -9,7 +9,7 @@
   "overrides": [
     {
       "files": [
-        "plugins/**/test/**"
+        "packages/**/test/**"
       ],
       "plugins": [
         "vitest"

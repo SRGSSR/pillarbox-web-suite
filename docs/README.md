@@ -52,24 +52,24 @@ After running the command, you will be prompted to enter the type and name of yo
 element directory will be generated in the monorepo with the following structure:
 
 ```
-/plugins/your-element-name
+/packages/<your-element-name>
 |-- src
-|   |-- lang                      # Folder containing localization files (only if selected)
-|   `-- your-element-name.js      # Main JavaScript file for the element
+|   |-- lang                        # Folder containing localization files (only if selected)
+|   `-- <your-element-name>.js      # Main JavaScript file for the element
 |-- test
-|   `-- your-element-name.test.js # A default vitest test for your element
-|-- .babelrc                      # Babel configuration specific to this element
-|-- index.html                    # Demo page to showcase the element
-|-- package.json                  # NPM package file, you might need to install additional dependencies
-|-- README.md                     # Documentation file for the element
-|-- vite.config.lib.js            # Vite configuration for building the element as a library
-`-- vite.config.js                # Vite configuration for building the element demo page
+|   `-- <your-element-name>.test.js # A default vitest test for your element
+|-- .babelrc                        # Babel configuration specific to this element
+|-- index.html                      # Demo page to showcase the element
+|-- package.json                    # NPM package file, you might need to install additional dependencies
+|-- README.md                       # Documentation file for the element
+|-- vite.config.lib.js              # Vite configuration for building the element as a library
+`-- vite.config.js                  # Vite configuration for building the element demo page
 ```
 
 After the structure is generated, navigate into the element's directory:
 
 ```bash
-cd plugins/your-element-name
+cd packages/your-element-name
 ```
 
 The README.md file included in your element's directory provides detailed instructions on building

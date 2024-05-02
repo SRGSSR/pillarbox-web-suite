@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const packagesDir = path.join(process.cwd(), 'plugins');
+const packagesDir = path.join(process.cwd(), 'packages');
 const deploymentDir = path.join(process.cwd(), 'dist');
 
 // Ensure the deployment directory exists
@@ -10,7 +10,7 @@ if (!fs.existsSync(deploymentDir)) {
 }
 
 // Read all package directories
-const plugins = fs.readdirSync(packagesDir);
+const packages = fs.readdirSync(packagesDir);
 const indexContent = `
 <!DOCTYPE html>
 <html>
@@ -24,17 +24,17 @@ const indexContent = `
     </style>
 </head>
 <body>
-    <h1>Available Plugins</h1>
+    <h1>Available Packages</h1>
     <ul>
-    ${plugins.map(plugin => {
-        const distDir = path.join(packagesDir, plugin, 'dist');
-        const targetDir = path.join(deploymentDir, plugin);
+    ${packages.map(packageName => {
+        const distDir = path.join(packagesDir, packageName, 'dist');
+        const targetDir = path.join(deploymentDir, packageName);
     
         // Copy if the dist directory exists
         if (fs.existsSync(distDir)) {
           fs.cpSync(distDir, targetDir, { recursive: true });
     
-          return `<li><a href="${plugin}/index.html">${plugin}</a></li>`;
+          return `<li><a href="${packageName}/index.html">${packageName}</a></li>`;
         }
     })}
     </ul>

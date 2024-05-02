@@ -9,12 +9,12 @@
     "url": "git+https://github.com/SRGSSR/pillarbox-web-suite.git"
   },
   "workspaces": [
-    "plugins/*",
+    "packages/*",
     "themes/*"
   ],
   "scripts": {
     "create": "plop --plopfile scripts/create.js",
-    "eslint": "eslint {plugins/**/{src,test}/**/*.{js,jsx},scripts/*.{js,jsx}}",
+    "eslint": "eslint {packages/**/{src,test}/**/*.{js,jsx},scripts/*.{js,jsx}}",
     "outdated": "npm outdated",
     "prepare": "husky",
     "stylelint": "stylelint **/*.{css,scss} --allow-empty-input",
