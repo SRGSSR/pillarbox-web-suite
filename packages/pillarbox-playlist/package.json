@@ -1,0 +1,38 @@
+{
+  "name": "@srgssr/pillarbox-playlist",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/pillarbox-playlist.cjs.js",
+  "module": "dist/pillarbox-playlist.es.js",
+  "style": "./dist/pillarbox-playlist.min.css",
+  "exports": {
+    ".": {
+      "import": "./dist/pillarbox-playlist.es.js",
+      "require": "./dist/pillarbox-playlist.cjs.js"
+    },
+    "./*": "./*"
+  },
+  "files": [
+    "dist/*",
+    "scss/*"
+  ],
+  "targets": {
+    "main": false,
+    "github-page": {
+      "publicUrl": "./",
+      "isLibrary": false,
+      "outputFormat": "esmodule"
+    }
+  },
+  "scripts": {
+    "build": "npm run build:lib && npm run build:css",
+    "build:css": "sass ./scss/pillarbox-playlist.scss:dist/pillarbox-playlist.min.css --style compressed --source-map --load-path node_modules",
+    "build:lib": "vite build --config vite.config.lib.js",
+    "github:page": "vite build",
+    "start": " vite --port 4200 --open",
+    "test": "vitest run --silent --coverage --coverage.reporter text"
+  },
+  "peerDependencies": {
+    "@srgssr/pillarbox-web": "^1.12.1"
+  }
+}
