@@ -9,27 +9,24 @@
             font-family: var(--font-sans);
             background-color: var(--gray-9); /* Dark background for body */
             color: var(--gray-1); /* Light text color */
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
+            margin: 0 auto;
+            padding: var(--size-3);
+            max-width: var(--size-sm);
         }
         header {
             color: var(--gray-3); /* Lightest text color */
-            padding-bottom: 10px;
+            padding-bottom: var(--size-2);
             text-align: center;
             font-size: var(--font-size-1); /* Larger text for the header */
-            margin: 10px auto;
-            max-width: 600px;
-            border-radius: 8px;
+            margin: var(--size-2) auto;
         }
         ul {
             list-style-type: none;
             padding: 0;
-            margin: 10px auto;
-            max-width: 600px;
+            margin: var(--size-2) auto;
             background-color: var(--gray-8); /* Slightly lighter dark background for contrast */
             box-shadow: var(--shadow-3); /* Prominent shadow for 3D effect */
-            border-radius: 8px;
+            border-radius: var(--radius-2);
         }
         li {
             border-bottom: 1px solid var(--gray-7);
@@ -37,17 +34,20 @@
             transition: background-color 0.3s;
         }
         li:first-child {
-            border-radius: 8px 8px 0 0;
+            border-radius: var(--radius-2) var(--radius-2) 0 0;
         }
         li:last-child {
-            border-radius: 0 0 8px 8px;
+            border-radius: 0 0 var(--radius-2) var(--radius-2);
+        }
+        li:only-child {
+            border-radius: var(--radius-2);
         }
         li:hover {
             background-color: var(--gray-6); /* Slightly lighter on hover for interactive feel */
         }
         a {
             display: block;
-            padding: 15px 20px;
+            padding: var(--size-3) var(--size-4);
             text-decoration: none;
             color: var(--gray-4); /* Subtle blue color for links */
             transition: color 0.3s;
