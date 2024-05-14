@@ -1,0 +1,54 @@
+.pbw-playlist-button {
+  cursor: pointer;
+}
+
+.vjs-modal-dialog.pbw-playlist-dialog {
+  right: 0;
+  left: auto;
+  width: 100%;
+  max-width: 30em;
+
+  .vjs-button {
+    cursor: pointer;
+  }
+}
+
+.pbw-playlist-dialog {
+  .vjs-modal-dialog-content {
+    font-size: 1em;
+  }
+
+  .pbw-playlist-items {
+    width: 100%;
+    padding-left: 0;
+    list-style-position: inside;
+    border-radius: 0.5em;
+  }
+
+  .vjs-button.pbw-playlist-item-button {
+    width: 95%;
+    height: auto;
+    padding: 0.5em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+    text-overflow: ellipsis;
+    border-radius: 0.5em;
+  }
+
+  .vjs-selected {
+    color: black;
+    background-color: white;
+  }
+
+  .pbw-playlist-controls {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0;
+
+    .vjs-button {
+      margin-right: 1em;
+      border-radius: 0.5em;
+    }
+  }
+}
