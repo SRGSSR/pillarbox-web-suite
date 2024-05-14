@@ -1,11 +1,11 @@
-import pillarbox from '@srgssr/pillarbox-web';
+import videojs from 'video.js';
 
 /**
  * @ignore
  * @type {typeof import('video.js/dist/types/plugin').default}
  */
-const Plugin = pillarbox.getPlugin('plugin');
-const log = pillarbox.log.createLogger('pillarbox-playlist');
+const Plugin = videojs.getPlugin('plugin');
+const log = videojs.log.createLogger('pillarbox-playlist');
 
 /**
  * Represents a Plugin that allows control over a playlist.
@@ -33,12 +33,33 @@ class PillarboxPlaylist extends Plugin {
    * @type boolean
    */
   repeat = false;
+
+  /**
+   * Toggles the repeat mode of the player to the opposite of its current state.
+   *
+   * @param {boolean} [force] Optional. If provided, sets the repeat mode to the specified boolean value (true or false).
+   *                          If omitted, the repeat mode will toggle to the opposite of its current state.
+   */
+  toggleRepeat(force = undefined) {
+    this.repeat = force ?? !this.repeat;
+  }
+
   /**
    * Whether auto-advance is enabled or not.
    *
    * @type boolean
    */
   autoadvance = false;
+
+  /**
+   * Toggles the auto-advance mode of the player to the opposite of its current state.
+   *
+   * @param {boolean} [force] Optional. If provided, sets the auto-advance mode to the specified boolean value (true or false).
+   *                          If omitted, the auto-advance mode will toggle to the opposite of its current state.
+   */
+  toggleAutoadvance(force = undefined) {
+    this.autoadvance = force ?? !this.autoadvance;
+  }
 
   /**
    * Handles the 'ended' event when triggered. This method serves as a proxy to
@@ -52,7 +73,7 @@ class PillarboxPlaylist extends Plugin {
   /**
    * Creates an instance of a pillarbox playlist.
    *
-   * @param {import('@srgssr/pillarbox-web').Player} player The player instance.
+   * @param {import('video.js/dist/types/player.js').default} player The player instance.
    * @param {Object} options Configuration options for the plugin.
    */
   constructor(player, options) {
@@ -95,6 +116,7 @@ class PillarboxPlaylist extends Plugin {
    */
   push(...items) {
     this.items_.push(...items);
+    this.updateState_();
   }
 
   /**
@@ -117,24 +139,34 @@ class PillarboxPlaylist extends Plugin {
    */
   splice(start, deleteCount, ...items) {
     const itemsAddedCount = items.length;
-    const effectiveDeleteCount =
-      Math.min(deleteCount, this.items_.length - start);
+    const deletedElements = this.items_.splice(start, deleteCount, ...items);
+    const deletedElementsCount = deletedElements.length;
 
-    if (this.currentIndex_ < start) {
-      return this.items_.splice(start, deleteCount, ...items);
-    }
-
-    // Adjust currentIndex for items being deleted
-    if (this.currentIndex_ < start + effectiveDeleteCount) {
-      // Current item is removed, set currentIndex to -1
+    if (this.currentIndex_ >= start &&
+        this.currentIndex_ < start + deletedElementsCount) {
+      // Current item was removed, set currentIndex to -1
       this.currentIndex_ = -1;
-    } else {
+    } else if (this.currentIndex_ >= start) {
       // Adjust currentIndex based on the net items added/removed
       this.currentIndex_ =
-        this.currentIndex_ - effectiveDeleteCount + itemsAddedCount;
+        this.currentIndex_ - deletedElementsCount + itemsAddedCount;
     }
 
-    return this.items_.splice(start, deleteCount, ...items);
+    this.updateState_();
+
+    return deletedElements;
+  }
+
+  /**
+   * Clears the internal playlist. This method empties the playlist and resets
+   * the current index to -1.
+   *
+   * Note that this method does not stop the currently playing media or unload it.
+   */
+  clear() {
+    this.items_ = [];
+    this.currentIndex_ = -1;
+    this.updateState_();
   }
 
   /**
@@ -191,6 +223,7 @@ class PillarboxPlaylist extends Plugin {
     this.player.src(item.sources);
     this.player.poster(item.poster);
     this.currentIndex_ = index;
+    this.updateState_();
   }
 
   /**
@@ -269,10 +302,26 @@ class PillarboxPlaylist extends Plugin {
         this.currentIndex_ = i;
       }
     }
+
+    this.updateState_();
+  }
+
+  /**
+   * Updates the component's state with the current items and index.
+   *
+   * @private
+   */
+  updateState_() {
+    this.setState({
+      // Converts the items array to a JSON string before setting it in the state.
+      // Otherwise the change is not detected.
+      items: JSON.stringify(this.items_),
+      currentIndex: this.currentIndex_
+    });
   }
 }
 
-pillarbox.registerPlugin('pillarboxPlaylist', PillarboxPlaylist);
+videojs.registerPlugin('pillarboxPlaylist', PillarboxPlaylist);
 
 export default PillarboxPlaylist;
 

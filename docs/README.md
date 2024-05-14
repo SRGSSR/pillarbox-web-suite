@@ -100,8 +100,7 @@ npm run stylelint:fix
 ```
 
 This project utilizes a pre-commit hook that automatically runs these linting checks before each
-commit. Enable this
-hook by running the `prepare` script:
+commit. Enable this hook by running the `prepare` script:
 
 ```shell
 npm run prepare

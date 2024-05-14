@@ -9,13 +9,17 @@
   },
   "homepage": "https://srgssr.github.io/pillarbox-web-suite/pillarbox-playlist",
   "type": "module",
-  "main": "dist/pillarbox-playlist.cjs.js",
-  "module": "dist/pillarbox-playlist.es.js",
+  "main": "dist/pillarbox-playlist.cjs",
+  "module": "dist/pillarbox-playlist.js",
   "style": "./dist/pillarbox-playlist.min.css",
   "exports": {
     ".": {
-      "import": "./dist/pillarbox-playlist.es.js",
-      "require": "./dist/pillarbox-playlist.cjs.js"
+      "import": "./dist/pillarbox-playlist.js",
+      "require": "./dist/pillarbox-playlist.cjs"
+    },
+    "./ui": {
+      "import": "./dist/ui/pillarbox-playlist-ui.js",
+      "require": "./dist/ui/pillarbox-playlist-ui.cjs"
     },
     "./*": "./*"
   },
@@ -31,14 +35,18 @@
     "playlist"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:css",
+    "build": "npm run build:lib && npm run build:ui && npm run build:css",
     "build:css": "sass ./scss/pillarbox-playlist.scss:dist/pillarbox-playlist.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "vite build --config vite.config.lib.js",
+    "build:ui": "vite build --config vite.config.ui.js",
     "github:page": "vite build",
     "start": " vite --port 4200 --open",
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
   "peerDependencies": {
+    "video.js": "^8.0.0"
+  },
+  "devDependencies": {
     "@srgssr/pillarbox-web": "^1.12.1"
   }
 }

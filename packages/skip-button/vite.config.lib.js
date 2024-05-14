@@ -5,8 +5,8 @@ import babel from '@rollup/plugin-babel';
  * Vite's configuration for the lib build.
  *
  * Outputs:
- * - 'dist/skip-button.es.js': ESModule version with sourcemaps.
- * - 'dist/skip-button.cjs.js': CommonJS version with sourcemaps.
+ * - 'dist/skip-button.js': ESModule version with sourcemaps.
+ * - 'dist/skip-button.cjs': CommonJS version with sourcemaps.
  */
 export default defineConfig({
   esbuild: false,

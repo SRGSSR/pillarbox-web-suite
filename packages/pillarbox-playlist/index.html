@@ -22,8 +22,10 @@
 
 <script type="module">
   import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
-  import pillarbox from '@srgssr/pillarbox-web';
+  import './scss/pillarbox-playlist.scss';
+  import { default as pillarbox, SrgSsr} from '@srgssr/pillarbox-web';
   import './src/pillarbox-playlist.js';
+  import './src/pillarbox-playlist-ui.js';
 
   // Handle URL parameters
   const searchParams = new URLSearchParams(location.search);
@@ -37,16 +39,32 @@
     language,
     autoplay: true,
     srgOptions: { dataProviderHost: ilHost },
-    plugins: { pillarboxPlaylist: { autoadvance: true, repeat: true } }
+    plugins: {
+      pillarboxPlaylist: { autoadvance: true, repeat: true },
+      pillarboxPlaylistUI: { insertChildBefore: 'fullscreenToggle' }
+    }
   });
 
-  // Load the video source for the player
-  player.pillarboxPlaylist().load([
-    { sources: [{ src: 'urn:rts:video:14827306', type: 'srgssr/urn' }] },
-    { sources: [{ src: 'urn:rts:video:8393241', type: 'srgssr/urn' }] },
-    { sources: [{ src: 'urn:rts:video:13444390', type: 'srgssr/urn' }] },
-    { sources: [{ src: 'urn:rsi:video:15916771', type: 'srgssr/urn' }] }
-  ]);
+  const sources = [
+    'urn:rts:video:14827742',
+    'urn:srf:video:05457f66-fd67-4131-8e0a-6d85743efc39',
+    'urn:rtr:video:33136b80-bec6-40cd-a771-b8954c805098',
+    'urn:rts:video:9883196',
+  ];
+
+  Promise.all(sources.map(async urn => {
+    const mediaComposition = await SrgSsr.getMediaComposition(urn, SrgSsr.dataProvider(player));
+    const mainChapter = mediaComposition.getMainChapter();
+
+    return {
+      sources: [{ src: urn, type: 'srgssr/urn' }],
+      data: { title: mainChapter.title, duration: mainChapter.duration / 1000 },
+      poster: mainChapter.imageUrl
+    };
+  })).then(playlist => {
+    // Load the video sources for the player
+    player.pillarboxPlaylist().load(playlist);
+  });
 
   // Expose player for debugging
   window.player = player;

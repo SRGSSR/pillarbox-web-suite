@@ -39,9 +39,13 @@ Once the player is installed you can activate the plugin as follows:
 ```javascript
 import Pillarbox from '@srgssr/pillarbox-web';
 import '@srgssr/pillarbox-playlist';
+import '@srgssr/pillarbox-playlist/ui';
 
 const player = new Pillarbox('my-player', {
-  plugins: { pillarboxPlaylist: { autoadvance: true, repeat: true } }
+  plugins: { 
+    pillarboxPlaylist: { autoadvance: true, repeat: true },
+    pillarboxPlaylistUI: { insertChildBefore: 'fullscreenToggle' }
+  }
 });
 
 const playlist = [
@@ -52,21 +56,28 @@ const playlist = [
 player.playlistPlugin().load(playlist);
 ```
 
+> [!TIP]
+> To opt-out of the default UI, simply remove the `pillarboxPlaylistUI` plugin from the player
+> configuration.
+
 ### API Documentation
 
 #### Methods
 
 The following table outlines the key methods available in the this plugin:
 
-| Function                               | Description                                                                                            |
-|----------------------------------------|--------------------------------------------------------------------------------------------------------|
-| `load(items)`                          | Initializes the playlist with the given items and starts playback from the first item.                 |
-| `push(...items)`                       | Adds new items to the end of the current playlist.                                                     |
-| `splice(start, deleteCount, ...items)` | Modifies the playlist by adding, removing, or replacing items. Adjusts the current index if necessary. |
-| `next()`                               | Advances to the next item in the playlist, with support for repeat mode.                               |
-| `previous()`                           | Moves to the previous item in the playlist.                                                            |
-| `shuffle()`                            | Randomizes the order of the playlist items using the Fisher-Yates shuffle algorithm.                   |
-| `select(index)`                        | Selects and plays the item at the specified index in the playlist.                                     |
+| Function                               | Description                                                                                                                              |
+|----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| `load(items)`                          | Initializes the playlist with the given items and starts playback from the first item.                                                   |
+| `push(...items)`                       | Adds new items to the end of the current playlist.                                                                                       |
+| `splice(start, deleteCount, ...items)` | Modifies the playlist by adding, removing, or replacing items. Adjusts the current index if necessary.                                   |
+| `clear()`                              | Clears the internal playlist. Does not stop or unload the currently playing media.                                                       |
+| `next()`                               | Advances to the next item in the playlist, with support for repeat mode.                                                                 |
+| `previous()`                           | Moves to the previous item in the playlist.                                                                                              |
+| `shuffle()`                            | Randomizes the order of the playlist items using the Fisher-Yates shuffle algorithm.                                                     |
+| `select(index)`                        | Selects and plays the item at the specified index in the playlist.                                                                       |
+| `toggleRepeat(force)`                  | Toggles the repeat mode of the player to the opposite of its current state, or sets it to the specified boolean value if provided.       |
+| `toggleAutoadvance(force)`             | Toggles the auto-advance mode of the player to the opposite of its current state, or sets it to the specified boolean value if provided. |
 
 #### Options
 

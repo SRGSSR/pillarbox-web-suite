@@ -28,7 +28,7 @@ describe('SkipButton', () => {
     expect(player.SkipButton).toBeDefined();
   });
 
-  it('should update the button text and show it for valid interval', async() => {
+  it('should update the button text and show it for valid interval', () => {
     // Given
     const data = {
       text: JSON.stringify({

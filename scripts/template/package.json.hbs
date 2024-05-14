@@ -8,13 +8,13 @@
   },
   "homepage": "https://srgssr.github.io/pillarbox-web-suite/{{kebabCase name}}",
   "type": "module",
-  "main": "dist/{{kebabCase name}}.cjs.js",
-  "module": "dist/{{kebabCase name}}.es.js",
+  "main": "dist/{{kebabCase name}}.cjs",
+  "module": "dist/{{kebabCase name}}.js",
   "style": "./dist/{{kebabCase name}}.min.css",
   "exports": {
     ".": {
-      "import": "./dist/{{kebabCase name}}.es.js",
-      "require": "./dist/{{kebabCase name}}.cjs.js"
+      "import": "./dist/{{kebabCase name}}.js",
+      "require": "./dist/{{kebabCase name}}.cjs"
     },
     "./*": "./*"
   },
