@@ -29,26 +29,24 @@ visit: [Authenticating with a Personal Access Token][token-guide].
 You can now install it through `npm` the following command:
 
 ```bash
-npm install --save @srgssr/pillarbox-web @srgssr/{{kebabCase name}}
+npm install --save {{importAlias}} @srgssr/{{kebabCase name}}
 ```
 
+{{#ifEq platform 'pillarbox'}}
 For instructions on setting up Pillarbox, see the [Quick Start guide](SRGSSR/pillarbox-web#quick-start).
 
+{{/ifEq}}
 Once the player is installed you can activate the {{lowerCase type}} as follows:
 
 ```javascript
-import Pillarbox from '@srgssr/pillarbox-web';
+import {{platform}} from '{{importAlias}}';
 import '@srgssr/{{kebabCase name}}';
 
 {{#ifEq type 'plugin'}}
-const player = new Pillarbox('my-player', { plugins: { '{{camelCase name}}': true } });
+const player = {{platform}}('my-player', { plugins: { '{{camelCase name}}': true } });
 {{else}}
-const player = new Pillarbox('my-player', { {{properCase name}}: true });
+const player = {{platform}}('my-player', { {{properCase name}}: true });
 {{/ifEq}}
-player.src({
-  src: 'urn:swi:video:48115940',
-  type: 'srgssr/urn'
-});
 ```
 
 ## Contributing

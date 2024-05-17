@@ -1,6 +1,12 @@
 {
   "name": "@srgssr/{{kebabCase name}}",
   "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SRGSSR/pillarbox-web-suite.git"
+  },
+  "homepage": "https://srgssr.github.io/pillarbox-web-suite/{{kebabCase name}}",
   "type": "module",
   "main": "dist/{{kebabCase name}}.cjs.js",
   "module": "dist/{{kebabCase name}}.es.js",
@@ -16,14 +22,13 @@
     "dist/*",
     "scss/*"
   ],
-  "targets": {
-    "main": false,
-    "github-page": {
-      "publicUrl": "./",
-      "isLibrary": false,
-      "outputFormat": "esmodule"
-    }
-  },
+  "keywords": [
+    "video.js",
+    "player"{{#ifEq platform 'videojs'}}{{#ifEq type 'Plugin'}},
+    "videojs-plugin"{{/ifEq}}{{else}},
+    "pillarbox"{{#ifEq type 'Plugin'}},
+    "pillarbox-plugin"{{/ifEq}}{{/ifEq}}
+  ],
   "scripts": {
     "build": "npm run build:lib && npm run build:css",
     "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules",
@@ -33,6 +38,9 @@
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
   "peerDependencies": {
+    "{{importAlias}}": {{#ifEq platform 'pillarbox'}}"^1.12.1"{{else}}"^8.0.0"{{/ifEq}}
+  }{{#ifEq platform 'videojs'}},
+  "devDependencies": {
     "@srgssr/pillarbox-web": "^1.12.1"
-  }
+  }{{/ifEq}}
 }

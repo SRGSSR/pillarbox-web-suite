@@ -10,10 +10,19 @@ export default function(plop) {
     prompts: [
       {
         type: 'list',
+        name: 'platform',
+        message: 'Which platform are you targeting?',
+        choices: [
+          { name: 'Pillarbox \x1b[90m(Contains business logic linked to SRG SSR media content)\x1b[0m', value: 'pillarbox' },
+          { name: 'Video.js \x1b[90m(Standard video.js element without specific business logic)\x1b[0m', value: 'videojs' }
+        ]
+      },
+      {
+        type: 'list',
         name: 'type',
         message: 'What type of the element would you like to create?',
         choices: [
-          { name: 'Plugin \x1b[90m(Extend Pillarbox functionality or add new features)\x1b[0m', value: 'Plugin' },
+          { name: 'Plugin \x1b[90m(Extend the player functionality or add new features)\x1b[0m', value: 'Plugin' },
           { name: 'Component \x1b[90m(Manipulate or display content within the player)\x1b[0m', value: 'Component' },
           { name: 'Button \x1b[90m(Provide custom interactive functionality to the player)\x1b[0m', value: 'Button' }
         ]
@@ -38,6 +47,9 @@ export default function(plop) {
         globOptions: {
           dot: true,
           ignore: !data.wantLocalization ? '**/src/lang/**' : undefined
+        },
+        data: {
+          importAlias: data.platform === 'pillarbox' ? '@srgssr/pillarbox-web' : 'video.js'
         }
       }
     ]

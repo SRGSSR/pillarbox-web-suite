@@ -2,3 +2,12 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm test
+
+# Check for changes in the scripts folder
+if git diff --name-only origin/main | grep -q '^scripts/'; then
+  echo "Changes detected in scripts folder."
+  echo "Running npm run test:create"
+  npm run test:create
+else
+  echo "No changes in scripts folder. Skipping npm run test:create"
+fi

@@ -1,4 +1,4 @@
-import pillarbox from '@srgssr/pillarbox-web';
+import {{platform}} from '{{importAlias}}';
 {{#if wantLocalization}}import './lang';{{/if}}
 
 {{#ifEq type 'Plugin'}}
@@ -6,16 +6,16 @@ import pillarbox from '@srgssr/pillarbox-web';
  * @ignore
  * @type {typeof import('video.js/dist/types/plugin').default}
  */
-const Plugin = pillarbox.getPlugin('plugin');
+const Plugin = {{platform}}.getPlugin('plugin');
 
 /**
- * Represents a {{properCase name}} plugin for the pillarbox player.
+ * Represents a {{properCase name}} plugin for the {{platform}} player.
  */
 class {{properCase name}} extends Plugin {
   /**
    * Creates an instance of a {{properCase name}}.
    *
-   * @param {import('@srgssr/pillarbox-web').Player} player The player instance.
+   * @param {import('{{importAlias}}{{#ifEq platform 'pillarbox'}}').Player}{{else}}/dist/types/player.js').default}{{/ifEq}} player The player instance.
    * @param {Object} options Configuration options for the plugin.
    */
   constructor(player, options) {
@@ -23,23 +23,22 @@ class {{properCase name}} extends Plugin {
   }
 }
 
-pillarbox.registerPlugin('{{camelCase name}}', {{properCase name}});
-
+{{platform}}.registerPlugin('{{camelCase name}}', {{properCase name}});
 {{else}}
 /**
 * @ignore
 * @type {typeof import('video.js/dist/types/{{kebabCase type}}').default}
 */
-const {{type}} = pillarbox.getComponent('{{type}}');
+const {{type}} = {{platform}}.getComponent('{{type}}');
 
 /**
-* Represents a {{properCase name}} component for the pillarbox player.
+* Represents a {{properCase name}} component for the {{platform}} player.
 */
 class {{properCase name}} extends {{type}} {
   /**
   * Creates an instance of a {{properCase name}}.
   *
-  * @param {import('@srgssr/pillarbox-web').Player} player The player instance.
+  * @param {import('{{importAlias}}{{#ifEq platform 'pillarbox'}}').Player}{{else}}/dist/types/player.js').default}{{/ifEq}} player The player instance.
   * @param {Object} options Configuration options for the component.
   */
   constructor(player, options) {
@@ -55,8 +54,7 @@ class {{properCase name}} extends {{type}} {
   }
 }
 
-pillarbox.registerComponent('{{properCase name}}', {{properCase name}});
+{{platform}}.registerComponent('{{properCase name}}', {{properCase name}});
 {{/ifEq}}
-
 
 export default {{properCase name}};
