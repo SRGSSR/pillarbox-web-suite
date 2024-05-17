@@ -3,11 +3,12 @@
   "description": "A suite of plugins and themes for pillarbox-web",
   "version": "0.0.1",
   "license": "MIT",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SRGSSR/pillarbox-web-suite.git"
   },
+  "homepage": "https://srgssr.github.io/pillarbox-web-suite",
+  "type": "module",
   "workspaces": [
     "packages/*",
     "themes/*"
@@ -15,12 +16,13 @@
   "scripts": {
     "create": "plop --plopfile scripts/create.js",
     "eslint": "eslint {packages/**/{src,test}/**/*.{js,jsx},scripts/*.{js,jsx}}",
+    "github:page": "npm run github:page --ws && node scripts/prepare-deployment.js",
     "outdated": "npm outdated",
     "prepare": "husky",
     "stylelint": "stylelint **/*.{css,scss} --allow-empty-input",
     "stylelint:fix": "stylelint **/*.{css,scss} --fix",
-    "github:page": "npm run github:page --ws && node scripts/prepare-deployment.js",
-    "test": "vitest run --coverage --reporter=verbose --silent"
+    "test": "vitest run --coverage --reporter=verbose --silent",
+    "test:create": "vitest run --config scripts/vitest.scripts.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.24.1",
@@ -40,6 +42,7 @@
     "jsdom": "^24.0.0",
     "parcel": "^2.12.0",
     "plop": "^4.0.1",
+    "node-plop": "^0.32.0",
     "sass": "^1.75.0",
     "stylelint": "^16.3.1",
     "stylelint-config-rational-order": "^0.1.2",

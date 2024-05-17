@@ -41,3 +41,17 @@ jobs:
 
       - name: Report Coverage
         uses: davelosert/vitest-coverage-report-action@v2
+
+      - name: Filter changes in scripts folder
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            scripts:
+              - 'scripts/**'
+
+      - name: Run create tests if scripts folder changed
+        if: steps.filter.outputs.scripts == 'true'
+        run: |
+          echo "Changes detected in scripts folder."
+          npm run test:create

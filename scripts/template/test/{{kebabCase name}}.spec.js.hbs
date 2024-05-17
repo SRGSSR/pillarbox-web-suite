@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import pillarbox from '@srgssr/pillarbox-web';
+import {{platform}} from '{{importAlias}}';
 import {{properCase name}} from '../src/{{kebabCase name}}.js';
 
 window.HTMLMediaElement.prototype.load = () => {};
@@ -14,13 +14,13 @@ describe('{{properCase name}}', () => {
 
   beforeEach(() => {
 {{#ifEq type 'Plugin'}}
-    player = pillarbox(videoElement, {
+    player = {{platform}}(videoElement, {
       plugins: {
         {{camelCase name}}: true
       }
     });
 {{else}}
-    player = pillarbox(videoElement, {
+    player = {{platform}}(videoElement, {
       {{properCase name}}: true
     });
 {{/ifEq}}
@@ -32,10 +32,10 @@ describe('{{properCase name}}', () => {
 
   it('should be registered and attached to the player', () => {
 {{#ifEq type 'Plugin'}}
-    expect(pillarbox.getPlugin('{{camelCase name}}')).toBe({{properCase name}});
+    expect({{platform}}.getPlugin('{{camelCase name}}')).toBe({{properCase name}});
     expect(player.{{camelCase name}}).toBeDefined();
 {{else}}
-    expect(pillarbox.getComponent('{{properCase name}}')).toBe({{properCase name}});
+    expect({{platform}}.getComponent('{{properCase name}}')).toBe({{properCase name}});
     expect(player.{{properCase name}}).toBeDefined();
 {{/ifEq}}
   });

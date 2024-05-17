@@ -18,7 +18,7 @@ export default defineConfig({
       entry: 'src/{{kebabCase name}}.js'
     },
     rollupOptions: {
-      external: ['@srgssr/pillarbox-web'],
+      external: ['{{importAlias}}'],
       plugins: [babel({
         babelHelpers: 'bundled',
         exclude: 'node_modules/**'
