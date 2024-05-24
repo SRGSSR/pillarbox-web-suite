@@ -1,5 +1,13 @@
 {
-  "branches": ["main"],
+  "branches": [
+    {
+      "name": "github-ci",
+      "channel": "latest"
+    },
+    {
+      "name": "main"
+    }
+  ],
   "extends": "semantic-release-monorepo",
   "plugins": [
     "@semantic-release/commit-analyzer",
@@ -84,14 +92,22 @@
         "changelogFile": "CHANGELOG.md"
       }
     ],
-    "@semantic-release/npm",
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": true,
+        "pkgRoot": ".",
+        "tarballDir": "dist"
+      }
+    ],
     [
       "@semantic-release/git",
       {
         "assets": [
           "package.json",
           "package-lock.json",
-          "CHANGELOG.md"
+          "CHANGELOG.md",
+          "dist/*.tgz"
         ],
         "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }

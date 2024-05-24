@@ -1,11 +1,14 @@
 {
-  "name": "@srgssr/pillarbox-playlist",
+  "name": "@jboix/pillarbox-playlist",
   "description": "Add Playlist management capabilities to video.js",
   "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:jboix/pillarbox-web-suite.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "homepage": "https://srgssr.github.io/pillarbox-web-suite/pillarbox-playlist",
   "type": "module",
@@ -31,10 +34,11 @@
     "playlist"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:css",
+    "build": "npm run build:lib",
     "build:css": "sass ./scss/pillarbox-playlist.scss:dist/pillarbox-playlist.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "vite build --config vite.config.lib.js",
     "github:page": "vite build",
+    "release:ci": "semantic-release",
     "start": " vite --port 4200 --open",
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },

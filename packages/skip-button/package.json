@@ -1,11 +1,14 @@
 {
-  "name": "@srgssr/skip-button",
+  "name": "@jboix/skip-button",
   "description": "A button to skip certain parts of the content, such as opening credits or end credits",
   "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:jboix/pillarbox-web-suite.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "homepage": "https://srgssr.github.io/pillarbox-web-suite/skip-button",
   "type": "module",
@@ -35,6 +38,7 @@
     "build:css": "sass ./scss/skip-button.scss:dist/skip-button.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "vite build --config vite.config.lib.js",
     "github:page": "vite build",
+    "release:ci": "semantic-release",
     "start": " vite --port 4200 --open",
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },

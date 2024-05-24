@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/SRGSSR/pillarbox-web-suite.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "homepage": "https://srgssr.github.io/pillarbox-web-suite/{{kebabCase name}}",
   "type": "module",
   "main": "dist/{{kebabCase name}}.cjs.js",
@@ -34,6 +37,7 @@
     "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "vite build --config vite.config.lib.js",
     "github:page": "vite build",
+    "release:ci": "semantic-release",
     "start": " vite --port 4200 --open",
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
