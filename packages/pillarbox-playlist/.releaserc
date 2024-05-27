@@ -103,10 +103,6 @@
           {
             "path": "dist/**/*",
             "label": "Distribution"
-          },
-          {
-            "path": "CHANGELOG.md",
-            "label": "Changelog"
           }
         ]
       }
