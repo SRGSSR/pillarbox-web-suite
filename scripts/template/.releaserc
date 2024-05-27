@@ -117,12 +117,10 @@
       {
         "assets": [
           {
-            "path": "dist/**/*",
-            "label": "Distribution"
+            "path": "dist/**/*"
           },
           {
-            "path": "CHANGELOG.md",
-            "label": "Changelog"
+            "path": "CHANGELOG.md"
           }
         ]
       }
