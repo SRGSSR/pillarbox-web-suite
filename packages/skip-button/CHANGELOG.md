@@ -1,3 +1,10 @@
+## [@jboix/skip-button-v1.1.0](https://github.com/jboix/pillarbox-web-suite/compare/@jboix/skip-button-v1.0.0...@jboix/skip-button-v1.1.0) (2024-05-27)
+
+
+### New Features 🚀
+
+* test releasing only 1 package ([523350e](https://github.com/jboix/pillarbox-web-suite/commit/523350e3b3ef54d8cc907b3a4d0e7e944816657f))
+
 ## @jboix/skip-button-v1.0.0 (2024-05-27)
 
 
