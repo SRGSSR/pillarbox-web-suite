@@ -1,7 +1,7 @@
 {
   "name": "@srgssr/pillarbox-playlist",
   "description": "Add Playlist management capabilities to video.js",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
