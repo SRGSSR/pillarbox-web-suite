@@ -51,6 +51,7 @@
     "plop": "^4.0.1",
     "sass": "^1.75.0",
     "semantic-release": "^23.1.1",
+    "semantic-release-monorepo": "^8.0.2",
     "stylelint": "^16.3.1",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^36.0.0",
