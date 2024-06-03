@@ -46,6 +46,12 @@ player.src({
 });
 ```
 
+To apply the default styling, add the following line to your CSS file:
+
+```css
+@import "@srgssr/skip-button/dist/skip-button.min.css";
+```
+
 ## Contributing
 
 For detailed contribution guidelines, refer to the main project’s [README file][main-readme]. Please

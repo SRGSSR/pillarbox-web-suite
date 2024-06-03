@@ -56,6 +56,12 @@ const playlist = [
 player.playlistPlugin().load(playlist);
 ```
 
+To apply the default styling, add the following line to your CSS file:
+
+```css
+@import "@srgssr/pillarbox-playlist/dist/pillarbox-playlist.min.css";
+```
+
 > [!TIP]
 > To opt-out of the default UI, simply remove the `pillarboxPlaylistUI` plugin from the player
 > configuration.
@@ -107,6 +113,34 @@ The following properties are read-only:
 | `currentIndex` | Number | Retrieves the index of the currently playing item.                                                                           |
 | `currentItem`  | Object | Retrieves the currently playing item.                                                                                        |
 | `items`        | Array  | Retrieves all items in the playlist. Modifications to the returned array will not affect the internal state of the playlist. |
+
+#### Events
+
+The following event is emitted by the playlist plugin:
+
+| Event          | Description                                                                                                                                                                    |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `statechanged` | Triggered whenever there is a change in the playlist state. This event provides an object containing the properties that have changed, allowing you to react to these changes. |
+
+**Event Payload:**
+
+| Property  | Type   | Description                                                                                          |
+|-----------|--------|------------------------------------------------------------------------------------------------------|
+| `changes` | Object | An object containing the properties that have changed. Possible keys are `items` and `currentIndex`. |
+
+**Example Usage:**
+
+```javascript
+player.playlistPlugin().on('statechanged', ({ changes }) => {
+  if ('items' in changes) {
+    // React to 'items' changes
+  }
+
+  if ('currentIndex' in changes) {
+    // React to 'currentIndex' changes
+  }
+});
+```
 
 ## Contributing
 
