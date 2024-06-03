@@ -113,6 +113,8 @@ class PillarboxPlaylist extends Plugin {
    * running.
    *
    * @param {...PlaylistItem} items the items to add to the playlist.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
    */
   push(...items) {
     this.items_.push(...items);
@@ -136,6 +138,8 @@ class PillarboxPlaylist extends Plugin {
    * @param {...PlaylistItem} items The items to add to the playlist.
    *
    * @return {PlaylistItem[]} An array containing the deleted elements.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
    */
   splice(start, deleteCount, ...items) {
     const itemsAddedCount = items.length;
@@ -143,7 +147,7 @@ class PillarboxPlaylist extends Plugin {
     const deletedElementsCount = deletedElements.length;
 
     if (this.currentIndex_ >= start &&
-        this.currentIndex_ < start + deletedElementsCount) {
+      this.currentIndex_ < start + deletedElementsCount) {
       // Current item was removed, set currentIndex to -1
       this.currentIndex_ = -1;
     } else if (this.currentIndex_ >= start) {
@@ -168,6 +172,45 @@ class PillarboxPlaylist extends Plugin {
     this.currentIndex_ = -1;
     this.updateState_();
   }
+
+  /**
+   * Reverses the order of the items in the playlist and updates the current index to reflect
+   * the new position of the previously current item after reversal.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse
+   */
+  reverse() {
+    if (!this.items_.length) return;
+
+    this.items_.reverse();
+    this.currentIndex_ = this.items_.length - 1 - this.currentIndex_;
+    this.updateState_();
+  }
+
+  /**
+   * Sorts the items in the playlist using the provided compare function and updates the current
+   * index to reflect the new position of the previously current item after sorting.
+   *
+   * @method sort
+   * @param {Function} compareFn - A function that defines the sort order.
+   *        The return value should be a number whose sign indicates the relative order
+   *        of the two elements: negative if a is less than b, positive if a is
+   *        greater than b, and zero if they are equal. NaN is treated as 0. If omitted,
+   *        the array elements are converted to strings, then sorted according to each
+   *        character's Unicode code point value.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+   */
+  sort(compareFn) {
+    if (!this.items_.length) return;
+
+    const currentItem = this.currentItem;
+
+    this.items_.sort(compareFn);
+    this.currentIndex_ = this.items_.indexOf(currentItem);
+    this.updateState_();
+  }
+
 
   /**
    * Get the currently playing index.

@@ -7,7 +7,7 @@ const playlist = [
   {
     sources: [{ src: 'first-source', type: 'test' }],
     poster: 'first-poster',
-    data: { title: 'first-source', duration: 120 }
+    data: { title: 'first-source', duration: 180 }
   },
   {
     sources: [{ src: 'second-source', type: 'test' }],
@@ -17,7 +17,7 @@ const playlist = [
   {
     sources: [{ src: 'third-source', type: 'test' }],
     poster: 'third-poster',
-    data: { title: 'third-source', duration: 180 }
+    data: { title: 'third-source', duration: 120 }
   },
   {
     sources: [{ src: 'fourth-source', type: 'test' }],
@@ -386,6 +386,103 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(-1);
       expect(pillarboxPlaylist.currentItem).toBeUndefined();
+    });
+  });
+
+  describe('reverse', () => {
+    it('should reverse the order of items and update currentIndex correctly', () => {
+      // Given
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.select(1);
+
+      // When
+      pillarboxPlaylist.reverse();
+
+      // Then
+      expect(pillarboxPlaylist.currentIndex).toBe(2);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[1]);
+    });
+
+    it('should reverse an empty playlist without errors', () => {
+      // Given
+      pillarboxPlaylist.load([]);
+
+      // When
+      pillarboxPlaylist.reverse();
+
+      // Then
+      expect(pillarboxPlaylist.items_.length).toBe(0);
+      expect(pillarboxPlaylist.currentIndex).toBe(-1);
+      expect(pillarboxPlaylist.currentItem).toBeUndefined();
+    });
+
+    it('should reverse a single-item playlist without changing the index', () => {
+      // Given
+      const items = [{
+        sources: [{ src: 'first-source', type: 'test' }],
+        poster: 'first-poster',
+        data: { title: 'first-source', duration: 120 }
+      }];
+
+      pillarboxPlaylist.load(items);
+
+      // When
+      pillarboxPlaylist.reverse();
+
+      // Then
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(items[0]);
+    });
+  });
+
+
+  describe('sort', () => {
+    it('should sort items by duration and update currentIndex correctly', () => {
+      // Given
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.select(2);
+
+      // When
+      pillarboxPlaylist.sort((a, b) => a.data.duration - b.data.duration);
+
+      // Then
+      const durations = pillarboxPlaylist.items_.map(item => item.data.duration);
+
+      for (let i = 0; i < durations.length - 1; i++) {
+        expect(durations[i]).toBeLessThanOrEqual(durations[i + 1]);
+      }
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[2]);
+    });
+
+    it('should handle sorting an empty playlist without errors', () => {
+      // Given
+      pillarboxPlaylist.load([]);
+
+      // When
+      pillarboxPlaylist.sort((a, b) => a.data.duration - b.data.duration);
+
+      // Then
+      expect(pillarboxPlaylist.items_.length).toBe(0);
+      expect(pillarboxPlaylist.currentIndex).toBe(-1);
+    });
+
+    it('should sort a single-item playlist without changing the index', () => {
+      // Given
+      const items = [{
+        sources: [{ src: 'first-source', type: 'test' }],
+        poster: 'first-poster',
+        data: { title: 'first-source', duration: 120 }
+      }];
+
+      pillarboxPlaylist.load(items);
+
+      // When
+      pillarboxPlaylist.sort((a, b) => a.data.duration - b.data.duration);
+
+      // Then
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(items[0]);
     });
   });
 
