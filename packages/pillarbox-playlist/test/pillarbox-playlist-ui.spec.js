@@ -2,32 +2,57 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vite
 import pillarbox from '@srgssr/pillarbox-web';
 import '../src/pillarbox-playlist.js';
 import PillarboxPlaylistUi from '../src/pillarbox-playlist-ui.js';
+import { RepeatMode } from '../src/pillarbox-playlist.js';
 
 const playlist = [
   {
-    sources: [{ src: 'first-source', type: 'test' }],
+    sources: [{
+      src: 'first-source',
+      type: 'test'
+    }],
     poster: 'first-poster',
-    data: { title: 'first-source', duration: 180 }
+    data: {
+      title: 'first-source',
+      duration: 180
+    }
   },
   {
-    sources: [{ src: 'second-source', type: 'test' }],
+    sources: [{
+      src: 'second-source',
+      type: 'test'
+    }],
     poster: 'second-poster',
-    data: { title: 'second-source', duration: 150 }
+    data: {
+      title: 'second-source',
+      duration: 150
+    }
   },
   {
-    sources: [{ src: 'third-source', type: 'test' }],
+    sources: [{
+      src: 'third-source',
+      type: 'test'
+    }],
     poster: 'third-poster',
-    data: { title: 'third-source', duration: 120 }
+    data: {
+      title: 'third-source',
+      duration: 120
+    }
   },
   {
-    sources: [{ src: 'fourth-source', type: 'test' }],
+    sources: [{
+      src: 'fourth-source',
+      type: 'test'
+    }],
     poster: 'fourth-poster',
-    data: { title: 'fourth-source', duration: 210 }
+    data: {
+      title: 'fourth-source',
+      duration: 210
+    }
   }
 ];
 
-
-window.HTMLMediaElement.prototype.load = () => {};
+window.HTMLMediaElement.prototype.load = () => {
+};
 
 describe('PillarboxPlaylist', () => {
   let videoElement, player;
@@ -84,7 +109,7 @@ describe('PillarboxPlaylist', () => {
       const fullscreenBtnIndex = controlBarChildIndex('FullscreenToggle');
       const playlistBtnIndex = controlBarChildIndex('PillarboxPlaylistButton');
 
-      expect(playlistBtnIndex).toBe(fullscreenBtnIndex-1);
+      expect(playlistBtnIndex).toBe(fullscreenBtnIndex - 1);
     });
 
     it('should insert the playlist button at the last position if no sibling was found', () => {
@@ -112,7 +137,7 @@ describe('PillarboxPlaylist', () => {
 
     it('should not insert the playlist button if the control bar is disabled', () => {
       player = pillarbox(videoElement, {
-        controlBar:false,
+        controlBar: false,
         plugins: {
           pillarboxPlaylist: true,
           pillarboxPlaylistUI: true
@@ -125,8 +150,7 @@ describe('PillarboxPlaylist', () => {
     });
   });
 
-
-  describe('User interface',() => {
+  describe('User interface', () => {
     let pillarboxPlaylist, dialog, controls, items, button;
 
     beforeEach(async() => {
@@ -139,8 +163,10 @@ describe('PillarboxPlaylist', () => {
 
       pillarboxPlaylist = player.pillarboxPlaylist();
 
-      vi.spyOn(player, 'src').mockImplementation(() => {});
-      vi.spyOn(player, 'poster').mockImplementation(() => {});
+      vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
       pillarboxPlaylist.load(playlist);
 
       await new Promise((resolve) => player.ready(() => resolve()));
@@ -163,7 +189,7 @@ describe('PillarboxPlaylist', () => {
       expect(dialog.hasClass('vjs-hidden')).toBeTruthy();
     });
 
-    it('should open the playlist dialog', ()=> {
+    it('should open the playlist dialog', () => {
       // When
       button.handleClick();
 
@@ -171,7 +197,7 @@ describe('PillarboxPlaylist', () => {
       expect(dialog.hasClass('vjs-hidden')).toBeFalsy();
     });
 
-    it('should hide the button when the playlist is empty', ()=> {
+    it('should hide the button when the playlist is empty', () => {
       // When
       pillarboxPlaylist.clear();
 
@@ -179,8 +205,7 @@ describe('PillarboxPlaylist', () => {
       expect(button.hasClass('vjs-hidden')).toBeTruthy();
     });
 
-
-    it('should select an item when clicked', ()=> {
+    it('should select an item when clicked', () => {
       // Given
       pillarboxPlaylist.select(0);
 
@@ -194,15 +219,29 @@ describe('PillarboxPlaylist', () => {
         .forEach((item) => expect(item.hasClass('vjs-selected')).toBeFalsy());
     });
 
-    it('should toggle repeat mode through the dialog controls', ()=> {
-      // When
-      controls.getChild('PillarboxPlaylistRepeatButton').handleClick();
+    it('should toggle repeat mode through the dialog controls', () => {
+      pillarboxPlaylist.toggleRepeat(RepeatMode.NO_REPEAT);
 
-      // Then
-      expect(pillarboxPlaylist.repeat).toBeTruthy();
+      controls.getChild('PillarboxPlaylistRepeatButton').handleClick();
+      expect(pillarboxPlaylist.repeat).toBe(RepeatMode.REPEAT_ALL);
+      expect(pillarboxPlaylist.isNoRepeatMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatAllMode()).toBeTruthy();
+      expect(pillarboxPlaylist.isRepeatOneMode()).toBeFalsy();
+
+      controls.getChild('PillarboxPlaylistRepeatButton').handleClick();
+      expect(pillarboxPlaylist.repeat).toBe(RepeatMode.REPEAT_ONE);
+      expect(pillarboxPlaylist.isNoRepeatMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatAllMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatOneMode()).toBeTruthy();
+
+      controls.getChild('PillarboxPlaylistRepeatButton').handleClick();
+      expect(pillarboxPlaylist.repeat).toBe(RepeatMode.NO_REPEAT);
+      expect(pillarboxPlaylist.isNoRepeatMode()).toBeTruthy();
+      expect(pillarboxPlaylist.isRepeatAllMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatOneMode()).toBeFalsy();
     });
 
-    it('should go the next item through the dialog controls', ()=> {
+    it('should go the next item through the dialog controls', () => {
       // Given
       pillarboxPlaylist.select(0);
 
@@ -216,7 +255,7 @@ describe('PillarboxPlaylist', () => {
         .forEach((item) => expect(item.hasClass('vjs-selected')).toBeFalsy());
     });
 
-    it('should go the previous item through the dialog controls', ()=> {
+    it('should go the previous item through the dialog controls', () => {
       // Given
       pillarboxPlaylist.select(2);
 
@@ -230,7 +269,7 @@ describe('PillarboxPlaylist', () => {
         .forEach((item) => expect(item.hasClass('vjs-selected')).toBeFalsy());
     });
 
-    it('should shuffle the items through the dialog controls', ()=> {
+    it('should shuffle the items through the dialog controls', () => {
       // When
       controls.getChild('PillarboxPlaylistShuffleButton').handleClick();
 

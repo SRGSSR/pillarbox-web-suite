@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import { RepeatMode } from '../../pillarbox-playlist.js';
 
 /**
  * @ignore
@@ -14,6 +15,7 @@ class PillarboxPlaylistRepeatButton extends Button {
   constructor(player, options) {
     options = videojs.mergeOptions({ controlText: 'Repeat' }, options);
     super(player, options);
+    this.controlText(this.repeatModeAsString());
     this.setIcon('repeat');
   }
 
@@ -28,6 +30,17 @@ class PillarboxPlaylistRepeatButton extends Button {
 
   ready() {
     this.$('.vjs-icon-placeholder').classList.toggle(`vjs-icon-repeat`, true);
+  }
+
+  repeatModeAsString() {
+    switch (this.playlist().repeat) {
+      case RepeatMode.NO_REPEAT:
+        return 'No Repeat';
+      case RepeatMode.REPEAT_ALL:
+        return 'Repeat All';
+      case RepeatMode.REPEAT_ONE:
+        return 'Repeat One';
+    }
   }
 
   /**
@@ -47,7 +60,10 @@ class PillarboxPlaylistRepeatButton extends Button {
   handleClick(event) {
     super.handleClick(event);
     this.playlist().toggleRepeat();
-    this.toggleClass('vjs-selected', this.playlist().repeat);
+    this.toggleClass('vjs-selected', !this.playlist().isNoRepeatMode());
+    this.toggleClass('pbw-repeat-one', this.playlist().isRepeatOneMode());
+    this.controlText(this.repeatModeAsString());
+    this.setAttribute('aria-pressed', !this.playlist().isNoRepeatMode());
   }
 }
 
