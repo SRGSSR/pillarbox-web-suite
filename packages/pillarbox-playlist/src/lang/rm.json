@@ -1,7 +1,9 @@
 {
-  "Next Item": "Element proxim",
+  "NextItem": "Element proxim",
+  "NoRepeat": "Nagins Repeter",
   "Playlist": "Glista da reprodukziun",
-  "Previous Item": "Element precedent",
-  "Repeat": "Repeter",
+  "PreviousItem": "Element precedent",
+  "RepeatAll": "Repeter Tut",
+  "RepeatOne": "Repeter In",
   "Shuffle": "Maschadar"
 }

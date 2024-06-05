@@ -1,6 +1,6 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import pillarbox from '@srgssr/pillarbox-web';
-import PillarboxPlaylist from '../src/pillarbox-playlist.js';
+import { PillarboxPlaylist, RepeatMode } from '../src/pillarbox-playlist.js';
 import '../src/pillarbox-playlist-button.js';
 
 const playlist = [
@@ -173,27 +173,6 @@ describe('PillarboxPlaylist', () => {
       expect(srcSpy).toHaveBeenLastCalledWith(playlist[3].sources);
       expect(posterSpy).toHaveBeenLastCalledWith(playlist[3].poster);
     });
-
-    it('should play the first element if repeat is true when next is called and the current index is the last of the playlist', () => {
-      // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
-
-      // When
-      pillarboxPlaylist.toggleRepeat(true);
-      pillarboxPlaylist.load(playlist);
-      pillarboxPlaylist.select(3);
-      pillarboxPlaylist.next();
-
-      // Then
-      expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
-      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
-      expect(pillarboxPlaylist.items.length).toBe(4);
-      expect(pillarboxPlaylist.currentIndex).toBe(0);
-      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
-    });
   });
 
   describe('previous', () => {
@@ -248,6 +227,48 @@ describe('PillarboxPlaylist', () => {
       pillarboxPlaylist.toggleAutoadvance(false);
       pillarboxPlaylist.load(playlist);
       pillarboxPlaylist.handleEnded();
+
+      // Then
+      expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
+      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
+      expect(pillarboxPlaylist.items.length).toBe(4);
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
+      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
+      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
+    });
+  });
+
+  describe('repeat', () => {
+    it('should play the same element if repeat mode is "repeat one"', () => {
+      // Given
+      const playSpy = vi.spyOn(player, 'play')
+        .mockImplementation(() => Promise.resolve());
+
+      // When
+      pillarboxPlaylist.toggleRepeat(RepeatMode.REPEAT_ONE);
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.handleEnded();
+
+      // Then
+      expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
+      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
+      expect(pillarboxPlaylist.items.length).toBe(4);
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
+      expect(playSpy).toHaveBeenCalled();
+    });
+
+    it('should play the first element if repeat is true when next is called and the current index is the last of the playlist', () => {
+      // Given
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
+
+      // When
+      pillarboxPlaylist.toggleRepeat(RepeatMode.REPEAT_ALL);
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.select(3);
+      pillarboxPlaylist.next();
 
       // Then
       expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
@@ -466,11 +487,25 @@ describe('PillarboxPlaylist', () => {
     });
 
     it('should toggle repeat mode through the dialog controls', ()=> {
-      // When
-      controls.getChild('RepeatButton').handleClick();
+      pillarboxPlaylist.toggleRepeat(RepeatMode.NO_REPEAT);
 
-      // Then
-      expect(pillarboxPlaylist.repeat).toBeTruthy();
+      controls.getChild('RepeatButton').handleClick();
+      expect(pillarboxPlaylist.repeat).toBe(RepeatMode.REPEAT_ALL);
+      expect(pillarboxPlaylist.isNoRepeatMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatAllMode()).toBeTruthy();
+      expect(pillarboxPlaylist.isRepeatOneMode()).toBeFalsy();
+
+      controls.getChild('RepeatButton').handleClick();
+      expect(pillarboxPlaylist.repeat).toBe(RepeatMode.REPEAT_ONE);
+      expect(pillarboxPlaylist.isNoRepeatMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatAllMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatOneMode()).toBeTruthy();
+
+      controls.getChild('RepeatButton').handleClick();
+      expect(pillarboxPlaylist.repeat).toBe(RepeatMode.NO_REPEAT);
+      expect(pillarboxPlaylist.isNoRepeatMode()).toBeTruthy();
+      expect(pillarboxPlaylist.isRepeatAllMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatOneMode()).toBeFalsy();
     });
 
     it('should go the next item through the dialog controls', ()=> {
