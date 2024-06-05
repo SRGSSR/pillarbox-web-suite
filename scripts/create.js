@@ -46,7 +46,10 @@ export default function(plop) {
         templateFiles: './template/**',
         globOptions: {
           dot: true,
-          ignore: !data.wantLocalization ? '**/src/lang/**' : undefined
+          ignore: !data.wantLocalization ? [
+            '**/src/lang/**',
+            '**/test/language.spec.js.hbs'
+          ] : undefined
         },
         data: {
           importAlias: data.platform === 'pillarbox' ? '@srgssr/pillarbox-web' : 'video.js'

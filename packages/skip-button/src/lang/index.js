@@ -1,12 +1,19 @@
-import * as de from './de.json';
-import * as en from './en.json';
-import * as fr from './fr.json';
-import * as it from './it.json';
-import * as rm from './rm.json';
+import de from './de.json';
+import en from './en.json';
+import fr from './fr.json';
+import it from './it.json';
+import rm from './rm.json';
 import pillarbox from '@srgssr/pillarbox-web';
 
-pillarbox.addLanguage('de', de);
-pillarbox.addLanguage('en', en);
-pillarbox.addLanguage('fr', fr);
-pillarbox.addLanguage('it', it);
-pillarbox.addLanguage('rm', rm);
+function extendLanguage(code, data) {
+  pillarbox.addLanguage(code, {
+    ...pillarbox.options.language[code] ?? {},
+    ...data
+  });
+}
+
+extendLanguage('de', de);
+extendLanguage('en', en);
+extendLanguage('fr', fr);
+extendLanguage('it', it);
+extendLanguage('rm', rm);
