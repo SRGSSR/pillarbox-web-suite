@@ -38,12 +38,12 @@ Once the player is installed you can activate the plugin as follows:
 
 ```javascript
 import Pillarbox from '@srgssr/pillarbox-web';
-import '@srgssr/pillarbox-playlist';
+import { RepeatMode } from '@srgssr/pillarbox-playlist';
 import '@srgssr/pillarbox-playlist/ui';
 
 const player = new Pillarbox('my-player', {
   plugins: { 
-    pillarboxPlaylist: { autoadvance: true, repeat: true },
+    pillarboxPlaylist: { autoadvance: true, repeat: RepeatMode.REPEAT_ALL },
     pillarboxPlaylistUI: { insertChildBefore: 'fullscreenToggle' }
   }
 });
@@ -76,7 +76,7 @@ The following table outlines the key methods available in the this plugin:
 | `previous()`                           | Moves to the previous item in the playlist.                                                                                              |
 | `shuffle()`                            | Randomizes the order of the playlist items using the Fisher-Yates shuffle algorithm.                                                     |
 | `select(index)`                        | Selects and plays the item at the specified index in the playlist.                                                                       |
-| `toggleRepeat(force)`                  | Toggles the repeat mode of the player to the opposite of its current state, or sets it to the specified boolean value if provided.       |
+| `toggleRepeat(force)`                  | Cycles through the repeat mode of the player, or sets it to the specified value if provided.                                             |
 | `toggleAutoadvance(force)`             | Toggles the auto-advance mode of the player to the opposite of its current state, or sets it to the specified boolean value if provided. |
 
 #### Options
@@ -87,7 +87,7 @@ behavior of the plugin. Here are the available options:
 | Option        | Type    | Default | Description                                                                                 |
 |---------------|---------|---------|---------------------------------------------------------------------------------------------|
 | `playlist`    | Array   | `[]`    | An array of playlist items to be initially loaded into the player.                          |
-| `repeat`      | Boolean | `false` | If true, the playlist will start over automatically after the last item ends.               |
+| `repeat`      | Number  | 0       | Set the repeat mode of the playlist: 0 - No Repeat, 1 - Repeat All, 2 - Repeat one.         |
 | `autoadvance` | Boolean | `false` | If enabled, the player will automatically move to the next item after the current one ends. |
 
 #### Properties
@@ -95,10 +95,10 @@ behavior of the plugin. Here are the available options:
 After initializing the plugin, you can modify or read these properties to control playlist behavior
 dynamically:
 
-| Property      | Type    | Description                                                                                                                                   |
-|---------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| `repeat`      | Boolean | Enables or disables repeating the playlist once the last item has played. Changes take effect immediately and apply to subsequent operations. |
-| `autoadvance` | Boolean | Toggles automatic advancement to the next item when the current item ends.                                                                    |
+| Property      | Type    | Description                                                                                  |
+|---------------|---------|----------------------------------------------------------------------------------------------|
+| `repeat`      | Number  | Changes the repeat mode of the playlist: 0 - No Repeat, 1 - Repeat All, 2 - Repeat one.    . |
+| `autoadvance` | Boolean | Toggles automatic advancement to the next item when the current item ends.                   |
 
 The following properties are read-only:
 
@@ -107,6 +107,16 @@ The following properties are read-only:
 | `currentIndex` | Number | Retrieves the index of the currently playing item.                                                                           |
 | `currentItem`  | Object | Retrieves the currently playing item.                                                                                        |
 | `items`        | Array  | Retrieves all items in the playlist. Modifications to the returned array will not affect the internal state of the playlist. |
+
+#### Constants
+
+The following table outlines the key constants available in this plugin:
+
+| Constant                | Description                                                                                                                                                                             |
+|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `RepeatMode.NO_REPEAT`  | Disables repeat mode.                                                                                                                                                                   |
+| `RepeatMode.REPEAT_ALL` | Loops the entire playlist. Once the last element of the playlist ends, the next element will be the first one. This mode only works forwards, i.e., when advancing to the next element. |
+| `RepeatMode.REPEAT_ONE` | Loops the currently playing item in the playlist.                                                                                                                                       |
 
 ## Contributing
 

@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import './pillarbox-playlist-menu-item.js';
+import { RepeatMode } from './pillarbox-playlist.js';
 
 /**
  * @ignore
@@ -128,7 +129,6 @@ class PlaylistMenuDialog extends ModalDialog {
       itemListEl.addChild(itemEl);
     });
 
-
     this.addChild(itemListEl);
   }
 
@@ -159,9 +159,20 @@ class PlaylistMenuDialog extends ModalDialog {
   createPreviousItemButton() {
     return this.setButtonIcon(new Button(this.player(), {
       name: 'PreviousItemButton',
-      controlText: this.localize('Previous Item'),
+      controlText: this.localize('PreviousItem'),
       clickHandler: () => this.playlist().previous()
     }), 'previous-item');
+  }
+
+  repeatModeAsString() {
+    switch (this.playlist().repeat) {
+      case RepeatMode.NO_REPEAT:
+        return this.localize('NoRepeat');
+      case RepeatMode.REPEAT_ALL:
+        return this.localize('RepeatAll');
+      case RepeatMode.REPEAT_ONE:
+        return this.localize('RepeatOne');
+    }
   }
 
   /**
@@ -172,11 +183,14 @@ class PlaylistMenuDialog extends ModalDialog {
   createRepeatButton() {
     const repeatButton = this.setButtonIcon(new Button(this.player(), {
       name: 'RepeatButton',
-      controlText: this.localize('Repeat'),
+      controlText: this.repeatModeAsString(),
       className: this.playlist().repeat ? 'vjs-selected' : '',
       clickHandler: () => {
         this.playlist().toggleRepeat();
-        repeatButton.toggleClass('vjs-selected', this.playlist().repeat);
+        repeatButton.toggleClass('vjs-selected', !this.playlist().isNoRepeatMode());
+        repeatButton.toggleClass('pbw-repeat-one', this.playlist().isRepeatOneMode());
+        repeatButton.controlText(this.repeatModeAsString());
+        repeatButton.setAttribute('aria-pressed', !this.playlist().isNoRepeatMode());
       }
     }), 'repeat');
 
@@ -204,7 +218,7 @@ class PlaylistMenuDialog extends ModalDialog {
   createNextItemButton() {
     return this.setButtonIcon(new Button(this.player(), {
       name: 'NextItemButton',
-      controlText: this.localize('Next Item'),
+      controlText: this.localize('NextItem'),
       clickHandler: () => this.playlist().next()
     }), 'next-item');
   }
@@ -240,10 +254,10 @@ class PlaylistMenuDialog extends ModalDialog {
   handleLanguagechange() {
     const controls = this.getChild('PlaylistControls');
 
-    controls.getChild('PreviousItemButton').controlText(this.localize('Previous Item'));
-    controls.getChild('RepeatButton').controlText(this.localize('Repeat'));
+    controls.getChild('PreviousItemButton').controlText(this.localize('PreviousItem'));
+    controls.getChild('RepeatButton').controlText(this.repeatModeAsString());
     controls.getChild('ShuffleButton').controlText(this.localize('Shuffle'));
-    controls.getChild('NextItemButton').controlText(this.localize('Next Item'));
+    controls.getChild('NextItemButton').controlText(this.localize('NextItem'));
   }
 }
 

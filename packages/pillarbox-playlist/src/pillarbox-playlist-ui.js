@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import './pillarbox-playlist-button.js';
+import './lang';
 
 /**
  * @ignore
