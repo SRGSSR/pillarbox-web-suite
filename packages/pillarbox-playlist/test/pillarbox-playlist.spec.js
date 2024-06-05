@@ -1,38 +1,53 @@
-import {
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi
-} from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import pillarbox from '@srgssr/pillarbox-web';
-import PillarboxPlaylist from '../src/pillarbox-playlist.js';
+import { PillarboxPlaylist, RepeatMode } from '../src/pillarbox-playlist.js';
 
 const playlist = [
   {
-    sources: [{ src: 'first-source', type: 'test' }],
+    sources: [{
+      src: 'first-source',
+      type: 'test'
+    }],
     poster: 'first-poster',
-    data: { title: 'first-source', duration: 180 }
+    data: {
+      title: 'first-source',
+      duration: 180
+    }
   },
   {
-    sources: [{ src: 'second-source', type: 'test' }],
+    sources: [{
+      src: 'second-source',
+      type: 'test'
+    }],
     poster: 'second-poster',
-    data: { title: 'second-source', duration: 150 }
+    data: {
+      title: 'second-source',
+      duration: 150
+    }
   },
   {
-    sources: [{ src: 'third-source', type: 'test' }],
+    sources: [{
+      src: 'third-source',
+      type: 'test'
+    }],
     poster: 'third-poster',
-    data: { title: 'third-source', duration: 120 }
+    data: {
+      title: 'third-source',
+      duration: 120
+    }
   },
   {
-    sources: [{ src: 'fourth-source', type: 'test' }],
+    sources: [{
+      src: 'fourth-source',
+      type: 'test'
+    }],
     poster: 'fourth-poster',
-    data: { title: 'fourth-source', duration: 210 }
+    data: {
+      title: 'fourth-source',
+      duration: 210
+    }
   }
 ];
-
 
 window.HTMLMediaElement.prototype.load = () => {
 };
@@ -67,8 +82,10 @@ describe('PillarboxPlaylist', () => {
   describe('load', () => {
     it('should load a playlist', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);
@@ -87,8 +104,10 @@ describe('PillarboxPlaylist', () => {
   describe('select', () => {
     it('should select an item by index', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);
@@ -103,8 +122,10 @@ describe('PillarboxPlaylist', () => {
 
     it('should not load an item if its already selected', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);
@@ -121,8 +142,10 @@ describe('PillarboxPlaylist', () => {
 
     it('should not load an item if its outside of the playlist range', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);
@@ -141,8 +164,10 @@ describe('PillarboxPlaylist', () => {
   describe('next', () => {
     it('should play next on a registered playlist', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);
@@ -160,8 +185,10 @@ describe('PillarboxPlaylist', () => {
 
     it('should not play next if the current index is the last of the playlist', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);
@@ -177,34 +204,15 @@ describe('PillarboxPlaylist', () => {
       expect(srcSpy).toHaveBeenLastCalledWith(playlist[3].sources);
       expect(posterSpy).toHaveBeenLastCalledWith(playlist[3].poster);
     });
-
-    it('should play the first element if repeat is true when next is called and the current index is the last of the playlist', () => {
-      // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
-
-      // When
-      pillarboxPlaylist.toggleRepeat(true);
-      pillarboxPlaylist.load(playlist);
-      pillarboxPlaylist.select(3);
-      pillarboxPlaylist.next();
-
-      // Then
-      expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
-      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
-      expect(pillarboxPlaylist.items.length).toBe(4);
-      expect(pillarboxPlaylist.currentIndex).toBe(0);
-      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
-    });
   });
 
   describe('previous', () => {
     it('should play previous on a registered playlist', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);
@@ -243,8 +251,10 @@ describe('PillarboxPlaylist', () => {
   describe('autoadvance', () => {
     it('should play next element on ended if autoadvance is enabled', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.toggleAutoadvance(true);
@@ -263,8 +273,10 @@ describe('PillarboxPlaylist', () => {
 
     it('should not play next element on ended if autoadvance is disabled', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {});
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {});
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.toggleAutoadvance(false);
@@ -282,11 +294,57 @@ describe('PillarboxPlaylist', () => {
     });
   });
 
+  describe('repeat', () => {
+    it('should play the same element if repeat mode is "repeat one"', () => {
+      // Given
+      const playSpy = vi.spyOn(player, 'play')
+        .mockImplementation(() => Promise.resolve());
+
+      // When
+      pillarboxPlaylist.toggleRepeat(RepeatMode.REPEAT_ONE);
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.handleEnded();
+
+      // Then
+      expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
+      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
+      expect(pillarboxPlaylist.items.length).toBe(4);
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
+      expect(playSpy).toHaveBeenCalled();
+    });
+
+    it('should play the first element if repeat is true when next is called and the current index is the last of the playlist', () => {
+      // Given
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
+
+      // When
+      pillarboxPlaylist.toggleRepeat(RepeatMode.REPEAT_ALL);
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.select(3);
+      pillarboxPlaylist.next();
+
+      // Then
+      expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
+      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
+      expect(pillarboxPlaylist.items.length).toBe(4);
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
+      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
+      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
+    });
+  });
+
   describe('shuffle', () => {
     it('should randomize the order of playlist items', () => {
       // Given
-      vi.spyOn(player, 'src').mockImplementation(() => {});
-      vi.spyOn(player, 'poster').mockImplementation(() => {});
+      vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);
@@ -301,11 +359,25 @@ describe('PillarboxPlaylist', () => {
   describe('push', () => {
     it('should push new items at the end of the playlist', () => {
       // Given
-      vi.spyOn(player, 'src').mockImplementation(() => {});
-      vi.spyOn(player, 'poster').mockImplementation(() => {});
+      vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
       const items = [
-        { sources: [{ src: 'fifth-source', type: 'test' }], poster: 'fifth-poster' },
-        { sources: [{ src: 'sixth-source', type: 'test' }], poster: 'sixth-poster' }
+        {
+          sources: [{
+            src: 'fifth-source',
+            type: 'test'
+          }],
+          poster: 'fifth-poster'
+        },
+        {
+          sources: [{
+            src: 'sixth-source',
+            type: 'test'
+          }],
+          poster: 'sixth-poster'
+        }
       ];
 
       // When
@@ -322,12 +394,26 @@ describe('PillarboxPlaylist', () => {
   describe('splice', () => {
     it('should push new items at any point of the playlist', () => {
       // Given
-      vi.spyOn(player, 'src').mockImplementation(() => {});
-      vi.spyOn(player, 'poster').mockImplementation(() => {});
+      vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       const items = [
-        { sources: [{ src: 'fifth-source', type: 'test' }], poster: 'fifth-poster' },
-        { sources: [{ src: 'sixth-source', type: 'test' }], poster: 'sixth-poster' }
+        {
+          sources: [{
+            src: 'fifth-source',
+            type: 'test'
+          }],
+          poster: 'fifth-poster'
+        },
+        {
+          sources: [{
+            src: 'sixth-source',
+            type: 'test'
+          }],
+          poster: 'sixth-poster'
+        }
       ];
 
       // When
@@ -342,8 +428,10 @@ describe('PillarboxPlaylist', () => {
 
     it('should delete items at any point of the playlist', () => {
       // Given
-      vi.spyOn(player, 'src').mockImplementation(() => {});
-      vi.spyOn(player, 'poster').mockImplementation(() => {});
+      vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);
@@ -358,11 +446,25 @@ describe('PillarboxPlaylist', () => {
 
     it('should push and delete items at any point of the playlist', () => {
       // Given
-      vi.spyOn(player, 'src').mockImplementation(() => {});
-      vi.spyOn(player, 'poster').mockImplementation(() => {});
+      vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
       const items = [
-        { sources: [{ src: 'fifth-source', type: 'test' }], poster: 'fifth-poster' },
-        { sources: [{ src: 'sixth-source', type: 'test' }], poster: 'sixth-poster' }
+        {
+          sources: [{
+            src: 'fifth-source',
+            type: 'test'
+          }],
+          poster: 'fifth-poster'
+        },
+        {
+          sources: [{
+            src: 'sixth-source',
+            type: 'test'
+          }],
+          poster: 'sixth-poster'
+        }
       ];
 
       // When
@@ -378,8 +480,10 @@ describe('PillarboxPlaylist', () => {
 
     it('should lose track of current item when deleted', () => {
       // Given
-      vi.spyOn(player, 'src').mockImplementation(() => {});
-      vi.spyOn(player, 'poster').mockImplementation(() => {});
+      vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);
@@ -393,11 +497,25 @@ describe('PillarboxPlaylist', () => {
 
     it('should lose track of current item when deleted even when items are added', () => {
       // Given
-      vi.spyOn(player, 'src').mockImplementation(() => {});
-      vi.spyOn(player, 'poster').mockImplementation(() => {});
+      vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
       const items = [
-        { sources: [{ src: 'fifth-source', type: 'test' }], poster: 'fifth-poster' },
-        { sources: [{ src: 'sixth-source', type: 'test' }], poster: 'sixth-poster' }
+        {
+          sources: [{
+            src: 'fifth-source',
+            type: 'test'
+          }],
+          poster: 'fifth-poster'
+        },
+        {
+          sources: [{
+            src: 'sixth-source',
+            type: 'test'
+          }],
+          poster: 'sixth-poster'
+        }
       ];
 
       // When
@@ -441,9 +559,15 @@ describe('PillarboxPlaylist', () => {
     it('should reverse a single-item playlist without changing the index', () => {
       // Given
       const items = [{
-        sources: [{ src: 'first-source', type: 'test' }],
+        sources: [{
+          src: 'first-source',
+          type: 'test'
+        }],
         poster: 'first-poster',
-        data: { title: 'first-source', duration: 120 }
+        data: {
+          title: 'first-source',
+          duration: 120
+        }
       }];
 
       pillarboxPlaylist.load(items);
@@ -456,7 +580,6 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.currentItem).toBe(items[0]);
     });
   });
-
 
   describe('sort', () => {
     it('should sort items by duration and update currentIndex correctly', () => {
@@ -492,9 +615,15 @@ describe('PillarboxPlaylist', () => {
     it('should sort a single-item playlist without changing the index', () => {
       // Given
       const items = [{
-        sources: [{ src: 'first-source', type: 'test' }],
+        sources: [{
+          src: 'first-source',
+          type: 'test'
+        }],
         poster: 'first-poster',
-        data: { title: 'first-source', duration: 120 }
+        data: {
+          title: 'first-source',
+          duration: 120
+        }
       }];
 
       pillarboxPlaylist.load(items);
@@ -511,8 +640,10 @@ describe('PillarboxPlaylist', () => {
   describe('clear', () => {
     it('should clear all the items of the playlist', () => {
       // Given
-      vi.spyOn(player, 'src').mockImplementation(() => {});
-      vi.spyOn(player, 'poster').mockImplementation(() => {});
+      vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
 
       // When
       pillarboxPlaylist.load(playlist);

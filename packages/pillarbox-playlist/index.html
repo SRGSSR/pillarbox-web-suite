@@ -26,6 +26,7 @@
   import { default as pillarbox, SrgSsr} from '@srgssr/pillarbox-web';
   import './src/pillarbox-playlist.js';
   import './src/pillarbox-playlist-ui.js';
+  import { RepeatMode } from './src/pillarbox-playlist.js';
 
   // Handle URL parameters
   const searchParams = new URLSearchParams(location.search);
@@ -40,7 +41,7 @@
     autoplay: true,
     srgOptions: { dataProviderHost: ilHost },
     plugins: {
-      pillarboxPlaylist: { repeat: true },
+      pillarboxPlaylist: { autoadvance: true, repeat: RepeatMode.REPEAT_ALL },
       pillarboxPlaylistUI: true
     }
   });

@@ -8,9 +8,31 @@ const Plugin = videojs.getPlugin('plugin');
 const log = videojs.log.createLogger('pillarbox-playlist');
 
 /**
+ * Defines the available repeat modes for the playlist.
+ *
+ * @enum {number}
+ */
+export const RepeatMode = {
+  /**
+   * Disables repeat mode.
+   */
+  NO_REPEAT: 0,
+  /**
+   * Loops the entire playlist. Once the last element of the playlist ends the n
+   * ext element will be the first one. This mode only works forwards,
+   * i.e. when advancing to the next element.
+   */
+  REPEAT_ALL: 1,
+  /**
+   * Loops the currently playing item in the playlist.
+   */
+  REPEAT_ONE: 2,
+};
+
+/**
  * Represents a Plugin that allows control over a playlist.
  */
-class PillarboxPlaylist extends Plugin {
+export class PillarboxPlaylist extends Plugin {
   /**
    * The items in the playlist.
    *
@@ -45,22 +67,48 @@ class PillarboxPlaylist extends Plugin {
   previousNavigationThreshold = 3;
 
   /**
-   * Whether the repeat is enabled or not. If repeat is enabled once the last
-   * element of the playlist ends the next element will be the first one. This
-   * mode only works forwards, i.e. when advancing to the next element.
+   * The current repeat mode of the player. By default, repeat is disabled.
    *
-   * @type boolean
+   * @type {RepeatMode}
    */
-  repeat = false;
+  repeat = RepeatMode.NO_REPEAT;
 
   /**
    * Toggles the repeat mode of the player to the opposite of its current state.
    *
-   * @param {boolean} [force] Optional. If provided, sets the repeat mode to the specified boolean value (true or false).
-   *                          If omitted, the repeat mode will toggle to the opposite of its current state.
+   * @param {RepeatMode} [force] Optional.
+   *        If provided, sets the repeat mode to the specified state.
+   *        If omitted, the repeat mode will cycle in order through: no repeat, repeat all and repeat one.
    */
   toggleRepeat(force = undefined) {
-    this.repeat = force ?? !this.repeat;
+    this.repeat = force ?? (this.repeat + 1) % 3;
+  }
+
+  /**
+   * Checks if the repeat mode is set to {@link RepeatMode.REPEAT_ONE}.
+   *
+   * @returns {boolean} True if the repeat mode is {@link RepeatMode.REPEAT_ONE}, false otherwise.
+   */
+  isRepeatOneMode() {
+    return this.repeat === RepeatMode.REPEAT_ONE;
+  }
+
+  /**
+   * Checks if the repeat mode is set to {@link RepeatMode.REPEAT_ALL}.
+   *
+   * @returns {boolean} True if the repeat mode is {@link RepeatMode.REPEAT_ALL}, false otherwise.
+   */
+  isRepeatAllMode() {
+    return this.repeat === RepeatMode.REPEAT_ALL;
+  }
+
+  /**
+   * Checks if the repeat mode is set to {@link RepeatMode.NO_REPEAT}.
+   *
+   * @returns {boolean} True if the repeat mode is {@link RepeatMode.NO_REPEAT}, false otherwise.
+   */
+  isNoRepeatMode() {
+    return this.repeat === RepeatMode.NO_REPEAT;
   }
 
   /**
@@ -110,7 +158,7 @@ class PillarboxPlaylist extends Plugin {
     }
 
     this.autoadvance = Boolean(options.autoadvance);
-    this.repeat = Boolean(options.repeat);
+    this.repeat = options.repeat ?? this.repeat;
     this.previousNavigationThreshold =
       Number.isFinite(options.previousNavigationThreshold) ?
       options.previousNavigationThreshold :
@@ -312,7 +360,7 @@ class PillarboxPlaylist extends Plugin {
       return;
     }
 
-    if (this.repeat) this.select(0);
+    if (this.repeat === RepeatMode.REPEAT_ALL) this.select(0);
   }
 
   /**
@@ -369,6 +417,12 @@ class PillarboxPlaylist extends Plugin {
    * will be played, otherwise nothing happens.
    */
   handleEnded() {
+    if (this.repeat === RepeatMode.REPEAT_ONE) {
+      this.player.play().then(() => {});
+
+      return;
+    }
+
     if (!this.autoadvance) {
       return;
     }
@@ -421,8 +475,6 @@ PillarboxPlaylist.prototype.options_ = {
 };
 
 videojs.registerPlugin('pillarboxPlaylist', PillarboxPlaylist);
-
-export default PillarboxPlaylist;
 
 /**
  * Represents a single item in the playlist.

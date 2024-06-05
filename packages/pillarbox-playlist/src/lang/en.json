@@ -1,7 +1,9 @@
 {
   "Next Item": "Next Item",
+  "No Repeat": "No Repeat",
   "Playlist": "Playlist",
   "Previous Item": "Previous Item",
-  "Repeat": "Repeat",
+  "Repeat All": "Repeat All",
+  "Repeat One": "Repeat One",
   "Shuffle": "Shuffle"
 }

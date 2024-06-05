@@ -1,7 +1,9 @@
 {
   "Next Item": "Elemento successivo",
+  "No Repeat": "Nessuna Ripetizione",
   "Playlist": "Playlist",
   "Previous Item": "Elemento precedente",
-  "Repeat": "Ripeti",
+  "Repeat All": "Ripeti Tutto",
+  "Repeat One": "Ripeti Uno",
   "Shuffle": "Mescola"
 }
