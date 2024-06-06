@@ -216,6 +216,24 @@ describe('PillarboxPlaylist', () => {
       expect(srcSpy).toHaveBeenLastCalledWith(playlist[1].sources);
       expect(posterSpy).toHaveBeenLastCalledWith(playlist[1].poster);
     });
+
+    it('should restart the current media if the current time is beyond the threshold', () => {
+      // Given
+      const currentTime = vi.spyOn(player, 'currentTime').mockImplementation(() => pillarboxPlaylist.previousNavigationThreshold + 1);
+
+      // When
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.select(2);
+      pillarboxPlaylist.previous();
+
+      // Then
+      expect(pillarboxPlaylist.hasPrevious()).toBeTruthy();
+      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
+      expect(pillarboxPlaylist.items.length).toBe(4);
+      expect(pillarboxPlaylist.currentIndex).toBe(2);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[2]);
+      expect(currentTime).toHaveBeenLastCalledWith(0);
+    });
   });
 
   describe('autoadvance', () => {

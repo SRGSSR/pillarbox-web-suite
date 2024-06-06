@@ -18,6 +18,7 @@ class PillarboxPlaylist extends Plugin {
    * @private
    */
   items_ = [];
+
   /**
    * The current index.
    *
@@ -25,6 +26,24 @@ class PillarboxPlaylist extends Plugin {
    * @private
    */
   currentIndex_ = -1;
+
+  /**
+   * Threshold in seconds for determining the behavior when navigating to the previous item.
+   *
+   * - If the media is live, {@link previous} will navigate to the previous item,
+   *   regardless of the threshold.
+   * - If the playback position is within this threshold, {@link previous} will
+   *   navigate to the previous item.
+   * - If the playback position is beyond this threshold, {@link previous} will
+   *   restart the current media.
+   *
+   * To disable this functionality, set the value to undefined or infinity.
+   *
+   * @type {number}
+   * @default 3
+   */
+  previousNavigationThreshold = 3;
+
   /**
    * Whether the repeat is enabled or not. If repeat is enabled once the last
    * element of the playlist ends the next element will be the first one. This
@@ -73,18 +92,30 @@ class PillarboxPlaylist extends Plugin {
   /**
    * Creates an instance of a pillarbox playlist.
    *
-   * @param {import('video.js/dist/types/player.js').default} player The player instance.
-   * @param {Object} options Configuration options for the plugin.
+   * @param {import('video.js/dist/types/player.js').default} player - The player instance.
+   * @param {Object} options - Configuration options for the plugin.
+   * @param {Array} [options.playlist=[]] - An array of playlist items to be initially loaded into the player.
+   * @param {Boolean} [options.repeat=false] - If true, the playlist will start over automatically after the last item ends.
+   * @param {Boolean} [options.autoadvance=false] - If enabled, the player will automatically move to the next item after the current one ends.
+   * @param {Number} [options.previousNavigationThreshold=3] - Threshold in seconds for determining the behavior when navigating to the previous item.
    */
   constructor(player, options) {
     super(player);
+
+    options = this.options_ = videojs.obj.merge(this.options_, options);
     if (options.playlist && options.playlist.length) {
       player.ready(() => {
         this.load(...options.playlist);
       });
     }
-    this.autoadvance = !!options.autoadvance;
-    this.repeat = !!options.repeat;
+
+    this.autoadvance = Boolean(options.autoadvance);
+    this.repeat = Boolean(options.repeat);
+    this.previousNavigationThreshold =
+      Number.isFinite(options.previousNavigationThreshold) ?
+      options.previousNavigationThreshold :
+      this.previousNavigationThreshold;
+
     this.player.on('ended', this.onEnded_);
   }
 
@@ -296,10 +327,30 @@ class PillarboxPlaylist extends Plugin {
   }
 
   /**
-   * Moves to the previous item in the playlist.
+   * Navigates to the previous item in the playlist or restarts the current
+   * media based on playback position.
+   *
+   * - If the media is live, navigates to the previous item regardless of the threshold.
+   * - If playback is beyond the threshold, restarts the current media.
+   * - If playback is within the threshold, navigates to the previous item.
+   *
+   * @see previousNavigationThreshold
    */
   previous() {
+    if (!this.isLive() &&
+      this.player.currentTime() > this.previousNavigationThreshold) {
+      this.player.currentTime(0);
+
+      return;
+    }
+
     this.select(this.currentIndex_ - 1);
+  }
+
+  isLive() {
+    const liveTracker = this.player.liveTracker;
+
+    return liveTracker && liveTracker.isLive();
   }
 
   /**
