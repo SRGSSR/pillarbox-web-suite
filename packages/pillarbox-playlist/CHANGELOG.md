@@ -1,3 +1,15 @@
+## [@srgssr/pillarbox-playlist-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.0.0...@srgssr/pillarbox-playlist-v1.1.0) (2024-06-06)
+
+
+### New Features 🚀
+
+* **playlist-plugin:** add reverse and sort functionality ([a1a37b8](https://github.com/SRGSSR/pillarbox-web-suite/commit/a1a37b82ab0b2eaac6549206da3d04fffe7c3b8f)), closes [#18](https://github.com/SRGSSR/pillarbox-web-suite/issues/18)
+
+
+### Docs 📖
+
+* css and events documentation ([9526479](https://github.com/SRGSSR/pillarbox-web-suite/commit/9526479dfe3a8e6f21066be35db037fd1e971377))
+
 ## @srgssr/pillarbox-playlist-v1.0.0 (2024-05-28)
 
 
