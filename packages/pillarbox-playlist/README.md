@@ -73,7 +73,7 @@ The following table outlines the key methods available in the this plugin:
 | `splice(start, deleteCount, ...items)` | Modifies the playlist by adding, removing, or replacing items. Adjusts the current index if necessary.                                   |
 | `clear()`                              | Clears the internal playlist. Does not stop or unload the currently playing media.                                                       |
 | `next()`                               | Advances to the next item in the playlist, with support for repeat mode.                                                                 |
-| `previous()`                           | Moves to the previous item in the playlist.                                                                                              |
+| `previous()`                           | Navigates to the previous item or restarts the current item based on playback position and threshold.                                    |
 | `shuffle()`                            | Randomizes the order of the playlist items using the Fisher-Yates shuffle algorithm.                                                     |
 | `select(index)`                        | Selects and plays the item at the specified index in the playlist.                                                                       |
 | `toggleRepeat(force)`                  | Toggles the repeat mode of the player to the opposite of its current state, or sets it to the specified boolean value if provided.       |
@@ -84,21 +84,23 @@ The following table outlines the key methods available in the this plugin:
 When initializing the playlist plugin, you can pass an `options` object that configures the
 behavior of the plugin. Here are the available options:
 
-| Option        | Type    | Default | Description                                                                                 |
-|---------------|---------|---------|---------------------------------------------------------------------------------------------|
-| `playlist`    | Array   | `[]`    | An array of playlist items to be initially loaded into the player.                          |
-| `repeat`      | Boolean | `false` | If true, the playlist will start over automatically after the last item ends.               |
-| `autoadvance` | Boolean | `false` | If enabled, the player will automatically move to the next item after the current one ends. |
+| Option                        | Type    | Default | Description                                                                                 |
+|-------------------------------|---------|---------|---------------------------------------------------------------------------------------------|
+| `playlist`                    | Array   | `[]`    | An array of playlist items to be initially loaded into the player.                          |
+| `repeat`                      | Boolean | `false` | If true, the playlist will start over automatically after the last item ends.               |
+| `autoadvance`                 | Boolean | `false` | If enabled, the player will automatically move to the next item after the current one ends. |
+| `previousNavigationThreshold` | Number  | 3       | Threshold in seconds for determining the behavior when navigating to the previous item.     |
 
 #### Properties
 
 After initializing the plugin, you can modify or read these properties to control playlist behavior
 dynamically:
 
-| Property      | Type    | Description                                                                                                                                   |
-|---------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| `repeat`      | Boolean | Enables or disables repeating the playlist once the last item has played. Changes take effect immediately and apply to subsequent operations. |
-| `autoadvance` | Boolean | Toggles automatic advancement to the next item when the current item ends.                                                                    |
+| Property                      | Type    | Description                                                                                                                                   |
+|-------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| `repeat`                      | Boolean | Enables or disables repeating the playlist once the last item has played. Changes take effect immediately and apply to subsequent operations. |
+| `autoadvance`                 | Boolean | Toggles automatic advancement to the next item when the current item ends.                                                                    |
+| `previousNavigationThreshold` | Number  | Threshold in seconds for determining the behavior when navigating to the previous item.                                                       |
 
 The following properties are read-only:
 
