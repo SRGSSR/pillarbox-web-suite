@@ -29,7 +29,7 @@ class PillarboxPlaylistMenuItem extends Button {
   /**
    * Gets the Pillarbox playlist associated with the player.
    *
-   * @returns {import('/pillarbox-playlist.js').default} The Pillarbox playlist.
+   * @returns {import('/packages/pillarbox-playlist/src/pillarbox-playlist.js').default} The Pillarbox playlist.
    */
   playlist() {
     return this.player().pillarboxPlaylist();

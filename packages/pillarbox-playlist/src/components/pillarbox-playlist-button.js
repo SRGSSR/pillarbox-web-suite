@@ -1,10 +1,10 @@
 import videojs from 'video.js';
-import './pillarbox-playlist-modal.js';
-import './lang';
+import './modal/pillarbox-playlist-modal.js';
+import '../lang/index.js';
 
 /**
  * @ignore
- * @type {typeof import('video.js/dist/types/button').default}
+ * @type {typeof import('video.js/dist/types/menu/menu-item').default}
  */
 const Button = videojs.getComponent('Button');
 
@@ -19,7 +19,7 @@ class PillarboxPlaylistButton extends Button {
    *
    * @private
    */
-  _onPlaylistStateChanged = ({ changes }) => {
+  onPlaylistStateChanged_ = ({ changes }) => {
     if ('items' in changes) {
       this.toggleVisibility();
     }
@@ -32,32 +32,31 @@ class PillarboxPlaylistButton extends Button {
    * @param {Object} options - Options for the button.
    */
   constructor(player, options) {
+    options = videojs.mergeOptions({ controlText: 'Playlist' }, options);
     super(player, options);
-    this.handleLanguagechange();
     this.setIcon('chapters');
-    player.ready(() => {
-      this.$('.vjs-icon-placeholder').classList.toggle('vjs-icon-chapters', true);
-      player.addChild('PlaylistMenuDialog', {pauseOnOpen: false});
-    });
+    this.playlist().on('statechanged', this.onPlaylistStateChanged_);
+  }
 
-    this.playlist().on('statechanged', this._onPlaylistStateChanged);
+  /**
+   * Get the playlist instance associated with the player.
+   *
+   * @returns {import('packages/pillarbox-playlist/src/pillarbox-playlist.js').default} The playlist instance.
+   */
+  playlist() {
+    return this.player().pillarboxPlaylist();
+  }
+
+  ready() {
+    this.$('.vjs-icon-placeholder').classList.toggle('vjs-icon-chapters', true);
   }
 
   /**
    * Dispose of the PillarboxPlaylistButton instance.
    */
   dispose() {
-    this.playlist().off('statechanged', this._onPlaylistStateChanged);
+    this.playlist().off('statechanged', this.onPlaylistStateChanged_);
     super.dispose();
-  }
-
-  /**
-   * Get the playlist instance associated with the player.
-   *
-   * @returns {import('pillarbox-playlist.js').default} The playlist instance.
-   */
-  playlist() {
-    return this.player().pillarboxPlaylist();
   }
 
   /**
@@ -76,14 +75,7 @@ class PillarboxPlaylistButton extends Button {
    */
   handleClick(event) {
     super.handleClick(event);
-    this.player().getChild('PlaylistMenuDialog').open();
-  }
-
-  /**
-   * Handles the language change event to update the control text.
-   */
-  handleLanguagechange() {
-    this.controlText(this.localize('Playlist'));
+    this.player().getChild('PillarboxPlaylistMenuDialog').open();
   }
 
   /**
