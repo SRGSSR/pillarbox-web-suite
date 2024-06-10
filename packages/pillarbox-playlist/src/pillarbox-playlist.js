@@ -415,6 +415,11 @@ class PillarboxPlaylist extends Plugin {
   }
 }
 
+PillarboxPlaylist.prototype.options_ = {
+  autoadvance: false,
+  repeat: false
+};
+
 videojs.registerPlugin('pillarboxPlaylist', PillarboxPlaylist);
 
 export default PillarboxPlaylist;
