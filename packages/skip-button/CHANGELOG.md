@@ -1,3 +1,15 @@
+## [@srgssr/skip-button-v1.0.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.0...@srgssr/skip-button-v1.0.1) (2024-06-10)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* preserve default options when adding new translations ([2efcfd1](https://github.com/SRGSSR/pillarbox-web-suite/commit/2efcfd1dbbe82f12f9f6beae65148e89e8597eae))
+
+
+### Docs 📖
+
+* css and events documentation ([9526479](https://github.com/SRGSSR/pillarbox-web-suite/commit/9526479dfe3a8e6f21066be35db037fd1e971377))
+
 ## @srgssr/skip-button-v1.0.0 (2024-05-28)
 
 

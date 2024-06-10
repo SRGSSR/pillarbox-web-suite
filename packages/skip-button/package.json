@@ -1,7 +1,7 @@
 {
   "name": "@srgssr/skip-button",
   "description": "A button to skip certain parts of the content, such as opening credits or end credits",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
