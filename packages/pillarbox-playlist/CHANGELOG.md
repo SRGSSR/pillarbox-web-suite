@@ -1,3 +1,10 @@
+## [@srgssr/pillarbox-playlist-v1.1.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.1.0...@srgssr/pillarbox-playlist-v1.1.1) (2024-06-10)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* preserve default options when adding new translations ([2efcfd1](https://github.com/SRGSSR/pillarbox-web-suite/commit/2efcfd1dbbe82f12f9f6beae65148e89e8597eae))
+
 ## [@srgssr/pillarbox-playlist-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.0.0...@srgssr/pillarbox-playlist-v1.1.0) (2024-06-06)
 
 
