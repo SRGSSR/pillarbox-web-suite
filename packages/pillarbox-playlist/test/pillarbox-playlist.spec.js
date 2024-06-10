@@ -1,7 +1,8 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import pillarbox from '@srgssr/pillarbox-web';
 import PillarboxPlaylist from '../src/pillarbox-playlist.js';
-import '../src/pillarbox-playlist-button.js';
+import PillarboxPlaylistUi from '../src/pillarbox-playlist-ui.js';'../src/pillarbox-playlist-ui.js';
+import '../src/components/pillarbox-playlist-button.js';
 
 const playlist = [
   {
@@ -532,14 +533,25 @@ describe('PillarboxPlaylist', () => {
       await new Promise((resolve) => player.ready(() => resolve()));
 
       button = player.controlBar.PillarboxPlaylistButton;
-      dialog = player.getChild('PlaylistMenuDialog');
-      controls = dialog.getChild('PlaylistControls');
+      dialog = player.getChild('PillarboxPlaylistMenuDialog');
+      controls = dialog.getChild('PillarboxPlaylistControls');
       items = dialog.getChild('PillarboxPlaylistMenuItemsList').children()
         .filter(item => item.name() === 'PillarboxPlaylistMenuItem')
         .map(item => item.getChild('PillarboxPlaylistMenuItemButton'));
     });
 
-    it('should modal should display the button and all the items in the playlist', ()=> {
+    it('should be registered and attached to the player', () => {
+      player = pillarbox(videoElement, {
+        plugins: {
+          pillarboxPlaylist: true,
+          pillarboxPlaylistUI: true
+        }
+      });
+      expect(pillarbox.getPlugin('pillarboxPlaylistUI')).toBe(PillarboxPlaylistUi);
+      expect(player.pillarboxPlaylistUI).toBeDefined();
+    });
+
+    it('should modal should display the button and all the items in the playlist', () => {
       // Then
       expect(button.hasClass('vjs-hidden')).toBeFalsy();
       expect(items.length).toBe(4);
@@ -582,7 +594,7 @@ describe('PillarboxPlaylist', () => {
 
     it('should toggle repeat mode through the dialog controls', ()=> {
       // When
-      controls.getChild('RepeatButton').handleClick();
+      controls.getChild('PillarboxPlaylistRepeatButton').handleClick();
 
       // Then
       expect(pillarboxPlaylist.repeat).toBeTruthy();
@@ -593,7 +605,7 @@ describe('PillarboxPlaylist', () => {
       pillarboxPlaylist.select(0);
 
       // When
-      controls.getChild('NextItemButton').handleClick();
+      controls.getChild('PillarboxPlaylistNextItemButton').handleClick();
 
       // Then
       expect(pillarboxPlaylist.currentIndex).toBe(1);
@@ -607,7 +619,7 @@ describe('PillarboxPlaylist', () => {
       pillarboxPlaylist.select(2);
 
       // When
-      controls.getChild('PreviousItemButton').handleClick();
+      controls.getChild('PillarboxPlaylistPreviousItemButton').handleClick();
 
       // Then
       expect(pillarboxPlaylist.currentIndex).toBe(1);
@@ -618,7 +630,7 @@ describe('PillarboxPlaylist', () => {
 
     it('should shuffle the items through the dialog controls', ()=> {
       // When
-      controls.getChild('ShuffleButton').handleClick();
+      controls.getChild('PillarboxPlaylistShuffleButton').handleClick();
 
       // Then
       expect(playlist).not.toEqual(pillarboxPlaylist.item);
