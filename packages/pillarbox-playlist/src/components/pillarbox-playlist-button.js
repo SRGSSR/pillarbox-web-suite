@@ -1,6 +1,6 @@
 import videojs from 'video.js';
-import './pillarbox-playlist-modal.js';
-import './lang';
+import './modal/pillarbox-playlist-modal.js';
+import '../lang/index.js';
 
 /**
  * @ignore
@@ -37,7 +37,7 @@ class PillarboxPlaylistButton extends Button {
     this.setIcon('chapters');
     player.ready(() => {
       this.$('.vjs-icon-placeholder').classList.toggle('vjs-icon-chapters', true);
-      player.addChild('PlaylistMenuDialog', {pauseOnOpen: false});
+      player.addChild('PillarboxPlaylistMenuDialog', options.modal);
     });
 
     this.playlist().on('statechanged', this._onPlaylistStateChanged);
@@ -54,7 +54,7 @@ class PillarboxPlaylistButton extends Button {
   /**
    * Get the playlist instance associated with the player.
    *
-   * @returns {import('pillarbox-playlist.js').default} The playlist instance.
+   * @returns {import('packages/pillarbox-playlist/src/pillarbox-playlist.js').default} The playlist instance.
    */
   playlist() {
     return this.player().pillarboxPlaylist();
@@ -76,7 +76,7 @@ class PillarboxPlaylistButton extends Button {
    */
   handleClick(event) {
     super.handleClick(event);
-    this.player().getChild('PlaylistMenuDialog').open();
+    this.player().getChild('PillarboxPlaylistMenuDialog').open();
   }
 
   /**
