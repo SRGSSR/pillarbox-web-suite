@@ -1,3 +1,10 @@
+## [@srgssr/pillarbox-playlist-v1.2.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.1.1...@srgssr/pillarbox-playlist-v1.2.0) (2024-06-21)
+
+
+### New Features 🚀
+
+* **playlist-plugin:** implement smart navigation based on playback position ([4cf92de](https://github.com/SRGSSR/pillarbox-web-suite/commit/4cf92decd4d8810ee55be183902686083115ce69)), closes [#17](https://github.com/SRGSSR/pillarbox-web-suite/issues/17)
+
 ## [@srgssr/pillarbox-playlist-v1.1.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.1.0...@srgssr/pillarbox-playlist-v1.1.1) (2024-06-10)
 
 
