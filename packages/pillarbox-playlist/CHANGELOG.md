@@ -1,3 +1,10 @@
+## [@srgssr/pillarbox-playlist-v1.2.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.2.0...@srgssr/pillarbox-playlist-v1.2.1) (2024-07-02)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* publish pillarbox-suite to npm ([74e7ada](https://github.com/SRGSSR/pillarbox-web-suite/commit/74e7ada804bfe7a76b0972af859f57ebd2dc1270))
+
 ## [@srgssr/pillarbox-playlist-v1.2.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.1.1...@srgssr/pillarbox-playlist-v1.2.0) (2024-06-21)
 
 
