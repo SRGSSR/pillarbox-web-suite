@@ -1,3 +1,10 @@
+## [@srgssr/skip-button-v1.0.2](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.1...@srgssr/skip-button-v1.0.2) (2024-07-02)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* publish pillarbox-suite to npm ([74e7ada](https://github.com/SRGSSR/pillarbox-web-suite/commit/74e7ada804bfe7a76b0972af859f57ebd2dc1270))
+
 ## [@srgssr/skip-button-v1.0.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.0...@srgssr/skip-button-v1.0.1) (2024-06-10)
 
 
