@@ -3,12 +3,13 @@
   "description": "A button to skip certain parts of the content, such as opening credits or end credits",
   "version": "1.0.1",
   "license": "MIT",
+  "author": "SRG SSR",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SRGSSR/pillarbox-web-suite.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   },
   "homepage": "https://srgssr.github.io/pillarbox-web-suite/skip-button",
   "type": "module",
@@ -44,6 +45,6 @@
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
   "peerDependencies": {
-    "@srgssr/pillarbox-web": "^1.12.1"
+    "@srgssr/pillarbox-web": "^1.12.2"
   }
 }
