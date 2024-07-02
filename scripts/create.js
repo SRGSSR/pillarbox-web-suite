@@ -30,7 +30,12 @@ export default function(plop) {
       {
         type: 'input',
         name: 'name',
-        message: data => `What is the name of your ${data.type}?`
+        message: data => `What is the name of your ${data.type}?`,
+        validate: (value) => {
+          if ((/.+/).test(value)) { return true; }
+
+          return 'Package name is required';
+        }
       },
       {
         type: 'confirm',
@@ -52,6 +57,7 @@ export default function(plop) {
           ] : undefined
         },
         data: {
+          currentYear: new Date().getFullYear(),
           importAlias: data.platform === 'pillarbox' ? '@srgssr/pillarbox-web' : 'video.js'
         }
       }

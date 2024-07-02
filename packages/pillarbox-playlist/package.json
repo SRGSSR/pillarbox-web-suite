@@ -3,12 +3,13 @@
   "description": "Add Playlist management capabilities to video.js",
   "version": "1.2.0",
   "license": "MIT",
+  "author": "SRG SSR",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SRGSSR/pillarbox-web-suite.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   },
   "homepage": "https://srgssr.github.io/pillarbox-web-suite/pillarbox-playlist",
   "type": "module",
@@ -51,6 +52,6 @@
     "video.js": "^8.0.0"
   },
   "devDependencies": {
-    "@srgssr/pillarbox-web": "^1.12.1"
+    "@srgssr/pillarbox-web": "^1.12.2"
   }
 }

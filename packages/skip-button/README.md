@@ -12,19 +12,7 @@ To use this component, you need the following installed on your system:
 
 ## Quick Start
 
-To get started with this component, follow these steps:
-
-Add the `@srgssr` registry to your `.npmrc` file:
-
-```plaintext
-//npm.pkg.github.com/:_authToken=TOKEN
-@srgssr:registry=https://npm.pkg.github.com
-```
-
-Generate an authentication token by following this
-guide: [Authenticating with a personal access token][generate-token]
-
-You can now install it through `npm` the following command:
+To get started with this component, install it through the following command:
 
 ```bash
 npm install --save @srgssr/pillarbox-web @srgssr/skip-button
@@ -88,7 +76,7 @@ http://localhost:4200/?language=fr&urn=urn:rts:video:14318206
 
 ## Licensing
 
-This project is licensed under the MIT License. See the [LICENSE](../../LICENSE) file for more
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more
 details.
 
 [main-readme]: ../../docs/README.md#Contributing
