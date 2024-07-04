@@ -19,7 +19,7 @@ npm install --save @srgssr/pillarbox-web @srgssr/skip-button
 ```
 
 For instructions on setting up Pillarbox, see
-the [Quick Start guide](SRGSSR/pillarbox-web#quick-start).
+the [Quick Start guide](https://github.com/SRGSSR/pillarbox-web#quick-start).
 
 Once the player is installed you can activate the button as follows:
 
