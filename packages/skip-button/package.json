@@ -11,7 +11,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://srgssr.github.io/pillarbox-web-suite/skip-button",
+  "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/skip-button#readme",
   "type": "module",
   "main": "dist/skip-button.cjs",
   "module": "dist/skip-button.js",
