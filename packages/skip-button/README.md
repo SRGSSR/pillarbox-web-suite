@@ -42,8 +42,8 @@ To apply the default styling, add the following line to your CSS file:
 
 ## Contributing
 
-For detailed contribution guidelines, refer to the main project’s [README file][main-readme]. Please
-adhere to the specified guidelines.
+For detailed contribution guidelines, refer to our [Contributing guide][contributing-guide].
+Please adhere to the specified guidelines.
 
 ### Setting up a development server
 
@@ -79,6 +79,4 @@ http://localhost:4200/?language=fr&urn=urn:rts:video:14318206
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more
 details.
 
-[main-readme]: ../../docs/README.md#Contributing
-
-[generate-token]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-with-a-personal-access-token
+[contributing-guide]: https://github.com/SRGSSR/pillarbox-web-suite/blob/main/docs/README.md#contributing

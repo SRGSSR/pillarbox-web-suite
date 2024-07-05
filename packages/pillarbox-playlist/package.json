@@ -11,7 +11,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://srgssr.github.io/pillarbox-web-suite/pillarbox-playlist",
+  "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/pillarbox-playlist#readme",
   "type": "module",
   "main": "dist/pillarbox-playlist.cjs",
   "module": "dist/pillarbox-playlist.js",
