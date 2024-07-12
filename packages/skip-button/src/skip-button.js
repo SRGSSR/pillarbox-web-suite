@@ -71,7 +71,7 @@ class SkipButton extends Button {
     const timeInterval = JSON.parse(this.activeInterval.text);
     const text = timeInterval.type === 'OPENING_CREDITS' ? 'Skip intro' : 'Skip credits';
 
-    this.controlText(this.localize(text));
+    this.controlText(text);
     this.show();
   }
 }
