@@ -1,3 +1,16 @@
+## [@srgssr/skip-button-v1.0.3](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.2...@srgssr/skip-button-v1.0.3) (2024-07-12)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* remove unneeded call to localize ([c6bb013](https://github.com/SRGSSR/pillarbox-web-suite/commit/c6bb01336af6295573420e782e9ed79635940c9f))
+
+
+### Docs 📖
+
+* changed homepage in package json ([0020f92](https://github.com/SRGSSR/pillarbox-web-suite/commit/0020f92f5db6d4f0b0439e6dfa4e9ef93c3d14d5))
+* fix quick start link ([82de85e](https://github.com/SRGSSR/pillarbox-web-suite/commit/82de85e6b37a072d9c8f1b836e89a9b947fd1c80))
+
 ## [@srgssr/skip-button-v1.0.2](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.1...@srgssr/skip-button-v1.0.2) (2024-07-02)
 
 
