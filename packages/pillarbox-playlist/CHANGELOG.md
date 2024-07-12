@@ -1,3 +1,16 @@
+## [@srgssr/pillarbox-playlist-v1.3.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.2.1...@srgssr/pillarbox-playlist-v1.3.0) (2024-07-12)
+
+
+### New Features 🚀
+
+* **playlist-plugin:** enhance configuration options for playlist modal ([78275d8](https://github.com/SRGSSR/pillarbox-web-suite/commit/78275d8e7cbf1bc10171dca2d0ffe64efaab2734)), closes [#16](https://github.com/SRGSSR/pillarbox-web-suite/issues/16)
+
+
+### Docs 📖
+
+* changed homepage in package json ([0020f92](https://github.com/SRGSSR/pillarbox-web-suite/commit/0020f92f5db6d4f0b0439e6dfa4e9ef93c3d14d5))
+* fix quick start link ([82de85e](https://github.com/SRGSSR/pillarbox-web-suite/commit/82de85e6b37a072d9c8f1b836e89a9b947fd1c80))
+
 ## [@srgssr/pillarbox-playlist-v1.2.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.2.0...@srgssr/pillarbox-playlist-v1.2.1) (2024-07-02)
 
 
