@@ -27,6 +27,12 @@ Install the dependencies:
 npm install
 ```
 
+Start the server:
+
+```shell
+npm run start
+```
+
 ### Adding a new element
 
 Open your terminal and execute the following command:
@@ -35,7 +41,7 @@ Open your terminal and execute the following command:
 npm run create
 ```
 
-After running the command, you will be prompted to enter the type and name of your element. A new 
+After running the command, you will be prompted to enter the type and name of your element. A new
 element directory will be generated in the monorepo with the following structure:
 
 ```

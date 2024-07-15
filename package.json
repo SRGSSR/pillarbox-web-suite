@@ -20,7 +20,8 @@
   "scripts": {
     "create": "plop --plopfile scripts/create.js",
     "eslint": "eslint {packages/**/{src,test}/**/*.{js,jsx},scripts/*.{js,jsx}}",
-    "github:page": "npm run github:page --ws && node scripts/prepare-deployment.js",
+    "github:page": "npm run github:page --ws && vite build && node scripts/prepare-deployment.js",
+    "start": " vite --port 4200 --open",
     "outdated": "npm outdated",
     "prepare": "husky",
     "stylelint": "stylelint **/*.{css,scss} --allow-empty-input",

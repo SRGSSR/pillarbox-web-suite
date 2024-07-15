@@ -1,95 +1,42 @@
 import fs from 'fs';
 import path from 'path';
 
+// ANSI escape codes for colors and styles
+const colors = {
+  reset: "\x1b[0m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  blue: "\x1b[34m",
+  bold: "\x1b[1m",
+};
+
+// Define the directories
 const packagesDir = path.join(process.cwd(), 'packages');
 const deploymentDir = path.join(process.cwd(), 'dist');
 
 // Ensure the deployment directory exists
 if (!fs.existsSync(deploymentDir)) {
   fs.mkdirSync(deploymentDir, { recursive: true });
+  console.log(`${colors.blue}Created deployment directory at ${deploymentDir}${colors.reset}`);
 }
 
 // Read all package directories
-const packages = fs.readdirSync(packagesDir);
-const indexContent = `
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Package Showcase</title>
-    <link rel="stylesheet" href="https://unpkg.com/open-props">
-    <style>
-         body {
-            font-family: var(--font-sans);
-            background-color: var(--gray-9); /* Dark background for body */
-            color: var(--gray-1); /* Light text color */
-            margin: 0 auto;
-            padding: var(--size-3);
-            max-width: var(--size-sm);
-        }
-        header {
-            color: var(--gray-3); /* Lightest text color */
-            padding-bottom: var(--size-2);
-            text-align: center;
-            font-size: var(--font-size-1); /* Larger text for the header */
-            margin: var(--size-2) auto;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: var(--size-2) auto;
-            background-color: var(--gray-8); /* Slightly lighter dark background for contrast */
-            box-shadow: var(--shadow-3); /* Prominent shadow for 3D effect */
-            border-radius: var(--radius-2);
-        }
-        li {
-            border-bottom: 1px solid var(--gray-7);
-            margin: 0;
-            transition: background-color 0.3s;
-        }
-        li:first-child {
-            border-radius: var(--radius-2) var(--radius-2) 0 0;
-        }
-        li:last-child {
-            border-radius: 0 0 var(--radius-2) var(--radius-2);
-        }
-        li:only-child {
-            border-radius: var(--radius-2);
-        }
-        li:hover {
-            background-color: var(--gray-6); /* Slightly lighter on hover for interactive feel */
-        }
-        a {
-            display: block;
-            padding: var(--size-3) var(--size-4);
-            text-decoration: none;
-            color: var(--gray-4); /* Subtle blue color for links */
-            transition: color 0.3s;
-            font-size: var(--font-size-2); /* Standard text size for links */
-        }
-        a:hover {
-            color: var(--gray-12); /* Slightly brighter blue on hover */
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Pillarbox Extensions</h1>
-    </header>
-    <ul>
-        ${packages.map(packageName => {
-          const distDir = path.join(packagesDir, packageName, 'dist');
-          const targetDir = path.join(deploymentDir, packageName);
+fs.readdirSync(packagesDir).forEach(packageName => {
+  // Define the source and target directories for the current package
+  const distDir = path.join(packagesDir, packageName, 'dist');
+  const targetDir = path.join(deploymentDir, 'packages', packageName);
 
-          if (!fs.existsSync(distDir)) return;
+  // Check if the package's dist directory exists
+  if (!fs.existsSync(distDir)) {
+    console.log(`${colors.yellow}(!) No dist directory found for package: ${packageName}${colors.reset}`);
 
-          fs.cpSync(distDir, targetDir, { recursive: true });
+    return;
+  }
 
-          return `<li><a href="${packageName}/index.html">${packageName}</a></li>`;
-        }).filter(Boolean).join('')}
-    </ul>
-</body>
-</html>
-`;
+  // Copy the package dist directory to the target location
+  fs.cpSync(distDir, targetDir, { recursive: true });
+  const relativeDistDir = path.relative(process.cwd(), distDir);
+  const relativeTargetDir = path.relative(process.cwd(), targetDir);
 
-// Write the index.html to the deployment directory
-fs.writeFileSync(path.join(deploymentDir, 'index.html'), indexContent);
+  console.log(`${colors.green}✓${colors.reset} ${colors.bold}Copied ${relativeDistDir} to ${relativeTargetDir}${colors.reset}`);
+});
