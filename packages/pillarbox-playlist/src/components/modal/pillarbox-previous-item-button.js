@@ -2,7 +2,7 @@ import videojs from 'video.js';
 
 /**
  * @ignore
- * @type {typeof import('video.js/dist/types/menu/menu-item').default}
+ * @type {typeof import('video.js/dist/types/button').default}
  */
 const Button = videojs.getComponent('Button');
 
