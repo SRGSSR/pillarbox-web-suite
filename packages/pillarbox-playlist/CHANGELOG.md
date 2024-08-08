@@ -1,3 +1,21 @@
+## [@srgssr/pillarbox-playlist-v2.0.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.3.0...@srgssr/pillarbox-playlist-v2.0.0) (2024-08-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* **playlist-plugin:** - Changed the API to toggle the repeat mode and the initialization options.
+- The repeat mode is no longer a boolean. It is now a number representing each mode (0: no repeat,
+  1: repeat all, 2: repeat one).
+
+### Docs 📖
+
+* correct type reference for button component ([57abd71](https://github.com/SRGSSR/pillarbox-web-suite/commit/57abd7169018e07b70f4ba06e1f81d68b3d93e7c))
+
+
+### New Features 🚀
+
+* **playlist-plugin:** introduce repeat one mode ([a76840c](https://github.com/SRGSSR/pillarbox-web-suite/commit/a76840c671d9cbfab579a97513968d3b0cc0cb33))
+
 ## [@srgssr/pillarbox-playlist-v1.3.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.2.1...@srgssr/pillarbox-playlist-v1.3.0) (2024-07-12)
 
 
