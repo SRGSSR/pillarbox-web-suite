@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{titleCase name}} Demo</title>
+  <title>Pillarbox-Debug-Panel Demo</title>
   <style>
     html,
     body {
@@ -19,32 +19,27 @@
 </head>
 <body>
 <video id="player" class="pillarbox-js" controls muted></video>
-
 <script type="module">
   import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
   import pillarbox from '@srgssr/pillarbox-web';
-  import './scss/{{kebabCase name}}.scss';
-  import './src/{{kebabCase name}}.js';
+  import './scss/pillarbox-debug-panel.scss';
+  import './src/pillarbox-debug-panel.js';
 
   // Handle URL parameters
   const searchParams = new URLSearchParams(location.search);
   const debug = searchParams.has('debug');
   const ilHost = searchParams.get('ilHost') || undefined;
   const language = searchParams.get('language');
-  const urn = searchParams.get('urn') || 'urn:rts:video:14683290';
+  const urn = searchParams.get('urn') || 'urn:rts:video:14651145';
 
-  // Create a pillarbox player instance with the {{properCase name}} enabled
+  // Create a pillarbox player instance with the PillarboxDebugPanel enabled
   window.player = pillarbox('player', {
     debug,
     language,
     srgOptions: {
       dataProviderHost: ilHost
     },
-{{#ifEq type 'Plugin'}}
-    plugins: { {{camelCase name}}: true }
-{{else}}
-    {{properCase name}}: true
-{{/ifEq}}
+    pillarboxDebugPanel: true
   });
 
   // Load the video source for the player

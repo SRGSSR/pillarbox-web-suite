@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import babel from '@rollup/plugin-babel';
-import copy from 'rollup-plugin-copy';
+{{#if wantLocalization}}import copy from 'rollup-plugin-copy';{{/if}}
 
 /**
  * Vite's configuration for the lib build.
