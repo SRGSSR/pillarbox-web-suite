@@ -1,0 +1,42 @@
+.pbw-debug-panel {
+  position: absolute;
+  bottom: 6em;
+  left: 2.1em;
+  width: 30%;
+  padding: 0.8em;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: bottom .5s;
+
+  > * {
+    margin-bottom: 0.2em;
+  }
+}
+
+.vjs-layout-tiny, .vjs-layout-x-small, .vjs-layout-small, .vjs-layout-medium {
+  .pbw-debug-panel {
+    width: calc(100% - 4.2em);
+  }
+}
+
+.vjs-layout-large .pbw-debug-panel {
+  width: 40%
+}
+
+.vjs-playing.vjs-user-inactive .pbw-debug-panel {
+  bottom: 1em;
+}
+
+.metric-component {
+  display: flex;
+  gap: 0.5em;
+  justify-content: space-between;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.graph-component {
+  width: 60%;
+  height: 1em;
+  image-rendering: pixelated;
+}
