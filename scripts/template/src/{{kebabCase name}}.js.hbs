@@ -22,9 +22,12 @@ class {{properCase name}} extends Plugin {
   constructor(player, options) {
     super(player, options);
   }
+
+  static get VERSION() {
+    return version;
+  }
 }
 
-{{properCase name}}.VERSION = version;
 {{platform}}.registerPlugin('{{camelCase name}}', {{properCase name}});
 {{else}}
 /**
@@ -54,9 +57,12 @@ class {{properCase name}} extends {{type}} {
   handleLanguagechange() {
     super.handleLanguagechange();
   }
+
+  static get VERSION() {
+    return version;
+  }
 }
 
-{{properCase name}}.VERSION = version;
 {{platform}}.registerComponent('{{properCase name}}', {{properCase name}});
 {{/ifEq}}
 
