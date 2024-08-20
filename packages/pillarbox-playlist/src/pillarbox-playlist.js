@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import { version } from '../package.json';
 
 /**
  * @ignore
@@ -466,6 +467,10 @@ export class PillarboxPlaylist extends Plugin {
       items: JSON.stringify(this.items_),
       currentIndex: this.currentIndex_
     });
+  }
+
+  static get VERSION() {
+    return version;
   }
 }
 
