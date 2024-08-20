@@ -1,4 +1,5 @@
 import pillarbox from '@srgssr/pillarbox-web';
+import { version } from '../package.json';
 import './lang';
 
 /**
@@ -76,6 +77,7 @@ class SkipButton extends Button {
   }
 }
 
+SkipButton.VERSION = version;
 pillarbox.registerComponent('SkipButton', SkipButton);
 
 export default SkipButton;
