@@ -1,3 +1,10 @@
+## [@srgssr/pillarbox-playlist-v2.0.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v2.0.0...@srgssr/pillarbox-playlist-v2.0.1) (2024-08-29)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* **playlist-plugin:** expose playlist plugin version ([0b57214](https://github.com/SRGSSR/pillarbox-web-suite/commit/0b57214e4432525350c6e50701504d6c5d0207e6))
+
 ## [@srgssr/pillarbox-playlist-v2.0.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v1.3.0...@srgssr/pillarbox-playlist-v2.0.0) (2024-08-08)
 
 
