@@ -1,3 +1,11 @@
+## [@srgssr/skip-button-v1.0.4](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.3...@srgssr/skip-button-v1.0.4) (2024-08-29)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* **playlist-plugin:** expose playlist plugin version ([0b57214](https://github.com/SRGSSR/pillarbox-web-suite/commit/0b57214e4432525350c6e50701504d6c5d0207e6))
+* **skip-button:** expose skip button component version ([5eceec2](https://github.com/SRGSSR/pillarbox-web-suite/commit/5eceec2f9c5ebb2e12695e94f129dae8c8cd5e82))
+
 ## [@srgssr/skip-button-v1.0.3](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.2...@srgssr/skip-button-v1.0.3) (2024-07-12)
 
 
