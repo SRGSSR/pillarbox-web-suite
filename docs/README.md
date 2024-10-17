@@ -71,8 +71,7 @@ and testing the element.
 ## Contributing
 
 Contributions are welcome! If you'd like to contribute, please follow the project's code style and
-linting rules. Here
-are some commands to help you get started:
+linting rules. Here are some commands to help you get started:
 
 Check your JavaScript code:
 

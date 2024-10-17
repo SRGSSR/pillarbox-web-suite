@@ -291,7 +291,6 @@ export class PillarboxPlaylist extends Plugin {
     this.updateState_();
   }
 
-
   /**
    * Get the currently playing index.
    *
@@ -350,9 +349,9 @@ export class PillarboxPlaylist extends Plugin {
   }
 
   /**
-   * Advances to the next item in the playlist. If repeat mode is enabled, then
-   * once the last item of the playlist is reached this function will play
-   * the first one.
+   * Advances to the next item in the playlist. If {@link RepeatMode#REPEAT_ALL}
+   * mode is enabled, then once the last item of the playlist is reached this
+   * function will play the first one.
    */
   next() {
     if (this.hasNext()) {
@@ -382,6 +381,8 @@ export class PillarboxPlaylist extends Plugin {
    * - If the media is live, navigates to the previous item regardless of the threshold.
    * - If playback is beyond the threshold, restarts the current media.
    * - If playback is within the threshold, navigates to the previous item.
+   * - If {@link RepeatMode#REPEAT_ALL} mode is enabled, then once the first
+   *   item of the playlist is reached this function will play the last one.
    *
    * @see previousNavigationThreshold
    */
@@ -393,7 +394,15 @@ export class PillarboxPlaylist extends Plugin {
       return;
     }
 
-    this.select(this.currentIndex_ - 1);
+    if (this.hasPrevious()) {
+      this.select(this.currentIndex_ - 1);
+
+      return;
+    }
+
+    if (this.repeat === RepeatMode.REPEAT_ALL) {
+      this.select(this.items_.length - 1);
+    }
   }
 
   isLive() {
@@ -463,7 +472,7 @@ export class PillarboxPlaylist extends Plugin {
   updateState_() {
     this.setState({
       // Converts the items array to a JSON string before setting it in the state.
-      // Otherwise the change is not detected.
+      // Otherwise, the change is not detected.
       items: JSON.stringify(this.items_),
       currentIndex: this.currentIndex_
     });
