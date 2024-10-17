@@ -204,6 +204,29 @@ describe('PillarboxPlaylist', () => {
       expect(srcSpy).toHaveBeenLastCalledWith(playlist[3].sources);
       expect(posterSpy).toHaveBeenLastCalledWith(playlist[3].poster);
     });
+
+    it('should play first element if the current index is the last of the playlist and repeat mode all is enabled', () => {
+      // Given
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
+
+      // When
+      pillarboxPlaylist.toggleRepeat(RepeatMode.REPEAT_ALL);
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.select(3);
+      pillarboxPlaylist.next();
+
+      // Then
+      expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
+      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
+      expect(pillarboxPlaylist.items.length).toBe(4);
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
+      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
+      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
+    });
   });
 
   describe('previous', () => {
@@ -245,6 +268,51 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.currentIndex).toBe(2);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[2]);
       expect(currentTime).toHaveBeenLastCalledWith(0);
+    });
+
+    it('should not play previous if the current index is the last of the playlist', () => {
+      // Given
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
+
+      // When
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.select(0);
+      pillarboxPlaylist.previous();
+
+      // Then
+      expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
+      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
+      expect(pillarboxPlaylist.items.length).toBe(4);
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
+      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
+      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
+    });
+
+    it('should play last element if the current index is the first of the playlist and repeat mode all is enabled', () => {
+      // Given
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
+
+      // When
+      pillarboxPlaylist.toggleRepeat(RepeatMode.REPEAT_ALL);
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.select(0);
+      pillarboxPlaylist.previous();
+
+      // Then
+      expect(pillarboxPlaylist.hasPrevious()).toBeTruthy();
+      expect(pillarboxPlaylist.hasNext()).toBeFalsy();
+      expect(pillarboxPlaylist.items.length).toBe(4);
+      expect(pillarboxPlaylist.currentIndex).toBe(3);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[3]);
+      expect(srcSpy).toHaveBeenLastCalledWith(playlist[3].sources);
+      expect(posterSpy).toHaveBeenLastCalledWith(playlist[3].poster);
     });
   });
 
