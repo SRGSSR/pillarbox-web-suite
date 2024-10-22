@@ -82,7 +82,7 @@ export class PillarboxPlaylist extends Plugin {
    *        If omitted, the repeat mode will cycle in order through: no repeat, repeat all and repeat one.
    */
   toggleRepeat(force = undefined) {
-    this.repeat = force ?? (this.repeat + 1) % 3;
+    this.repeat = force ?? (this.repeat + 1) % Object.keys(RepeatMode).length;
   }
 
   /**

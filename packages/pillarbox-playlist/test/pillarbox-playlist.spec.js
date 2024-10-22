@@ -404,6 +404,28 @@ describe('PillarboxPlaylist', () => {
       expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
       expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
     });
+
+    it('should toggle repeat mode', () => {
+      pillarboxPlaylist.toggleRepeat(RepeatMode.NO_REPEAT);
+
+      pillarboxPlaylist.toggleRepeat();
+      expect(pillarboxPlaylist.repeat).toBe(RepeatMode.REPEAT_ALL);
+      expect(pillarboxPlaylist.isNoRepeatMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatAllMode()).toBeTruthy();
+      expect(pillarboxPlaylist.isRepeatOneMode()).toBeFalsy();
+
+      pillarboxPlaylist.toggleRepeat();
+      expect(pillarboxPlaylist.repeat).toBe(RepeatMode.REPEAT_ONE);
+      expect(pillarboxPlaylist.isNoRepeatMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatAllMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatOneMode()).toBeTruthy();
+
+      pillarboxPlaylist.toggleRepeat();
+      expect(pillarboxPlaylist.repeat).toBe(RepeatMode.NO_REPEAT);
+      expect(pillarboxPlaylist.isNoRepeatMode()).toBeTruthy();
+      expect(pillarboxPlaylist.isRepeatAllMode()).toBeFalsy();
+      expect(pillarboxPlaylist.isRepeatOneMode()).toBeFalsy();
+    });
   });
 
   describe('shuffle', () => {
