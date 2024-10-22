@@ -1,3 +1,10 @@
+## [@srgssr/pillarbox-playlist-v2.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v2.0.1...@srgssr/pillarbox-playlist-v2.1.0) (2024-10-22)
+
+
+### New Features 🚀
+
+* bidirectional looping when repeat all is enabled ([0674a4e](https://github.com/SRGSSR/pillarbox-web-suite/commit/0674a4ef66fa6b5995d0766966ed932c3ffa8db7)), closes [#32](https://github.com/SRGSSR/pillarbox-web-suite/issues/32)
+
 ## [@srgssr/pillarbox-playlist-v2.0.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v2.0.0...@srgssr/pillarbox-playlist-v2.0.1) (2024-08-29)
 
 
