@@ -116,6 +116,16 @@ function currentVideoTrack(player) {
 }
 
 /**
+ * Helper function to get the codec of the current video track.
+ *
+ * @param {import('video.js/dist/types/player.js').default} player - The Video.js player instance.
+ * @returns {string|undefined} The codec of the current video track, or undefined if not available.
+ */
+function currentVideoCodec(player) {
+  return currentVideoTrack(player)?.configuration?.codec;
+}
+
+/**
  * Helper function to get the currently enabled audio track.
  *
  * @param {import('video.js/dist/types/player.js').default} player - The Video.js player instance.
@@ -124,6 +134,16 @@ function currentVideoTrack(player) {
  */
 function currentAudioTrack(player) {
   return Array.from(player.audioTracks()).find(track => track.enabled);
+}
+
+/**
+ * Helper function to get the codec of the current audio track.
+ *
+ * @param {import('video.js/dist/types/player.js').default} player - The Video.js player instance.
+ * @returns {string|undefined} The codec of the current audio track, or undefined if not available.
+ */
+function currentAudioCodec(player) {
+  return currentAudioTrack(player)?.configuration?.codec;
 }
 
 PillarboxDebugPanel.prototype.options_ = {
@@ -192,10 +212,9 @@ PillarboxDebugPanel.prototype.options_ = {
 
         if (codec) return codec;
 
-        const videoCodec = currentVideoTrack(player)?.configuration?.codec;
-        const audioCodec = currentAudioTrack(player)?.configuration?.codec;
-
-        return [videoCodec, audioCodec].filter(Boolean).join(',') || 'N/A';
+        return [
+          currentVideoCodec(player), currentAudioCodec(player)
+        ].filter(Boolean).join(',') || 'N/A';
       }
     },
     {
