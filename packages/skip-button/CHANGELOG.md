@@ -1,3 +1,10 @@
+## [@srgssr/skip-button-v1.0.5](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.4...@srgssr/skip-button-v1.0.5) (2024-10-31)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* update urls for custom domain setup ([545aa9c](https://github.com/SRGSSR/pillarbox-web-suite/commit/545aa9c9b2f3fbe8dfafc4164765e9bfd70b83e6))
+
 ## [@srgssr/skip-button-v1.0.4](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.3...@srgssr/skip-button-v1.0.4) (2024-08-29)
 
 
