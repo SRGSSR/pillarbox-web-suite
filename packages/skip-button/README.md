@@ -2,7 +2,7 @@
 
 A custom component that extends the pillarbox-web player allowing users to skip certain parts of the
 video content, such as opening credits or end credits, by listening to
-the [`srgssr/interval` event](https://srgssr.github.io/pillarbox-web/api/tutorial-Events.html#srgssr%2Finterval-event).
+the [`srgssr/interval` event](https://web.pillarbox.ch/api/tutorial-Events.html#srgssr%2Finterval-event).
 
 ## Requirements
 
