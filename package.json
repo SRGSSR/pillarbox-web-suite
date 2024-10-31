@@ -11,7 +11,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://srgssr.github.io/pillarbox-web-suite",
+  "homepage": "https://plugins.pillarbox.ch",
   "type": "module",
   "workspaces": [
     "packages/*",
