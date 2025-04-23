@@ -1,0 +1,48 @@
+{
+  "name": "@srgssr/user-preferences",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "SRG SSR",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SRGSSR/pillarbox-web-suite.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/user-preferences#readme",
+  "type": "module",
+  "main": "dist/user-preferences.cjs",
+  "module": "dist/user-preferences.js",
+  "style": "./dist/user-preferences.min.css",
+  "exports": {
+    ".": {
+      "import": "./dist/user-preferences.js",
+      "require": "./dist/user-preferences.cjs"
+    },
+    "./*": "./*"
+  },
+  "files": [
+    "dist/*",
+    "scss/*"
+  ],
+  "keywords": [
+    "video.js",
+    "player"
+  ],
+  "scripts": {
+    "build": "npm run build:lib && npm run build:css",
+    "build:css": "sass ./scss/user-preferences.scss:dist/user-preferences.min.css --style compressed --source-map --load-path node_modules",
+    "build:lib": "vite build --config vite.config.lib.js",
+    "github:page": "vite build",
+    "release:ci": "semantic-release",
+    "start": " vite --port 4200 --open",
+    "test": "vitest run --silent --coverage --coverage.reporter text"
+  },
+  "peerDependencies": {
+    "video.js": "^8.0.0"
+  },
+  "devDependencies": {
+    "@srgssr/pillarbox-web": "^1.14.1"
+  }
+}
