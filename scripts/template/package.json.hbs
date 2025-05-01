@@ -13,8 +13,8 @@
   "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/{{kebabCase name}}#readme",
   "type": "module",
   "main": "dist/{{kebabCase name}}.cjs",
-  "module": "dist/{{kebabCase name}}.js",
-  "style": "./dist/{{kebabCase name}}.min.css",
+  "module": "dist/{{kebabCase name}}.js",{{#if wantScss}}
+  "style": "./dist/{{kebabCase name}}.min.css",{{/if}}
   "exports": {
     ".": {
       "import": "./dist/{{kebabCase name}}.js",
@@ -23,8 +23,8 @@
     "./*": "./*"
   },
   "files": [
-    "dist/*",
-    "scss/*"
+    "dist/*"{{#if wantScss}},
+    "scss/*"{{/if}}
   ],
   "keywords": [
     "video.js",
@@ -34,8 +34,8 @@
     "pillarbox-plugin"{{/ifEq}}{{/ifEq}}
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:css",
-    "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules",
+    "build": "npm run build:lib{{#if wantScss}} && npm run build:css{{/if}}",{{#if wantScss}}
+    "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules",{{/if}}
     "build:lib": "vite build --config vite.config.lib.js",
     "github:page": "vite build",
     "release:ci": "semantic-release",

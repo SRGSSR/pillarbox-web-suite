@@ -20,7 +20,7 @@ export default function(plop) {
       {
         type: 'list',
         name: 'type',
-        message: 'What type of the element would you like to create?',
+        message: 'What type of element would you like to create?',
         choices: [
           { name: 'Plugin \x1b[90m(Extend the player functionality or add new features)\x1b[0m', value: 'Plugin' },
           { name: 'Component \x1b[90m(Manipulate or display content within the player)\x1b[0m', value: 'Component' },
@@ -40,7 +40,14 @@ export default function(plop) {
       {
         type: 'confirm',
         name: 'wantLocalization',
-        message: 'Will your element support multiple languages?'
+        message: 'Will your element support multiple languages?',
+        default: true
+      },
+      {
+        type: 'confirm',
+        name: 'wantScss',
+        message: 'Will your element offer custom styles with SCSS?',
+        default: true
       }
     ],
     actions: data => [
@@ -51,10 +58,15 @@ export default function(plop) {
         templateFiles: './template/**',
         globOptions: {
           dot: true,
-          ignore: !data.wantLocalization ? [
-            '**/src/lang/**',
-            '**/test/language.spec.js.hbs'
-          ] : undefined
+          ignore: [
+            ...(!data.wantLocalization ? [
+              '**/src/lang/**',
+              '**/test/language.spec.js.hbs'
+            ] : []),
+            ...(!data.wantScss ? [
+              '**/scss/**'
+            ] : [])
+          ]
         },
         data: {
           currentYear: new Date().getFullYear(),

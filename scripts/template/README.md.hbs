@@ -37,12 +37,14 @@ const player = {{platform}}('my-player', { {{properCase name}}: true });
 {{/ifEq}}
 ```
 
+{{#if wantScss}}
 To apply the default styling, add the following line to your CSS file:
 
 ```css
 @import "@srgssr/{{kebabCase name}}/dist/{{kebabCase name}}.min.css";
 ```
 
+{{/if}}
 ## Contributing
 
 For detailed contribution guidelines, refer to our [Contributing guide][contributing-guide].
