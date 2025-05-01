@@ -13,6 +13,7 @@
   "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/{{kebabCase name}}#readme",
   "type": "module",
   "main": "dist/{{kebabCase name}}.cjs",
+  "browser": "dist/{{kebabCase name}}.umd.min.js",
   "module": "dist/{{kebabCase name}}.js",{{#if wantScss}}
   "style": "./dist/{{kebabCase name}}.min.css",{{/if}}
   "exports": {
@@ -34,9 +35,10 @@
     "pillarbox-plugin"{{/ifEq}}{{/ifEq}}
   ],
   "scripts": {
-    "build": "npm run build:lib{{#if wantScss}} && npm run build:css{{/if}}",{{#if wantScss}}
+    "build": "npm run build:lib && npm run build:umd{{#if wantScss}} && npm run build:css{{/if}}",{{#if wantScss}}
     "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules",{{/if}}
     "build:lib": "vite build --config vite.config.lib.js",
+    "build:umd": "vite build --config vite.config.umd.js",
     "github:page": "vite build",
     "release:ci": "semantic-release",
     "start": " vite --port 4200 --open",
