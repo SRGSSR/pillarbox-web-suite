@@ -1,3 +1,15 @@
+## [@srgssr/user-preferences-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/user-preferences-v1.0.0...@srgssr/user-preferences-v1.1.0) (2025-05-01)
+
+
+### New Features 🚀
+
+* **user-preferences:** add UMD build configuration ([8678d23](https://github.com/SRGSSR/pillarbox-web-suite/commit/8678d230d2643663e6e78ede6dfc269cfcca0fd6))
+
+
+### Chore 🧹
+
+* **user-preferences:** remove unused scss file ([e064b1b](https://github.com/SRGSSR/pillarbox-web-suite/commit/e064b1bdb3e3ea131a17ba0557610222c22512a3))
+
 ## @srgssr/user-preferences-v1.0.0 (2025-04-30)
 
 

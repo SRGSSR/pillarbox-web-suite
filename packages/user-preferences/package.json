@@ -1,6 +1,6 @@
 {
   "name": "@srgssr/user-preferences",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "author": "SRG SSR",
   "repository": {
@@ -12,7 +12,7 @@
   },
   "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/user-preferences#readme",
   "type": "module",
-  "browser":"dist/user-preferences.umd.min.js",
+  "browser": "dist/user-preferences.umd.min.js",
   "main": "dist/user-preferences.cjs",
   "module": "dist/user-preferences.js",
   "exports": {
