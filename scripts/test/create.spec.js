@@ -22,7 +22,7 @@ describe('Plop generator', () => {
   });
 
   it('should generate a pillarbox plugin successfully', async() => {
-    await create(  { platform: 'pillarbox', type: 'Plugin', wantLocalization: false, });
+    await create(  { platform: 'pillarbox', type: 'Plugin', wantLocalization: false, wantScss: true });
     const packageJsonPath = path.join(testDir, 'package.json');
 
     expect(fs.existsSync(packageJsonPath)).toBe(true);
@@ -44,7 +44,7 @@ describe('Plop generator', () => {
   });
 
   it('should generate a pillarbox component with localization successfully', async() => {
-    await create(  { platform: 'pillarbox', type: 'Component', wantLocalization: true, });
+    await create(  { platform: 'pillarbox', type: 'Component', wantLocalization: true, wantScss: true});
     const packageJsonPath = path.join(testDir, 'package.json');
 
     expect(fs.existsSync(packageJsonPath)).toBe(true);
@@ -65,8 +65,8 @@ describe('Plop generator', () => {
     }
   });
 
-  it('should generate a video.js button with localization successfully', async() => {
-    await create(  { platform: 'videojs', type: 'Button', wantLocalization: true, });
+  it('should generate a video.js component without css successfully', async() => {
+    await create(  { platform: 'videojs', type: 'Component', wantLocalization: true, wantScss: false });
     const packageJsonPath = path.join(testDir, 'package.json');
 
     expect(fs.existsSync(packageJsonPath)).toBe(true);
