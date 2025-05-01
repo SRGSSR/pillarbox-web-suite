@@ -12,6 +12,7 @@
   },
   "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/user-preferences#readme",
   "type": "module",
+  "browser":"dist/user-preferences.umd.min.js",
   "main": "dist/user-preferences.cjs",
   "module": "dist/user-preferences.js",
   "exports": {
@@ -29,8 +30,9 @@
     "player"
   ],
   "scripts": {
-    "build": "npm run build:lib",
+    "build": "npm run build:lib && npm run build:umd",
     "build:lib": "vite build --config vite.config.lib.js",
+    "build:umd": "vite build --config vite.config.umd.js",
     "github:page": "vite build",
     "release:ci": "semantic-release",
     "start": " vite --port 4200 --open",
