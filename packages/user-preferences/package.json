@@ -14,7 +14,6 @@
   "type": "module",
   "main": "dist/user-preferences.cjs",
   "module": "dist/user-preferences.js",
-  "style": "./dist/user-preferences.min.css",
   "exports": {
     ".": {
       "import": "./dist/user-preferences.js",
@@ -23,16 +22,14 @@
     "./*": "./*"
   },
   "files": [
-    "dist/*",
-    "scss/*"
+    "dist/*"
   ],
   "keywords": [
     "video.js",
     "player"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:css",
-    "build:css": "sass ./scss/user-preferences.scss:dist/user-preferences.min.css --style compressed --source-map --load-path node_modules",
+    "build": "npm run build:lib",
     "build:lib": "vite build --config vite.config.lib.js",
     "github:page": "vite build",
     "release:ci": "semantic-release",
