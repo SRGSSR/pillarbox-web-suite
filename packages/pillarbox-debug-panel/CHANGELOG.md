@@ -1,3 +1,20 @@
+## [@srgssr/pillarbox-debug-panel-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-debug-panel-v1.0.0...@srgssr/pillarbox-debug-panel-v1.1.0) (2025-05-02)
+
+
+### New Features 🚀
+
+* add umd build for all remaining packages ([1d33c8a](https://github.com/SRGSSR/pillarbox-web-suite/commit/1d33c8a40d4a79a80aecaf8d7244cea334b83f9f))
+
+
+### Enhancements and Bug Fixes 🐛
+
+* **pillarbox-debug-panel:** add specific browser export property to the package.json ([3165277](https://github.com/SRGSSR/pillarbox-web-suite/commit/316527771ad38668c993f65155c498887e97e467))
+
+
+### Chore 🧹
+
+* update dependencies and configuration ([31ac981](https://github.com/SRGSSR/pillarbox-web-suite/commit/31ac9811d45af6dc8357b9f58eb0062df89e4e66))
+
 ## @srgssr/pillarbox-debug-panel-v1.0.0 (2024-08-29)
 
 
