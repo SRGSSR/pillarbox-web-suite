@@ -3,10 +3,10 @@ import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
 
 /**
- * Vite's configuration for the UMD build.
+ * Vite's configuration for the umd build.
  *
  * Outputs:
- * - 'dist/pillarbox-debug-panel.umd.min.js': Universal Module Definition version.
+ * - 'dist/pillarbox-playlist.umd.min.js': Universal Module Definition version.
  */
 export default defineConfig({
   esbuild: false,
@@ -15,15 +15,15 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       formats: ['umd'],
-      name: 'PillarboxDebugPanel',
-      entry: 'src/pillarbox-debug-panel.js'
+      name: 'PillarboxPlaylist',
+      entry: 'src/pillarbox-playlist.js'
     },
     rollupOptions: {
       output: {
-        name: 'PillarboxDebugPanel',
-        entryFileNames: 'pillarbox-debug.umd.min.js',
+        name: 'PillarboxPlaylist',
+        entryFileNames: 'pillarbox-playlist.umd.min.js',
         globals: {
-          videojs: 'videojs',
+          videojs: 'videojs'
         },
       },
       external: ['video.js'],
@@ -34,6 +34,6 @@ export default defineConfig({
         }),
         terser()
       ]
-    }
-  }
+    },
+  },
 });

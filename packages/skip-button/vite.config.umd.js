@@ -3,10 +3,10 @@ import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
 
 /**
- * Vite's configuration for the UMD build.
+ * Vite's configuration for the umd build.
  *
  * Outputs:
- * - 'dist/pillarbox-debug-panel.umd.min.js': Universal Module Definition version.
+ * - 'dist/skip-button.umd.min.js': Universal Module Definition version.
  */
 export default defineConfig({
   esbuild: false,
@@ -15,18 +15,18 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       formats: ['umd'],
-      name: 'PillarboxDebugPanel',
-      entry: 'src/pillarbox-debug-panel.js'
+      name: 'SkipButton',
+      entry: 'src/skip-button.js'
     },
     rollupOptions: {
       output: {
-        name: 'PillarboxDebugPanel',
-        entryFileNames: 'pillarbox-debug.umd.min.js',
+        name: 'SkipButton',
+        entryFileNames: 'skip-button.umd.min.js',
         globals: {
-          videojs: 'videojs',
+          pillarbox: 'pillarbox'
         },
       },
-      external: ['video.js'],
+      external: ['@srgssr/pillarbox-web'],
       plugins: [
         babel({
           babelHelpers: 'bundled',
@@ -34,6 +34,6 @@ export default defineConfig({
         }),
         terser()
       ]
-    }
-  }
+    },
+  },
 });

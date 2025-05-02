@@ -3,11 +3,11 @@ import babel from '@rollup/plugin-babel';
 import copy from 'rollup-plugin-copy';
 
 /**
- * Vite's configuration for the lib build.
+ * Vite's configuration for the ui build.
  *
  * Outputs:
- * - 'dist/pillarbox-playlist-ui.js': ESModule version with sourcemaps.
- * - 'dist/pillarbox-playlist-ui.cjs': CommonJS version with sourcemaps.
+ * - 'dist/ui/pillarbox-playlist-ui.js': ESModule version with sourcemaps.
+ * - 'dist/ui/pillarbox-playlist-ui.cjs': CommonJS version with sourcemaps.
  */
 export default defineConfig({
   esbuild: false,
