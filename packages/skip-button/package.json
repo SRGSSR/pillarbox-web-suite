@@ -14,6 +14,7 @@
   "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/skip-button#readme",
   "type": "module",
   "main": "dist/skip-button.cjs",
+  "browser": "dist/skip-button.umd.min.js",
   "module": "dist/skip-button.js",
   "style": "./dist/skip-button.min.css",
   "exports": {
@@ -35,10 +36,10 @@
     "skip-button"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:css",
+    "build": "npm run build:lib && npm run build:umd && npm run build:css",
     "build:css": "sass ./scss/skip-button.scss:dist/skip-button.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "vite build --config vite.config.lib.js",
-    "build:ui": "vite build --config vite.config.ui.js",
+    "build:umd": "vite build --config vite.config.umd.js",
     "github:page": "vite build",
     "release:ci": "semantic-release",
     "start": " vite --port 4200 --open",
