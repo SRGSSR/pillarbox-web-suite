@@ -13,6 +13,7 @@
   "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/pillarbox-debug-panel#readme",
   "type": "module",
   "main": "dist/pillarbox-debug-panel.cjs",
+  "browser": "dist/pillarbox-debug-panel.umd.min.js",
   "module": "dist/pillarbox-debug-panel.js",
   "style": "./dist/pillarbox-debug-panel.min.css",
   "exports": {

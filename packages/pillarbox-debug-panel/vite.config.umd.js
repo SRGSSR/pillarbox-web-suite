@@ -3,11 +3,10 @@ import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
 
 /**
- * Vite's configuration for the lib build.
+ * Vite's configuration for the UMD build.
  *
  * Outputs:
- * - 'dist/pillarbox-debug-panel.js': ESModule version with sourcemaps.
- * - 'dist/pillarbox-debug-panel.cjs': CommonJS version with sourcemaps.
+ * - 'dist/pillarbox-debug-panel.umd.min.js': ESModule version with sourcemaps.
  */
 export default defineConfig({
   esbuild: false,
@@ -20,12 +19,14 @@ export default defineConfig({
       entry: 'src/pillarbox-debug-panel.js'
     },
     rollupOptions: {
-      external: ['video.js'],
       output: {
+        name: 'PillarboxDebugPanel',
+        entryFileNames: 'pillarbox-debug.umd.min.js',
         globals: {
-          'video.js': 'videojs'
-        }
+          videojs: 'videojs',
+        },
       },
+      external: ['video.js'],
       plugins: [
         babel({
           babelHelpers: 'bundled',
