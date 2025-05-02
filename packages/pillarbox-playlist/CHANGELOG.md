@@ -1,3 +1,15 @@
+## [@srgssr/pillarbox-playlist-v2.2.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v2.1.0...@srgssr/pillarbox-playlist-v2.2.0) (2025-05-02)
+
+
+### New Features 🚀
+
+* add umd build for all remaining packages ([1d33c8a](https://github.com/SRGSSR/pillarbox-web-suite/commit/1d33c8a40d4a79a80aecaf8d7244cea334b83f9f))
+
+
+### Chore 🧹
+
+* **playlist-plugin:** use dynamic repeat mode length in toggle calculation ([8d5daf4](https://github.com/SRGSSR/pillarbox-web-suite/commit/8d5daf40dcdbec971118f4506eb5676bc390b892))
+
 ## [@srgssr/pillarbox-playlist-v2.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v2.0.1...@srgssr/pillarbox-playlist-v2.1.0) (2024-10-22)
 
 
