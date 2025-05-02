@@ -1,3 +1,10 @@
+## [@srgssr/skip-button-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.5...@srgssr/skip-button-v1.1.0) (2025-05-02)
+
+
+### New Features 🚀
+
+* add umd build for all remaining packages ([1d33c8a](https://github.com/SRGSSR/pillarbox-web-suite/commit/1d33c8a40d4a79a80aecaf8d7244cea334b83f9f))
+
 ## [@srgssr/skip-button-v1.0.5](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/skip-button-v1.0.4...@srgssr/skip-button-v1.0.5) (2024-10-31)
 
 
