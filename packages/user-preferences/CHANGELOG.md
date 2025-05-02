@@ -1,3 +1,10 @@
+## [@srgssr/user-preferences-v1.1.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/user-preferences-v1.1.0...@srgssr/user-preferences-v1.1.1) (2025-05-02)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* **user-preferences:** align browser compatibility with bable for the umd build ([717e05f](https://github.com/SRGSSR/pillarbox-web-suite/commit/717e05f01249235cdd405f7f078b07fb201992e9))
+
 ## [@srgssr/user-preferences-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/user-preferences-v1.0.0...@srgssr/user-preferences-v1.1.0) (2025-05-01)
 
 
