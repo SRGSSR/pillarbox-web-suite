@@ -33,16 +33,20 @@ The User Preferences component works automatically in the background after being
 
 You can customize the component's behavior by passing options during player initialization under the `userPreferences` key:
 
-| Option      | Type   | Default                | Description                                                                 |
-|-------------|--------|------------------------|-----------------------------------------------------------------------------|
-| storageName | String | `vjs-user-preferences` | The key used to store the preferences in `localStorage`.                    |
+| Option             | Type   | Default                                                                      | Description                                                                                                                             |
+|--------------------|--------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| storageName        | String | `vjs-user-preferences`                                                       | The key used to store the preferences in `localStorage`.                                                                                |
+| allowedPreferences | Object | `{ volume: true, muted: true, playbackRate: true, audioTrack: true, textTrack: true }` | An object specifying which preferences to save/restore. Keys: `volume`, `muted`, `playbackRate`, `audioTrack`, `textTrack`. Set a key to `false` to disable. |
 
 **Example:**
 
 ```javascript
 const player = new videojs('my-player', {
   userPreferences: {
-    storageName: 'pillarbox-player-settings'
+    storageName: 'pillarbox-player-settings',
+    allowedPreferences: {
+      playbackRate: false
+    }
   }
 });
 ```

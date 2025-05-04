@@ -27,6 +27,7 @@
   ],
   "keywords": [
     "video.js",
+    "videojs-plugin",
     "player"
   ],
   "scripts": {
