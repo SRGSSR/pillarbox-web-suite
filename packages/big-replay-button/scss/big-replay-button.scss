@@ -1,0 +1,12 @@
+.vjs-has-started .pbw-big-replay-button,
+.vjs-paused .pbw-big-replay-button {
+  display: none;
+}
+
+.vjs-ended .pbw-big-replay-button {
+  display: block;
+
+  & .vjs-icon-placeholder:before {
+    content: "\f11b";
+  }
+}
