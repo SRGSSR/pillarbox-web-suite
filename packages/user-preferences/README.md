@@ -22,7 +22,7 @@ Once the player is installed you can activate the component as follows:
 import videojs from 'video.js';
 import '@srgssr/user-preferences';
 
-const player = videojs('my-player', { UserPreferences: true });
+const player = videojs('my-player', { userPreferences: true });
 ```
 
 ## API Documentation

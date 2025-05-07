@@ -37,6 +37,7 @@ describe('PillarboxDebugPanel', () => {
   it('should be registered and attached to the player', () => {
     expect(videojs.getComponent('PillarboxDebugPanel')).toBe(PillarboxDebugPanel);
     expect(player.pillarboxDebugPanel).toBeDefined();
+    expect(PillarboxDebugPanel.VERSION).toBeDefined();
   });
 
   it('should update the UI when "loadeddata" event is triggered', () => {

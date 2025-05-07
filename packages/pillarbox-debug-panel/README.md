@@ -24,7 +24,7 @@ Once the player is installed you can activate the component as follows:
 import videojs from 'video.js';
 import '@srgssr/pillarbox-debug-panel';
 
-const player = videojs('my-player', { PillarboxDebugPanel: true });
+const player = videojs('my-player', { pillarboxDebugPanel: true });
 ```
 
 To apply the default styling, add the following line to your CSS file:
