@@ -73,6 +73,7 @@ describe('PillarboxPlaylist', () => {
       });
       expect(pillarbox.getPlugin('pillarboxPlaylistUI')).toBe(PillarboxPlaylistUi);
       expect(player.pillarboxPlaylistUI).toBeDefined();
+      expect(PillarboxPlaylistUi.VERSION).toBeDefined();
     });
 
     it('should not to initialize if the playlist plugin is not being used', async() => {

@@ -43,7 +43,7 @@
 {{#ifEq type 'Plugin'}}
     plugins: { {{camelCase name}}: true }
 {{else}}
-    {{properCase name}}: true
+    {{camelCase name}}: true
 {{/ifEq}}
   });
 

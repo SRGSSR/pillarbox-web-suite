@@ -21,7 +21,7 @@ describe('{{properCase name}}', () => {
     });
 {{else}}
     player = {{platform}}(videoElement, {
-      {{properCase name}}: true
+      {{camelCase name}}: true
     });
 {{/ifEq}}
   });
@@ -33,10 +33,10 @@ describe('{{properCase name}}', () => {
   it('should be registered and attached to the player', () => {
 {{#ifEq type 'Plugin'}}
     expect({{platform}}.getPlugin('{{camelCase name}}')).toBe({{properCase name}});
-    expect(player.{{camelCase name}}).toBeDefined();
 {{else}}
     expect({{platform}}.getComponent('{{properCase name}}')).toBe({{properCase name}});
-    expect(player.{{properCase name}}).toBeDefined();
 {{/ifEq}}
+    expect(player.{{camelCase name}}).toBeDefined();
+    expect({{properCase name}}.VERSION).toBeDefined();
   });
 });

@@ -24,7 +24,7 @@ Once the player is installed you can activate the component as follows:
 import videojs from 'video.js';
 import '@srgssr/big-replay-button';
 
-const player = videojs('my-player', { BigReplayButton: true });
+const player = videojs('my-player', { bigReplayButton: true });
 ```
 
 To apply the default styling, add the following line to your CSS file:
