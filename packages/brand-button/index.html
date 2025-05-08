@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brand-Button Demo</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<video id="player" class="pillarbox-js" controls muted></video>
+
+<script type="module">
+  import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
+  import pillarbox from '@srgssr/pillarbox-web';
+  import './scss/brand-button.scss';
+  import './src/brand-button.js';
+  import icon from './assets/brand-logo.svg?raw';
+
+  // Handle URL parameters
+  const searchParams = new URLSearchParams(location.search);
+  const debug = searchParams.has('debug');
+  const ilHost = searchParams.get('ilHost') || undefined;
+  const language = searchParams.get('language');
+  const urn = searchParams.get('urn') || 'urn:rts:video:14683290';
+
+  // Prepare translations
+  pillarbox.addLanguage('en', { 'Open in Play RTS': 'Open in Play RTS' });
+  pillarbox.addLanguage('fr', { 'Open in Play RTS': 'Ouvrir dans Play RTS' });
+  pillarbox.addLanguage('de', { 'Open in Play RTS': 'In Play RTS öffnen' });
+  pillarbox.addLanguage('it', { 'Open in Play RTS': 'Apri in Play RTS' });
+  pillarbox.addLanguage('rm', { 'Open in Play RTS': 'Avrir en Play RTS' });
+
+  // Callback to generate the link
+  const href = (player) => `https://www.rts.ch/play/tv/-/video/-?urn=${player.currentSource()?.mediaData?.urn }`
+
+  // Create a pillarbox player instance with the BrandButton enabled
+  window.player = pillarbox('player', {
+    debug,
+    language,
+    srgOptions: { dataProviderHost: ilHost },
+    controlBar: {
+      brandButton: { href, icon, title: 'Open in Play RTS' }
+    },
+  });
+
+  // Load the video source for the player
+  player.src({ src: urn, type: 'srgssr/urn', disableTrackers: true });
+
+  // Expose player for debugging
+  window.player = player;
+  window.pillarbox = pillarbox;
+</script>
+</body>
+</html>
