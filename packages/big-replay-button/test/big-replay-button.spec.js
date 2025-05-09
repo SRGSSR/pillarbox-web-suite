@@ -13,7 +13,7 @@ describe('BigReplayButton', () => {
   });
 
   beforeEach(() => {
-    player = videojs(videoElement, { BigReplayButton: true });
+    player = videojs(videoElement, { bigReplayButton: true });
   });
 
   afterEach(() => {
@@ -23,7 +23,7 @@ describe('BigReplayButton', () => {
 
   it('should be registered and attached to the player', () => {
     expect(videojs.getComponent('BigReplayButton')).toBe(BigReplayButton);
-    expect(player.BigReplayButton).toBeDefined();
+    expect(player.bigReplayButton).toBeDefined();
     expect(BigReplayButton.VERSION).toBeDefined();
   });
 

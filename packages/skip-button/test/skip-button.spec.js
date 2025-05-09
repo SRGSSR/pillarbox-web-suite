@@ -13,7 +13,7 @@ describe('SkipButton', () => {
     const videoElement = document.querySelector('#test-video');
     const Button = pillarbox.getComponent('Button');
 
-    player = pillarbox(videoElement, { SkipButton: true });
+    player = pillarbox(videoElement, { skipButton: true });
     vi.spyOn(Button.prototype, 'handleClick').mockImplementation(()=>{});
 
   });
@@ -25,7 +25,8 @@ describe('SkipButton', () => {
 
   it('should be registered and attached to the player', () => {
     expect(pillarbox.getComponent('SkipButton')).toBe(SkipButton);
-    expect(player.SkipButton).toBeDefined();
+    expect(player.skipButton).toBeDefined();
+    expect(SkipButton.VERSION).toBeDefined();
   });
 
   it('should update the button text and show it for valid interval', () => {
@@ -38,19 +39,19 @@ describe('SkipButton', () => {
     };
 
     // When
-    player.SkipButton.handleTimeIntervalChange(data);
+    player.skipButton.handleTimeIntervalChange(data);
 
     // Then
-    expect(player.SkipButton.controlText()).toBe('Skip intro');
-    expect(player.SkipButton.hasClass('vjs-hidden')).toBeFalsy();
+    expect(player.skipButton.controlText()).toBe('Skip intro');
+    expect(player.skipButton.hasClass('vjs-hidden')).toBeFalsy();
   });
 
   it('should hide the button when there is no active interval', () => {
     // When
-    player.SkipButton.handleTimeIntervalChange();
+    player.skipButton.handleTimeIntervalChange();
 
     // Then
-    expect(player.SkipButton.hasClass('vjs-hidden')).toBeTruthy();
+    expect(player.skipButton.hasClass('vjs-hidden')).toBeTruthy();
   });
 
   it('should seek to the end of the interval when clicked', () => {
@@ -62,8 +63,8 @@ describe('SkipButton', () => {
     const spy = vi.spyOn(player, 'currentTime');
 
     // When
-    player.SkipButton.handleTimeIntervalChange(data);
-    player.SkipButton.handleClick();
+    player.skipButton.handleTimeIntervalChange(data);
+    player.skipButton.handleClick();
 
     // Then
     expect(spy).toHaveBeenCalledWith(90);
@@ -79,10 +80,10 @@ describe('SkipButton', () => {
     vi.spyOn(Button.prototype, 'dispose').mockImplementation(() => {});
 
     // When
-    player.SkipButton.dispose();
+    player.skipButton.dispose();
 
     // Then
-    expect(spy).toHaveBeenCalledWith('srgssr/interval', player.SkipButton.onTimeIntervalChange_);
+    expect(spy).toHaveBeenCalledWith('srgssr/interval', player.skipButton.onTimeIntervalChange_);
 
     vi.resetAllMocks();
   });

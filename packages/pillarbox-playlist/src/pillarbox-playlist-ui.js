@@ -2,6 +2,7 @@ import videojs from 'video.js';
 import './components/pillarbox-playlist-button.js';
 import './components/modal/pillarbox-playlist-modal.js';
 import './lang';
+import { version } from '../package.json';
 
 /**
  * @ignore
@@ -83,6 +84,9 @@ class PillarboxPlaylistUI extends Plugin {
     return controlBarOptions;
   }
 
+  static get VERSION() {
+    return version;
+  }
 }
 
 PillarboxPlaylistUI.prototype.options_ = {

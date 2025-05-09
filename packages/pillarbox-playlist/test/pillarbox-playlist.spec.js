@@ -77,6 +77,7 @@ describe('PillarboxPlaylist', () => {
   it('should be registered and attached to the player', () => {
     expect(pillarbox.getPlugin('pillarboxPlaylist')).toBe(PillarboxPlaylist);
     expect(player.pillarboxPlaylist).toBeDefined();
+    expect(PillarboxPlaylist.VERSION).toBeDefined();
   });
 
   describe('load', () => {

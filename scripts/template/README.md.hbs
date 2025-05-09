@@ -33,7 +33,7 @@ import '@srgssr/{{kebabCase name}}';
 {{#ifEq type 'plugin'}}
 const player = {{platform}}('my-player', { plugins: { '{{camelCase name}}': true } });
 {{else}}
-const player = {{platform}}('my-player', { {{properCase name}}: true });
+const player = {{platform}}('my-player', { {{camelCase name}}: true });
 {{/ifEq}}
 ```
 

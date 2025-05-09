@@ -13,7 +13,7 @@ describe('UserPreferences', () => {
     videoElement = document.querySelector('#test-video');
     player = videojs(videoElement, {
       textTrackDisplay: false,
-      UserPreferences: true,
+      userPreferences: true,
       html5: {
         vhs: {
           overrideNative: false
@@ -43,13 +43,14 @@ describe('UserPreferences', () => {
 
   it('should be registered and attached to the player', () => {
     expect(videojs.getComponent('UserPreferences')).toBe(UserPreferences);
-    expect(player.UserPreferences).toBeDefined();
+    expect(player.userPreferences).toBeDefined();
+    expect(UserPreferences.VERSION).toBeDefined();
   });
 
   describe('audioTrackChange', () => {
 
     it('should not save preferences if the player has not started', () => {
-      const spyOnSave = vi.spyOn(player.UserPreferences, 'save');
+      const spyOnSave = vi.spyOn(player.userPreferences, 'save');
 
       player.hasStarted(false);
       player.audioTracks().trigger('change');
@@ -58,7 +59,7 @@ describe('UserPreferences', () => {
     });
 
     it('should save the language and kind of the enabled audio track', () => {
-      const spyOnSave = vi.spyOn(player.UserPreferences, 'save');
+      const spyOnSave = vi.spyOn(player.userPreferences, 'save');
 
       player.hasStarted(true);
       player.audioTracks().getTrackById('2').enabled = true;
@@ -73,7 +74,7 @@ describe('UserPreferences', () => {
       localStorage.setItem('vjs-user-preferences', JSON.stringify({
         volume: 0.69, muted: false
       }));
-      const spyOnSave = vi.spyOn(player.UserPreferences, 'save');
+      const spyOnSave = vi.spyOn(player.userPreferences, 'save');
 
       player.hasStarted(true);
       player.audioTracks().getTrackById('2').enabled = true;
@@ -89,30 +90,30 @@ describe('UserPreferences', () => {
 
   describe('emptied', () => {
     it('should set the isEmptied when the emptied event is fired', () => {
-      expect(player.UserPreferences.isEmptied).toBe(undefined);
+      expect(player.userPreferences.isEmptied).toBe(undefined);
       player.trigger('emptied');
-      expect(player.UserPreferences.isEmptied).toBe(true);
+      expect(player.userPreferences.isEmptied).toBe(true);
     });
   });
 
   describe('playbackRateChange', () => {
     it('should not save preferences if the player has not started or if isEmptied is true', () => {
-      const spyOnSave = vi.spyOn(player.UserPreferences, 'save');
+      const spyOnSave = vi.spyOn(player.userPreferences, 'save');
 
       player.hasStarted(false);
       player.trigger('ratechange');
 
-      player.UserPreferences.isEmptied = true;
+      player.userPreferences.isEmptied = true;
       player.trigger('ratechange');
 
       expect(spyOnSave).not.toBeCalled();
     });
 
     it('should save the playback rate', () => {
-      const spyOnSave = vi.spyOn(player.UserPreferences, 'save');
+      const spyOnSave = vi.spyOn(player.userPreferences, 'save');
 
       player.hasStarted(true);
-      player.UserPreferences.isEmptied = false;
+      player.userPreferences.isEmptied = false;
       player.playbackRate(1.420);
 
       expect(spyOnSave).toBeCalledWith({
@@ -127,7 +128,7 @@ describe('UserPreferences', () => {
       const track1 = player.audioTracks().getTrackById('1');
       const track2 = player.audioTracks().getTrackById('2');
 
-      player.UserPreferences.restoreAudioTrack(preferences);
+      player.userPreferences.restoreAudioTrack(preferences);
 
       expect(track1.enabled).toBe(true);
       expect(track2.enabled).toBe(false);
@@ -138,7 +139,7 @@ describe('UserPreferences', () => {
       const track1 = player.audioTracks().getTrackById('1');
       const track2 = player.audioTracks().getTrackById('2');
 
-      player.UserPreferences.restoreAudioTrack(preferences);
+      player.userPreferences.restoreAudioTrack(preferences);
 
       expect(track1.enabled).toBe(true);
       expect(track2.enabled).toBe(false);
@@ -153,7 +154,7 @@ describe('UserPreferences', () => {
       track1.enabled = true;
       track2.enabled = false;
 
-      player.UserPreferences.restoreAudioTrack(preferences);
+      player.userPreferences.restoreAudioTrack(preferences);
 
       expect(track1.enabled).toBe(false);
       expect(track2.enabled).toBe(true);
@@ -178,7 +179,7 @@ describe('UserPreferences', () => {
       track2.enabled = false;
       track3.enabled = true;
 
-      player.UserPreferences.restoreAudioTrack(preferences);
+      player.userPreferences.restoreAudioTrack(preferences);
 
       expect(track1.enabled).toBe(true);
       expect(track2.enabled).toBe(false);
@@ -190,7 +191,7 @@ describe('UserPreferences', () => {
       const track1 = player.audioTracks().getTrackById('1');
       const track2 = player.audioTracks().getTrackById('2');
 
-      player.UserPreferences.restoreAudioTrack(preferences);
+      player.userPreferences.restoreAudioTrack(preferences);
 
       expect(track1.enabled).toBe(true);
       expect(track2.enabled).toBe(false);
@@ -205,7 +206,7 @@ describe('UserPreferences', () => {
       track1.enabled = false;
       track2.enabled = true;
 
-      player.UserPreferences.restoreAudioTrack(preferences);
+      player.userPreferences.restoreAudioTrack(preferences);
 
       expect(track1.enabled).toBe(true);
       expect(track2.enabled).toBe(false);
@@ -255,7 +256,7 @@ describe('UserPreferences', () => {
       const preferences = {};
       const tracks = Array.from(player.textTracks());
 
-      player.UserPreferences.restoreTextTrack(preferences);
+      player.userPreferences.restoreTextTrack(preferences);
 
       tracks.forEach(track => {
         if (!['metadata', 'chapters'].includes(track.kind)) {
@@ -271,7 +272,7 @@ describe('UserPreferences', () => {
 
       enSubs.mode = 'showing';
 
-      player.UserPreferences.restoreTextTrack(preferences);
+      player.userPreferences.restoreTextTrack(preferences);
 
       tracks.forEach(track => {
         if (!['metadata', 'chapters'].includes(track.kind)) {
@@ -287,7 +288,7 @@ describe('UserPreferences', () => {
       const enSubs = tracks.find(t => t.language === 'en' && t.kind === 'subtitles');
       const frSubs = tracks.find(t => t.language === 'fr' && t.kind === 'subtitles');
 
-      player.UserPreferences.restoreTextTrack(preferences);
+      player.userPreferences.restoreTextTrack(preferences);
 
       expect(enCaps.mode).toBe('showing');
       expect(enSubs.mode).toBe('disabled');
@@ -301,7 +302,7 @@ describe('UserPreferences', () => {
       const enCaps = tracks.find(t => t.language === 'en' && t.kind === 'captions');
       const frSubs = tracks.find(t => t.language === 'fr' && t.kind === 'subtitles');
 
-      player.UserPreferences.restoreTextTrack(preferences);
+      player.userPreferences.restoreTextTrack(preferences);
 
       expect(enSubs.mode).toBe('showing');
       expect(enCaps.mode).toBe('disabled');
@@ -312,7 +313,7 @@ describe('UserPreferences', () => {
       const preferences = { textTrack: { language: 'de', kind: 'subtitles' } };
       const tracks = Array.from(player.textTracks());
 
-      player.UserPreferences.restoreTextTrack(preferences);
+      player.userPreferences.restoreTextTrack(preferences);
 
       tracks.forEach(track => {
         if (!['metadata', 'chapters'].includes(track.kind)) {
@@ -328,7 +329,7 @@ describe('UserPreferences', () => {
       const enCaps = tracks.find(t => t.language === 'en' && t.kind === 'captions');
       const frSubs = tracks.find(t => t.language === 'fr' && t.kind === 'subtitles');
 
-      player.UserPreferences.restoreTextTrack(preferences);
+      player.userPreferences.restoreTextTrack(preferences);
 
       expect(enSubs.mode).toBe('showing');
       expect(enCaps.mode).toBe('disabled');
@@ -342,7 +343,7 @@ describe('UserPreferences', () => {
       const chaptersTrack = tracks.find(t => t.kind === 'chapters');
       const enSubs = tracks.find(t => t.language === 'en' && t.kind === 'subtitles');
 
-      player.UserPreferences.restoreTextTrack(preferences);
+      player.userPreferences.restoreTextTrack(preferences);
 
       expect(metadataTrack.mode).not.toBe('showing');
       expect(chaptersTrack.mode).not.toBe('showing');
@@ -351,7 +352,7 @@ describe('UserPreferences', () => {
       // Try restoring a valid track to ensure metadata/chapters weren't accidentally enabled
       const validPreferences = { textTrack: { language: 'en', kind: 'subtitles' } };
 
-      player.UserPreferences.restoreTextTrack(validPreferences);
+      player.userPreferences.restoreTextTrack(validPreferences);
 
       expect(enSubs.mode).toBe('showing');
       expect(metadataTrack.mode).not.toBe('showing');
@@ -361,7 +362,7 @@ describe('UserPreferences', () => {
 
   describe('restoreUserPreference', () => {
     beforeEach(() => {
-      player.UserPreferences.isEmptied = true;
+      player.userPreferences.isEmptied = true;
     });
 
     afterEach(() => {
@@ -369,18 +370,18 @@ describe('UserPreferences', () => {
     });
 
     it('should do nothing if storage() returns null', () => {
-      const storageSpy = vi.spyOn(player.UserPreferences, 'storage').mockReturnValue(null);
+      const storageSpy = vi.spyOn(player.userPreferences, 'storage').mockReturnValue(null);
       const volumeSpy = vi.spyOn(player, 'volume');
       const mutedSpy = vi.spyOn(player, 'muted');
       const playbackRateSpy = vi.spyOn(player, 'playbackRate');
-      const restoreTextTrackSpy = vi.spyOn(player.UserPreferences, 'restoreTextTrack');
-      const restoreAudioTrackSpy = vi.spyOn(player.UserPreferences, 'restoreAudioTrack');
+      const restoreTextTrackSpy = vi.spyOn(player.userPreferences, 'restoreTextTrack');
+      const restoreAudioTrackSpy = vi.spyOn(player.userPreferences, 'restoreAudioTrack');
 
 
-      player.UserPreferences.restoreUserPreference();
+      player.userPreferences.restoreUserPreference();
 
       expect(storageSpy).toHaveBeenCalledTimes(1);
-      expect(player.UserPreferences.isEmptied).toBe(true);
+      expect(player.userPreferences.isEmptied).toBe(true);
       expect(volumeSpy).not.toHaveBeenCalled();
       expect(mutedSpy).not.toHaveBeenCalled();
       expect(playbackRateSpy).not.toHaveBeenCalled();
@@ -396,18 +397,18 @@ describe('UserPreferences', () => {
         textTrack: { language: 'fr', kind: 'subtitles' },
         audioTrack: { language: 'en', kind: 'alternative' }
       };
-      const storageSpy = vi.spyOn(player.UserPreferences, 'storage')
+      const storageSpy = vi.spyOn(player.userPreferences, 'storage')
         .mockReturnValue(mockPreferences);
       const volumeSpy = vi.spyOn(player, 'volume');
       const mutedSpy = vi.spyOn(player, 'muted');
       const playbackRateSpy = vi.spyOn(player, 'playbackRate');
-      const restoreTextTrackSpy = vi.spyOn(player.UserPreferences, 'restoreTextTrack');
-      const restoreAudioTrackSpy = vi.spyOn(player.UserPreferences, 'restoreAudioTrack');
+      const restoreTextTrackSpy = vi.spyOn(player.userPreferences, 'restoreTextTrack');
+      const restoreAudioTrackSpy = vi.spyOn(player.userPreferences, 'restoreAudioTrack');
 
-      player.UserPreferences.restoreUserPreference();
+      player.userPreferences.restoreUserPreference();
 
       expect(storageSpy).toHaveBeenCalled();
-      expect(player.UserPreferences.isEmptied).toBe(false);
+      expect(player.userPreferences.isEmptied).toBe(false);
       expect(volumeSpy).toHaveBeenCalledWith(mockPreferences.volume);
       expect(mutedSpy).toHaveBeenCalledWith(mockPreferences.muted);
       expect(playbackRateSpy).toHaveBeenCalledWith(mockPreferences.playbackRate);
@@ -434,7 +435,7 @@ describe('UserPreferences', () => {
       const preference = { volume: 0.5, muted: false };
       const expectedStorageName = 'vjs-user-preferences';
 
-      player.UserPreferences.save(preference);
+      player.userPreferences.save(preference);
 
       expect(getItemSpy).toHaveBeenCalledWith(expectedStorageName);
       expect(setItemSpy).toHaveBeenCalledWith(
@@ -455,7 +456,7 @@ describe('UserPreferences', () => {
       );
       getItemSpy.mockReturnValueOnce(JSON.stringify(initialPreference));
 
-      player.UserPreferences.save(newPreference);
+      player.userPreferences.save(newPreference);
 
       expect(getItemSpy).toHaveBeenCalledWith(expectedStorageName);
       expect(setItemSpy).toHaveBeenCalledWith(
@@ -473,7 +474,7 @@ describe('UserPreferences', () => {
         throw testError;
       });
 
-      player.UserPreferences.save(preference);
+      player.userPreferences.save(preference);
 
       expect(getItemSpy).toHaveBeenCalledWith(expectedStorageName);
       expect(setItemSpy).toHaveBeenCalledWith(
@@ -487,10 +488,10 @@ describe('UserPreferences', () => {
     });
 
     it('should not call setItem if preference argument is null or undefined', () => {
-      player.UserPreferences.save(null);
+      player.userPreferences.save(null);
       expect(setItemSpy).not.toHaveBeenCalled();
 
-      player.UserPreferences.save(undefined);
+      player.userPreferences.save(undefined);
       expect(setItemSpy).not.toHaveBeenCalled();
     });
   });
@@ -509,16 +510,16 @@ describe('UserPreferences', () => {
     });
 
     it('should return null if the storage is empty', () => {
-      vi.spyOn(player.UserPreferences, 'options').mockRejectedValue({
+      vi.spyOn(player.userPreferences, 'options').mockRejectedValue({
         storageName: 'vjs-user-preferences'
       });
-      const storage = player.UserPreferences.storage();
+      const storage = player.userPreferences.storage();
 
       expect(storage).toBeNull(null);
     });
 
     it('should return the preference object', () => {
-      vi.spyOn(player.UserPreferences, 'options').mockRejectedValue({
+      vi.spyOn(player.userPreferences, 'options').mockRejectedValue({
         storageName: 'vjs-user-preferences'
       });
 
@@ -526,7 +527,7 @@ describe('UserPreferences', () => {
 
       getItemSpy.mockReturnValueOnce(JSON.stringify(storedPreferences));
 
-      const storage = player.UserPreferences.storage();
+      const storage = player.userPreferences.storage();
 
       expect(storage).toEqual(storedPreferences);
     });
@@ -534,14 +535,14 @@ describe('UserPreferences', () => {
     it('should handle invalid JSON parsing errors', () => {
       const testError = new Error('SyntaxError: JSON.parse:');
 
-      vi.spyOn(player.UserPreferences, 'options').mockRejectedValue({
+      vi.spyOn(player.userPreferences, 'options').mockRejectedValue({
         storageName: 'vjs-user-preferences'
       });
       vi.spyOn(JSON, 'parse').mockImplementation(() => {
         throw testError;
       });
 
-      player.UserPreferences.storage();
+      player.userPreferences.storage();
 
       expect(logErrorSpy).toHaveBeenCalledWith(
         'UserPreferences: localStorage:',
@@ -552,7 +553,7 @@ describe('UserPreferences', () => {
 
   describe('textTrackChange', () => {
     it('should not save preferences if the player has not started', () => {
-      const spyOnSave = vi.spyOn(player.UserPreferences, 'save');
+      const spyOnSave = vi.spyOn(player.userPreferences, 'save');
 
       player.hasStarted(false);
       player.textTracks().trigger('change');
@@ -561,7 +562,7 @@ describe('UserPreferences', () => {
     });
 
     it('should save the language and kind of the enabled text track', () => {
-      const spyOnSave = vi.spyOn(player.UserPreferences, 'save');
+      const spyOnSave = vi.spyOn(player.userPreferences, 'save');
 
       player.textTracks().addTrack(
         new videojs.TextTrack({
@@ -584,7 +585,7 @@ describe('UserPreferences', () => {
 
   describe('volumeChange', () => {
     it('should the volume and muted', () => {
-      const spyOnSave = vi.spyOn(player.UserPreferences, 'save');
+      const spyOnSave = vi.spyOn(player.userPreferences, 'save');
 
       player.volume(0.69),
         player.muted(true),
