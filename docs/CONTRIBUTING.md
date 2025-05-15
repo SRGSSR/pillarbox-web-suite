@@ -8,10 +8,17 @@ contribute.
 
 ## Purpose
 
-Our development team is small, our ability to quickly evaluate a need or a code submission is
-therefore critical. Please follow the present contributing guidelines so that we can efficiently
-consider your proposal. You should also read or our [code of conduct](CODE_OF_CONDUCT.md), providing
+We aim to evaluate needs and code submissions as efficiently as possible. Since the Pillarbox web
+suite is a collaborative effort across multiple contributors and teams, following these contribution
+guidelines helps us streamline reviews and maintain consistency.
+
+You should also read or our [code of conduct](CODE_OF_CONDUCT.md), providing
 a few guidelines to keep interactions as respectful as possible.
+
+## Scope and Ownership
+
+The Pillarbox web suite is a collaborative effort involving multiple teams. No single team owns the
+entire suite, and contributions come from various stakeholders.
 
 ## Contributions we are looking for
 
@@ -24,14 +31,18 @@ example:
 * Translation improvements.
 
 Contributions can either take the form of simple issues where you describe the problem you face or
-what you would like to see in our products. If you feel up to the challenge, you can even submit
-code in the form of pull requests which our team will review.
+what you would like to see in our products. If you feel up to the challenge, you can submit code via
+pull requests, which will be reviewed by the Pillarbox team and other maintainers involved in this
+shared effort.
 
 ## Contributions we are not looking for
 
 Requests which are too vague or not related to our product will not be taken into account. We also
 have no editorial influence, any issue related to the content available on our platform will simply
 be closed.
+
+This repository focuses specifically on components related to video.js and Pillarbox only.
+Contributions unrelated to these components or outside this scope are unlikely to be accepted.
 
 ## Making a contribution
 
@@ -55,12 +66,14 @@ Templates are available when you want to contribute:
 
 ## Code conventions
 
-We currently have no formal code conventions, but we try to keep our codebase consistent. In
-general, having a look at the code itself should be enough for you to discover how you should write
-your changes.
+While there are no formal, rigid code conventions in place, we strive to maintain a consistent
+codebase across all contributors and teams involved in the Pillarbox web suite. Please follow the
+existing style and patterns you observe in the code to ensure your changes integrate smoothly with
+the shared components.
 
 ## Code review
 
-Pull requests, once complete, can be submitted for review by our team. Depending on the complexity
-of the involved changes, a few iterations might be needed. Once a pull request has been approved, it
-will be rebased, merged back into the development trunk and delivered with the next release.
+Pull requests will be reviewed by members of the Pillarbox team and other contributors involved in
+maintaining the shared components. Depending on the complexity of the changes, multiple review
+cycles may be needed to ensure quality and compatibility. Approved pull requests will be rebased and
+merged into the main development branch and included in the next release.
