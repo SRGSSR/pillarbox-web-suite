@@ -70,8 +70,12 @@ and testing the element.
 
 ## Contributing
 
-Contributions are welcome! If you'd like to contribute, please follow the project's code style and
-linting rules. Here are some commands to help you get started:
+Contributions are welcome! The Pillarbox web suite is a common effort maintained collaboratively —
+no single team owns the entire suite. This repository focuses exclusively on components
+related to video.js and Pillarbox.
+
+If you'd like to contribute, please follow the project's code style and linting rules. Here are some
+commands to help you get started:
 
 Check your JavaScript code:
 
@@ -112,5 +116,4 @@ Refer to our [Contribution Guide](CONTRIBUTING.md) for more detailed information
 This project is licensed under the MIT License. See the [LICENSE](../LICENSE) file for more details.
 
 [token-settings]: https://github.com/settings/tokens
-
 [token-guide]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-with-a-personal-access-token
