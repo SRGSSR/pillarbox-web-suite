@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thumbnail-Preview Demo</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<video id="player" class="pillarbox-js" controls muted></video>
+
+<script type="module">
+  import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
+  import pillarbox from '@srgssr/pillarbox-web';
+  import './scss/thumbnail-preview.scss';
+  import './src/thumbnail-preview.js';
+
+  // Handle URL parameters
+  const searchParams = new URLSearchParams(location.search);
+  const debug = searchParams.has('debug');
+  const ilHost = searchParams.get('ilHost') || undefined;
+  const language = searchParams.get('language');
+  const urn = searchParams.get('urn') || 'urn:rts:video:14683290';
+  // Create a pillarbox player instance with the ThumbnailPreviewComponent enabled
+  window.player = pillarbox('player', {
+    debug,
+    language,
+    srgOptions: {
+      dataProviderHost: ilHost
+    },
+    plugins: {
+      thumbnailPreview: {
+        sprite: {
+          rows: 27,
+          columns: 20,
+          thumbnailHeight: 84,
+          thumbnailWidth: 150,
+          interval: 5000,
+          url: 'https://il.srgssr.ch/spritesheet/urn/rts/video/14683290/sprite-14683290.jpeg'
+        }
+      }
+    }
+  });
+
+  // Load the video source for the player
+  player.src({
+    src: urn,
+    type: 'srgssr/urn',
+    disableTrackers: true
+  });
+
+  // Expose player for debugging
+  window.player = player;
+  window.pillarbox = pillarbox;
+</script>
+</body>
+</html>
