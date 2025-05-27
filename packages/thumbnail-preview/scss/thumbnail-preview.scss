@@ -1,0 +1,29 @@
+.pbw-thumbnail-preview {
+  position: absolute;
+  bottom: 4.5em;
+
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  border-radius: 4px;
+
+  box-shadow: 0px 0px 5px rgba(0,0,0,.2);
+  transform: translateX(-1000px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.vjs-progress-control:hover .pbw-thumbnail-preview,
+.vjs-progress-control.fake-active .pbw-thumbnail-preview,
+.vjs-progress-control:active .pbw-thumbnail-preview {
+  opacity: 1;
+}
+
+.pbw-thumbnail {
+  position: absolute;
+  left: 0;
+}
