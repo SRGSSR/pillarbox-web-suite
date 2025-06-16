@@ -129,8 +129,8 @@ class ThumbnailPreviewOverlay extends Component {
 
     const progressControl = this.getProgressControl();
 
-    progressControl.on(['pointermove'], this.#onMove);
-    progressControl.on(['pointerleave'], this.#onCancel);
+    progressControl.on('pointermove', this.#onMove);
+    progressControl.on('pointerleave', this.#onCancel);
     this.player().on('userinactive', this.#onCancel);
     this.player().on('playerresize', this.#onPlayerResize);
 
@@ -147,8 +147,8 @@ class ThumbnailPreviewOverlay extends Component {
 
     const progressControl = this.getProgressControl();
 
-    progressControl.off(['pointermove'], this.#onMove);
-    progressControl.off(['pointerleave'], this.#onCancel);
+    progressControl.off('pointermove', this.#onMove);
+    progressControl.off('pointerleave', this.#onCancel);
     this.player().off('userinactive', this.#onCancel);
     this.player().off('playerresize', this.#onPlayerResize);
 
