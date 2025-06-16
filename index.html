@@ -10,7 +10,7 @@
       color: var(--gray-1); /* Light text color */
       margin: 0 auto;
       padding: var(--size-3);
-      max-width: var(--size-sm);
+      max-width: var(--size-md);
     }
 
     header {
@@ -61,8 +61,22 @@
       font-size: var(--font-size-2); /* Standard text size for links */
     }
 
+    a h4 {
+      margin: 0;
+    }
+
+    a p {
+      font-size: var(--font-size-1);
+    }
+
     a:hover {
       color: var(--gray-12); /* Slightly brighter blue on hover */
+    }
+
+    .package-container {
+      display: flex;
+      align-items: center;
+      gap: var(--size-4);
     }
   </style>
 </head>
@@ -71,13 +85,83 @@
   <h1>Pillarbox Extensions</h1>
 </header>
 <ul>
-  <li><a href="packages/pillarbox-playlist/index.html">pillarbox-playlist</a></li>
-  <li><a href="packages/skip-button/index.html">skip-button</a></li>
-  <li><a href="packages/pillarbox-debug-panel/index.html">pillarbox-debug-panel</a></li>
-  <li><a href="packages/user-preferences/index.html">user-preferences</a></li>
-  <li><a href="packages/big-replay-button/index.html">big-replay-button</a></li>
-  <li><a href="packages/brand-button/index.html">brand-button</a></li>
-  <li><a href="packages/thumbnail-preview/index.html">thumbnail-preview</a></li>
+  <li>
+    <a href="packages/pillarbox-playlist/index.html">
+      <div class="package-container">
+        <img src="./assets/pillarbox-playlist-ND2IlL0o.png" width="150">
+        <div>
+          <h4>pillarbox-playlist</h4>
+          <p>Displays a list of available media items and handles playlist navigation and playback control within the Pillarbox player.</p>
+        </div>
+      </div>
+    </a>
+  </li>
+  <li>
+    <a href="packages/skip-button/index.html">
+      <div class="package-container">
+        <img src="./assets/skip-button-ktSzD26j.png" width="150">
+        <div>
+          <h4>skip-button</h4>
+          <p>Adds a control to skip predefined video segments based on custom intervals triggered by the srgssr/interval event.</p>
+        </div>
+      </div>
+    </a>
+  </li>
+  <li>
+    <a href="packages/pillarbox-debug-panel/index.html">
+      <div class="package-container">
+        <img src="./assets/pillarbox-debug-panel-BUPCq-wz.png" width="150">
+        <div>
+          <h4>pillarbox-debug-panel</h4>
+          <p>Renders an overlay with internal debug data, including playback state, timing metrics, and live player information.</p>
+        </div>
+      </div>
+    </a>
+  </li>
+  <li>
+    <a href="packages/user-preferences/index.html">
+      <div class="package-container">
+        <img src="./assets/user-preferences-Cnj4ZQjt.png" width="150">
+        <div>
+          <h4>user-preferences</h4>
+          <p>Stores and retrieves user settings like volume, playback rate, text track, and audio track using localStorage.</p>
+        </div>
+      </div>
+    </a>
+  </li>
+  <li>
+    <a href="packages/big-replay-button/index.html">
+      <div class="package-container">
+        <img src="./assets/big-replay-button-BVsMFnD-.png" width="150">
+        <div>
+          <h4>big-replay-button</h4>
+          <p>Displays a prominent replay button when playback ends, reusing the standard play button’s appearance and behavior.</p>
+        </div>
+      </div>
+    </a>
+  </li>
+  <li>
+    <a href="packages/brand-button/index.html">
+      <div class="package-container">
+        <img src="./assets/brand-button-KD7audpS.png" width="150">
+        <div>
+          <h4>brand-button</h4>
+          <p>Adds a configurable button to the control bar with a custom SVG icon and URL for linking to external destinations.</p>
+        </div>
+      </div>
+    </a>
+  </li>
+  <li>
+    <a href="packages/thumbnail-preview/index.html">
+      <div class="package-container">
+        <img src="./assets/thumbnail-preview-BlYnvFK_.png" width="150">
+        <div>
+          <h4>thumbnail-preview</h4>
+          <p>Displays timestamp-aligned thumbnails during timeline hover using a sprite sheet and optional scaling configuration.</p>
+        </div>
+      </div>
+    </a>
+  </li>
 </ul>
 </body>
 </html>
