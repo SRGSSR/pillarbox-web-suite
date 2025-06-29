@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChapterBar Demo</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <video id="player" class="pillarbox-js" muted></video>
+
+    <script type="module">
+      import "@srgssr/pillarbox-web/dist/pillarbox.min.css";
+      import pillarbox from "@srgssr/pillarbox-web";
+      import "./scss/chapters-bar.scss";
+      import "./src/chapters-bar.js";
+
+      // Handle URL parameters
+      const searchParams = new URLSearchParams(location.search);
+      const debug = searchParams.has("debug");
+      const ilHost = searchParams.get("ilHost") || undefined;
+      const language = searchParams.get("language");
+      const urn =
+        searchParams.get("urn") ||
+        "urn:rts:video:8b301bc9-cc07-3a63-b7df-1a6b7a5fee09";
+
+      // Create a pillarbox player instance with the ChapterBar enabled
+      window.player = pillarbox("player", {
+        controls: true,
+        debug,
+        language,
+        srgOptions: {
+          dataProviderHost: ilHost,
+        },
+        chaptersBar: {
+          chapterOptions: {
+            urlHandler() {
+              const { title } = this.options().metadata;
+
+              return `https://duckduckgo.com/?q=${title}`;
+            },
+          },
+        },
+      });
+
+      // Load the video source for the player
+      player.src({
+        src: urn,
+        type: "srgssr/urn",
+        disableTrackers: true,
+      });
+
+      // Expose player for debugging
+      window.player = player;
+      window.pillarbox = pillarbox;
+    </script>
+  </body>
+</html>

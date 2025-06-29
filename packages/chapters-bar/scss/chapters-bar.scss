@@ -1,0 +1,66 @@
+@use '../../card/scss/card';
+
+.pbw-chapters-bar {
+  position: absolute;
+  top: 5em;
+  right: 0;
+  bottom: 7em;
+  display: none;
+  flex-direction: column;
+  gap: .25em;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #1f2125b0 #1f2125b0;
+  scrollbar-width: thin;
+
+  &.vjs-lock-showing {
+    display: flex !important;
+  }
+}
+
+.vjs-has-started .pbw-chapters-bar {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility .1s,opacity .1s;
+}
+
+.vjs-has-started.vjs-user-inactive.vjs-playing .pbw-chapters-bar {
+  visibility: visible;
+  opacity: 0;
+  transition: visibility 1s,opacity 1s;
+  pointer-events: none;
+}
+
+.vjs-card {
+  position: relative;
+  padding: 0;
+  background: #16191d;
+  border-radius: .5em;
+}
+
+.vjs-card-img {
+  border-radius: 0.5em 0.5em 0 0;
+}
+
+.vjs-card-figcaption {
+  padding: 0 0.5em 0.5em;
+}
+
+.vjs-card-title {
+  font-size: .9em;
+}
+
+.vjs-card-duration {
+  position: absolute;
+  top: 6.55em;
+  right: 0.5em;
+  padding: 0.5em;
+  font-size: 0.75em;
+  background: #1f2125b0;
+  border-radius: 0.25em;
+}
+
+.vjs-card-selected {
+  background: #af001e;
+}
