@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Demo</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+
+      :not(.vjs-has-started) .example-card-link {
+        position: absolute;
+        bottom: 19em;
+      }
+
+      :not(.vjs-has-started) .example-styled-card-button {
+        position: absolute;
+        bottom: 6em;
+      }
+
+      :not(.vjs-has-started) .example-card {
+        position: absolute;
+        bottom: 6em;
+      }
+
+      .vjs-has-started .example-styled-card-button,
+      .vjs-has-started .example-card-link {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <video id="player" class="pillarbox-js" muted></video>
+
+    <script type="module">
+      import "@srgssr/pillarbox-web/dist/pillarbox.min.css";
+      import pillarbox from "@srgssr/pillarbox-web";
+      import "./scss/card.scss";
+      import Card from "./src/card.js";
+      import CardLink from "./src/card-link.js";
+      import CardButton from "./src/card-button.js";
+
+      // Handle URL parameters
+      const searchParams = new URLSearchParams(location.search);
+      const debug = searchParams.has("debug");
+      const ilHost = searchParams.get("ilHost") || undefined;
+      const language = searchParams.get("language");
+      const urn = searchParams.get("urn") || "urn:rts:video:14683290";
+
+      // Create a pillarbox player instance with the Card enabled
+      window.player = pillarbox("player", {
+        debug,
+        language,
+        controls: true,
+        srgOptions: {
+          dataProviderHost: ilHost,
+        },
+      });
+
+      player.on("loadstart", () => {
+        const [{ duration: durationInMs, ...data }] =
+          player.currentSource().mediaData.chapters;
+        const duration = durationInMs / 1_000;
+
+        // Card link when clicked goes to the chapter's Play page
+        const cardLink = new CardLink(player, {
+          className: "example-card-link",
+          metadata: {
+            duration,
+            ...data,
+          },
+          urlHandler() {
+            const { urn } = this.metadata;
+            return `https://www.rts.ch/play/tv/-/video/-?urn=${urn}`;
+          },
+        });
+
+        // Card button with custom inline style
+        // When clicked start playback and seek to the indicated position
+        const cardButton = new CardButton(player, {
+          className: "example-styled-card-button",
+          metadata: {
+            duration,
+            ...data,
+          },
+          styleEl: "background: blue;",
+          clickHandler([e]) {
+            e.preventDefault();
+            this.player().currentTime(14);
+            this.player().play();
+          },
+        });
+
+        // Card with custom inline style
+        const card = new Card(player, {
+          className: "example-card",
+          styleEl: "right: 1.5em;",
+          metadata: {
+            duration,
+            ...data,
+          }
+        });
+
+        player.addChild(cardLink);
+        player.addChild(cardButton);
+        player.addChild(card);
+
+        player.one('playing', () => {
+          card.select(true);
+          card.setTimeout(() => card.hide(), 5_000);
+        });
+      });
+
+      // Load the video source for the player
+      player.src({
+        src: urn,
+        type: "srgssr/urn",
+        disableTrackers: true,
+      });
+
+      // Expose player for debugging
+      window.player = player;
+      window.pillarbox = pillarbox;
+    </script>
+  </body>
+
+</html>

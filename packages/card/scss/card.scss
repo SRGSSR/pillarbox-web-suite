@@ -1,0 +1,41 @@
+.vjs-card {
+  width: 12em;
+  padding: .5em;
+  background: rgba(43, 51, 63, 0.7);
+}
+
+.vjs-card-selected {
+  color: #2B333F;
+  background: #fff;
+}
+
+.vjs-card.vjs-card-button {
+  text-align: left;
+  background: rgba(43, 51, 63, 0.7);
+  cursor: pointer;
+}
+
+.vjs-card-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.vjs-card-figure {
+  margin: 0;
+}
+
+.vjs-card-img {
+  width: 100%;
+}
+
+.vjs-card-figcaption {
+  display: grid;
+}
+
+.vjs-card-title {
+  margin-block: .5em;
+}
+
+.vjs-card-duration {
+  justify-self: end;
+}
