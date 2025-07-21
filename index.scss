@@ -1,0 +1,137 @@
+body {
+  max-width: var(--size-md);
+  margin: 0 auto;
+  padding: var(--size-3);
+  color: var(--gray-1);
+  font-family: var(--font-sans);
+  background-color: var(--gray-9);
+}
+
+header {
+  margin: var(--size-2) auto;
+  padding-bottom: var(--size-2);
+  color: var(--gray-3);
+  font-size: var(--font-size-1);
+  text-align: center;
+}
+
+ul {
+  margin: var(--size-2) auto;
+  padding: 0;
+  list-style-type: none;
+  background-color: var(--gray-8);
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-3);
+}
+
+li {
+  display: flex;
+  margin: 0;
+  border-bottom: 1px solid var(--gray-7);
+}
+
+li:first-child {
+  border-radius: var(--radius-2) var(--radius-2) 0 0;
+
+  & > *:first-child {
+    border-radius: var(--radius-2) 0 0 0;
+  }
+
+  & > *:last-child {
+    border-radius: 0 var(--radius-2) 0 0;
+  }
+
+  & > *:only-child {
+    border-radius: var(--radius-2) var(--radius-2) 0 0;
+  }
+}
+
+li:last-child {
+  border-radius: 0 0 var(--radius-2) var(--radius-2);
+
+  & > *:first-child {
+    border-radius: 0 0 0 var(--radius-2);
+  }
+
+  & > *:last-child {
+    border-radius: 0 0 var(--radius-2) 0;
+  }
+
+  & > *:only-child {
+    border-radius: 0 0 var(--radius-2) var(--radius-2);
+  }
+}
+
+li:only-child {
+  border-radius: var(--radius-2);
+
+  & > *:first-child {
+    border-radius: var(--radius-2) 0 0 var(--radius-2);
+  }
+
+  & > *:last-child {
+    border-radius: 0 var(--radius-2) var(--radius-2) 0;
+  }
+
+  & > *:only-child {
+    border-radius: var(--radius-2);
+  }
+}
+
+a {
+  box-sizing: border-box;
+  color: var(--gray-4);
+  font-size: var(--font-size-2);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+h4 {
+  margin: 0;
+}
+
+p {
+  font-size: var(--font-size-1);
+}
+
+.info-container {
+  display: flex;
+  gap: var(--size-4);
+  align-items: center;
+  padding: var(--size-3) 0 var(--size-3) var(--size-4);
+}
+
+.info-container:hover {
+  color: var(--gray-12);
+  background-color: var(--gray-6)
+}
+
+.link-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: var(--gray-12)
+}
+
+.link-container:hover {
+  background-color: var(--gray-6);
+}
+
+
+.link-container > a {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: var(--size-4) var(--size-3);
+  transition: background-color 0.3s;
+}
+
+.github-icon {
+  transition: fill 0.3s;
+  fill: var(--gray-5);
+}
+
+.link-container > a:hover > .github-icon {
+  fill: var(--gray-12);
+}

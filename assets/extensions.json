@@ -1,0 +1,38 @@
+[
+  {
+    "name": "pillarbox-playlist",
+    "description": "Displays a list of available media items and handles playlist navigation and playback control within the Pillarbox player."
+  },
+  {
+    "name": "skip-button",
+    "description": "Adds a control to skip predefined video segments based on custom intervals triggered by the srgssr/interval event."
+  },
+  {
+    "name": "pillarbox-debug-panel",
+    "description": "Renders an overlay with internal debug data, including playback state, timing metrics, and live player information."
+  },
+  {
+    "name": "user-preferences",
+    "description": "Stores and retrieves user settings like volume, playback rate, text track, and audio track using localStorage."
+  },
+  {
+    "name": "big-replay-button",
+    "description": "Displays a prominent replay button when playback ends, reusing the standard play button’s appearance and behavior."
+  },
+  {
+    "name": "brand-button",
+    "description": "Adds a configurable button to the control bar with a custom SVG icon and URL for linking to external destinations."
+  },
+  {
+    "name": "thumbnail-preview",
+    "description": "Displays timestamp-aligned thumbnails during timeline hover using a sprite sheet and optional scaling configuration."
+  },
+  {
+    "name": "card",
+    "description": "Displays a card component containing a title, duration, and a preview image."
+  },
+  {
+    "name": "chapters-bar",
+    "description": "Displays a scrollable list of video chapters, allowing users to easily navigate through the content."
+  }
+]
