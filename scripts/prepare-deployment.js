@@ -23,7 +23,7 @@ if (!fs.existsSync(deploymentDir)) {
 // Read all package directories
 fs.readdirSync(packagesDir).forEach(packageName => {
   // Define the source and target directories for the current package
-  const distDir = path.join(packagesDir, packageName, 'dist');
+  const distDir = path.join(packagesDir, packageName, 'dist/demo');
   const targetDir = path.join(deploymentDir, 'packages', packageName);
 
   // Check if the package's dist directory exists
