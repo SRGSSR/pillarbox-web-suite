@@ -17,13 +17,16 @@ jobs:
         with:
           node-version: 20
 
-
       - name: Install dependencies
-        env :
+        env:
           CI: true
         run: |
           npm pkg delete scripts.prepare
           npm ci
+
+      - name: Run Build
+        run: |
+          npm run build -ws
 
       - name: Run build Github Page
         run: |

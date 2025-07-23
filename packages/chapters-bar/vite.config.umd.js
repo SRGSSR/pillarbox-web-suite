@@ -26,7 +26,7 @@ export default defineConfig({
           pillarbox: 'pillarbox',
         },
       },
-      external: ['@srgssr/pillarbox-web'],
+      external: ['@srgssr/pillarbox-web', 'video.js'],
       plugins: [
         babel({
           babelHelpers: 'bundled',

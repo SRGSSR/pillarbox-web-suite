@@ -1,5 +1,5 @@
 {
-  "name": "@srgssr/chapter-bar",
+  "name": "@srgssr/chapters-bar",
   "version": "0.0.1",
   "license": "MIT",
   "author": "SRG SSR",
@@ -10,16 +10,16 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/chapter-bar#readme",
+  "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/chapters-bar#readme",
   "type": "module",
-  "main": "dist/chapter-bar.cjs",
-  "browser": "dist/chapter-bar.umd.min.js",
-  "module": "dist/chapter-bar.js",
-  "style": "./dist/chapter-bar.min.css",
+  "main": "dist/chapters-bar.cjs",
+  "browser": "dist/chapters-bar.umd.min.js",
+  "module": "dist/chapters-bar.js",
+  "style": "./dist/chapters-bar.min.css",
   "exports": {
     ".": {
-      "import": "./dist/chapter-bar.js",
-      "require": "./dist/chapter-bar.cjs"
+      "import": "./dist/chapters-bar.js",
+      "require": "./dist/chapters-bar.cjs"
     },
     "./*": "./*"
   },
@@ -34,13 +34,16 @@
   ],
   "scripts": {
     "build": "npm run build:lib && npm run build:umd && npm run build:css",
-    "build:css": "sass ./scss/chapter-bar.scss:dist/chapter-bar.min.css --style compressed --source-map --load-path node_modules",
+    "build:css": "sass ./scss/chapters-bar.scss:dist/chapters-bar.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "vite build --config vite.config.lib.js",
     "build:umd": "vite build --config vite.config.umd.js",
     "github:page": "vite build",
     "release:ci": "semantic-release",
     "start": " vite --port 4200 --open",
     "test": "vitest run --silent --coverage --coverage.reporter text"
+  },
+  "dependencies": {
+    "@srgssr/card": "^1.0.0"
   },
   "peerDependencies": {
     "@srgssr/pillarbox-web": "^1.12.1"
