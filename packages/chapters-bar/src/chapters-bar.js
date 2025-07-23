@@ -1,11 +1,11 @@
 import pillarbox from '@srgssr/pillarbox-web';
 import { version } from '../package.json';
-import CardLink from '../../card/src/card-link.js';
+import { CardLink } from '@srgssr/card';
 
 /**
  * @typedef {import('@srgssr/pillarbox-web/dist/types/src/dataProvider/model/MediaComposition.js').Chapter} Chapter
  *
- * @typedef {import('../../card/src/card-link.js').CardLinkOptions} chapterOptions
+ * @typedef {import('@srgssr/card').CardLinkOptions} chapterOptions
  *
  * @typedef {object} ChaptersBarOptions
  * @property {chapterOptions} chapterOptions options to be passed to the chapter cards
@@ -18,9 +18,9 @@ import CardLink from '../../card/src/card-link.js';
 const log = pillarbox.log.createLogger('chapters-bar');
 
 /**
-* @ignore
-* @type {typeof import('video.js/dist/types/component').default}
-*/
+ * @ignore
+ * @type {typeof import('video.js/dist/types/component').default}
+ */
 const Component = pillarbox.getComponent('Component');
 
 /**
@@ -54,7 +54,11 @@ class ChaptersBar extends Component {
    *
    * @param {Chapter} chapter the chapter to add
    */
-  addChapter({ startTime, endTime, metadata }) {
+  addChapter({
+    startTime,
+    endTime,
+    metadata
+  }) {
     this.addChild(new CardLink(this.player(), {
       id: metadata.urn,
       name: metadata.urn,
@@ -66,7 +70,11 @@ class ChaptersBar extends Component {
       },
       clickHandler: this.onChapterClick(startTime),
       urlHandler() {
-        const { vendor, mediaType, urn } = this.options().metadata;
+        const {
+          vendor,
+          mediaType,
+          urn
+        } = this.options().metadata;
 
         return `https://www.${vendor.toLowerCase()}.ch/play/tv/-/${mediaType.toLowerCase()}/-?urn=${urn}`;
       },
@@ -100,8 +108,14 @@ class ChaptersBar extends Component {
     if (!chapters.length) return [];
 
     try {
-      return chapters.map(({ startTime, endTime, text }) => ({
-        startTime, endTime, metadata: JSON.parse(text)
+      return chapters.map(({
+        startTime,
+        endTime,
+        text
+      }) => ({
+        startTime,
+        endTime,
+        metadata: JSON.parse(text)
       }));
     } catch (error) {
       log(error);

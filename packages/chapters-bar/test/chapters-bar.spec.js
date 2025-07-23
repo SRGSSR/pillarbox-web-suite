@@ -6,7 +6,7 @@ import { version } from '../package.json';
 window.HTMLMediaElement.prototype.load = () => { };
 
 // Mock CardLink since we are not testing its functionality here
-vi.mock('../../card/src/card-link.js', () => {
+vi.mock('@srgssr/card', () => {
   const CardLink = vi.fn().mockImplementation((player, options) => {
     const el = document.createElement('div');
 
@@ -26,7 +26,7 @@ vi.mock('../../card/src/card-link.js', () => {
   });
 
 
-  return { default: CardLink };
+  return { CardLink };
 });
 
 describe('ChaptersBar', () => {

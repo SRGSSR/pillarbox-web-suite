@@ -22,7 +22,6 @@ jobs:
         with:
           node-version: 20
 
-
       - name: Install dependencies
         if: github.event.action != 'closed'
         env:
@@ -30,6 +29,11 @@ jobs:
         run: |
           npm pkg delete scripts.prepare
           npm ci
+
+      - name: Run Build
+        if: github.event.action != 'closed'
+        run: |
+          npm run build -ws
 
       - name: Run build
         if: github.event.action != 'closed'
