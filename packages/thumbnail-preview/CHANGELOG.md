@@ -1,3 +1,15 @@
+## [@srgssr/thumbnail-preview-v1.0.2](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/thumbnail-preview-v1.0.1...@srgssr/thumbnail-preview-v1.0.2) (2025-07-23)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* **thumbnail-preview:** avoid crash when sprite is undefined ([a8f88b1](https://github.com/SRGSSR/pillarbox-web-suite/commit/a8f88b1beb9571f71f1dbbe54ef7b816013cde89))
+
+
+### Chore 🧹
+
+* change demo oututdir ([96086d2](https://github.com/SRGSSR/pillarbox-web-suite/commit/96086d2e484833280004b3bacf713823482722a3))
+
 ## [@srgssr/thumbnail-preview-v1.0.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/thumbnail-preview-v1.0.0...@srgssr/thumbnail-preview-v1.0.1) (2025-06-16)
 
 
