@@ -196,6 +196,31 @@ describe('ThumbnailPreview', () => {
       expect(thumbnailPreviewOverlay.active).toBeFalsy();
     });
 
+    it('should deactivate the thumbnail when updateSprite is called with an undefined sprite', () => {
+      const progressControl = player.controlBar.progressControl;
+      const thumbnailPreviewOverlay = progressControl.thumbnailPreviewOverlay;
+      const overlayEl = thumbnailPreviewOverlay.el();
+
+      expect(overlayEl.classList).not.toContain(`vjs-hidden`);
+      expect(thumbnailPreviewOverlay.active).toBeTruthy();
+      player.thumbnailPreview().updateSprite(undefined);
+      expect(overlayEl.classList).toContain('vjs-hidden');
+      expect(thumbnailPreviewOverlay.active).toBeFalsy();
+    });
+
+
+    it('should deactivate the thumbnail when passing a sprite without url', () => {
+      const progressControl = player.controlBar.progressControl;
+      const thumbnailPreviewOverlay = progressControl.thumbnailPreviewOverlay;
+      const overlayEl = thumbnailPreviewOverlay.el();
+
+      expect(overlayEl.classList).not.toContain(`vjs-hidden`);
+      expect(thumbnailPreviewOverlay.active).toBeTruthy();
+      player.thumbnailPreview().updateSprite({ url: undefined });
+      expect(overlayEl.classList).toContain('vjs-hidden');
+      expect(thumbnailPreviewOverlay.active).toBeFalsy();
+    });
+
   });
 
   describe('when progress control is missing', () => {
