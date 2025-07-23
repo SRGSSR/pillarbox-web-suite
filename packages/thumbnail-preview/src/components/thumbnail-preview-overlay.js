@@ -84,7 +84,9 @@ class ThumbnailPreviewOverlay extends Component {
    * resizes the thumbnail holder to match the expected layout.
    */
   init() {
-    if (this.options().sprite.url) {
+    const { sprite } = this.options();
+
+    if (sprite && sprite.url) {
       this.initListeners();
       this.resizeThumbnail();
       this.thumbnail.src = this.options().sprite.url;
