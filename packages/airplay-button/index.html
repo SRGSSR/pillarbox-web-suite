@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Airplay-Button Demo</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<video id="player" class="pillarbox-js" controls muted></video>
+
+<script type="module">
+  import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
+  import pillarbox from '@srgssr/pillarbox-web';
+  import './scss/airplay-button.scss';
+  import './src/airplay-button.js';
+  import airplayIcon from './assets/airplay.svg?raw';
+
+  // Handle URL parameters
+  const searchParams = new URLSearchParams(location.search);
+  const debug = searchParams.has('debug');
+  const ilHost = searchParams.get('ilHost') || undefined;
+  const language = searchParams.get('language');
+  const urn = searchParams.get('urn') || 'urn:rts:video:14683290';
+
+  // Create a pillarbox player instance with the AirplayButton enabled
+  window.player = pillarbox('player', {
+    debug,
+    language,
+    experimentalSvgIcons: true,
+    srgOptions: {
+      dataProviderHost: ilHost
+    }
+  });
+
+  const controlBar = player.controlBar;
+  controlBar.addChild('AirplayButton', { icon: airplayIcon }, controlBar.children().length -1);
+
+  // Load the video source for the player
+  player.src({
+    src: urn,
+    type: 'srgssr/urn',
+    disableTrackers: true
+  });
+
+  // Expose player for debugging
+  window.player = player;
+  window.pillarbox = pillarbox;
+</script>
+</body>
+</html>
