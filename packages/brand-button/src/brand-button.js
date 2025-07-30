@@ -1,6 +1,6 @@
 import videojs from 'video.js';
 import { version } from '../package.json';
-import loadSvgElement from './svg-loader.js';
+import { loadSvgElement } from '@srgssr/web-suite-utils';
 
 /**
  * @ignore

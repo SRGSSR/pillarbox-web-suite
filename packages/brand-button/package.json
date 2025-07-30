@@ -41,6 +41,9 @@
     "start": " vite --port 4200 --open",
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
+  "dependencies": {
+    "@srgssr/web-suite-utils": "^1.0.0"
+  },
   "peerDependencies": {
     "video.js": "^8.0.0"
   },
