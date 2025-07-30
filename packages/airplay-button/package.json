@@ -1,0 +1,54 @@
+{
+  "name": "@srgssr/airplay-button",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "SRG SSR",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SRGSSR/pillarbox-web-suite.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/airplay-button#readme",
+  "type": "module",
+  "main": "dist/airplay-button.cjs",
+  "browser": "dist/airplay-button.umd.min.js",
+  "module": "dist/airplay-button.js",
+  "style": "./dist/airplay-button.min.css",
+  "exports": {
+    ".": {
+      "import": "./dist/airplay-button.js",
+      "require": "./dist/airplay-button.cjs"
+    },
+    "./*": "./*"
+  },
+  "files": [
+    "dist/*",
+    "scss/*",
+    "assets/*"
+  ],
+  "keywords": [
+    "video.js",
+    "player"
+  ],
+  "scripts": {
+    "build": "npm run build:lib && npm run build:umd && npm run build:css",
+    "build:css": "sass ./scss/airplay-button.scss:dist/airplay-button.min.css --style compressed --source-map --load-path node_modules",
+    "build:lib": "vite build --config vite.config.lib.js",
+    "build:umd": "vite build --config vite.config.umd.js",
+    "github:page": "vite build",
+    "release:ci": "semantic-release",
+    "start": " vite --port 4200 --open",
+    "test": "vitest run --silent --coverage --coverage.reporter text"
+  },
+  "dependencies": {
+    "@srgssr/web-suite-utils": "^1.0.0"
+  },
+  "peerDependencies": {
+    "video.js": "^8.0.0"
+  },
+  "devDependencies": {
+    "@srgssr/pillarbox-web": "^1.14.1"
+  }
+}

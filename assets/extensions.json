@@ -34,5 +34,9 @@
   {
     "name": "chapters-bar",
     "description": "Displays a scrollable list of video chapters, allowing users to easily navigate through the content."
+  },
+  {
+    "name": "airplay-button",
+    "description": "Adds an AirPlay button when AirPlay is available, and opens the system picker on click."
   }
 ]

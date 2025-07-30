@@ -14,13 +14,14 @@
   "homepage": "https://plugins.pillarbox.ch",
   "type": "module",
   "workspaces": [
-    "packages/*",
-    "themes/*"
+    "packages/web-suite-utils",
+    "packages/card",
+    "packages/*"
   ],
   "scripts": {
     "create": "plop --plopfile scripts/create.js",
     "eslint": "eslint {packages/**/{src,test}/**/*.{js,jsx},scripts/*.{js,jsx}}",
-    "github:page": "npm run github:page --ws && vite build && node scripts/prepare-deployment.js",
+    "github:page": "npm run github:page --ws --if-present && vite build && node scripts/prepare-deployment.js",
     "start": " vite --host --port 4200 --open",
     "outdated": "npm outdated",
     "prepare": "husky",
