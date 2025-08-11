@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import videojs from 'video.js';
-import CardLink from '../src/card-link.js';
+import { CardLink } from '../src/index.js';
 import { version } from '../package.json';
 
 describe('CardLink', () => {

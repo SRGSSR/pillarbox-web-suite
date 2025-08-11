@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import videojs from 'video.js';
-import Card from '../src/card.js';
+import { Card } from '../src/index.js';
 import { version } from '../package.json';
 
 
