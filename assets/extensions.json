@@ -38,5 +38,9 @@
   {
     "name": "airplay-button",
     "description": "Adds an AirPlay button when AirPlay is available, and opens the system picker on click."
+  },
+  {
+    "name": "svg-button",
+    "description": "Base components that simplifies the process of adding custom SVG icons."
   }
 ]

@@ -1,12 +1,12 @@
 import videojs from 'video.js';
+import '@srgssr/svg-button';
 import { version } from '../package.json';
-import { loadSvgElement } from '@srgssr/web-suite-utils';
 
 /**
  * @ignore
- * @type {typeof import('video.js/dist/types/Component').default}
+ * @type {typeof import('@srgssr/svg-button').SvgComponent}
  */
-const Component = videojs.getComponent('Component');
+const SvgComponent = videojs.getComponent('SvgComponent');
 
 /**
  * @ignore
@@ -18,7 +18,7 @@ const log = videojs.log.createLogger('brand-button');
  * Represents a BrandButton component for the video.js player.
  * Displays a clickable brand icon that redirects to a specified URL.
  */
-class BrandButton extends Component {
+class BrandButton extends SvgComponent {
   /**
    * A bound method for updating the href attribute.
    * @private
@@ -64,14 +64,11 @@ class BrandButton extends Component {
       throw new Error(`'${tag}' is not supported for BrandButton`);
     }
 
-    const {
-      title,
-      target,
-      rel
-    } = this.options();
-    const el = videojs.dom.createEl(
+    const { title, target, rel } = this.options();
+
+    return super.createEl(
       tag,
-      videojs.obj.merge({ className: this.buildCSSClass() }, props),
+      props,
       videojs.obj.merge({
         href: this.getHref(),
         title: this.localize(title),
@@ -79,42 +76,6 @@ class BrandButton extends Component {
         rel
       }, attributes)
     );
-
-    this.createIconEl(el);
-
-    return el;
-  }
-
-  /**
-   * Asynchronously loads the SVG element based on the icon option.
-   *
-   * Override or extend this method in subclasses to customize how the SVG
-   * element is loaded.
-   *
-   * @returns {Promise<SVGElement>} A promise that resolves to the loaded SVG element.
-   */
-  async loadSvgElement() {
-    return loadSvgElement(this.options().icon);
-  }
-
-  /**
-   * Appends the SVG icon to the button element, if a valid icon is provided.
-   *
-   * @param {HTMLElement} el - The parent element to which the icon should be appended.
-   */
-  createIconEl(el) {
-    this.loadSvgElement().then(svg => {
-      const svgContainer = videojs.dom.createEl(
-        'span',
-        { className: 'pbw-brand-button-icon-container' },
-        { ariaHidden: true }
-      );
-
-      svgContainer.appendChild(svg);
-      el.appendChild(svgContainer);
-    }, reason => {
-      log.error(`No valid SVG Icon provided for BrandButton`, reason);
-    });
   }
 
   /**
@@ -151,7 +112,7 @@ class BrandButton extends Component {
    * @returns {string} The CSS class string.
    */
   buildCSSClass() {
-    return `${super.buildCSSClass()} vjs-control pbw-brand-button`;
+    return `vjs-brand-button vjs-control ${super.buildCSSClass()}`;
   }
 
   /**
@@ -171,6 +132,10 @@ class BrandButton extends Component {
     return version;
   }
 }
+
+BrandButton.prototype.options_ = {
+  iconName: 'brand-button'
+};
 
 videojs.registerComponent('BrandButton', BrandButton);
 

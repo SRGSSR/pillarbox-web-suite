@@ -1,0 +1,12 @@
+.vjs-svg-component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vjs-svg-button, .vjs-svg-component {
+  svg.icon-from-options {
+    cursor: pointer;
+    fill: currentColor;
+  }
+}

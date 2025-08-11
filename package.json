@@ -15,6 +15,7 @@
   "type": "module",
   "workspaces": [
     "packages/web-suite-utils",
+    "packages/svg-button",
     "packages/card",
     "packages/*"
   ],
