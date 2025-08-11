@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import loadSvgElement from '../src/svg-loader.js';
+import { loadSvgElement } from '../src/index.js';
 
 describe('loadSvgElement', () => {
   afterEach(() => {

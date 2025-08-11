@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import videojs from 'video.js';
-import CardButton from '../src/card-button.js';
+import { CardButton } from '../src/index.js';
 import { version } from '../package.json';
 
 describe('CardButton', () => {
