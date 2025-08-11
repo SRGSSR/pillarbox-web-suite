@@ -1,24 +1,18 @@
 import videojs from 'video.js';
+import '@srgssr/svg-button';
 import { version } from '../package.json';
-import { loadSvgElement } from '@srgssr/web-suite-utils';
 import './lang';
 
 /**
  * @ignore
- * @type {typeof import('video.js/dist/types/button').default}
+ * @type {typeof import('@srgssr/svg-button').SvgButton}
  */
-const Button = videojs.getComponent('Button');
-
-/**
- * @ignore
- * @type {typeof import('video.js/dist/types/utils/log.js').default}
- */
-const log = videojs.log.createLogger('airplay-button');
+const SvgButton = videojs.getComponent('SvgButton');
 
 /**
  * Represents a AirplayButton component for the videojs player.
  */
-class AirplayButton extends Button {
+class AirplayButton extends SvgButton {
   /**
    * Listener for detecting AirPlay device availability.
    * If an AirPlay device is available, the button is shown.
@@ -40,7 +34,6 @@ class AirplayButton extends Button {
    */
   #mediaElement;
 
-
   /**
    * Creates an instance of a AirplayButton.
    *
@@ -48,7 +41,6 @@ class AirplayButton extends Button {
    * @param {Object} options Configuration options for the component.
    */
   constructor(player, options) {
-    options = videojs.obj.merge({ controlText: 'Use AirPlay' }, options);
     super(player, options);
     this.init();
   }
@@ -68,10 +60,6 @@ class AirplayButton extends Button {
    * registering the device availability event listener.
    */
   init() {
-    this.hide();
-    this.setIcon('airplay');
-    this.appendIcon(this.el());
-
     if (!AirplayButton.isAirplaySupported()) {
       return;
     }
@@ -103,53 +91,23 @@ class AirplayButton extends Button {
   }
 
   /**
-   * Asynchronously loads the SVG element based on the icon option.
-   *
-   * Override or extend this method in subclasses to customize how the SVG
-   * element is loaded.
-   *
-   * @returns {Promise<SVGElement>} A promise that resolves to the loaded SVG element.
-   */
-  async loadSvgElement() {
-    return loadSvgElement(this.options().icon);
-  }
-
-  /**
-   * Appends the SVG icon to the button element, if a valid icon is provided.
-   *
-   * @param {HTMLElement} el - The parent element to which the icon should be appended.
-   */
-  appendIcon(el) {
-    if (!this.options().icon) {
-      return;
-    }
-
-    this.loadSvgElement().then(svg => {
-      const placeholder = el.querySelector('.vjs-icon-placeholder');
-
-      if (placeholder) {
-        svg.classList.toggle('icon-from-options', true);
-        placeholder.innerHTML = '';
-        placeholder.appendChild(svg);
-      }
-    }, reason => {
-      log.error(`There was a problem loading the provided SVG Icon`, reason);
-    });
-  }
-
-  /**
    * Builds the CSS class string for the button.
    *
    * @returns {string} The CSS class string.
    */
   buildCSSClass() {
-    return `vjs-airplay-button ${super.buildCSSClass()}`;
+    return `vjs-airplay-button vjs-hidden ${super.buildCSSClass()}`;
   }
 
   static get VERSION() {
     return version;
   }
 }
+
+AirplayButton.prototype.options_ = {
+  controlText: 'Use AirPlay',
+  iconName: 'airplay'
+};
 
 videojs.registerComponent('AirplayButton', AirplayButton);
 

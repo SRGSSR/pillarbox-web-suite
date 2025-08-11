@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brand-Button Demo</title>
+  <title>SvgButton Demo</title>
   <style>
     html,
     body {
@@ -15,11 +15,6 @@
       margin: 0;
       overflow: hidden;
     }
-
-
-    .vjs-brand-button .vjs-svg-icon {
-      width: 100%;
-    }
   </style>
 </head>
 <body>
@@ -28,9 +23,10 @@
 <script type="module">
   import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
   import pillarbox from '@srgssr/pillarbox-web';
-  import './scss/brand-button.scss';
-  import './src/brand-button.js';
-  import icon from './assets/brand-logo.svg?raw';
+  import './scss/svg-button.scss';
+  import './src/svg-button.js';
+  import './src/index.js';
+  import icon from './assets/custom.svg?raw';
 
   // Handle URL parameters
   const searchParams = new URLSearchParams(location.search);
@@ -39,28 +35,30 @@
   const language = searchParams.get('language');
   const urn = searchParams.get('urn') || 'urn:rts:video:14683290';
 
-  // Prepare translations
-  pillarbox.addLanguage('en', { 'Open in Play RTS': 'Open in Play RTS' });
-  pillarbox.addLanguage('fr', { 'Open in Play RTS': 'Ouvrir dans Play RTS' });
-  pillarbox.addLanguage('de', { 'Open in Play RTS': 'In Play RTS öffnen' });
-  pillarbox.addLanguage('it', { 'Open in Play RTS': 'Apri in Play RTS' });
-  pillarbox.addLanguage('rm', { 'Open in Play RTS': 'Avrir en Play RTS' });
-
-  // Callback to generate the link
-  const href = (player) => `https://www.rts.ch/play/tv/-/video/-?urn=${player.currentSource()?.mediaData?.urn }`
-
-  // Create a pillarbox player instance with the BrandButton enabled
+  // Create a pillarbox player instance with the SvgButton enabled
   window.player = pillarbox('player', {
     debug,
     language,
-    srgOptions: { dataProviderHost: ilHost },
-    controlBar: {
-      brandButton: { href, icon, title: 'Open in Play RTS' }
+    srgOptions: {
+      dataProviderHost: ilHost
     },
   });
 
+  // Add the SVG Icon inline
+  player.controlBar.addChild('SvgButton', {
+    icon,
+    iconName: 'my-button',
+    controlText: 'custom SVG Button',
+    clickHandler: () => console.log('Inline SvgButton clicked'),
+    className: 'vjs-my-button'
+  });
+
   // Load the video source for the player
-  player.src({ src: urn, type: 'srgssr/urn', disableTrackers: true });
+  player.src({
+    src: urn,
+    type: 'srgssr/urn',
+    disableTrackers: true
+  });
 
   // Expose player for debugging
   window.player = player;

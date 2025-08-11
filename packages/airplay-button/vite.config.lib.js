@@ -19,7 +19,7 @@ export default defineConfig({
       entry: 'src/airplay-button.js'
     },
     rollupOptions: {
-      external: ['video.js', '@srgssr/web-suite-utils'],
+      external: ['video.js', '@srgssr/svg-button'],
       plugins: [
         babel({
           babelHelpers: 'bundled',

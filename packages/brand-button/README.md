@@ -42,20 +42,44 @@ To apply the default styling, add the following line to your CSS file:
 @import "@srgssr/brand-button/dist/brand-button.min.css";
 ```
 
+Use the `vjs-brand-button` CSS class to adapt the size of the brand button, e.g. :
+
+```css
+/* Makes the container bigger */
+.vjs-brand-button {
+  width: 5em;
+}
+
+/* Adapts the size of the svg icon */
+.vjs-brand-button .vjs-svg-icon {
+  width: 3.6em;
+}
+```
+
 ## API Documentation
+
+The `BrandButton` extends the shared [`SvgComponent`][svg-component-api] component. All
+`SvgComponent` options are supported
 
 ### Options
 
 When initializing the `BrandButton` component, you can pass an `options` object to customize its
 behavior:
 
-| Option   | Type                                   | Default                 | Description                                                                                                                           |
-|----------|----------------------------------------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| `title`  | `string`                               | `''`                    | The tooltip text displayed on hover. Will be localized based on the player's current language.                                        |
-| `icon`   | `SVGElement \| string \| URL`          | Required                | An SVG icon to display inside the button. Can be an SVGElement, a raw SVG string, or a URL (string or URL object). Throws if invalid. |
-| `href`   | `string \| function(player) => string` | `''`                    | The URL for the button link, or a callback that receives the player instance and returns a URL.                                       |
-| `target` | `string`                               | `'_blank'`              | The `target` attribute of the link (`'_blank'`, `'_self'`, etc.).                                                                     |
-| `rel`    | `string`                               | `'noopener noreferrer'` | The `rel` attribute of the link, controlling link relationship and security.                                                          |
+| Option     | Type                                   | Default                 | Description                                                                                                                           |
+|------------|----------------------------------------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| `title`    | `string`                               | `undefined`             | The tooltip text displayed on hover. Will be localized based on the player's current language.                                        |
+| `icon`     | `SVGElement \| string \| URL`          | `undefined`             | An SVG icon to display inside the button. Can be an SVGElement, a raw SVG string, or a URL (string or URL object). Throws if invalid. |
+| `iconName` | `string`                               | `'brand-button'`        | Used when SVG icon class integration is enabled (e.g., `vjs-icon-brand-button`).                                                      |                                         
+| `href`     | `string \| function(player) => string` | `''`                    | The URL for the button link, or a callback that receives the player instance and returns a URL.                                       |
+| `target`   | `string`                               | `'_blank'`              | The `target` attribute of the link (`'_blank'`, `'_self'`, etc.).                                                                     |
+| `rel`      | `string`                               | `'noopener noreferrer'` | The `rel` attribute of the link, controlling link relationship and security.                                                          |
+
+> [!TIP]
+> You can customize the `BrandButton` icon by:
+> - Passing an iconName or using the default `brand-button` (for Video.js experimental SVG icons),
+> - Styling the .vjs-icon-placeholder via CSS (for font icons), or
+> - Providing a custom icon option as an SVGElement, raw SVG string, or SVG file URL.
 
 ## Contributing
 
@@ -97,3 +121,5 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 details.
 
 [contributing-guide]: https://github.com/SRGSSR/pillarbox-web-suite/blob/main/docs/README.md#contributing
+
+[svg-component-api]: ../svg-button/README.md#api-documentation

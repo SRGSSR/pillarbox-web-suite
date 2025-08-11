@@ -1,12 +1,13 @@
 import { defineConfig } from 'vite';
 import babel from '@rollup/plugin-babel';
 
+
 /**
  * Vite's configuration for the lib build.
  *
  * Outputs:
- * - 'dist/brand-button.js': ESModule version with sourcemaps.
- * - 'dist/brand-button.cjs': CommonJS version with sourcemaps.
+ * - 'dist/svg-button.js': ESModule version with sourcemaps.
+ * - 'dist/svg-button.cjs': CommonJS version with sourcemaps.
  */
 export default defineConfig({
   esbuild: false,
@@ -14,11 +15,11 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       formats: ['es', 'cjs'],
-      name: 'BrandButton',
-      entry: 'src/brand-button.js'
+      name: 'SvgButton',
+      entry: 'src/index.js'
     },
     rollupOptions: {
-      external: ['video.js', '@srgssr/svg-button'],
+      external: ['video.js', '@srgssr/web-suite-utils'],
       plugins: [
         babel({
           babelHelpers: 'bundled',

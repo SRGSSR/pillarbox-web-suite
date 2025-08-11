@@ -40,58 +40,21 @@ To apply the default styling, add the following line to your CSS file:
 
 ## API Documentation
 
-### Options
+The `AirplayButton` extends the shared [`SvgButton`][svg-button-api] component. All `SvgButton`
+options are supported.
 
-When initializing the `AirplayButton` component, you can pass an `options` object to customize its
-behavior:
+### AirplayButton-specific defaults:
 
-| Option | Type                          | Default     | Description                                                                                                                           |
-|--------|-------------------------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| `icon` | `SVGElement \| string \| URL` | `undefined` | An SVG icon to display inside the button. Can be an SVGElement, a raw SVG string, or a URL (string or URL object). Throws if invalid. |
-
-### Icon Integration
-
-The `AirplayButton` supports multiple strategies for integrating a custom icon, depending on your
-project setup and preferences:
-
-#### 1. Using SVG Icon Class (with experimental SVG icons)
-
-If your project uses Video.js’s [experimental SVG icon support][experimental-svg], the button
-automatically includes the `vjs-icon-airplay` class, simply register an icon named `airplay` in your
-SVG icon set.
-
-#### 2. Using a Custom Font Icon
-
-If your project uses an icon font (such as Font Awesome or a custom font), you can style the Airplay
-button via CSS:
-
-```css
-.vjs-airplay-button .vjs-icon-placeholder::before {
-  content: '\f123'; /* Your font icon’s Unicode */
-  font-family: 'YourCustomFont';
-}
-```
-
-#### 3. Providing an Icon via Options
-
-You can also pass a custom icon directly using the `icon` option. This works regardless of whether
-experimental SVG support is enabled. Accepted formats are:
-
-* An `SVGElement` instance.
-* A raw inline SVG string.
-* A URL pointing to an external SVG file (as a string or `URL` object)
+| Option     | Type                          | Default     | Description                                                                                                                           |
+|------------|-------------------------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| `icon`     | `SVGElement \| string \| URL` | `undefined`  | An SVG icon to display inside the button. Can be an SVGElement, a raw SVG string, or a URL (string or URL object). Throws if invalid. |
+| `iconName` | `string`                      | `'airplay'` | Used when SVG icon class integration is enabled (e.g., `vjs-icon-airplay`).                                                           |                                         
 
 > [!TIP]
-> An AirPlay icon is included with this package under the assets/ directory and can be used
-> directly.
-
-Example (using the built-in icon):
-
-```js
-import airplayIcon from '@srgssr/assets/airplay.svg?raw';
-
-player.controlBar.addChild('AirplayButton', { icon: airplayIcon });
-```
+> You can customize the `AirplayButton` icon by:
+> - Passing an `iconName` or using the default `airplay` (for Video.js experimental SVG icons),
+> - Styling the `.vjs-icon-placeholder` via CSS (for font icons), or
+> - Providing a custom icon option as an SVGElement, raw SVG string, or SVG file URL.
 
 ## Contributing
 
@@ -134,4 +97,4 @@ details.
 
 [contributing-guide]: https://github.com/SRGSSR/pillarbox-web-suite/blob/main/docs/README.md#contributing
 
-[experimental-svg]: https://videojs.com/guides/options/#experimentalsvgicons
+[svg-button-api]: ../svg-button/README.md#api-documentation
