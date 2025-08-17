@@ -42,5 +42,9 @@
   {
     "name": "svg-button",
     "description": "Base components that simplifies the process of adding custom SVG icons."
+  },
+  {
+    "name": "google-cast-sender",
+    "description": "A Chromecast plugin that supports supports subtitle and audio track selection, live streams with DVR capabilities and custom source resolution."
   }
 ]

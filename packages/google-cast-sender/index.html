@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GoogleCastSender Demo</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <video id="player" class="pillarbox-js" muted></video>
+
+    <script type="module">
+      import "@srgssr/pillarbox-web/dist/pillarbox.min.css";
+      import pillarbox from "@srgssr/pillarbox-web";
+      import "./scss/google-cast-sender.scss";
+      import "./src/google-cast-sender.js";
+      import "./src/google-cast-tech.js";
+
+      // Handle URL parameters
+      const searchParams = new URLSearchParams(location.search);
+      const debug = searchParams.has("debug");
+      const ilHost = searchParams.get("ilHost") || undefined;
+      const language = searchParams.get("language");
+      const urn = searchParams.get("urn") || "urn:rts:video:8806923";
+
+      // Create a pillarbox player instance with the GoogleCastSender enabled
+      window.player = pillarbox("player", {
+        controls: true,
+        debug,
+        language,
+        srgOptions: {
+          dataProviderHost: ilHost,
+        },
+        techOrder: ['chromecast', 'html5'],
+        plugins: {
+          googleCastSender: {
+            receiverApplicationId: '1AC2931D',
+            sourceResolver: (source) => {
+              if (!source.mediaData) return source;
+
+              return {
+                src: source.mediaData.urn,
+                type: 'srgssr/urn',
+                disableTrackers: true
+              }
+            }
+          },
+        },
+      });
+
+      // Load the video source for the player
+      player.src({
+        src: urn,
+        type: "srgssr/urn",
+        disableTrackers: true,
+      });
+
+      // Expose player for debugging
+      window.player = player;
+      window.pillarbox = pillarbox;
+    </script>
+  </body>
+
+</html>

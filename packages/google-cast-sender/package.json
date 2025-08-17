@@ -1,0 +1,57 @@
+{
+  "name": "@srgssr/google-cast-sender",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "SRG SSR",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SRGSSR/pillarbox-web-suite.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/SRGSSR/pillarbox-web-suite/tree/main/packages/google-cast-sender#readme",
+  "type": "module",
+  "main": "dist/google-cast-sender.cjs",
+  "browser": "dist/google-cast-sender.umd.min.js",
+  "module": "dist/google-cast-sender.js",
+  "style": "./dist/google-cast-sender.min.css",
+  "exports": {
+    ".": {
+      "import": "./dist/google-cast-sender.js",
+      "require": "./dist/google-cast-sender.cjs"
+    },
+    "./*": "./*"
+  },
+  "files": [
+    "dist/*",
+    "scss/*"
+  ],
+  "keywords": [
+    "video.js",
+    "player",
+    "videojs-plugin",
+    "Chrome",
+    "Chromecast",
+    "Google cast",
+    "Cast",
+    "TV"
+  ],
+  "scripts": {
+    "build": "npm run build:lib && npm run build:umd && npm run build:css",
+    "build:css": "sass ./scss/google-cast-sender.scss:dist/google-cast-sender.min.css --style compressed --source-map --load-path node_modules",
+    "build:lib": "vite build --config vite.config.lib.js",
+    "build:umd": "vite build --config vite.config.umd.js",
+    "github:page": "vite build",
+    "release:ci": "semantic-release",
+    "start": " vite --port 4200 --open",
+    "test": "vitest run --silent --coverage --coverage.reporter text"
+  },
+  "peerDependencies": {
+    "video.js": "^8.0.0"
+  },
+  "devDependencies": {
+    "@srgssr/pillarbox-web": "^1.23.1",
+    "@types/chromecast-caf-sender": "^1.0.11"
+  }
+}
