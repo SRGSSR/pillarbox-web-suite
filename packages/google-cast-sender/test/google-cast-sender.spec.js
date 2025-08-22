@@ -1,8 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import videojs from 'video.js';
-import GoogleCastSender from '../src/google-cast-sender.js';
+import { GoogleCastSender } from '../src/google-cast-sender.js';
 import './google-cast.mock.js';
-import '../src/google-cast-tech.js';
 
 window.HTMLMediaElement.prototype.load = () => { };
 
