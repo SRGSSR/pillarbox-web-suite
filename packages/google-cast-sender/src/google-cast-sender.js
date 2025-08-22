@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import { version } from '../package.json';
+import Chromecast from './google-cast-tech.js';
 import './lang';
 
 /**
@@ -436,4 +437,4 @@ class GoogleCastSender extends Plugin {
 
 videojs.registerPlugin('googleCastSender', GoogleCastSender);
 
-export default GoogleCastSender;
+export { GoogleCastSender, Chromecast };
