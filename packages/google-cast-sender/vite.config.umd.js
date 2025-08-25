@@ -1,6 +1,35 @@
 import { defineConfig } from 'vite';
 import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
+import process from 'node:process';
+
+const entryMap = {
+  sender: {
+    entry: 'src/google-cast-sender.js',
+    output: 'google-cast-sender',
+    outDir: 'dist',
+    name: 'GoogleCastSender',
+  },
+  button: {
+    entry: 'src/components/google-cast-button.js',
+    output: 'google-cast-button',
+    outDir: 'dist/button',
+    name: 'GoogleCastButton',
+  },
+  launcher: {
+    entry: 'src/components/google-cast-launcher.js',
+    output: 'google-cast-launcher',
+    outDir: 'dist/launcher',
+    name: 'GoogleCastLauncher',
+  },
+};
+const target = process.env.BUILD_TARGET;
+const {
+  entry,
+  output,
+  outDir,
+  name
+} = entryMap[target];
 
 /**
  * Vite's configuration for the umd build.
@@ -11,17 +40,18 @@ import terser from '@rollup/plugin-terser';
 export default defineConfig({
   esbuild: false,
   build: {
+    outDir: outDir,
     emptyOutDir: false,
     sourcemap: true,
     lib: {
       formats: ['umd'],
-      name: 'GoogleCastSender',
-      entry: 'src/google-cast-sender.js'
+      name: name,
+      entry: entry
     },
     rollupOptions: {
       output: {
-        name: 'GoogleCastSender',
-        entryFileNames: 'google-cast-sender.umd.min.js',
+        name: name,
+        entryFileNames: `${output}.umd.min.js`,
         globals: {
           videojs: 'videojs',
         },
