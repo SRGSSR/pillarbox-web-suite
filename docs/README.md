@@ -105,7 +105,7 @@ npm run prepare
 Ensure your code builds correctly before submitting a pull request:
 
 ```shell
-npm run build -ws # Build all the packages in the workspace
+npm run build # Build all the packages in the workspace
 npm run build -w @srgssr/your-element-name # Build a single page by name
 ```
 
