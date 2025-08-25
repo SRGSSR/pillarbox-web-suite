@@ -100,22 +100,47 @@ describe('GoogleCastSender', () => {
   });
 
   describe('onGCastApiAvailable', () => {
-    it('should not do anything if isAvailable is false', () => {
-      const spy = vi.spyOn(googleCastSender, 'enableDefaultCastButton');
+    let setOptionsSpy;
+    let addEventListenerSpy;
 
-      googleCastSender.onGCastApiAvailable(false);
-      expect(spy).not.toHaveBeenCalled();
+    beforeEach(() => {
+      setOptionsSpy = vi.spyOn(
+        window.cast.framework.CastContext.getInstance(),
+        'setOptions'
+      );
+      addEventListenerSpy = vi.spyOn(
+        window.cast.framework.CastContext.getInstance(),
+        'addEventListener'
+      );
     });
 
-    it('should initialize cast context and button', () => {
-      const enableBtnSpy = vi.spyOn(googleCastSender, 'enableDefaultCastButton');
-      const setOptionsSpy = vi.spyOn(window.cast.framework.CastContext.getInstance(), 'setOptions');
+    afterEach(() => {
+      vi.restoreAllMocks(); // restores all spies/stubs to original
+    });
 
+    it('should not do anything if isAvailable is false', () => {
+      googleCastSender.onGCastApiAvailable(false);
+
+      expect(setOptionsSpy).not.toHaveBeenCalled();
+      expect(addEventListenerSpy).not.toHaveBeenCalled();
+    });
+
+    it('should initialize cast context and set options', () => {
       googleCastSender.onGCastApiAvailable(true);
-      expect(setOptionsSpy).toHaveBeenCalled();
-      expect(enableBtnSpy).toHaveBeenCalledOnce();
+
+      expect(setOptionsSpy).toHaveBeenCalledWith({
+        androidReceiverCompatible: expect.any(Boolean),
+        autoJoinPolicy: expect.any(String),
+        receiverApplicationId: expect.any(String),
+      });
+
+      expect(addEventListenerSpy).toHaveBeenCalledWith(
+        window.cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
+        expect.any(Function)
+      );
     });
   });
+
 
   describe('session state changes', () => {
     beforeEach(() => {
@@ -275,13 +300,11 @@ describe('GoogleCastSender', () => {
       googleCastSender.onGCastApiAvailable(true);
       const removeListenerSpy = vi.spyOn(googleCastSender, 'removeCastListener');
       const removeScriptSpy = vi.spyOn(googleCastSender, 'removeCastScript');
-      const removeButtonSpy = vi.spyOn(googleCastSender, 'removeDefaultCastButton');
       const endSessionSpy = vi.spyOn(googleCastSender, 'endCurrentSession');
 
       googleCastSender.dispose();
       expect(removeListenerSpy).toHaveBeenCalledOnce();
       expect(removeScriptSpy).toHaveBeenCalledOnce();
-      expect(removeButtonSpy).toHaveBeenCalledOnce();
       expect(endSessionSpy).toHaveBeenCalledOnce();
       expect(window.__onGCastApiAvailable).toBeUndefined();
     });
