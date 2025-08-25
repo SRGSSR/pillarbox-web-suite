@@ -1,15 +1,16 @@
-.vjs-chromecast-button.vjs-button {
+.vjs-google-cast-launcher.vjs-button {
   --connected-color: currentColor;
-  --disconnected-color:currentColor;
+  --disconnected-color: currentColor;
   padding: .55em;
+  cursor: pointer;
 }
 
 .vjs-tech-chromecast {
-    display: none;
-    background-color: #000;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+  display: none;
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .vjs-tech-chromecast-container {
@@ -45,4 +46,8 @@
   .vjs-picture-in-picture-control {
     display: none;
   }
+}
+
+.vjs-google-cast-button {
+  cursor: pointer;
 }
