@@ -32,6 +32,7 @@ const castContextInstance = {
   setOptions: vi.fn(),
   addEventListener: vi.fn(),
   removeEventListener: vi.fn(),
+  requestSession: vi.fn(),
   endCurrentSession: vi.fn(),
   getCurrentSession: vi.fn(() => getCurrentSession),
   getCastState: vi.fn(),
