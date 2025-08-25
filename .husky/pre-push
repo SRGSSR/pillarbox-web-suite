@@ -1,3 +1,4 @@
+npm run build
 npm test
 
 # Check for changes in the scripts folder

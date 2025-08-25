@@ -22,6 +22,7 @@
   "scripts": {
     "create": "plop --plopfile scripts/create.js",
     "eslint": "eslint {packages/**/{src,test}/**/*.{js,jsx},scripts/*.{js,jsx}}",
+    "build": "npm run build -ws",
     "github:page": "npm run github:page --ws --if-present && vite build && node scripts/prepare-deployment.js",
     "start": " vite --host --port 4200 --open",
     "outdated": "npm outdated",
