@@ -4,6 +4,12 @@ import { appendSvgIcon } from './svg-icon-loader.js';
 
 /**
  * @ignore
+ * @type {typeof import('video.js/dist/types/utils/log.js').default}
+ */
+const log = videojs.log.createLogger('svg-button');
+
+/**
+ * @ignore
  * @type {typeof import('video.js/dist/types/component').default}
  */
 const Button = videojs.getComponent('Button');
@@ -22,28 +28,49 @@ const Button = videojs.getComponent('Button');
  * - experimental Video.js SVG icons
  */
 class SvgButton extends Button {
+
   /**
    * Creates an instance of SvgButton.
    *
    * @param {import('video.js/dist/types/player.js').default} player The player instance.
-   * @param {Object} options Configuration options for the button.
+   * @param {Object | undefined} options Configuration options for the button.
    * @param {SVGElement|string|URL} [options.icon] An optional icon to be loaded into the button.
    * Can be an SVGElement, a raw SVG string, or a URL to an SVG file.
    * @param {string} [options.iconName] An Optional icon name if using Video.js experimental icon support.
    */
   constructor(player, options) {
     super(player, options);
-    this.appendIcon();
+
+    this.appendIcon().catch((reason) =>
+      log.error(`There was a problem loading the provided SVG Icon`, reason));
   }
 
   /**
-   * Appends the configured icon to the button element.
-   * Uses the `appendSvgIcon` helper to handle different icon input formats.
+   * Appends the configured icon to the component element.
+   * Uses the {@link appendSvgIcon} helper to handle different icon input formats.
    *
-   * Override this function to customize how the svg icon is appended.
+   * Override this function to customize how the SVG icon is appended.
+   *
+   * @param {Object | undefined} options
+   *        The parameters used to configure the icon.
+   *
+   * @param {SVGElement|string|URL} [options.icon]
+   *        An optional icon to be loaded into the button. Can be an SVGElement,
+   *        a raw SVG string, or a URL to an SVG file. This will update the
+   *        current configured icon.
+   *
+   * @param {string} [options.iconName]
+   *        A symbolic name for the icon (e.g., `"play"`, `"pause"`, `"chromecast"`).
+   *        Useful when you want to reference or style icons by name.
    */
-  appendIcon() {
-    appendSvgIcon(this);
+  async appendIcon(options = undefined) {
+    if (options) {
+      const { icon, iconName } = options;
+
+      this.options({ icon, iconName });
+    }
+
+    await appendSvgIcon(this);
   }
 
   /**
