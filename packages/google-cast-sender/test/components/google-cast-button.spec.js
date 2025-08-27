@@ -64,6 +64,7 @@ describe('GoogleCastButton', () => {
       );
 
       await new Promise((resolve) => player.ready(resolve));
+      player.googleCastSender().onGCastApiAvailable(true);
     });
 
     afterEach(() => {
@@ -84,6 +85,27 @@ describe('GoogleCastButton', () => {
     it('should call requestSession when clicked', () => {
       player.controlBar.GoogleCastButton.handleClick();
       expect(requestSessionSpy).toHaveBeenCalled();
+    });
+
+    it('should handle SESSION_STARTED', () => {
+      const event = { sessionState: window.cast.framework.SessionState.SESSION_STARTED };
+
+      player.googleCastSender().sessionStateChangedListener(event);
+      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon.google-cast-active')).toBeDefined();
+    });
+
+    it('should handle SESSION_RESUMED', () => {
+      const event = { sessionState: window.cast.framework.SessionState.SESSION_RESUMED };
+
+      player.googleCastSender().sessionStateChangedListener(event);
+      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon.google-cast-active')).toBeDefined();
+    });
+
+    it('should handle SESSION_ENDED', () => {
+      const event = { sessionState: window.cast.framework.SessionState.SESSION_ENDED };
+
+      player.googleCastSender().sessionStateChangedListener(event);
+      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon.google-cast-idle')).toBeDefined();
     });
   });
 });

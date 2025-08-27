@@ -3,7 +3,7 @@
 This plugin integrates Google Cast functionality into a video.js player, allowing users to stream
 video content to a Chromecast device. It supports subtitle and audio track selection. It also allows
 for custom source resolution, which is useful for integrations that play custom sources based on IDs
-or other middleware logic. Finally it also supports live streams with DVR capabilities.
+or other middleware logic. Finally, it also supports live streams with DVR capabilities.
 
 ## Requirements
 
@@ -76,6 +76,30 @@ const player = new videojs('my-player', {
 });
 ```
 
+### Events
+
+The following event is emitted by the Google cast sender plugin:
+
+| Event          | Description                                                                                                                                                                                |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `statechanged` | Triggered whenever there is a change in the cast state or availability. This event provides an object containing the properties that have changed, allowing you to react to these changes. |
+
+**Event Payload:**
+
+| Property  | Type   | Description                                                                              |
+|-----------|--------|------------------------------------------------------------------------------------------|
+| `changes` | Object | An object containing the properties that have changed. Possible keys are `sessionState`. |
+
+**Example Usage:**
+
+```javascript
+player.googleCastSender().on('statechanged', ({ changes }) => {
+  if ('sessionState' in changes) {
+    // React to 'sessionState' changes
+  }
+});
+```
+
 ### User Interface
 
 The plugin provides two ways to integrate a Cast button into your player.
@@ -109,31 +133,55 @@ const player = new videojs('my-player', {
 import "@srgssr/google-cast-sender/button";
 ```
 
-This is a custom button built on top of the shared [`SvgButton`][svg-button-api]component. All 
-`SvgButton` options are supported.
+This is a custom button that extends the shared [`SvgButton`][svg-button-api] component.
+the Chromecast button manages its own icon depending on the current cast session state.
 
-| Option     | Type                          | Default     | Description                                                                                                                           |
-|------------|-------------------------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| `icon`     | `SVGElement \| string \| URL` | `undefined` | An SVG icon to display inside the button. Can be an SVGElement, a raw SVG string, or a URL (string or URL object). Throws if invalid. |
-| `iconName` | `string`                      | `'airplay'` | Used when SVG icon class integration is enabled (e.g., `vjs-icon-airplay`).                                                           |                                         
+By default, the component defines two icons:
 
-Example:
+- `idleIcon` is shown (no active cast session).
+- `activeIcon` is shown (cast session started or resumed).
 
-  ```js
-  import icon from './cast-icon.svg?raw';
+The component listens to cast session state changes and automatically toggles the displayed icon.
+You can override these icons via player options if you want to customize them.
 
-  const player = videojs('my-player', {
-    techOrder: ['chromecast', 'html5'],
-    controlBar: {
-      googleCastButton: { icon }
-    },
-    plugins: {
-      googleCastSender: {
-        enableDefaultCastLauncher: false
+##### Options
+
+| Option       | Type                                                  | Default                                                          | Description                                                                                  |
+|--------------|-------------------------------------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `idleIcon`   | `{ icon: SVGElement\|string\|URL, iconName: string }` | `{ iconName: 'google-cast', icon: googleCastIcon }`              | The icon shown when no cast session is active. Accepts the same formats as `SvgButton.icon`. |
+| `activeIcon` | `{ icon: SVGElement\|string\|URL, iconName: string }` | `{ iconName: 'google-cast-active', icon: googleCastIconActive }` | The icon shown when a cast session is active (started or resumed).                           |
+
+> [!IMPORTANT]
+> Unlike `SvgButton`, the top-level `icon`/`iconName` options will be **overridden** automatically
+> by the component depending on cast state.
+
+##### Example
+
+```js
+import idleIcon from './cast-idle.svg?raw';
+import activeIcon from './cast-active.svg?raw';
+
+const player = videojs('player', {
+  techOrder: ['chromecast', 'html5'],
+  controlBar: {
+    googleCastButton: {
+      idleIcon: {
+        icon: idleIcon,
+        iconName: 'custom-idle'
+      },
+      activeIcon: {
+        icon: activeIcon,
+        iconName: 'custom-active'
       }
     }
-  });
-  ```
+  },
+  plugins: {
+    googleCastSender: {
+      enableDefaultCastLauncher: false
+    }
+  }
+});
+```
 
 ##### Placement & Removal
 
@@ -199,4 +247,5 @@ details.
 
 [auto-join-policy]: https://developers.google.com/cast/docs/reference/web_sender/chrome.cast#.AutoJoinPolicy
 [contributing-guide]: https://github.com/SRGSSR/pillarbox-web-suite/blob/main/docs/README.md#contributing
+
 [svg-button-api]: ../svg-button/README.md#api-documentation
