@@ -24,7 +24,6 @@ Once the player is installed you can activate the plugin as follows:
 ```javascript
 import videojs from 'video.js';
 import '@srgssr/google-cast-sender';
-import '@srgssr/google-cast-sender/launcher';
 
 const player = videojs('my-player', {
   techOrder: ['chromecast', 'html5'],
@@ -146,10 +145,11 @@ You can override these icons via player options if you want to customize them.
 
 ##### Options
 
-| Option       | Type                                                  | Default                                                          | Description                                                                                  |
-|--------------|-------------------------------------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `idleIcon`   | `{ icon: SVGElement\|string\|URL, iconName: string }` | `{ iconName: 'google-cast', icon: googleCastIcon }`              | The icon shown when no cast session is active. Accepts the same formats as `SvgButton.icon`. |
-| `activeIcon` | `{ icon: SVGElement\|string\|URL, iconName: string }` | `{ iconName: 'google-cast-active', icon: googleCastIconActive }` | The icon shown when a cast session is active (started or resumed).                           |
+| Option              | Type                                                  | Default                                                          | Description                                                                                                  |
+|---------------------|-------------------------------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `idleIcon`          | `{ icon: SVGElement\|string\|URL, iconName: string }` | `{ iconName: 'google-cast', icon: googleCastIcon }`              | The icon shown when no cast session is active. Accepts the same formats as `SvgButton.icon`.                 |
+| `activeIcon`        | `{ icon: SVGElement\|string\|URL, iconName: string }` | `{ iconName: 'google-cast-active', icon: googleCastIconActive }` | The icon shown when a cast session is active (started or resumed).                                           |
+| `endSessionOnClick` | `Boolean`                                             | `false`                                                          | If enabled, clicking the chromecast button will end the current session without displaying the session menu. |
 
 > [!IMPORTANT]
 > Unlike `SvgButton`, the top-level `icon`/`iconName` options will be **overridden** automatically
