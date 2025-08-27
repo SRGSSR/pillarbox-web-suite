@@ -81,7 +81,7 @@ class GoogleCastButton extends SvgButton {
    * Dispose of the GoogleCastButton instance.
    */
   dispose() {
-    this.googleCastSender().off('statechanged', this.onPlaylistStateChanged_);
+    this.googleCastSender().off('statechanged', this.#onCastStateChanged);
     super.dispose();
   }
 
@@ -97,7 +97,17 @@ class GoogleCastButton extends SvgButton {
    */
   handleClick(event) {
     super.handleClick(event);
-    this.player().googleCastSender().requestSession();
+
+    if (
+      this.options().endSessionOnClick &&
+      this.player().hasClass('vjs-chromecast-connected')
+    ) {
+      this.googleCastSender().endCurrentSession();
+
+      return;
+    }
+
+    this.googleCastSender().requestSession();
   }
 
   async toggleState(sessionState) {
@@ -139,6 +149,7 @@ class GoogleCastButton extends SvgButton {
 }
 
 GoogleCastButton.prototype.options_ = {
+  endSessionOnClick: false,
   idleIcon: {
     iconName: 'google-cast',
     icon: googleCastIconIdle

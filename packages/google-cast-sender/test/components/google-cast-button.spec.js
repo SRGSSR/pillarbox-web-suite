@@ -108,4 +108,49 @@ describe('GoogleCastButton', () => {
       expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon.google-cast-idle')).toBeDefined();
     });
   });
+
+
+  describe('Google Cast supported with end current session on click', () => {
+    let requestSessionSpy, endCurrentSessionSpy;
+
+    beforeEach(async() => {
+      player = videojs(videoElement, {
+        techOrder: ['chromecast', 'html5'],
+        controlBar: { GoogleCastButton: {endSessionOnClick: true} },
+        plugins: { googleCastSender: true }
+      });
+
+      // grab requestSession spy
+      requestSessionSpy = vi.spyOn(
+        window.cast.framework.CastContext.getInstance(),
+        'requestSession'
+      );
+
+      // grab requestSession spy
+      endCurrentSessionSpy = vi.spyOn(
+        window.cast.framework.CastContext.getInstance(),
+        'endCurrentSession'
+      );
+
+      await new Promise((resolve) => player.ready(resolve));
+      player.googleCastSender().onGCastApiAvailable(true);
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+      player.dispose();
+    });
+
+    it('should call requestSession when clicked', () => {
+      player.controlBar.GoogleCastButton.handleClick();
+      expect(requestSessionSpy).toHaveBeenCalled();
+    });
+
+
+    it('should call endCurrentSession when clicked if the cast is connected', () => {
+      player.addClass('vjs-chromecast-connected');
+      player.controlBar.GoogleCastButton.handleClick();
+      expect(endCurrentSessionSpy).toHaveBeenCalled();
+    });
+  });
 });
