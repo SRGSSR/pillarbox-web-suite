@@ -97,6 +97,16 @@ class GoogleCastButton extends SvgButton {
    */
   handleClick(event) {
     super.handleClick(event);
+
+    if (
+      this.options().endSessionOnClick &&
+      this.player().hasClass('vjs-chromecast-connected')
+    ) {
+      this.player().googleCastSender().endCurrentSession();
+
+      return;
+    }
+
     this.player().googleCastSender().requestSession();
   }
 
@@ -139,6 +149,7 @@ class GoogleCastButton extends SvgButton {
 }
 
 GoogleCastButton.prototype.options_ = {
+  endSessionOnClick: false,
   idleIcon: {
     iconName: 'google-cast',
     icon: googleCastIconIdle
