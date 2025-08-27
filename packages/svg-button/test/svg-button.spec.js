@@ -38,6 +38,23 @@ describe('SvgButton', () => {
       expect(svg).toBeDefined();
       expect(svg).toBeInstanceOf(SVGElement);
     });
+
+    it('should update the icon when calling appendIcon', async() => {
+      const newIcon = '<svg xmlns="http://www.w3.org/2000/svg" id="new-icon"></svg>';
+      let svg = player.svgButton.el().querySelector('.icon-from-options');
+
+      expect(svg).toBeDefined();
+      expect(svg).toBeInstanceOf(SVGElement);
+      expect(svg.id).toBe('');
+
+      await player.svgButton.appendIcon({ icon: newIcon });
+
+      svg = player.svgButton.el().querySelector('.icon-from-options');
+
+      expect(svg).toBeDefined();
+      expect(svg).toBeInstanceOf(SVGElement);
+      expect(svg.id).toBe('new-icon');
+    });
   });
 
   describe('The SVG icon is not provided', () => {
