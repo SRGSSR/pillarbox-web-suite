@@ -132,6 +132,8 @@ class GoogleCastSender extends Plugin {
         log.debug('Unknown state change', sessionState);
         break;
     }
+
+    this.setState({ sessionState: sessionState });
   }
 
   /**
@@ -141,7 +143,10 @@ class GoogleCastSender extends Plugin {
    * @private
    */
   onCastSessionStarted() {
-    const { currentTime, source } = this.player.getCache();
+    const {
+      currentTime,
+      source
+    } = this.player.getCache();
     const audioTrack = this.findEnabledAudioTrack(this.player.audioTracks());
     const textTrack = this.findShowingTextTrack(this.player.textTracks());
 
@@ -173,8 +178,15 @@ class GoogleCastSender extends Plugin {
    * @private
    */
   onCastSessionEnded() {
-    const { currentTime, source, volume } = this.player.getCache();
-    const { audioTrack, textTrack } = this.getCastSessionTracks();
+    const {
+      currentTime,
+      source,
+      volume
+    } = this.player.getCache();
+    const {
+      audioTrack,
+      textTrack
+    } = this.getCastSessionTracks();
 
     // reload the tech to avoid having a blob in currentSource
     // which breaks the load function if called.
@@ -206,7 +218,10 @@ class GoogleCastSender extends Plugin {
       castTechOptions.textTracks || []
     );
 
-    return { audioTrack, textTrack };
+    return {
+      audioTrack,
+      textTrack
+    };
   }
 
   /**
@@ -314,11 +329,17 @@ class GoogleCastSender extends Plugin {
    * Creates and appends the Google Cast sender script to the document head.
    */
   createCastScriptEl() {
-    const { id, src } = this.#options.script;
+    const {
+      id,
+      src
+    } = this.#options.script;
 
     document.head.appendChild(
       videojs.dom.createEl('script', {
-        id, src, defer: true, type: 'text/javascript'
+        id,
+        src,
+        defer: true,
+        type: 'text/javascript'
       })
     );
   }
@@ -347,6 +368,12 @@ class GoogleCastSender extends Plugin {
     if (!this.#castContext) return;
 
     this.#castContext.endCurrentSession();
+  }
+
+  requestSession() {
+    if (!this.#castContext) return;
+
+    this.#castContext.requestSession();
   }
 
   /**
