@@ -83,6 +83,14 @@ object to customize their behavior:
 | `icon`     | `SVGElement \| string \| URL` | `undefined` | An SVG icon to display inside the button. Can be an `SVGElement`, a raw SVG string, or a URL (string or `URL` object). Throws if invalid. |
 | `iconName` | `string`                      | `undefined` | The name of the registered Video.js icon (if using [experimental SVG icons][experimental-svg]).                                           |
 
+### Methods
+
+The following table outlines the key methods available in this component:
+
+| Function                         | Description                                                                                                                                                                                                                                 |
+|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `appendIcon({ icon, iconName })` | Dynamically updates the icon of the component. Accepts an `SVGElement`, raw SVG string, or URL as `icon`, and an optional `iconName` (e.g., `"play"`, `"pause"`). If called without arguments, it re-renders the currently configured icon. |
+
 ### Icon Integration
 
 The `SvgButton` and the `SvgComponent` support multiple strategies for integrating a custom icon,
