@@ -17,10 +17,9 @@ class {{properCase name}} extends Plugin {
    * Creates an instance of a {{properCase name}}.
    *
    * @param {import('{{importAlias}}{{#ifEq platform 'pillarbox'}}').Player}{{else}}/dist/types/player.js').default}{{/ifEq}} player The player instance.
-   * @param {Object} options Configuration options for the plugin.
    */
-  constructor(player, options) {
-    super(player, options);
+  constructor(player) {
+    super(player);
   }
 
   static get VERSION() {
