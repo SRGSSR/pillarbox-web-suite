@@ -31,7 +31,8 @@
     "player"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:umd",
+    "clean": "rimraf dist",
+    "build": "npm-run-all clean build:*",
     "build:lib": "vite build --config vite.config.lib.js",
     "build:umd": "vite build --config vite.config.umd.js",
     "github:page": "vite build",

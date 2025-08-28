@@ -35,7 +35,8 @@
     "pillarbox-plugin"{{/ifEq}}{{/ifEq}}
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:umd{{#if wantScss}} && npm run build:css{{/if}}",{{#if wantScss}}
+    "clean": "rimraf dist",
+    "build": "npm-run-all clean build:*",{{#if wantScss}}
     "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules",{{/if}}
     "build:lib": "vite build --config vite.config.lib.js",
     "build:umd": "vite build --config vite.config.umd.js",
