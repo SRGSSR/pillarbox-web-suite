@@ -40,12 +40,13 @@
     "playlist"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:ui && npm run build:umd && npm run build:umd:ui && npm run build:css",
+    "clean": "rimraf dist",
+    "build": "npm-run-all clean build:*",
     "build:css": "sass ./scss/pillarbox-playlist.scss:dist/pillarbox-playlist.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "vite build --config vite.config.lib.js",
     "build:umd": "vite build --config vite.config.umd.js",
-    "build:umd:ui": "vite build --config vite.config.umd.ui.js",
-    "build:ui": "vite build --config vite.config.ui.js",
+    "build:ui": "BUILD_TARGET=ui vite build --config vite.config.lib.js",
+    "build:umd:ui": "BUILD_TARGET=ui vite build --config vite.config.umd.js",
     "github:page": "vite build",
     "release:ci": "semantic-release",
     "start": " vite --port 4200 --open",

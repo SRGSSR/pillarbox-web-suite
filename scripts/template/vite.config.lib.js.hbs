@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import babel from '@rollup/plugin-babel';
+import { entry, outDir, output } from './.build.config.js';
 {{#if wantLocalization}}import copy from 'rollup-plugin-copy';{{/if}}
 
 /**
@@ -12,14 +13,25 @@ import babel from '@rollup/plugin-babel';
 export default defineConfig({
   esbuild: false,
   build: {
+    outDir: outDir,
+    emptyOutDir: false,
     sourcemap: true,
     lib: {
       formats: ['es', 'cjs'],
-      name: '{{properCase name}}',
-      entry: 'src/{{kebabCase name}}.js'
+      entry: entry
     },
     rollupOptions: {
       external: ['{{importAlias}}'],
+      output: [
+        {
+          format: 'es',
+          entryFileNames: `${output}.js`
+        },
+        {
+          format: 'cjs',
+          entryFileNames: `${output}.cjs`
+        }
+      ],
       plugins: [
         babel({
           babelHelpers: 'bundled',
