@@ -38,12 +38,12 @@ class ChaptersBar extends Component {
   constructor(player, options) {
     super(player, options);
 
-    this.onLoadedData = this.onLoadedData.bind(this);
+    this.onAddChaptersTrack = this.onAddChaptersTrack.bind(this);
     this.onEmptied = this.onEmptied.bind(this);
     this.onChapterChange = this.onChapterChange.bind(this);
     this.userActive = this.userActive.bind(this);
 
-    this.player().on('loadeddata', this.onLoadedData);
+    this.player().textTracks().on('addtrack', this.onAddChaptersTrack);
     this.player().on('emptied', this.onEmptied);
     this.player().on('useractive', this.userActive);
     this.player().on('srgssr/chapter', this.onChapterChange);
@@ -192,11 +192,13 @@ class ChaptersBar extends Component {
   }
 
   /**
-   * Handles the `loadeddata` event.
+   * Handles the `addtrack` event.
    *
    * @private
    */
-  onLoadedData() {
+  onAddChaptersTrack({ track }) {
+    if (!track || track.id !== 'srgssr-chapters') return;
+
     const chapters = this.chapters();
 
     if (!chapters.length) return;
@@ -270,7 +272,7 @@ class ChaptersBar extends Component {
    */
   dispose() {
     this.onEmptied();
-    this.player().off('loadeddata', this.onLoadedData);
+    this.player().off('loadeddata', this.onAddChaptersTrack);
     this.player().off('emptied', this.onEmptied);
     this.player().off('useractive', this.userActive);
     this.player().on('srgssr/chapter', this.onChapterChange);
