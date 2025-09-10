@@ -45,9 +45,7 @@ describe('ChaptersBar', () => {
         { startTime: 10, endTime: 20, text: '{"urn":"urn:two","title":"Chapter 2"}' },
       ],
     };
-    player.textTracks = vi.fn(() => ({
-      getTrackById: vi.fn().mockReturnValue(textTrack),
-    }));
+    player.textTracks().getTrackById = vi.fn().mockReturnValue(textTrack);
   });
 
   afterEach(() => {
@@ -77,7 +75,7 @@ describe('ChaptersBar', () => {
     it('should return an empty array if no chapters track is found', () => {
       const chaptersBarComponent = new ChaptersBar(player, { chapterOptions: {} });
 
-      textTrack = undefined;
+      player.textTracks().getTrackById.mockReturnValueOnce(undefined);
 
       expect(chaptersBarComponent.chapters()).toEqual([]);
     });
@@ -91,13 +89,13 @@ describe('ChaptersBar', () => {
     });
   });
 
-  describe('loadeddata', () => {
+  describe('onAddChaptersTrack', () => {
     it('should add chapters and show the bar', () => {
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
       const addChapterSpy = vi.spyOn(chaptersBar, 'addChapter');
       const showSpy = vi.spyOn(chaptersBar, 'show');
 
-      player.trigger('loadeddata');
+      chaptersBar.onAddChaptersTrack({ track: textTrack });
 
       expect(addChapterSpy).toHaveBeenCalledTimes(2);
       expect(showSpy).toHaveBeenCalled();
@@ -105,11 +103,10 @@ describe('ChaptersBar', () => {
 
     it('should do nothing if there are no chapters', () => {
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
-
-      textTrack.cues = [];
       const addChapterSpy = vi.spyOn(chaptersBar, 'addChapter');
 
-      player.trigger('loadeddata');
+      chaptersBar.onAddChaptersTrack({});
+
       expect(addChapterSpy).not.toHaveBeenCalled();
     });
   });
@@ -118,7 +115,8 @@ describe('ChaptersBar', () => {
     it('should hide the bar and clear all chapters', () => {
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
 
-      player.trigger('loadeddata');
+      chaptersBar.onAddChaptersTrack({ track: textTrack });
+
       expect(chaptersBar.children()).toHaveLength(2);
 
       const hideSpy = vi.spyOn(chaptersBar, 'hide');
@@ -139,6 +137,7 @@ describe('ChaptersBar', () => {
       const chapterChangeEvent = { data: { text: '{"urn":"urn:two"}' } };
       const scrollToSelectedChapterSpy = vi.spyOn(chaptersBar, 'scrollToSelectedChapter');
 
+      chaptersBar.onAddChaptersTrack({ track: textTrack });
       chaptersBar.onChapterChange(chapterChangeEvent);
 
       const firstChild = chaptersBar.getChildById('urn:one');
@@ -155,7 +154,7 @@ describe('ChaptersBar', () => {
     it('should scroll to the selected chapter if it is selected', () => {
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
 
-      player.trigger('loadeddata');
+      chaptersBar.onAddChaptersTrack({ track: textTrack });
 
       const chapter = chaptersBar.getChildById('urn:one');
 
@@ -175,7 +174,7 @@ describe('ChaptersBar', () => {
     it('should not scroll if the chapter is not selected', () => {
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
 
-      player.trigger('loadeddata');
+      chaptersBar.onAddChaptersTrack({ track: textTrack });
 
       const chapter = chaptersBar.getChildById('urn:one');
 
