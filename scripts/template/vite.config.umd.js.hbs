@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import babel from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
+import { entry, name, outDir, output } from './.build.config.js';
 
 /**
  * Vite's configuration for the umd build.
@@ -11,17 +12,18 @@ import terser from '@rollup/plugin-terser';
 export default defineConfig({
   esbuild: false,
   build: {
+    outDir: outDir,
     emptyOutDir: false,
     sourcemap: true,
     lib: {
       formats: ['umd'],
-      name: '{{properCase name}}',
-      entry: 'src/{{kebabCase name}}.js'
+      name: name,
+      entry: entry
     },
     rollupOptions: {
       output: {
-        name: '{{properCase name}}',
-        entryFileNames: '{{kebabCase name}}.umd.min.js',
+        name: name,
+        entryFileNames: `${output}.umd.min.js`,
         globals: {
           {{platform}}: '{{platform}}',
         },
