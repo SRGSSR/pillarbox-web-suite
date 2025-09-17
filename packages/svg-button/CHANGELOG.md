@@ -1,3 +1,10 @@
+## [@srgssr/svg-button-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/svg-button-v1.0.0...@srgssr/svg-button-v1.1.0) (2025-09-17)
+
+
+### New Features 🚀
+
+* **svg-button:** allow icon update throw the appendIcon function ([aff8a6f](https://github.com/SRGSSR/pillarbox-web-suite/commit/aff8a6fd840bf4967ae99eb159b7a90be5a891e6))
+
 ## @srgssr/svg-button-v1.0.0 (2025-08-13)
 
 
