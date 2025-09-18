@@ -12,6 +12,7 @@ import copy from 'rollup-plugin-copy';
 export default defineConfig({
   esbuild: false,
   build: {
+    emptyOutDir: false,
     sourcemap: true,
     lib: {
       formats: ['es', 'cjs'],
