@@ -4,6 +4,7 @@ import '../src/pillarbox-playlist.js';
 import PillarboxPlaylistUi from '../src/pillarbox-playlist-ui.js';
 import { RepeatMode } from '../src/pillarbox-playlist.js';
 
+
 const playlist = [
   {
     sources: [{
@@ -116,10 +117,7 @@ describe('PillarboxPlaylist', () => {
     it('should insert the playlist button at the last position if no sibling was found', () => {
       player = pillarbox(videoElement, {
         controlBar: {
-          children: [
-            'playToggle',
-            'volumePanel'
-          ]
+          children: ['playToggle', 'volumePanel']
         },
         plugins: {
           pillarboxPlaylist: true,
@@ -176,8 +174,8 @@ describe('PillarboxPlaylist', () => {
       dialog = player.pillarboxPlaylistMenuDialog;
       controls = dialog.getChild('PillarboxPlaylistControls');
       items = dialog.getChild('PillarboxPlaylistMenuItemsList').children()
-        .filter(item => item.name() === 'PillarboxPlaylistMenuItem')
-        .map(item => item.getChild('PillarboxPlaylistMenuItemButton'));
+        .filter(item => item.name() === 'PillarboxPlaylistMenuListItem')
+        .map(item => item.getChild('PillarboxPlaylistMenuItem'));
     });
 
     it('should modal should display the button and all the items in the playlist', () => {
