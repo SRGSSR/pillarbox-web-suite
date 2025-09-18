@@ -40,17 +40,11 @@ const player = new Pillarbox('my-player', {
 
 const playlist = [
   {
-    sources: [{
-      src: 'video1.mp4',
-      type: 'video/mp4'
-    }],
+    sources: [{ src: 'video1.mp4', type: 'video/mp4' }],
     poster: 'poster1.jpg'
   },
   {
-    sources: [{
-      src: 'video2.mp4',
-      type: 'video/mp4'
-    }],
+    sources: [{ src: 'video2.mp4', type: 'video/mp4' }],
     poster: 'poster2.jpg'
   }
 ];
@@ -72,7 +66,7 @@ To apply the default styling, add the following line to your CSS file:
 
 #### Methods
 
-The following table outlines the key methods available in the this plugin:
+The following table outlines the key methods available in this plugin:
 
 | Function                               | Description                                                                                                                              |
 |----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
@@ -94,31 +88,41 @@ The following table outlines the key methods available in the this plugin:
 When initializing the playlist plugin, you can pass an `options` object that configures the
 behavior of the plugin. Here are the available options:
 
-| Option                        | Type    | Default | Description                                                                                 |
-|-------------------------------|---------|---------|---------------------------------------------------------------------------------------------|
-| `playlist`                    | Array   | `[]`    | An array of playlist items to be initially loaded into the player.                          |
-| `repeat`                      | Number  | 0       | Set the repeat mode of the playlist: 0 - No Repeat, 1 - Repeat All, 2 - Repeat one.         |
-| `autoadvance`                 | Boolean | `false` | If enabled, the player will automatically move to the next item after the current one ends. |
-| `previousNavigationThreshold` | Number  | 3       | Threshold in seconds for determining the behavior when navigating to the previous item.     |
+| Option                        | Type                             | Default | Description                                                                                 |
+|-------------------------------|----------------------------------|---------|---------------------------------------------------------------------------------------------|
+| `playlist`                    | [`PlaylistItem](#playlistitem)[] | `[]`    | An array of playlist items to be initially loaded into the player.                          |
+| `repeat`                      | `number`                         | 0       | Set the repeat mode of the playlist: 0 - No Repeat, 1 - Repeat All, 2 - Repeat one.         |
+| `autoadvance`                 | `boolean`                        | `false` | If enabled, the player will automatically move to the next item after the current one ends. |
+| `previousNavigationThreshold` | `number`                         | 3       | Threshold in seconds for determining the behavior when navigating to the previous item.     |
 
 #### Properties
 
 After initializing the plugin, you can modify or read these properties to control playlist behavior
 dynamically:
 
-| Property                      | Type    | Description                                                                                  |
-|-------------------------------|---------|----------------------------------------------------------------------------------------------|
-| `repeat`                      | Number  | Changes the repeat mode of the playlist: 0 - No Repeat, 1 - Repeat All, 2 - Repeat one.    . |
-| `autoadvance`                 | Boolean | Toggles automatic advancement to the next item when the current item ends.                   |
-| `previousNavigationThreshold` | Number  | Threshold in seconds for determining the behavior when navigating to the previous item.      |
+| Property                      | Type      | Description                                                                                  |
+|-------------------------------|-----------|----------------------------------------------------------------------------------------------|
+| `repeat`                      | `number`  | Changes the repeat mode of the playlist: 0 - No Repeat, 1 - Repeat All, 2 - Repeat one.    . |
+| `autoadvance`                 | `boolean` | Toggles automatic advancement to the next item when the current item ends.                   |
+| `previousNavigationThreshold` | `number`  | Threshold in seconds for determining the behavior when navigating to the previous item.      |
 
 The following properties are read-only:
 
-| Property       | Type   | Description                                                                                                                  |
-|----------------|--------|------------------------------------------------------------------------------------------------------------------------------|
-| `currentIndex` | Number | Retrieves the index of the currently playing item.                                                                           |
-| `currentItem`  | Object | Retrieves the currently playing item.                                                                                        |
-| `items`        | Array  | Retrieves all items in the playlist. Modifications to the returned array will not affect the internal state of the playlist. |
+| Property       | Type                              | Description                                                                                                                  |
+|----------------|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| `currentIndex` | `number`                          | Retrieves the index of the currently playing item.                                                                           |
+| `currentItem`  | [`PlaylistItem`](#playlistitem)   | Retrieves the currently playing item.                                                                                        |
+| `items`        | [`PlaylistItem`](#playlistitem)[] | Retrieves all items in the playlist. Modifications to the returned array will not affect the internal state of the playlist. |
+
+#### PlaylistItem
+
+Represents a single item in the playlist.
+
+| Property  | Type     | Description                                                                                                      |
+|-----------|----------|------------------------------------------------------------------------------------------------------------------|
+| `sources` | `any[]`  | The array of media sources for the playlist item.                                                                |
+| `poster`  | `string` | A URL for the poster image.                                                                                      |
+| `data`    | `Object` | Metadata for the playlist item, where you can store fields like `title`, `duration`, or other custom properties. |
 
 #### Constants
 
@@ -140,9 +144,10 @@ The following event is emitted by the playlist plugin:
 
 **Event Payload:**
 
-| Property  | Type   | Description                                                                                          |
-|-----------|--------|------------------------------------------------------------------------------------------------------|
-| `changes` | Object | An object containing the properties that have changed. Possible keys are `items` and `currentIndex`. |
+| Property               | Type                              | Description                                                                     |
+|------------------------|-----------------------------------|---------------------------------------------------------------------------------|
+| `changes.items`        | [`PlaylistItem[]`](#playlistitem) | The updated array of playlist items (if the playlist content has changed).      |
+| `changes.currentIndex` | `number`                          | The new index of the currently selected item (if the current item has changed). |
 
 **Example Usage:**
 
@@ -168,12 +173,27 @@ interface for the playlist.
 When initializing the playlist-ui plugin, you can pass an `options` object that configures the
 behavior of the plugin. Here are the available options:
 
-| Option                                                  | Type    | Default            | Description                                                                                                                                                                                                                                                 |
-|---------------------------------------------------------|---------|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `insertChildBefore`                                     | String  | `fullscreenToggle` | The control bar child name before which the playlist button should be inserted.                                                                                                                                                                             |
-| `pillarboxPlaylistMenuDialog`                           | Object  | `{}`               | Configuration for the modal dialog component. This can take any modal dialog options available in video.js. [See Video.js ModalDialog Documentation](https://docs.videojs.com/tutorial-modal-dialog.html)                                                   |
-| `pillarboxPlaylistMenuDialog.pauseOnOpen`               | Boolean | `false`            | If true, the player will pause when the modal dialog is opened.                                                                                                                                                                                             |
-| `pillarboxPlaylistMenuDialog.pillarboxPlaylistControls` | Object  | `{}`               | Configuration for the control buttons within the modal. You can define the order of the buttons, remove buttons you don't need, or add new ones. [See Video.js Component Children Documentation](https://videojs.com/guides/components/#component-children) |
+| Option                                                  | Type      | Default            | Description                                                                                                                                                                                                                                                 |
+|---------------------------------------------------------|-----------|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `insertChildBefore`                                     | `string`  | `fullscreenToggle` | The control bar child name before which the playlist button should be inserted.                                                                                                                                                                             |
+| `pillarboxPlaylistMenuDialog`                           | `object`  | `{}`               | Configuration for the modal dialog component. This can take any modal dialog options available in video.js. [See Video.js ModalDialog Documentation](https://docs.videojs.com/tutorial-modal-dialog.html)                                                   |
+| `pillarboxPlaylistMenuDialog.pauseOnOpen`               | `boolean` | `false`            | If true, the player will pause when the modal dialog is opened.                                                                                                                                                                                             |
+| `pillarboxPlaylistMenuDialog.pillarboxPlaylistControls` | `object`  | `{}`               | Configuration for the control buttons within the modal. You can define the order of the buttons, remove buttons you don't need, or add new ones. [See Video.js Component Children Documentation](https://videojs.com/guides/components/#component-children) |
+
+##### Playlist Item UI Data
+
+The playlist ui plugin uses the [`PlaylistItem`](#playlistitem) objects provided by the core
+plugin.
+
+The following fields in `item.data` are recognized and displayed automatically in the UI:
+
+| Property   | Type     | Description                                      |
+|------------|----------|--------------------------------------------------|
+| `title`    | `string` | The title displayed in the playlist menu.        |
+| `duration` | `number` | The duration (in seconds) shown in the playlist. |
+
+Any additional properties stored in `item.data` are ignored by the UI but remain available for
+custom usage.
 
 ***Example Usage***
 
@@ -199,6 +219,22 @@ const player = new Pillarbox('my-player', {
     }
   }
 });
+
+// Build a playlist with titles and durations
+const playlist = [
+  {
+    sources: [{ src: 'video1.mp4', type: 'video/mp4' }],
+    poster: 'poster1.jpg',
+    data: { title: 'Big Buck Bunny', duration: 596 }
+  },
+  {
+    sources: [{ src: 'video2.mp4', type: 'video/mp4' }],
+    poster: 'poster2.jpg',
+    data: { title: 'Sintel', duration: 888 }
+  }
+];
+
+player.playlistPlugin().load(playlist);
 ```
 
 ## Contributing
