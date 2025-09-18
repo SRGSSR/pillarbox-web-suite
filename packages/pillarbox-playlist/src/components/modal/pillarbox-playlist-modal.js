@@ -4,11 +4,6 @@ import './pillarbox-playlist-controls.js';
 
 /**
  * @ignore
- * @type {typeof import('./pillarbox-playlist-menu-item.js').default}
- */
-const PillarboxPlaylistMenuItem = videojs.getComponent('PillarboxPlaylistMenuItem');
-/**
- * @ignore
  * @type {typeof import('video.js/dist/types/component').default}
  */
 const Component = videojs.getComponent('Component');
@@ -44,15 +39,24 @@ class PlaylistMenuDialog extends ModalDialog {
   /**
    * Creates an instance of PlaylistMenuDialog.
    *
-   * @param {import('@srgssr/pillarbox-web').Player} player - The pillarbox player instance.
-   * @param {Object} options - Options for the dialog.
-   * @param {boolean} [options.pauseOnOpen=false] - If true, the player will pause when the modal dialog is opened.
-   * @param {Object} [options.pillarboxPlaylistControls={}] - Configuration for the control buttons within the modal. You can define the order of the buttons, remove buttons you don't need, or add new ones.
+   * @param {import('@srgssr/pillarbox-web').Player} player
+   *        The pillarbox player instance.
+   * @param {Object} options
+   *        Options for the dialog.
+   * @param {boolean} [options.pauseOnOpen=false]
+   *        If true, the player will pause when the modal dialog is opened.
+   * @param {Object} [options.pillarboxPlaylistControls={}]
+   *        Configuration for the control buttons within the modal. Allows
+   *        modifying the order of the buttons, remove buttons you don't need,
+   *        or add new ones.
+   * @param {String} [options.itemComponentName='PillarboxPlaylistMenuItem']
+   *        Name of the Video.js Component used to render each playlist item.
+   *        Allows replacing the default playlist item component. The specified
+   *        component must be registered with Video.js via
+   *        `videojs.registerComponent` before the dialog is created.
    */
   constructor(player, options) {
     options.temporary = false;
-    options = videojs.mergeOptions({ pauseOnOpen: false }, options);
-
     super(player, options);
 
     this.fill();
@@ -76,7 +80,8 @@ class PlaylistMenuDialog extends ModalDialog {
   /**
    * Get the playlist instance associated with the player.
    *
-   * @returns {import('packages/pillarbox-playlist/src/pillarbox-playlist.js').default} The playlist instance.
+   * @returns {import('packages/pillarbox-playlist/src/pillarbox-playlist.js').default}
+   *          The playlist instance.
    */
   playlist() {
     return this.player().pillarboxPlaylist();
@@ -85,14 +90,14 @@ class PlaylistMenuDialog extends ModalDialog {
   /**
    * Update the playlist item UI with the selected index.
    *
-   * @param {number} index - The index of the item to select.
+   * @param {number} index The index of the item to select.
    */
   select(index) {
     const itemList = this.getChild('PillarboxPlaylistMenuItemsList');
 
     itemList.children()
-      .filter(item => item.name() === 'PillarboxPlaylistMenuItem')
-      .map(item => item.getChild('PillarboxPlaylistMenuItemButton'))
+      .filter(item => item.name() === 'PillarboxPlaylistMenuListItem')
+      .map(item => item.getChild('PillarboxPlaylistMenuItem'))
       .forEach(button => button.selected(index === button.options().index));
   }
 
@@ -116,17 +121,13 @@ class PlaylistMenuDialog extends ModalDialog {
 
     this.playlist().items.forEach((item, index) => {
       const itemEl = new Component(this.player(), {
-        name: 'PillarboxPlaylistMenuItem',
+        name: 'PillarboxPlaylistMenuListItem',
         el: videojs.dom.createEl('li', {
           className: 'pbw-playlist-item'
         })
       });
 
-      itemEl.addChild(new PillarboxPlaylistMenuItem(this.player(), {
-        item,
-        index,
-        name: 'PillarboxPlaylistMenuItemButton'
-      }));
+      itemEl.addChild(this.options().itemComponentName, { item, index });
 
       itemListEl.addChild(itemEl);
     });
@@ -134,5 +135,11 @@ class PlaylistMenuDialog extends ModalDialog {
     this.addChild(itemListEl);
   }
 }
+
+PlaylistMenuDialog.prototype.options_ = {
+  pauseOnOpen: true,
+  itemComponentName: 'PillarboxPlaylistMenuItem',
+  pillarboxPlaylistControls: {}
+};
 
 videojs.registerComponent('PillarboxPlaylistMenuDialog', PlaylistMenuDialog);
