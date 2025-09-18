@@ -34,6 +34,7 @@
       const ilHost = searchParams.get("ilHost") || undefined;
       const language = searchParams.get("language");
       const urn = searchParams.get("urn") || "urn:rts:video:8806923";
+      const receiverId = searchParams.get("receiverId") || "1AC2931D";
 
       // Create a pillarbox player instance with the GoogleCastSender enabled
       window.player = pillarbox("player", {
@@ -46,7 +47,7 @@
         techOrder: ['chromecast', 'html5'],
         plugins: {
           googleCastSender: {
-            receiverApplicationId: '1AC2931D',
+            receiverApplicationId: receiverId,
             sourceResolver: (source) => {
               if (!source.mediaData) return source;
 
