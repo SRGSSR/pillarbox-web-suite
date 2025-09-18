@@ -1,6 +1,7 @@
 import videojs from 'video.js';
 import { version } from '../package.json';
 import Chromecast from './google-cast-tech.js';
+import './components/google-cast-launcher.js';
 import './lang';
 
 /**
@@ -26,7 +27,7 @@ const log = videojs.log.createLogger('GoogleCastSender-plugin');
  *           receiver application is compatible with Android TV devices
  * @property {string} [autoJoinPolicy=chrome.cast.AutoJoinPolicy.TAB_AND_ORIGIN_SCOPED] the policy for
  *           automatically joining a Cast session
- * @property {boolean} [enableDefaultCastButton=true] indicates whether the
+ * @property {boolean} [enableDefaultCastLauncher=true] indicates whether the
  *           default Cast button should be displayed in the controlBar
  * @property {string} [receiverApplicationId=chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID] the ID of the receiver application to use.
  *           Note that the default receiver doesn't handle DRM content.
@@ -66,7 +67,7 @@ class GoogleCastSender extends Plugin {
   #options = {
     androidReceiverCompatible: true,
     autoJoinPolicy: 'tab_and_origin_scoped',
-    enableDefaultCastButton: true, // https://developers.google.com/cast/docs/web_sender/integrate#cast_button
+    enableDefaultCastLauncher: true, // https://developers.google.com/cast/docs/web_sender/integrate#cast_button
     receiverApplicationId: undefined,
     script: {
       id: 'gstatic_cast_sender',
@@ -116,35 +117,27 @@ class GoogleCastSender extends Plugin {
    *
    * @private
    */
-  enableDefaultCastButton() {
+  enableDefaultCastLauncher() {
     if (
-      !this.#options.enableDefaultCastButton ||
+      !this.#options.enableDefaultCastLauncher ||
       !this.player.controlBar
-    ) return;
+    ) {
+      return;
+    }
 
-    const castButton = document.createElement('google-cast-launcher');
+    const controlBar = this.player.controlBar;
+    const position = controlBar.children().length - 1;
 
-    castButton.classList.add(
-      'vjs-chromecast-button',
-      'vjs-control',
-      'vjs-button'
-    );
-
-    const controlBarChildren = this.player.controlBar.children();
-
-    controlBarChildren[controlBarChildren.length - 1].el().before(castButton);
+    controlBar.addChild('GoogleCastLauncher', {}, position);
   }
+
   /**
    * Removes the Google Cast button.
    *
    * @private
    */
-  removeDefaultCastButton() {
-    const castButton = videojs.dom.$('google-cast-launcher');
-
-    if (!castButton) return;
-
-    castButton.remove();
+  removeDefaultCastLauncher() {
+    this.player.controlBar.removeChild('GoogleCastLauncher');
   }
 
   /**
@@ -176,6 +169,8 @@ class GoogleCastSender extends Plugin {
         log.debug('Unknown state change', sessionState);
         break;
     }
+
+    this.setState({ sessionState: sessionState });
   }
 
   /**
@@ -185,7 +180,10 @@ class GoogleCastSender extends Plugin {
    * @private
    */
   onCastSessionStarted() {
-    const { currentTime, source } = this.player.getCache();
+    const {
+      currentTime,
+      source
+    } = this.player.getCache();
     const audioTrack = this.findEnabledAudioTrack(this.player.audioTracks());
     const textTrack = this.findShowingTextTrack(this.player.textTracks());
 
@@ -217,8 +215,15 @@ class GoogleCastSender extends Plugin {
    * @private
    */
   onCastSessionEnded() {
-    const { currentTime, source, volume } = this.player.getCache();
-    const { audioTrack, textTrack } = this.getCastSessionTracks();
+    const {
+      currentTime,
+      source,
+      volume
+    } = this.player.getCache();
+    const {
+      audioTrack,
+      textTrack
+    } = this.getCastSessionTracks();
 
     // reload the tech to avoid having a blob in currentSource
     // which breaks the load function if called.
@@ -250,7 +255,10 @@ class GoogleCastSender extends Plugin {
       castTechOptions.textTracks || []
     );
 
-    return { audioTrack, textTrack };
+    return {
+      audioTrack,
+      textTrack
+    };
   }
 
   /**
@@ -307,7 +315,7 @@ class GoogleCastSender extends Plugin {
    *
    * It will:
    * - initialize the CastContext
-   * - add the default cast button if the option is set to true
+   * - add the default cast launcher if the option is set to true
    * - setup the SESSION_STATE_CHANGED listener
    *
    * @param {boolean} isAvailable whether the API is available
@@ -328,7 +336,7 @@ class GoogleCastSender extends Plugin {
     this.#castContext = cast.framework.CastContext.getInstance();
     this.#castContext.setOptions(castOptions);
 
-    this.enableDefaultCastButton();
+    this.enableDefaultCastLauncher();
 
     this.#castContext.addEventListener(
       cast.framework.CastContextEventType.SESSION_STATE_CHANGED,
@@ -361,11 +369,17 @@ class GoogleCastSender extends Plugin {
    * Creates and appends the Google Cast sender script to the document head.
    */
   createCastScriptEl() {
-    const { id, src } = this.#options.script;
+    const {
+      id,
+      src
+    } = this.#options.script;
 
     document.head.appendChild(
       videojs.dom.createEl('script', {
-        id, src, defer: true, type: 'text/javascript'
+        id,
+        src,
+        defer: true,
+        type: 'text/javascript'
       })
     );
   }
@@ -377,7 +391,7 @@ class GoogleCastSender extends Plugin {
   dispose() {
     this.removeCastListener();
     this.removeCastScript();
-    this.removeDefaultCastButton();
+    this.removeDefaultCastLauncher();
     this.endCurrentSession();
 
     delete window.__onGCastApiAvailable;
@@ -395,6 +409,12 @@ class GoogleCastSender extends Plugin {
     if (!this.#castContext) return;
 
     this.#castContext.endCurrentSession();
+  }
+
+  requestSession() {
+    if (!this.#castContext) return;
+
+    this.#castContext.requestSession();
   }
 
   /**

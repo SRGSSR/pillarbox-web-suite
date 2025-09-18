@@ -21,6 +21,10 @@
       "import": "./dist/google-cast-sender.js",
       "require": "./dist/google-cast-sender.cjs"
     },
+    "./button": {
+      "import": "./dist/ui/google-cast-button.js",
+      "require": "./dist/ui/google-cast-button.cjs"
+    },
     "./*": "./*"
   },
   "files": [
@@ -40,12 +44,19 @@
   "scripts": {
     "build": "npm run build:lib && npm run build:umd && npm run build:css",
     "build:css": "sass ./scss/google-cast-sender.scss:dist/google-cast-sender.min.css --style compressed --source-map --load-path node_modules",
-    "build:lib": "vite build --config vite.config.lib.js",
-    "build:umd": "vite build --config vite.config.umd.js",
+    "build:lib:sender": "BUILD_TARGET=sender vite build --config vite.config.lib.js",
+    "build:lib:button": "BUILD_TARGET=button vite build --config vite.config.lib.js",
+    "build:lib": "npm run build:lib:sender && npm run build:lib:button",
+    "build:umd:sender": "BUILD_TARGET=sender vite build --config vite.config.umd.js",
+    "build:umd:button": "BUILD_TARGET=button vite build --config vite.config.umd.js",
+    "build:umd": "npm run build:umd:sender && npm run build:umd:button",
     "github:page": "vite build",
     "release:ci": "semantic-release",
     "start": " vite --port 4200 --open",
     "test": "vitest run --silent --coverage --coverage.reporter text"
+  },
+  "dependencies": {
+    "@srgssr/svg-button": "^1.0.0"
   },
   "peerDependencies": {
     "video.js": "^8.0.0"
