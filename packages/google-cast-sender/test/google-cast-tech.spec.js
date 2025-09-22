@@ -86,6 +86,18 @@ describe('Chromecast', () => {
       tech.play();
       expect(playOrPauseSpy).toHaveBeenCalled();
     });
+
+    it('should call load when playback has ended to replay the media', () => {
+      const loadSpy = vi.spyOn(
+        tech,
+        'load'
+      );
+
+      vi.spyOn(tech, 'src').mockReturnValueOnce({ src: 'test.mp4'});
+      tech.remotePlayer.playerState = 'IDLE';
+      tech.play();
+      expect(loadSpy).toHaveBeenCalled();
+    });
   });
 
   describe('pause', () => {
@@ -244,11 +256,28 @@ describe('Chromecast', () => {
     });
   });
 
-  describe('getters', () => {
-    it('should return correct values', () => {
+  describe('ended', () => {
+    it('should return undefined if no source is loaded', () => {
+      vi.spyOn(tech, 'src').mockReturnValueOnce({});
+
+      expect(tech.ended()).toBeUndefined();
+    });
+
+    it('should return true if the receiver is IDLE', () => {
+      vi.spyOn(tech, 'src').mockReturnValueOnce({ src: 'test.mp4'});
       tech.remotePlayer.playerState = 'IDLE';
       expect(tech.ended()).toBe(true);
+    });
 
+    it('should return false if the receiver is not IDLE', () => {
+      vi.spyOn(tech, 'src').mockReturnValueOnce({ src: 'test.mp4'});
+      tech.remotePlayer.playerState = 'PAUSED';
+      expect(tech.ended()).toBe(false);
+    });
+  });
+
+  describe('getters', () => {
+    it('should return correct values', () => {
       tech.remotePlayer.isPaused = true;
       expect(tech.paused()).toBe(true);
 
