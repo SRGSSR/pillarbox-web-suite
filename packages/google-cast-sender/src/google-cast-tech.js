@@ -404,8 +404,10 @@ class Chromecast extends Tech {
   }
 
   ended() {
+    if(!this.src().src) return;
+
     return this.remotePlayer
-          && this.remotePlayer.playerState === 'IDLE' ? true : false;
+      && this.remotePlayer.playerState === 'IDLE' ? true : false;
   }
 
   muted() {
@@ -428,7 +430,15 @@ class Chromecast extends Tech {
   }
 
   play() {
-    if (this.remotePlayer && this.remotePlayer.isPaused) {
+    if (!this.remotePlayer) return;
+
+    if (this.ended()) {
+      this.load();
+
+      return;
+    }
+
+    if (this.remotePlayer.isPaused) {
       this.remotePlayerController.playOrPause();
       this.trigger('play');
       this.trigger('playing');
