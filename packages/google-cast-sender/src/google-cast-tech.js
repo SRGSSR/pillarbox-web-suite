@@ -103,6 +103,7 @@ class Chromecast extends Tech {
     this.triggerWaiting(playerState);
     this.handleSeeking(playerState);
     this.handlePlaying(playerState);
+    this.handlePause(playerState);
     this.handleEnded(playerState);
   }
 
@@ -185,6 +186,18 @@ class Chromecast extends Tech {
     if (playerState.value === 'PLAYING') {
       this.trigger('play');
       this.trigger('playing');
+    }
+  }
+
+  /**
+   * Handle paused.
+   *
+   * @param {cast.framework.RemotePlayerChangedEvent} playerState the player
+   * state
+   */
+  handlePause(playerState) {
+    if (playerState.value === 'PAUSED') {
+      this.trigger('pause');
     }
   }
 

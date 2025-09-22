@@ -233,6 +233,17 @@ describe('Chromecast', () => {
     });
   });
 
+  describe('handlePause', () => {
+    it('should trigger pause', () => {
+      const triggerSpy = vi.spyOn(tech, 'trigger');
+
+      tech.handlePause({
+        value: 'PAUSED'
+      });
+      expect(triggerSpy).toHaveBeenCalledWith('pause');
+    });
+  });
+
   describe('handleEnded', () => {
     it('should trigger ended', () => {
       const triggerSpy = vi.spyOn(tech, 'trigger');
