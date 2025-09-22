@@ -340,7 +340,7 @@ class Chromecast extends Tech {
   }
 
   load() {
-    // noop
+    this.loadMedia(this.currentSource_);
   }
 
   controls() {
