@@ -1,3 +1,17 @@
+## [@srgssr/google-cast-sender-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.0.1...@srgssr/google-cast-sender-v1.1.0) (2025-09-24)
+
+
+### New Features 🚀
+
+* **google-cast-sender:** add load method ([669b3fe](https://github.com/SRGSSR/pillarbox-web-suite/commit/669b3fe34363a5c0e8cde3a784f7ec560c3ddd64)), closes [#93](https://github.com/SRGSSR/pillarbox-web-suite/issues/93)
+* **google-cast-sender:** add the ability to replay media ([7dd80ea](https://github.com/SRGSSR/pillarbox-web-suite/commit/7dd80ea09533c247e7da5c7c4f740490b94ac928)), closes [#94](https://github.com/SRGSSR/pillarbox-web-suite/issues/94)
+* **google-cast-sender:** handle receiver paused event ([a176b5d](https://github.com/SRGSSR/pillarbox-web-suite/commit/a176b5d0bbcfdd0884a31b9e95d4c308d9dae357))
+
+
+### Chore 🧹
+
+* **cast:** allow passing a receiver application ID as a parameter ([bb08391](https://github.com/SRGSSR/pillarbox-web-suite/commit/bb08391e7272258df9870db4e633770bcd0fa0e0))
+
 ## [@srgssr/google-cast-sender-v1.0.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.0.0...@srgssr/google-cast-sender-v1.0.1) (2025-08-25)
 
 
