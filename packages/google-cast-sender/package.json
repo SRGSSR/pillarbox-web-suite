@@ -38,7 +38,7 @@
     "TV"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:umd && npm run build:css",
+    "build": "node ../../scripts/run-all.js build",
     "build:css": "sass ./scss/google-cast-sender.scss:dist/google-cast-sender.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "vite build --config vite.config.lib.js",
     "build:umd": "vite build --config vite.config.umd.js",
