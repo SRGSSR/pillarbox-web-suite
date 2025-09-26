@@ -1,20 +1,19 @@
 import videojs from 'video.js';
+import '@srgssr/svg-button';
 
 /**
  * @ignore
- * @type {typeof import('video.js/dist/types/button').default}
+ * @type {typeof import('@srgssr/svg-button').SvgButton}
  */
-const Button = videojs.getComponent('Button');
+const SvgButton = videojs.getComponent('SvgButton');
 
 /**
  * The shuffle button for the playlist ui. When clicked shuffles the items
  * in the playlist.
  */
-class PillarboxPlaylistShuffleButton extends Button {
+class PillarboxPlaylistShuffleButton extends SvgButton {
   constructor(player, options) {
-    options = videojs.mergeOptions({ controlText: 'Shuffle' }, options);
     super(player, options);
-    this.setIcon('shuffle');
   }
 
   /**
@@ -24,10 +23,6 @@ class PillarboxPlaylistShuffleButton extends Button {
    */
   playlist() {
     return this.player().pillarboxPlaylist();
-  }
-
-  ready() {
-    this.$('.vjs-icon-placeholder').classList.toggle(`vjs-icon-shuffle`, true);
   }
 
   /**
@@ -40,5 +35,10 @@ class PillarboxPlaylistShuffleButton extends Button {
     this.playlist().shuffle();
   }
 }
+
+PillarboxPlaylistShuffleButton.prototype.options_ = {
+  controlText: 'Shuffle',
+  iconName: 'shuffle',
+};
 
 videojs.registerComponent('PillarboxPlaylistShuffleButton', PillarboxPlaylistShuffleButton);

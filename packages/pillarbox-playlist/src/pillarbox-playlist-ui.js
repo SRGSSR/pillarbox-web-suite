@@ -22,8 +22,6 @@ class PillarboxPlaylistUI extends Plugin {
    * @param {Player} player - The video.js player instance.
    * @param {Object} options - Plugin options.
    * @param {string} [options.insertChildBefore='fullscreenToggle'] - The control bar child name before which the playlist button should be inserted.
-   * @param {Object} [options.pillarboxPlaylistButton={}] - Configuration for the playlist button.
-   * @param {Object} [options.pillarboxPlaylistMenuDialog={}] - Configuration for the modal dialog component. This can take any modal dialog options available in video.js.
    */
   constructor(player, options) {
     super(player);
@@ -37,7 +35,8 @@ class PillarboxPlaylistUI extends Plugin {
     options = this.options_ = videojs.obj.merge(this.options_, options);
 
     player.options({
-      pillarboxPlaylistMenuDialog: options.pillarboxPlaylistMenuDialog ?? true,
+      pillarboxPlaylistMenuDialog:
+        player.options().pillarboxPlaylistMenuDialog ?? true,
       controlBar: this.mergeControlBarOptions(player, options)
     });
   }
@@ -79,7 +78,7 @@ class PillarboxPlaylistUI extends Plugin {
     }
 
     controlBarOptions.pillarboxPlaylistButton =
-      options.pillarboxPlaylistButton ?? true;
+      controlBarOptions.pillarboxPlaylistButton ?? true;
 
     return controlBarOptions;
   }

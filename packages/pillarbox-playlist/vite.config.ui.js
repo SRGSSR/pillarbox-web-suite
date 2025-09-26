@@ -20,7 +20,7 @@ export default defineConfig({
       entry: 'src/pillarbox-playlist-ui.js'
     },
     rollupOptions: {
-      external: ['video.js'],
+      external: ['video.js', '@srgssr/svg-button'],
       output: [
         {
           format: 'es',
