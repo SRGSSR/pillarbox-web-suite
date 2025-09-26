@@ -4,50 +4,22 @@ import { PillarboxPlaylist, RepeatMode } from '../src/pillarbox-playlist.js';
 
 const playlist = [
   {
-    sources: [{
-      src: 'first-source',
-      type: 'test'
-    }],
+    sources: [{ src: 'first-source', type: 'test' }],
     poster: 'first-poster',
-    data: {
-      title: 'first-source',
-      duration: 180
-    }
-  },
-  {
-    sources: [{
-      src: 'second-source',
-      type: 'test'
-    }],
+    data: { title: 'first-source', duration: 180 }
+  }, {
+    sources: [{ src: 'second-source', type: 'test' }],
     poster: 'second-poster',
-    data: {
-      title: 'second-source',
-      duration: 150
-    }
-  },
-  {
-    sources: [{
-      src: 'third-source',
-      type: 'test'
-    }],
+    data: { title: 'second-source', duration: 150 }
+  }, {
+    sources: [{ src: 'third-source', type: 'test' }],
     poster: 'third-poster',
-    data: {
-      title: 'third-source',
-      duration: 120
-    }
-  },
-  {
-    sources: [{
-      src: 'fourth-source',
-      type: 'test'
-    }],
+    data: { title: 'third-source', duration: 120 }
+  }, {
+    sources: [{ src: 'fourth-source', type: 'test' }],
     poster: 'fourth-poster',
-    data: {
-      title: 'fourth-source',
-      duration: 210
-    }
-  }
-];
+    data: { title: 'fourth-source', duration: 210 }
+  }];
 
 window.HTMLMediaElement.prototype.load = () => {
 };

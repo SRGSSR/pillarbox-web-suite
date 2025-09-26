@@ -4,52 +4,23 @@ import '../src/pillarbox-playlist.js';
 import PillarboxPlaylistUi from '../src/pillarbox-playlist-ui.js';
 import { RepeatMode } from '../src/pillarbox-playlist.js';
 
-const playlist = [
-  {
-    sources: [{
-      src: 'first-source',
-      type: 'test'
-    }],
-    poster: 'first-poster',
-    data: {
-      title: 'first-source',
-      duration: 180
-    }
-  },
-  {
-    sources: [{
-      src: 'second-source',
-      type: 'test'
-    }],
-    poster: 'second-poster',
-    data: {
-      title: 'second-source',
-      duration: 150
-    }
-  },
-  {
-    sources: [{
-      src: 'third-source',
-      type: 'test'
-    }],
-    poster: 'third-poster',
-    data: {
-      title: 'third-source',
-      duration: 120
-    }
-  },
-  {
-    sources: [{
-      src: 'fourth-source',
-      type: 'test'
-    }],
-    poster: 'fourth-poster',
-    data: {
-      title: 'fourth-source',
-      duration: 210
-    }
-  }
-];
+const playlist = [{
+  sources: [{ src: 'first-source', type: 'test' }],
+  poster: 'first-poster',
+  data: { title: 'first-source', duration: 180 }
+}, {
+  sources: [{ src: 'second-source', type: 'test' }],
+  poster: 'second-poster',
+  data: { title: 'second-source', duration: 150 }
+}, {
+  sources: [{ src: 'third-source', type: 'test' }],
+  poster: 'third-poster',
+  data: { title: 'third-source', duration: 120 }
+}, {
+  sources: [{ src: 'fourth-source', type: 'test' }],
+  poster: 'fourth-poster',
+  data: { title: 'fourth-source', duration: 210 }
+}];
 
 window.HTMLMediaElement.prototype.load = () => {
 };
@@ -116,10 +87,7 @@ describe('PillarboxPlaylist', () => {
     it('should insert the playlist button at the last position if no sibling was found', () => {
       player = pillarbox(videoElement, {
         controlBar: {
-          children: [
-            'playToggle',
-            'volumePanel'
-          ]
+          children: ['playToggle', 'volumePanel']
         },
         plugins: {
           pillarboxPlaylist: true,
@@ -176,8 +144,8 @@ describe('PillarboxPlaylist', () => {
       dialog = player.pillarboxPlaylistMenuDialog;
       controls = dialog.getChild('PillarboxPlaylistControls');
       items = dialog.getChild('PillarboxPlaylistMenuItemsList').children()
-        .filter(item => item.name() === 'PillarboxPlaylistMenuItem')
-        .map(item => item.getChild('PillarboxPlaylistMenuItemButton'));
+        .filter(item => item.name() === 'PillarboxPlaylistMenuListItem')
+        .map(item => item.getChild('PillarboxPlaylistMenuItem'));
     });
 
     it('should modal should display the button and all the items in the playlist', () => {
