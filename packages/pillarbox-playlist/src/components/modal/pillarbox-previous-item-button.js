@@ -1,20 +1,19 @@
 import videojs from 'video.js';
+import '@srgssr/svg-button';
 
 /**
  * @ignore
- * @type {typeof import('video.js/dist/types/button').default}
+ * @type {typeof import('@srgssr/svg-button').SvgButton}
  */
-const Button = videojs.getComponent('Button');
+const SvgButton = videojs.getComponent('SvgButton');
 
 /**
  * The previous item button for the playlist ui. When clicked moves to the
  * previous item in the playlist.
  */
-class PillarboxPlaylistPreviousItemButton extends Button {
+class PillarboxPlaylistPreviousItemButton extends SvgButton {
   constructor(player, options) {
-    options = videojs.mergeOptions({ controlText: 'Previous Item' }, options);
     super(player, options);
-    this.setIcon('previous-item');
   }
 
   /**
@@ -24,10 +23,6 @@ class PillarboxPlaylistPreviousItemButton extends Button {
    */
   playlist() {
     return this.player().pillarboxPlaylist();
-  }
-
-  ready() {
-    this.$('.vjs-icon-placeholder').classList.toggle(`vjs-icon-previous-item`, true);
   }
 
   /**
@@ -40,5 +35,10 @@ class PillarboxPlaylistPreviousItemButton extends Button {
     this.playlist().previous();
   }
 }
+
+PillarboxPlaylistPreviousItemButton.prototype.options_ = {
+  controlText: 'Previous Item',
+  iconName: 'previous-item',
+};
 
 videojs.registerComponent('PillarboxPlaylistPreviousItemButton', PillarboxPlaylistPreviousItemButton);

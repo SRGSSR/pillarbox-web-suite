@@ -1,15 +1,16 @@
 import videojs from 'video.js';
+import '@srgssr/svg-button';
 
 /**
  * @ignore
- * @type {typeof import('video.js/dist/types/button').default}
+ * @type {typeof import('@srgssr/svg-button').SvgButton}
  */
-const Button = videojs.getComponent('Button');
+const SvgButton = videojs.getComponent('SvgButton');
 
 /**
  * Class representing a button that opens the playlist menu.
  */
-class PillarboxPlaylistButton extends Button {
+class PillarboxPlaylistButton extends SvgButton {
   /**
    * Handles the 'statechanged' event when triggered by the playlist. This method
    * serves as a proxy to the main `statechanged` handler, ensuring that additional
@@ -30,9 +31,7 @@ class PillarboxPlaylistButton extends Button {
    * @param {Object} options - Options for the button.
    */
   constructor(player, options) {
-    options = videojs.mergeOptions({ controlText: 'Playlist' }, options);
     super(player, options);
-    this.setIcon('chapters');
     this.playlist().on('statechanged', this.onPlaylistStateChanged_);
   }
 
@@ -43,10 +42,6 @@ class PillarboxPlaylistButton extends Button {
    */
   playlist() {
     return this.player().pillarboxPlaylist();
-  }
-
-  ready() {
-    this.$('.vjs-icon-placeholder').classList.toggle('vjs-icon-chapters', true);
   }
 
   /**
@@ -89,5 +84,10 @@ class PillarboxPlaylistButton extends Button {
     this.hide();
   }
 }
+
+PillarboxPlaylistButton.prototype.options_ = {
+  controlText: 'Playlist',
+  iconName: 'chapters'
+};
 
 videojs.registerComponent('PillarboxPlaylistButton', PillarboxPlaylistButton);
