@@ -10,8 +10,13 @@ export async function appendSvgIcon(component) {
   const placeholder = component.el().querySelector('.vjs-icon-placeholder');
 
   if (iconName) component.setIcon(iconName);
-  if (!icon) return;
-  if (!placeholder) return;
+  if (iconName && placeholder) placeholder.classList.toggle(`vjs-icon-${iconName}`, true);
+
+  await insertSvgIcon(icon, placeholder);
+}
+
+async function insertSvgIcon(icon, placeholder) {
+  if (!icon || !placeholder) return;
 
   const svg = await loadSvgElement(icon);
 
