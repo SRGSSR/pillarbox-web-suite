@@ -92,4 +92,23 @@ describe('SvgComponent', () => {
     });
   });
 
+  describe('Icon loaded as a font icon', () => {
+    beforeEach(() => {
+      player = videojs(videoElement, {
+        svgComponent: { iconName: 'chapters' }
+      });
+    });
+
+    afterEach(() => {
+      player.dispose();
+    });
+
+    it('should contain the vjs-icon-* class with the provided iconName', () => {
+      const placeholder = player.svgComponent.el().querySelector('.vjs-icon-placeholder');
+
+      expect(placeholder).toBeDefined();
+      expect(placeholder.classList).toContain('vjs-icon-chapters');
+    });
+  });
+
 });
