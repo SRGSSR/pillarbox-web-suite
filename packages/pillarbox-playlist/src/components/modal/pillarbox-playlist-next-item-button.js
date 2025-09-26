@@ -1,20 +1,19 @@
 import videojs from 'video.js';
+import '@srgssr/svg-button';
 
 /**
  * @ignore
- * @type {typeof import('video.js/dist/types/button').default}
+ * @type {typeof import('@srgssr/svg-button').SvgButton}
  */
-const Button = videojs.getComponent('Button');
+const SvgButton = videojs.getComponent('SvgButton');
 
 /**
  * The next item button for the playlist ui. When clicked moves to the
  * next item in the playlist.
  */
-class PillarboxPlaylistNextItemButton extends Button {
+class PillarboxPlaylistNextItemButton extends SvgButton {
   constructor(player, options) {
-    options = videojs.mergeOptions({ controlText: 'Next Item' }, options);
     super(player, options);
-    this.setIcon('next-item');
   }
 
   /**
@@ -24,10 +23,6 @@ class PillarboxPlaylistNextItemButton extends Button {
    */
   playlist() {
     return this.player().pillarboxPlaylist();
-  }
-
-  ready() {
-    this.$('.vjs-icon-placeholder').classList.toggle(`vjs-icon-next-item`, true);
   }
 
   /**
@@ -40,5 +35,10 @@ class PillarboxPlaylistNextItemButton extends Button {
     this.playlist().next();
   }
 }
+
+PillarboxPlaylistNextItemButton.prototype.options_ = {
+  controlText: 'Next Item',
+  iconName: 'next-item'
+};
 
 videojs.registerComponent('PillarboxPlaylistNextItemButton', PillarboxPlaylistNextItemButton);

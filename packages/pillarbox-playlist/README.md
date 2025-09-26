@@ -149,7 +149,7 @@ The following event is emitted by the playlist plugin:
 | `changes.items`        | [`PlaylistItem[]`](#playlistitem) | The updated array of playlist items (if the playlist content has changed).      |
 | `changes.currentIndex` | `number`                          | The new index of the currently selected item (if the current item has changed). |
 
-**Example Usage:**
+##### `stagechanged` Usage Example
 
 ```javascript
 player.playlistPlugin().on('statechanged', ({ changes }) => {
@@ -173,12 +173,44 @@ interface for the playlist.
 When initializing the playlist-ui plugin, you can pass an `options` object that configures the
 behavior of the plugin. Here are the available options:
 
-| Option                                                  | Type      | Default            | Description                                                                                                                                                                                                                                                 |
-|---------------------------------------------------------|-----------|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `insertChildBefore`                                     | `string`  | `fullscreenToggle` | The control bar child name before which the playlist button should be inserted.                                                                                                                                                                             |
-| `pillarboxPlaylistMenuDialog`                           | `object`  | `{}`               | Configuration for the modal dialog component. This can take any modal dialog options available in video.js. [See Video.js ModalDialog Documentation](https://docs.videojs.com/tutorial-modal-dialog.html)                                                   |
-| `pillarboxPlaylistMenuDialog.pauseOnOpen`               | `boolean` | `false`            | If true, the player will pause when the modal dialog is opened.                                                                                                                                                                                             |
-| `pillarboxPlaylistMenuDialog.pillarboxPlaylistControls` | `object`  | `{}`               | Configuration for the control buttons within the modal. You can define the order of the buttons, remove buttons you don't need, or add new ones. [See Video.js Component Children Documentation](https://videojs.com/guides/components/#component-children) |
+| Option              | Type   | Default            | Description                                                                     |
+|---------------------|--------|--------------------|---------------------------------------------------------------------------------|
+| `insertChildBefore` | String | `fullscreenToggle` | The control bar child name before which the playlist button should be inserted. |
+
+The plugin automatically adds 2 new components to the player:
+
+- [`PillarboxPlaylistMenuDialog`][pillarbox-playlist-modal]: a custom
+  dialog that extends the ModalDialog class. This component is added to the root options of the
+  player, it can take any modal dialog options available in
+  video.js ([See Video.js ModalDialog Documentation][videojs-modal-doc]) as well as the following
+  options:
+
+| Option                      | Type      | Default | Description                                                                                                                                                                                                                                                 |
+ |-----------------------------|-----------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `pauseOnOpen`               | `boolean` | `false` | If true, the player will pause when the modal dialog is opened.                                                                                                                                                                                             |
+| `pillarboxPlaylistControls` | `Object`  | `{}`    | Configuration for the control buttons within the modal. You can define the order of the buttons, remove buttons you don't need, or add new ones. [See Video.js Component Children Documentation](https://videojs.com/guides/components/#component-children) |
+
+- [`PillarboxPlaylistButton`][pillarbox-playlist-button.js] And [`SvgButton`][svg-button-api]
+  component added to the `controlBar` with the following default options:
+
+| Option        | Type   | Default    |
+ |---------------|--------|------------|
+| `iconName`    | String | `chapters` |
+| `controlText` | String | `Playlist` |
+
+###### Playlist Controls API
+
+The [`PillarboxPlaylistControls`][pillarbox-playlist-controls] component contains four children:
+
+| Button                                | Default `iconName` |
+|---------------------------------------|--------------------|
+| `pillarboxPlaylistRepeatButton`       | `'repeat'`         | 
+| `pillarboxPlaylistShuffleButton`      | `'shuffle'`        | 
+| `pillarboxPlaylistPreviousItemButton` | `'previous-item'`  | 
+| `pillarboxPlaylistNextItemButton`     | `'next-item`       |
+
+Each button extends the shared [`SvgButton`][svg-button-api] component. All `SvgButton` options are
+supported.
 
 ##### Playlist Item UI Data
 
@@ -195,7 +227,7 @@ The following fields in `item.data` are recognized and displayed automatically i
 Any additional properties stored in `item.data` are ignored by the UI but remain available for
 custom usage.
 
-***Example Usage***
+##### Playlist UI Plugin Usage Example
 
 ```javascript
 import Pillarbox from '@srgssr/pillarbox-web';
@@ -209,14 +241,19 @@ const player = new Pillarbox('my-player', {
     // Include the playlist UI plugin
     pillarboxPlaylistUI: {
       // Change the placement of the playlist button
-      inserChildBefore: 'subsCapsButton',
-      pillarboxPlaylistMenuDialog: {
-        // Force the playback to pause when the modal is opened
-        pauseOnOpen: true,
-        // Remove the shuffle  button 
-        pillarboxPlaylistControls: { pillarboxPlaylistShuffleButton: false }
-      }
+      inserChildBefore: 'subsCapsButton'
     }
+  },
+  // Change the Dialog options
+  pillarboxPlaylistMenuDialog: {
+    // Force the playback to pause when the modal is opened
+    pauseOnOpen: true,
+    // Remove the shuffle  button 
+    pillarboxPlaylistControls: { pillarboxPlaylistShuffleButton: false }
+  },
+  // Customize the look of the playlist button
+  controlBar: {
+    pillarboxPlaylistButton: { iconName: 'square' }
   }
 });
 
@@ -276,3 +313,8 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 details.
 
 [contributing-guide]: https://github.com/SRGSSR/pillarbox-web-suite/blob/main/docs/README.md#contributing
+[svg-button-api]: ../svg-button/README.md#api-documentation
+[pillarbox-playlist-modal]: ./src/components/modal/pillarbox-playlist-modal.js
+[videojs-modal-doc]: https://docs.videojs.com/tutorial-modal-dialog.html
+[pillarbox-playlist-controls]: ./src/components/modal/pillarbox-playlist-controls.js
+[pillarbox-playlist-button]: ./src/components/pillarbox-playlist-button.js
