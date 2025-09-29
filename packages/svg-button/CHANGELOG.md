@@ -1,3 +1,10 @@
+## [@srgssr/svg-button-v1.1.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/svg-button-v1.1.0...@srgssr/svg-button-v1.1.1) (2025-09-29)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* **svg-button:** missing vjs icon fonts ([34c663b](https://github.com/SRGSSR/pillarbox-web-suite/commit/34c663bde4fa3467688165b95cad2381acfe523d))
+
 ## [@srgssr/svg-button-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/svg-button-v1.0.0...@srgssr/svg-button-v1.1.0) (2025-09-17)
 
 
