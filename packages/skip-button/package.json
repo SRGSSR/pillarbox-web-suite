@@ -36,7 +36,8 @@
     "skip-button"
   ],
   "scripts": {
-    "build": "npm run build:lib && npm run build:umd && npm run build:css",
+    "clean": "rimraf dist",
+    "build": "npm-run-all clean build:*",
     "build:css": "sass ./scss/skip-button.scss:dist/skip-button.min.css --style compressed --source-map --load-path node_modules",
     "build:lib": "vite build --config vite.config.lib.js",
     "build:umd": "vite build --config vite.config.umd.js",

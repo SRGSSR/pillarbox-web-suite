@@ -12,6 +12,7 @@ import babel from '@rollup/plugin-babel';
 export default defineConfig({
   esbuild: false,
   build: {
+    emptyOutDir: false,
     sourcemap: true,
     lib: {
       formats: ['es', 'cjs'],

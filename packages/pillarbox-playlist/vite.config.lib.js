@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 import babel from '@rollup/plugin-babel';
+import copy from 'rollup-plugin-copy';
+import { entry, outDir, output } from './.build.config.js';
 
 /**
  * Vite's configuration for the lib build.
@@ -7,22 +9,41 @@ import babel from '@rollup/plugin-babel';
  * Outputs:
  * - 'dist/pillarbox-playlist.js': ESModule version with sourcemaps.
  * - 'dist/pillarbox-playlist.cjs': CommonJS version with sourcemaps.
+ * - 'dist/ui/pillarbox-playlist-ui.js': ESModule version with sourcemaps.
+ * - 'dist/ui/pillarbox-playlist-ui.cjs': CommonJS version with sourcemaps.
  */
 export default defineConfig({
   esbuild: false,
   build: {
+    outDir: outDir,
+    emptyOutDir: false,
     sourcemap: true,
     lib: {
       formats: ['es', 'cjs'],
-      name: 'PillarboxPlaylist',
-      entry: 'src/pillarbox-playlist.js'
+      entry: entry
     },
     rollupOptions: {
-      external: ['video.js'],
-      plugins: [babel({
-        babelHelpers: 'bundled',
-        exclude: 'node_modules/**'
-      })]
+      external: ['video.js', '@srgssr/svg-button'],
+      output: [
+        {
+          format: 'es',
+          entryFileNames: `${output}.js`
+        },
+        {
+          format: 'cjs',
+          entryFileNames: `${output}.cjs`
+        }
+      ],
+      plugins: [
+        babel({
+          babelHelpers: 'bundled',
+          exclude: 'node_modules/**'
+        }),
+        copy({
+          targets: [{ src: 'src/lang/*.json', dest: 'dist/lang' }],
+          hook: 'writeBundle'
+        })
+      ]
     }
   }
 });

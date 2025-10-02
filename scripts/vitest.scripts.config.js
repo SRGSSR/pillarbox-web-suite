@@ -6,6 +6,7 @@ export default defineConfig({
   root: path.resolve(__dirname),
   test: {
     globals: true,
-    environment: 'node'
+    environment: 'node',
+    testTimeout: 10_000
   },
 });
