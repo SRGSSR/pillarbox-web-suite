@@ -92,6 +92,29 @@ describe('SvgComponent', () => {
     });
   });
 
+  describe('`icon` property should take precedence over `iconName` when experimental SVG is enabled', () => {
+    beforeEach(() => {
+      player = videojs(videoElement, {
+        experimentalSvgIcons: true,
+        svgComponent: { icon, iconName: 'my-button' }
+      });
+    });
+
+    afterEach(() => {
+      player.dispose();
+    });
+
+    it('should contain an <svg> element instead of a <use> element', () => {
+      const use = player.svgComponent.el().querySelector('use');
+      const svg = player.svgComponent.el().querySelector('.icon-from-options');
+
+      expect(use).toBeNull();
+      expect(svg).toBeDefined();
+      expect(svg).toBeInstanceOf(SVGElement);
+
+    });
+  });
+
   describe('Icon loaded as a font icon', () => {
     beforeEach(() => {
       player = videojs(videoElement, {
