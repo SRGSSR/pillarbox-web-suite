@@ -1,3 +1,12 @@
+## [@srgssr/google-cast-sender-v1.2.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.1.0...@srgssr/google-cast-sender-v1.2.0) (2025-10-02)
+
+
+### New Features 🚀
+
+* **cast:** add customizable google cast button and native launcher ([d001129](https://github.com/SRGSSR/pillarbox-web-suite/commit/d00112982c8dbf6ad62d1eedae8846c545ec9c37)), closes [#75](https://github.com/SRGSSR/pillarbox-web-suite/issues/75)
+* **cast:** add option to end the current session on click for the google-cast-button ([ee2c62a](https://github.com/SRGSSR/pillarbox-web-suite/commit/ee2c62a55da650b5c675039be5d8d2cd3fb0b31f))
+* **cast:** add state management to the google-cast-button ([63f76ba](https://github.com/SRGSSR/pillarbox-web-suite/commit/63f76bad424d159d045ca1233f737276df154d42))
+
 ## [@srgssr/google-cast-sender-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.0.1...@srgssr/google-cast-sender-v1.1.0) (2025-09-24)
 
 
