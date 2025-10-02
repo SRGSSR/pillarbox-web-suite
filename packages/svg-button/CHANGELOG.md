@@ -1,3 +1,10 @@
+## [@srgssr/svg-button-v1.1.2](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/svg-button-v1.1.1...@srgssr/svg-button-v1.1.2) (2025-10-02)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* **svg-button:** icon property should take precedence over icon name ([06a7485](https://github.com/SRGSSR/pillarbox-web-suite/commit/06a748516b06a58f9939528f1d36c8efeab5acb4))
+
 ## [@srgssr/svg-button-v1.1.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/svg-button-v1.1.0...@srgssr/svg-button-v1.1.1) (2025-09-29)
 
 
