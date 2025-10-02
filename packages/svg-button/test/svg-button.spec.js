@@ -18,7 +18,7 @@ describe('SvgButton', () => {
   describe('The SVG icon is provided', () => {
     beforeEach(() => {
       player = videojs(videoElement, {
-        svgButton: { icon: icon }
+        svgButton: { icon }
       });
     });
 
@@ -106,6 +106,29 @@ describe('SvgButton', () => {
 
       expect(use).toBeDefined();
       expect(use.getAttribute('href')).toBe('#vjs-icon-my-button');
+    });
+  });
+
+  describe('`icon` property should take precedence over `iconName` when experimental SVG is enabled', () => {
+    beforeEach(() => {
+      player = videojs(videoElement, {
+        experimentalSvgIcons: true,
+        svgButton: { icon, iconName: 'my-button' }
+      });
+    });
+
+    afterEach(() => {
+      player.dispose();
+    });
+
+    it('should contain an <svg> element instead of a <use> element', () => {
+      const use = player.svgButton.el().querySelector('use');
+      const svg = player.svgButton.el().querySelector('.icon-from-options');
+
+      expect(use).toBeNull();
+      expect(svg).toBeDefined();
+      expect(svg).toBeInstanceOf(SVGElement);
+
     });
   });
 

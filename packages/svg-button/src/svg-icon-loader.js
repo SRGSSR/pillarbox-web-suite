@@ -7,9 +7,11 @@ import { loadSvgElement } from '@srgssr/web-suite-utils';
  */
 export async function appendSvgIcon(component) {
   const { icon, iconName } = component.options();
-  const placeholder = component.el().querySelector('.vjs-icon-placeholder');
 
   if (iconName) component.setIcon(iconName);
+
+  const placeholder = component.el().querySelector('.vjs-icon-placeholder');
+
   if (iconName && placeholder) placeholder.classList.toggle(`vjs-icon-${iconName}`, true);
 
   await insertSvgIcon(icon, placeholder);
