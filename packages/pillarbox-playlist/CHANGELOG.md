@@ -1,3 +1,26 @@
+## [@srgssr/pillarbox-playlist-v3.0.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v2.2.0...@srgssr/pillarbox-playlist-v3.0.0) (2025-10-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **pillarbox-playlist:** plugin options for dialog/buttons configuration are no longer
+passed through plugin options but via player root and controlBar options.
+
+### New Features 🚀
+
+* **pillarbox-playlist:** replace default buttons with custom svg-button components ([14ad1d5](https://github.com/SRGSSR/pillarbox-web-suite/commit/14ad1d5252c2961dfb0d75718fa460b2f1d8c534)), closes [#81](https://github.com/SRGSSR/pillarbox-web-suite/issues/81)
+
+
+### Docs 📖
+
+* add playlist item api documentation ([4dfec59](https://github.com/SRGSSR/pillarbox-web-suite/commit/4dfec59d5927c7ea3af82d89e72af17177d0f446)), closes [#77](https://github.com/SRGSSR/pillarbox-web-suite/issues/77)
+
+
+### Chore 🧹
+
+* change demo oututdir ([96086d2](https://github.com/SRGSSR/pillarbox-web-suite/commit/96086d2e484833280004b3bacf713823482722a3))
+* use camel case for examples and documentation ([dbfa4fc](https://github.com/SRGSSR/pillarbox-web-suite/commit/dbfa4fc146b6037b8c761ca72dd9bad2e2ac9af1))
+
 ## [@srgssr/pillarbox-playlist-v2.2.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v2.1.0...@srgssr/pillarbox-playlist-v2.2.0) (2025-05-02)
 
 
