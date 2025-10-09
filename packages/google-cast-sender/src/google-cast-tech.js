@@ -170,7 +170,15 @@ class Chromecast extends Tech {
    * state
    */
   handleSeeking(playerState) {
-    if (playerState.field === 'videoInfo' && !this.scrubbing() && this.isSeeking) {
+    // On the web receiver, the `field` property containing the value `videoInfo`
+    // allows, when combined with the other values, determining that a seek
+    // operation has finished, even when the media is paused. This prevents a
+    // spinner from continuing to spin while waiting for playback to resume,
+    // even though the seek operation has already completed.
+
+    // On the Android receiver, however, the `field` property containing `videoInfo`
+    // does not seem to be emitted, so the `mediaInfo` is used instead.
+    if (['mediaInfo', 'videoInfo'].includes(playerState.field) && !this.scrubbing() && this.isSeeking) {
       this.isSeeking = false;
       this.trigger('seeked');
     }
