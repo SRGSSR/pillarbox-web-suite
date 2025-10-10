@@ -1,3 +1,20 @@
+## [@srgssr/pillarbox-playlist-v3.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v3.0.0...@srgssr/pillarbox-playlist-v3.1.0) (2025-10-10)
+
+
+### New Features 🚀
+
+* add start time support for playlist items ([4678000](https://github.com/SRGSSR/pillarbox-web-suite/commit/46780001716e02e93be51ff5ca950ba66ab5dd19)), closes [#79](https://github.com/SRGSSR/pillarbox-web-suite/issues/79)
+
+
+### Docs 📖
+
+* add playlist item api documentation ([7719fb5](https://github.com/SRGSSR/pillarbox-web-suite/commit/7719fb567f60d99d0b86a1fe7f7abe0e8be086f7)), closes [#77](https://github.com/SRGSSR/pillarbox-web-suite/issues/77)
+
+
+### Chore 🧹
+
+* add multi-target build system with run-all helper ([4567784](https://github.com/SRGSSR/pillarbox-web-suite/commit/45677845a9bce365f5b56c19e68f53baae303afe))
+
 ## [@srgssr/pillarbox-playlist-v3.0.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v2.2.0...@srgssr/pillarbox-playlist-v3.0.0) (2025-10-02)
 
 
