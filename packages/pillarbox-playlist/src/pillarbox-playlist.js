@@ -139,6 +139,15 @@ export class PillarboxPlaylist extends Plugin {
   onEnded_ = () => this.handleEnded();
 
   /**
+   * Handles the 'loadeddata' event when triggered. This method serves as a
+   * proxy to the main `loaded` handler, ensuring that additional logic can be
+   * executed or making it easier to detach the event listener later.
+   *
+   * @private
+   */
+  onLoadedData_ = () => this.handleLoadedData();
+
+  /**
    * Creates an instance of a pillarbox playlist.
    *
    * @param {import('video.js/dist/types/player.js').default} player - The player instance.
@@ -166,10 +175,12 @@ export class PillarboxPlaylist extends Plugin {
       this.previousNavigationThreshold;
 
     this.player.on('ended', this.onEnded_);
+    this.player.on('loadeddata', this.onLoadedData_);
   }
 
   dispose() {
     this.player.off('ended', this.onEnded_);
+    this.player.off('loadeddata', this.onLoadedData_);
   }
 
   /**
@@ -441,6 +452,19 @@ export class PillarboxPlaylist extends Plugin {
   }
 
   /**
+   * Handles the `loadeddata` event. If the currently playing item defines a
+   * `startTime`, the player will automatically seek to that position once the
+   * media data has loaded.
+   */
+  handleLoadedData() {
+    const startTime = this.currentItem?.startTime;
+
+    if (!startTime) return;
+
+    this.player.currentTime(startTime);
+  }
+
+  /**
    * Shuffles the order of the items in the playlist randomly.
    * This method implements the Fisher-Yates shuffle algorithm to
    * ensure each permutation of the array elements is equally likely.
@@ -496,6 +520,8 @@ videojs.registerPlugin('pillarboxPlaylist', PillarboxPlaylist);
  * @typedef {Object} PlaylistItem
  * @property {any[]} sources The array of media sources for the playlist item.
  * @property {string} poster A url for the poster.
+ * @property {number} startTime The time position (in seconds) where playback
+ *                              should begin.
  * @property {Object} data The metadata for the playlist item. In this object
  *                          you can store properties related to the playlist
  *                          item such as `title`, the `duration`,

@@ -42,6 +42,7 @@ const playlist = [
       type: 'test'
     }],
     poster: 'fourth-poster',
+    startTime: 100,
     data: {
       title: 'fourth-source',
       duration: 210
@@ -744,6 +745,50 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(0);
       expect(pillarboxPlaylist.currentIndex).toBe(-1);
       expect(pillarboxPlaylist.currentItem).toBeUndefined();
+    });
+  });
+
+  describe('startTime', () => {
+    it('should seek to the item startTime on loadeddata', () => {
+      // Given
+      const currentTimeSpy = vi.spyOn(player, 'currentTime').mockImplementation(() => {
+      });
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
+
+      // When
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.select(3);
+      pillarboxPlaylist.handleLoadedData();
+
+      // Then
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[3]);
+      expect(srcSpy).toHaveBeenLastCalledWith(playlist[3].sources);
+      expect(posterSpy).toHaveBeenLastCalledWith(playlist[3].poster);
+      expect(currentTimeSpy).toHaveBeenLastCalledWith(playlist[3].startTime);
+    });
+
+    it('should not seek if no startTime is defined on the current item', () => {
+      // Given
+      const currentTimeSpy = vi.spyOn(player, 'currentTime').mockImplementation(() => {
+      });
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
+
+      // When
+      pillarboxPlaylist.load(playlist);
+      pillarboxPlaylist.select(2);
+      pillarboxPlaylist.handleLoadedData();
+
+      // Then
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[2]);
+      expect(srcSpy).toHaveBeenLastCalledWith(playlist[2].sources);
+      expect(posterSpy).toHaveBeenLastCalledWith(playlist[2].poster);
+      expect(currentTimeSpy).not.toHaveBeenCalled();
     });
   });
 });
