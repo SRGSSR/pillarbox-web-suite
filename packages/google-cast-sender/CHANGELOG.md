@@ -1,3 +1,15 @@
+## [@srgssr/google-cast-sender-v1.2.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.0...@srgssr/google-cast-sender-v1.2.1) (2025-10-10)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* **google-cast-sender:** android receiver seeked state ([da603ee](https://github.com/SRGSSR/pillarbox-web-suite/commit/da603ee6d6421f7592800635febab9b39f057c78))
+
+
+### Chore 🧹
+
+* add multi-target build system with run-all helper ([4567784](https://github.com/SRGSSR/pillarbox-web-suite/commit/45677845a9bce365f5b56c19e68f53baae303afe))
+
 ## [@srgssr/google-cast-sender-v1.2.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.1.0...@srgssr/google-cast-sender-v1.2.0) (2025-10-02)
 
 
