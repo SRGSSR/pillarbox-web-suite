@@ -118,11 +118,12 @@ The following properties are read-only:
 
 Represents a single item in the playlist.
 
-| Property  | Type     | Description                                                                                                      |
-|-----------|----------|------------------------------------------------------------------------------------------------------------------|
-| `sources` | `any[]`  | The array of media sources for the playlist item.                                                                |
-| `poster`  | `string` | A URL for the poster image.                                                                                      |
-| `data`    | `Object` | Metadata for the playlist item, where you can store fields like `title`, `duration`, or other custom properties. |
+| Property    | Type     | Description                                                                                                      |
+|-------------|----------|------------------------------------------------------------------------------------------------------------------|
+| `sources`   | `any[]`  | The array of media sources for the playlist item.                                                                |
+| `poster`    | `string` | A URL for the poster image.                                                                                      |
+| `data`      | `Object` | Metadata for the playlist item, where you can store fields like `title`, `duration`, or other custom properties. |
+| `startTime` | `number` | The time (in seconds) at which playback should begin for this item.                                              |
 
 #### Constants
 
