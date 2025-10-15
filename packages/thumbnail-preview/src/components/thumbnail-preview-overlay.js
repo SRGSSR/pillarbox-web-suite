@@ -87,13 +87,48 @@ class ThumbnailPreviewOverlay extends Component {
     const { sprite } = this.options();
 
     if (sprite && sprite.url) {
+      this.createOrUpdateThumbnail();
       this.initListeners();
       this.resizeThumbnail();
-      this.thumbnail.src = this.options().sprite.url;
       this.updateThumbnailVisibility();
     } else {
+      this.removeThumbnail();
       this.resetSprite();
     }
+  }
+
+  /**
+   * Creates or updates the thumbnail image element inside the component.
+   *
+   * - If a thumbnail already exists, its `src` attribute is updated
+   *   with the current sprite URL from `this.options().sprite.url`.
+   * - If no thumbnail exists, a new `<img>` element is created and
+   *   appended to the component's root element.
+   */
+  createOrUpdateThumbnail() {
+    const src = this.options().sprite.url;
+
+    if (this.thumbnail) {
+      this.thumbnail.src = src;
+
+      return;
+    }
+
+    this.thumbnail = videojs.dom.createEl('img', {
+      className: 'pbw-thumbnail',
+      src
+    });
+
+    this.el().appendChild(this.thumbnail);
+  }
+
+  /**
+   * Removes the thumbnail image element from the component. Called when the
+   * sprite is no longer valid.
+   */
+  removeThumbnail() {
+    this.el().removeChild(this.thumbnail);
+    this.thumbnail = null;
   }
 
   /**
@@ -307,16 +342,10 @@ class ThumbnailPreviewOverlay extends Component {
       throw new Error(`'${tag}' is not supported for ThumbnailPreview`);
     }
 
-    this.thumbnail = videojs.dom.createEl('img', {
-      className: 'pbw-thumbnail',
-      src: this.options().sprite.url
-    });
-
     return videojs.dom.createEl(
       tag,
       videojs.obj.merge({ className: this.buildCSSClass() }, props),
-      attributes,
-      this.thumbnail
+      attributes
     );
   }
 
