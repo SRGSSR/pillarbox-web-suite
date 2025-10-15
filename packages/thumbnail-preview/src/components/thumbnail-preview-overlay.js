@@ -89,7 +89,7 @@ class ThumbnailPreviewOverlay extends Component {
     if (sprite && sprite.url) {
       this.initListeners();
       this.resizeThumbnail();
-      this.thumbnail.src = this.options().sprite.url;
+      this.thumbnail.src = sprite.url ?? '';
       this.updateThumbnailVisibility();
     } else {
       this.resetSprite();
@@ -307,10 +307,7 @@ class ThumbnailPreviewOverlay extends Component {
       throw new Error(`'${tag}' is not supported for ThumbnailPreview`);
     }
 
-    this.thumbnail = videojs.dom.createEl('img', {
-      className: 'pbw-thumbnail',
-      src: this.options().sprite.url
-    });
+    this.thumbnail = this.createThumbnailEl();
 
     return videojs.dom.createEl(
       tag,
@@ -318,6 +315,19 @@ class ThumbnailPreviewOverlay extends Component {
       attributes,
       this.thumbnail
     );
+  }
+
+  /**
+   * Creates the thumbnail <img> element.
+   * Uses the sprite URL if defined, or an empty string otherwise.
+   *
+   * @returns {HTMLImageElement}
+   */
+  createThumbnailEl() {
+    return videojs.dom.createEl('img', {
+      className: 'pbw-thumbnail',
+      src: this.options().sprite?.url ?? ''
+    });
   }
 
   /**
