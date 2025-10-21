@@ -96,9 +96,8 @@ class PlaylistMenuDialog extends ModalDialog {
     const itemList = this.getChild('PillarboxPlaylistMenuItemsList');
 
     itemList.children()
-      .filter(item => item.name() === 'PillarboxPlaylistMenuListItem')
-      .map(item => item.getChild('PillarboxPlaylistMenuItem'))
-      .forEach(button => button.selected(index === button.options().index));
+      .filter(item => item.name() === this.options().itemComponentName)
+      .forEach(button => button.select(index === button.options().index));
   }
 
   /**
@@ -114,22 +113,16 @@ class PlaylistMenuDialog extends ModalDialog {
   renderItems() {
     const itemListEl = new Component(this.player(), {
       name: 'PillarboxPlaylistMenuItemsList',
-      el: videojs.dom.createEl('ol', {
+      el: videojs.dom.createEl('div', {
         className: 'pbw-playlist-items'
       })
     });
 
     this.playlist().items.forEach((item, index) => {
-      const itemEl = new Component(this.player(), {
-        name: 'PillarboxPlaylistMenuListItem',
-        el: videojs.dom.createEl('li', {
-          className: 'pbw-playlist-item'
-        })
+
+      itemListEl.addChild(this.options().itemComponentName, {
+        metadata: item.data, index
       });
-
-      itemEl.addChild(this.options().itemComponentName, { item, index });
-
-      itemListEl.addChild(itemEl);
     });
 
     this.addChild(itemListEl);

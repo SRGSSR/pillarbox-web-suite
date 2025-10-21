@@ -23,7 +23,7 @@
 <script type="module">
   import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
   import './scss/pillarbox-playlist.scss';
-  import { default as pillarbox, SrgSsr} from '@srgssr/pillarbox-web';
+  import { default as pillarbox, SrgSsr } from '@srgssr/pillarbox-web';
   import './src/pillarbox-playlist.js';
   import './src/pillarbox-playlist-ui.js';
   import { RepeatMode } from './src/pillarbox-playlist.js';
@@ -59,7 +59,12 @@
 
     return {
       sources: [{ src: urn, type: 'srgssr/urn' }],
-      data: { title: mainChapter.title, duration: mainChapter.duration / 1000 },
+      data: {
+        title: mainChapter.title,
+        duration: mainChapter.duration / 1000,
+        imageUrl: mainChapter.imageUrl,
+        imageTitle: mainChapter.imageTitle
+      },
       poster: mainChapter.imageUrl
     };
   })).then(playlist => {

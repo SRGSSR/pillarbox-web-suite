@@ -1,4 +1,5 @@
 @import '@srgssr/svg-button/dist/svg-button.min.css';
+@import '@srgssr/card/dist/card.min.css';
 
 .pbw-playlist-button {
   cursor: pointer;
@@ -16,31 +17,56 @@
 }
 
 .pbw-playlist-dialog {
+
   .vjs-modal-dialog-content {
     font-size: 1em;
   }
 
-  .pbw-playlist-items {
+  .vjs-card-button {
     width: 100%;
-    padding-left: 0;
-    list-style-position: inside;
+    padding: 0;
+    background-color: rgb(0, 0, 0, 0.3);
     border-radius: 0.5em;
-  }
 
-  .vjs-button.pbw-playlist-item-button {
-    width: 95%;
-    height: auto;
-    padding: 0.5em;
-    overflow: hidden;
-    white-space: nowrap;
-    text-align: left;
-    text-overflow: ellipsis;
-    border-radius: 0.5em;
-  }
+    &:focus {
+      background-color: rgb(255, 255, 255, 0.3);
+    }
 
-  .vjs-selected {
-    color: black;
-    background-color: white;
+    &.vjs-card-selected {
+      color: black;
+      background-color: white;
+    }
+
+    .vjs-card-figure {
+      position: relative;
+      display: flex;
+      height: 6em;
+
+      .vjs-card-img {
+        width: auto;
+        background-color: black;
+        border-radius: 0.5em 0 0 0.5em;
+        aspect-ratio: 16/9;
+      }
+    }
+
+    .vjs-card-figcaption {
+      padding-inline: 0.5em;
+
+      .vjs-card-title {
+        overflow: hidden;
+        line-height: 1.6em;
+      }
+
+      .vjs-card-duration {
+        position: absolute;
+        top: 4em;
+        left: 6.5em;
+        color: white;
+        background-color: rgb(0, 0, 0, 0.5);
+        padding-inline: 0.5em;
+      }
+    }
   }
 
   .pbw-playlist-controls {
@@ -51,6 +77,15 @@
     .vjs-button {
       margin-right: 1em;
       border-radius: 0.5em;
+
+      &:focus {
+        background-color: rgb(255, 255, 255, 0.3);
+      }
+
+      &.vjs-selected {
+        color: black;
+        background-color: white;
+      }
     }
   }
 

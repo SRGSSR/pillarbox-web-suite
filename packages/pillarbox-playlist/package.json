@@ -53,7 +53,8 @@
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
   "dependencies": {
-    "@srgssr/svg-button": "^1.1.0"
+    "@srgssr/svg-button": "^1.1.0",
+    "@srgssr/card": "^1.0.0"
   },
   "peerDependencies": {
     "video.js": "^8.0.0"
