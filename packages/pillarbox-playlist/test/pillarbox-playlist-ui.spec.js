@@ -174,17 +174,16 @@ describe('PillarboxPlaylist', () => {
       dialog = player.pillarboxPlaylistMenuDialog;
       controls = dialog.getChild('PillarboxPlaylistControls');
       items = dialog.getChild('PillarboxPlaylistMenuItemsList').children()
-        .filter(item => item.name() === 'PillarboxPlaylistMenuListItem')
-        .map(item => item.getChild('PillarboxPlaylistMenuItem'));
+        .filter(item => item.name() === 'PillarboxPlaylistMenuItem');
     });
 
     it('should modal should display the button and all the items in the playlist', () => {
       // Then
       expect(button.hasClass('vjs-hidden')).toBeFalsy();
       expect(items.length).toBe(4);
-      expect(items[pillarboxPlaylist.currentIndex].hasClass('vjs-selected')).toBeTruthy();
+      expect(items[pillarboxPlaylist.currentIndex].hasClass('vjs-card-selected')).toBeTruthy();
       items.filter((item, index) => index !== pillarboxPlaylist.currentIndex)
-        .forEach((item) => expect(item.hasClass('vjs-selected')).toBeFalsy());
+        .forEach((item) => expect(item.hasClass('vjs-card-selected')).toBeFalsy());
       expect(dialog.hasClass('vjs-hidden')).toBeTruthy();
     });
 
@@ -213,9 +212,9 @@ describe('PillarboxPlaylist', () => {
 
       // Then
       expect(pillarboxPlaylist.currentIndex).toBe(2);
-      expect(items[pillarboxPlaylist.currentIndex].hasClass('vjs-selected')).toBeTruthy();
+      expect(items[pillarboxPlaylist.currentIndex].hasClass('vjs-card-selected')).toBeTruthy();
       items.filter((item, index) => index !== pillarboxPlaylist.currentIndex)
-        .forEach((item) => expect(item.hasClass('vjs-selected')).toBeFalsy());
+        .forEach((item) => expect(item.hasClass('vjs-card-selected')).toBeFalsy());
     });
 
     it('should toggle repeat mode through the dialog controls', () => {
@@ -249,9 +248,9 @@ describe('PillarboxPlaylist', () => {
 
       // Then
       expect(pillarboxPlaylist.currentIndex).toBe(1);
-      expect(items[pillarboxPlaylist.currentIndex].hasClass('vjs-selected')).toBeTruthy();
+      expect(items[pillarboxPlaylist.currentIndex].hasClass('vjs-card-selected')).toBeTruthy();
       items.filter((item, index) => index !== pillarboxPlaylist.currentIndex)
-        .forEach((item) => expect(item.hasClass('vjs-selected')).toBeFalsy());
+        .forEach((item) => expect(item.hasClass('vjs-card-selected')).toBeFalsy());
     });
 
     it('should go the previous item through the dialog controls', () => {
@@ -263,9 +262,9 @@ describe('PillarboxPlaylist', () => {
 
       // Then
       expect(pillarboxPlaylist.currentIndex).toBe(1);
-      expect(items[pillarboxPlaylist.currentIndex].hasClass('vjs-selected')).toBeTruthy();
+      expect(items[pillarboxPlaylist.currentIndex].hasClass('vjs-card-selected')).toBeTruthy();
       items.filter((item, index) => index !== pillarboxPlaylist.currentIndex)
-        .forEach((item) => expect(item.hasClass('vjs-selected')).toBeFalsy());
+        .forEach((item) => expect(item.hasClass('vjs-card-selected')).toBeFalsy());
     });
 
     it('should shuffle the items through the dialog controls', () => {
