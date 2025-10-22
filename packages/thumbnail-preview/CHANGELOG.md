@@ -1,3 +1,15 @@
+## [@srgssr/thumbnail-preview-v1.0.3](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/thumbnail-preview-v1.0.2...@srgssr/thumbnail-preview-v1.0.3) (2025-10-22)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* **thumbnail-preview:** prevent undefined src in img sprite ewlement ([7d78d2f](https://github.com/SRGSSR/pillarbox-web-suite/commit/7d78d2ffa9c891db4364bba6b22de6b3a958aab3)), closes [#107](https://github.com/SRGSSR/pillarbox-web-suite/issues/107)
+
+
+### Chore 🧹
+
+* add multi-target build system with run-all helper ([4567784](https://github.com/SRGSSR/pillarbox-web-suite/commit/45677845a9bce365f5b56c19e68f53baae303afe))
+
 ## [@srgssr/thumbnail-preview-v1.0.2](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/thumbnail-preview-v1.0.1...@srgssr/thumbnail-preview-v1.0.2) (2025-07-23)
 
 
