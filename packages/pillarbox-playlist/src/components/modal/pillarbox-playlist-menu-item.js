@@ -3,7 +3,7 @@ import '@srgssr/card';
 
 /**
  * @ignore
- * @type {typeof import('video.js/dist/types/button').default}
+ * @type {typeof import('@srgssr/card').CardButton}
  */
 const CardButton = videojs.getComponent('CardButton');
 
@@ -16,6 +16,9 @@ class PillarboxPlaylistMenuItem extends CardButton {
    * @param {Object} player - The video.js player instance.
    * @param {Object} options - Options for the menu item.
    * @param {number} options.index - The index of the playlist item.
+   * @param {number} options.metadata.live - Whether the playlist item is a livestream.
+   *        If true, the duration element will display "Live" as text and the class
+   *        `vjs-card-duration-live` will be added to the element.
    */
   constructor(player, options) {
     super(player, options);
@@ -29,6 +32,17 @@ class PillarboxPlaylistMenuItem extends CardButton {
    */
   playlist() {
     return this.player().pillarboxPlaylist();
+  }
+
+  createDuration() {
+    const durationEl = super.createDuration();
+
+    if (this.options().metadata.live) {
+      durationEl.textContent = 'Live';
+      durationEl.classList.add('vjs-card-duration-live');
+    }
+
+    return durationEl;
   }
 
   /**

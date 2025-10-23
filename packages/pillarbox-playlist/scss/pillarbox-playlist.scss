@@ -61,10 +61,14 @@
       .vjs-card-duration {
         position: absolute;
         top: 4em;
-        left: 6.5em;
+        right: 17em;
         color: white;
         background-color: rgb(0, 0, 0, 0.5);
         padding-inline: 0.5em;
+
+        &.vjs-card-duration-live {
+          background-color: rgb(255, 0, 0, 0.5);
+        }
       }
     }
   }

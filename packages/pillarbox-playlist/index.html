@@ -51,6 +51,7 @@
     'urn:srf:video:05457f66-fd67-4131-8e0a-6d85743efc39',
     'urn:rtr:video:33136b80-bec6-40cd-a771-b8954c805098',
     'urn:rts:video:9883196',
+    'urn:rts:video:3608506'
   ];
 
   Promise.all(sources.map(async urn => {
@@ -62,6 +63,7 @@
       data: {
         title: mainChapter.title,
         duration: mainChapter.duration / 1000,
+        live: mainChapter.type === 'LIVESTREAM',
         imageUrl: mainChapter.imageUrl,
         imageTitle: mainChapter.imageTitle
       },
