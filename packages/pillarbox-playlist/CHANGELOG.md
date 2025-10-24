@@ -1,3 +1,10 @@
+## [@srgssr/pillarbox-playlist-v3.2.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v3.1.0...@srgssr/pillarbox-playlist-v3.2.0) (2025-10-24)
+
+
+### New Features 🚀
+
+* **pillarbox-playlist:** use card button as base for playlist menu items ([839d4ef](https://github.com/SRGSSR/pillarbox-web-suite/commit/839d4ef74736021ec4df967611f17cc3dd6ec677)), closes [#80](https://github.com/SRGSSR/pillarbox-web-suite/issues/80)
+
 ## [@srgssr/pillarbox-playlist-v3.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v3.0.0...@srgssr/pillarbox-playlist-v3.1.0) (2025-10-10)
 
 
