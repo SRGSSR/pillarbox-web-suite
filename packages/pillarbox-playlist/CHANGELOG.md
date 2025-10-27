@@ -1,3 +1,10 @@
+## [@srgssr/pillarbox-playlist-v3.3.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v3.2.0...@srgssr/pillarbox-playlist-v3.3.0) (2025-10-27)
+
+
+### New Features 🚀
+
+* display live label livestream items ([8dd1577](https://github.com/SRGSSR/pillarbox-web-suite/commit/8dd15779b66b2cbe6961aea8000042e26ac6acc1)), closes [#78](https://github.com/SRGSSR/pillarbox-web-suite/issues/78)
+
 ## [@srgssr/pillarbox-playlist-v3.2.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v3.1.0...@srgssr/pillarbox-playlist-v3.2.0) (2025-10-24)
 
 
