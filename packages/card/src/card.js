@@ -102,8 +102,8 @@ class Card extends ClickableComponent {
       undefined,
       {
         class: 'vjs-card-img',
-        alt: this.options().metadata.imageTitle,
-        src: this.options().metadata.imageUrl
+        alt: this.options().metadata.imageTitle ?? '',
+        src: this.options().metadata.imageUrl ?? ''
       }
     );
   }
