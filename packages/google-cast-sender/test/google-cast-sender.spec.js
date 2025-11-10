@@ -309,4 +309,42 @@ describe('GoogleCastSender', () => {
       expect(window.__onGCastApiAvailable).toBeUndefined();
     });
   });
+
+  describe('restoreTracks', () => {
+    it('should not try to restore the audio track if empty', () => {
+      const audioTrack = undefined;
+      const textTrack = { language: 'fr', mode: 'showing' };
+      const trackListToArraySpy = vi.spyOn(googleCastSender, 'trackListToArray');
+
+      player.audioTracks = vi.fn(()=>([]));
+      player.textTracks = vi.fn(()=>([]));
+
+      googleCastSender.restoreTracks(audioTrack, textTrack);
+
+      expect(trackListToArraySpy).toHaveBeenCalledOnce();
+      expect(player.audioTracks).not.toHaveBeenCalled();
+      expect(player.textTracks).toHaveBeenCalled();
+
+      player.audioTracks.mockRestore();
+      player.textTracks.mockRestore();
+    });
+
+    it('should not try to restore the text track if empty', () => {
+      const audioTrack = { language: 'en', enabled: true };
+      const textTrack = undefined;
+      const trackListToArraySpy = vi.spyOn(googleCastSender, 'trackListToArray');
+
+      player.audioTracks = vi.fn(()=>([]));
+      player.textTracks = vi.fn(()=>([]));
+
+      googleCastSender.restoreTracks(audioTrack, textTrack);
+
+      expect(trackListToArraySpy).toHaveBeenCalledOnce();
+      expect(player.audioTracks).toHaveBeenCalled();
+      expect(player.textTracks).not.toHaveBeenCalled();
+
+      player.audioTracks.mockRestore();
+      player.textTracks.mockRestore();
+    });
+  });
 });

@@ -301,13 +301,17 @@ class GoogleCastSender extends Plugin {
    * @param {TextTrack} textTrack the text track to restore
    */
   restoreTracks(audioTrack, textTrack) {
-    this.trackListToArray(this.player.audioTracks()).forEach(track => {
-      track.enabled = track.language === audioTrack.language;
-    });
+    if (audioTrack) {
+      this.trackListToArray(this.player.audioTracks()).forEach(track => {
+        track.enabled = track.language === audioTrack.language;
+      });
+    }
 
-    this.trackListToArray(this.player.textTracks()).forEach(track => {
-      track.mode = textTrack && track.language === textTrack.language ? 'showing' : 'disabled';
-    });
+    if (textTrack) {
+      this.trackListToArray(this.player.textTracks()).forEach(track => {
+        track.mode = textTrack && track.language === textTrack.language ? 'showing' : 'disabled';
+      });
+    }
   }
 
   /**
