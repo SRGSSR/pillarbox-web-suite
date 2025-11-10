@@ -460,7 +460,7 @@ class Chromecast extends Tech {
   poster() {
     const remotePoster = this.remotePlayer && this.remotePlayer.imageUrl;
 
-    return this.options().poster || remotePoster;
+    return remotePoster || this.options().poster;
   }
 
   src(source) {
