@@ -1,3 +1,11 @@
+## [@srgssr/google-cast-sender-v1.2.2](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.1...@srgssr/google-cast-sender-v1.2.2) (2025-11-10)
+
+
+### Enhancements and Bug Fixes 🐛
+
+* **google-cast-sender:** default poster displayed ([af3b543](https://github.com/SRGSSR/pillarbox-web-suite/commit/af3b543ecae2c8672f5f44097cd3d387324f1473))
+* **google-cast-sender:** empty track restoration ([f89e5dd](https://github.com/SRGSSR/pillarbox-web-suite/commit/f89e5dd21d3172edaa0ab1285b533642861fd158))
+
 ## [@srgssr/google-cast-sender-v1.2.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.0...@srgssr/google-cast-sender-v1.2.1) (2025-10-10)
 
 
