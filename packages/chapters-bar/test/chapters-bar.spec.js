@@ -7,7 +7,7 @@ window.HTMLMediaElement.prototype.load = () => { };
 
 // Mock CardLink since we are not testing its functionality here
 vi.mock('@srgssr/card', () => {
-  const CardLink = vi.fn().mockImplementation((player, options) => {
+  const CardLink = vi.fn().mockImplementation(function(player, options) {
     const el = document.createElement('div');
 
     el.className = 'vjs-card-link';

@@ -61,7 +61,9 @@ window.cast = {
       SESSION_STATE_CHANGED: 'session_state_changed',
     },
     RemotePlayer: vi.fn(),
-    RemotePlayerController: vi.fn(() => remotePlayerController),
+    RemotePlayerController: vi.fn(function() {
+      return remotePlayerController;
+    }),
     RemotePlayerEventType: {
       ANY_CHANGE: 'any_change',
     },
