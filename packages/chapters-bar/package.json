@@ -47,6 +47,6 @@
     "@srgssr/card": "^1.0.0"
   },
   "peerDependencies": {
-    "@srgssr/pillarbox-web": "^1.12.1"
+    "@srgssr/pillarbox-web": "^1.24.1"
   }
 }

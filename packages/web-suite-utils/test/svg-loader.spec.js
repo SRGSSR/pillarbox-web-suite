@@ -42,8 +42,7 @@ describe('loadSvgElement', () => {
     const fakeUrl = new URL('https://example.com/icon.svg');
     const result = await loadSvgElement(fakeUrl);
 
-    expect(fetch).toHaveBeenCalledOnce();
-    expect(fetch).toHaveBeenCalledWith(fakeUrl.href, { mode: 'cors' });
+    expect(fetch).toHaveBeenCalledExactlyOnceWith(fakeUrl.href, { mode: 'cors' });
     expect(result).toBeInstanceOf(SVGElement);
     expect(result.querySelector('rect')).not.toBeNull();
   });
@@ -91,8 +90,7 @@ describe('loadSvgElement', () => {
     const urlString = 'https://example.com/fake.svg';
 
     await expect(loadSvgElement(urlString)).rejects.toThrow('Parsed root is not an SVGElement');
-    expect(fetch).toHaveBeenCalledOnce();
-    expect(fetch).toHaveBeenCalledWith(urlString, { mode: 'cors' });
+    expect(fetch).toHaveBeenCalledExactlyOnceWith(urlString, { mode: 'cors' });
   });
 
 });
