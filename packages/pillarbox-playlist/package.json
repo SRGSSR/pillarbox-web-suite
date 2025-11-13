@@ -60,6 +60,6 @@
     "video.js": "^8.0.0"
   },
   "devDependencies": {
-    "@srgssr/pillarbox-web": "^1.12.2"
+    "@srgssr/pillarbox-web": "^1.24.1"
   }
 }

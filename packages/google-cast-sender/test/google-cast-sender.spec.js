@@ -104,14 +104,11 @@ describe('GoogleCastSender', () => {
     let addEventListenerSpy;
 
     beforeEach(() => {
-      setOptionsSpy = vi.spyOn(
-        window.cast.framework.CastContext.getInstance(),
-        'setOptions'
-      );
-      addEventListenerSpy = vi.spyOn(
-        window.cast.framework.CastContext.getInstance(),
-        'addEventListener'
-      );
+      setOptionsSpy = window.cast.framework.CastContext.getInstance().setOptions;
+      addEventListenerSpy = window.cast.framework.CastContext.getInstance().addEventListener;
+
+      setOptionsSpy.mockRestore();
+      addEventListenerSpy.mockRestore();
     });
 
     afterEach(() => {
