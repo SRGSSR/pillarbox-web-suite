@@ -50,5 +50,9 @@
   {
     "name": "countdown-display",
     "description": "A component for presenting a countdown overlay that leads into a playback transition."
+  },
+  {
+    "name": "chapter-navigation",
+    "description": "Displays a component that allows you to navigate through the list of chapters."
   }
 ]

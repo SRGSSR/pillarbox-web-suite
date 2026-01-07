@@ -1,0 +1,139 @@
+@import '@srgssr/svg-button/dist/svg-button.min.css';
+@import '@srgssr/chapters-bar/dist/chapters-bar.min.css';
+
+
+.pillarbox-js.pbw-with-chapters {
+  --chapters-navigation-bottom: 12em;
+  --chapters-navigation-bottom-tolerance: .9em;
+  --chapters-navigation-bottom-position: calc(var(--chapters-navigation-bottom) + var(--chapters-navigation-bottom-tolerance));
+
+  &.vjs-has-started:not(.vjs-fullscreen) {
+    .vjs-tech {
+      height: calc(100% - var(--chapters-navigation-bottom-position));
+    }
+
+    .vjs-loading-spinner {
+      top: unset;
+      bottom: calc(50% + var(--chapters-navigation-bottom-position));
+      transform: translate(-50%, calc(-50% + var(--chapters-navigation-bottom-position)));
+    }
+  }
+
+  .vjs-text-track-display {
+    inset: 0 0 calc(var(--chapters-navigation-bottom-position) + 5em);
+  }
+
+  &.vjs-user-inactive.vjs-playing:not(.vjs-fullscreen) .vjs-text-track-display {
+    bottom: calc(var(--chapters-navigation-bottom-position));
+  }
+
+  .vjs-control-bar {
+    bottom: var(--chapters-navigation-bottom-position);
+  }
+
+  .pbw-chapters-navigation {
+    position: absolute;
+    bottom: 0;
+    z-index: 0;
+    width: 100%;
+  }
+
+  &:not(.vjs-has-started) .pbw-chapters-navigation {
+    display: none;
+  }
+
+  &.vjs-has-started.vjs-fullscreen {
+    .vjs-control-bar {
+      bottom: 0;
+    }
+
+    .vjs-menu {
+      z-index: 1;
+    }
+
+    .pbw-chapters-navigation {
+      bottom: 6em;
+    }
+  }
+
+  &.vjs-fullscreen.vjs-has-started.vjs-user-inactive.vjs-playing .pbw-chapters-navigation:not(:hover) {
+    visibility: visible;
+    opacity: 0;
+    transition: visibility 1s, opacity 1s;
+    pointer-events: none;
+  }
+
+  .pbw-chapters-bar {
+    position: unset;
+    top: unset;
+    right: unset;
+    bottom: unset;
+    flex-direction: row;
+    gap: .5em;
+    padding-bottom: 1em;
+  }
+
+  &:not(.vjs-device-iphone, &.vjs-device-android) {
+    .pbw-chapters-bar {
+      overflow: hidden;
+    }
+  }
+
+  &.vjs-has-started.vjs-user-inactive.vjs-playing .pbw-chapters-bar {
+    visibility: unset;
+    opacity: unset;
+    transition: unset;
+    pointer-events: unset;
+  }
+
+  .vjs-card {
+    flex: 1 0 auto;
+    max-width: 12em;
+  }
+
+  .vjs-card-title {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  .vjs-control.pbw-chapter-arrow {
+    --arrow-size: 3em;
+    position: absolute;
+    bottom: 50%;
+    z-index: 1;
+    display: flex;
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+    place-content: center;
+    place-items: center;
+    background-color: #16191dbb;
+    border-radius: 50%;
+    transform: translateY(50%);
+
+    .vjs-svg-icon {
+      --icon-size: 1em;
+      display: flex;
+      width: var(--icon-size);
+      height: var(--icon-size);
+      place-content: center;
+      place-items: center;
+    }
+  }
+
+  .pbw-chapter-left {
+    left: 0.5em;
+  }
+
+  .pbw-chapter-right {
+    right: 0.5em;
+  }
+
+  .pbw-chapter-arrow .icon-from-options {
+    width: 100%;
+    height: 100%;
+  }
+}
