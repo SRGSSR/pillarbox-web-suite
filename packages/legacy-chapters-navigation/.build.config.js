@@ -25,10 +25,10 @@ import { env } from 'node:process';
  */
 const entryMap = {
   default: {
-    entry: 'src/chapter-navigation.js',
-    output: 'chapter-navigation',
+    entry: 'src/legacy-chapters-navigation.js',
+    output: 'legacy-chapters-navigation',
     outDir: 'dist',
-    name: 'ChapterNavigation',
+    name: 'LegacyChaptersNavigation',
   }
 };
 
