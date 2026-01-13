@@ -1,4 +1,4 @@
-# Pillarbox Web: ChapterNavigation
+# Pillarbox Web: LegacyChaptersNavigation
 
 <!--
 Introduce your component with a clear overview of its goals, providing
@@ -16,7 +16,7 @@ To use this component, you need the following installed on your system:
 To get started with this component, install it through the following command:
 
 ```bash
-npm install --save @srgssr/pillarbox-web @srgssr/chapter-navigation
+npm install --save @srgssr/pillarbox-web @srgssr/legacy-chapters-navigation
 ```
 
 For instructions on setting up Pillarbox, see
@@ -26,15 +26,15 @@ Once the player is installed you can activate the component as follows:
 
 ```javascript
 import pillarbox from '@srgssr/pillarbox-web';
-import '@srgssr/chapter-navigation';
+import '@srgssr/legacy-chapters-navigation';
 
-const player = pillarbox('my-player', { chapterNavigation: true });
+const player = pillarbox('my-player', { legacyChaptersNavigation: true });
 ```
 
 To apply the default styling, add the following line to your CSS file:
 
 ```css
-@import "@srgssr/chapter-navigation/dist/chapter-navigation.min.css";
+@import "@srgssr/legacy-chapters-navigation/dist/legacy-chapters-navigation.min.css";
 ```
 
 ## Contributing

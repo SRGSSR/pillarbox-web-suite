@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChapterNavigation Demo</title>
+    <title>LegacyChaptersNavigation Demo</title>
     <style>
       html,
       body {
@@ -25,24 +25,24 @@
     <script type="module">
       import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
       import pillarbox from '@srgssr/pillarbox-web';
-      import './scss/chapter-navigation.scss';
-      import './src/chapter-navigation.js';
+      import './scss/legacy-chapters-navigation.scss';
+      import './src/legacy-chapters-navigation.js';
 
       // Handle URL parameters
       const searchParams = new URLSearchParams(location.search);
       const debug = searchParams.has('debug');
       const ilHost = searchParams.get('ilHost') || undefined;
       const language = searchParams.get('language');
-      const urn = searchParams.get('urn') || 'urn:rts:video:b5404fe4-4f35-3add-a591-d75c19ad7a95';
+      const urn = searchParams.get('urn') || 'urn:srf:video:fe244549-2459-4d47-a45b-e307ca420154';
 
-      // Create a pillarbox player instance with the ChapterNavigation enabled
+      // Create a pillarbox player instance with the LegacyChaptersNavigation enabled
       window.player = pillarbox('player', {
         debug,
         language,
         srgOptions: {
           dataProviderHost: ilHost
         },
-        chapterNavigation: true,
+        legacyChaptersNavigation: true,
       });
 
       // Load the video source for the player
