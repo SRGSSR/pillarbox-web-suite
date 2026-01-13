@@ -1,10 +1,10 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import pillarbox from '@srgssr/pillarbox-web';
-import ChapterNavigation from '../src/chapter-navigation.js';
+import LegacyChaptersNavigation from '../src/legacy-chapters-navigation.js';
 
 window.HTMLMediaElement.prototype.load = () => {};
 
-describe('ChapterNavigation', () => {
+describe('LegacyChaptersNavigation', () => {
   let player, videoElement;
 
   beforeAll(() => {
@@ -14,7 +14,7 @@ describe('ChapterNavigation', () => {
 
   beforeEach(() => {
     player = pillarbox(videoElement, {
-      chapterNavigation: true
+      legacyChaptersNavigation: true
     });
   });
 
@@ -23,8 +23,8 @@ describe('ChapterNavigation', () => {
   });
 
   it('should be registered and attached to the player', () => {
-    expect(pillarbox.getComponent('ChapterNavigation')).toBe(ChapterNavigation);
-    expect(player.chapterNavigation).toBeDefined();
-    expect(ChapterNavigation.VERSION).toBeDefined();
+    expect(pillarbox.getComponent('LegacyChaptersNavigation')).toBe(LegacyChaptersNavigation);
+    expect(player.legacyChaptersNavigation).toBeDefined();
+    expect(LegacyChaptersNavigation.VERSION).toBeDefined();
   });
 });
