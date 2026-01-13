@@ -7,8 +7,8 @@ import copy from 'rollup-plugin-copy';
  * Vite's configuration for the lib build.
  *
  * Outputs:
- * - 'dist/chapter-navigation.js': ESModule version with sourcemaps.
- * - 'dist/chapter-navigation.cjs': CommonJS version with sourcemaps.
+ * - 'dist/legacy-chapters-navigation.js': ESModule version with sourcemaps.
+ * - 'dist/legacy-chapters-navigation.cjs': CommonJS version with sourcemaps.
  */
 export default defineConfig({
   esbuild: false,
