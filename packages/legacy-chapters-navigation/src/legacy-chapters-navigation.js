@@ -5,6 +5,7 @@ import './previous-button.js';
 import './next-button.js';
 import './text-track-display.js';
 import './chapters-bar.js';
+import './chapter-updater.js';
 import { version } from '../package.json';
 import './lang/index.js';
 
@@ -202,7 +203,8 @@ LegacyChaptersNavigation.prototype.options_ = {
   children: {
     previousButton: true,
     chaptersBar: true,
-    nextButton: true
+    nextButton: true,
+    chapterUpdater: true,
   }
 };
 
