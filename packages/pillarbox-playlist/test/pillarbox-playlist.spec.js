@@ -101,6 +101,34 @@ describe('PillarboxPlaylist', () => {
       expect(srcSpy).toHaveBeenCalledWith(playlist[0].sources);
       expect(posterSpy).toHaveBeenCalledWith(playlist[0].poster);
     });
+
+    it('should load a playlist from options', async() => {
+      // Given
+      player.dispose();
+      player = pillarbox(videoElement, {
+        plugins: {
+          pillarboxPlaylist: { playlist },
+        }
+      });
+      pillarboxPlaylist = player.pillarboxPlaylist();
+
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
+
+      // When
+      await new Promise((resolve) => player.ready(() => resolve()));
+
+      // Then
+      expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
+      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
+      expect(pillarboxPlaylist.items.length).toBe(4);
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
+      expect(srcSpy).toHaveBeenCalledWith(playlist[0].sources);
+      expect(posterSpy).toHaveBeenCalledWith(playlist[0].poster);
+    });
   });
 
   describe('select', () => {
