@@ -336,9 +336,9 @@ export class PillarboxPlaylist extends Plugin {
    * the playlist this method has no effect.
    *
    * @param {number} index The index of the item to play.
+   * @param {Function} [ready] Optional. A callback to be called when the player is ready.
    */
-  // eslint-disable-next-line max-statements
-  select(index) {
+  select(index, ready = undefined) {
     if (index < 0 || index >= this.items_.length) {
       log.warn(`Index: ${index} is out of bounds (The current playlist has ${this.items_.length} elements)`);
 
@@ -353,8 +353,7 @@ export class PillarboxPlaylist extends Plugin {
 
     const item = this.items_[index];
 
-    this.player.src(item.sources);
-    this.player.poster(item.poster);
+    this.player.loadMedia({ src: item.sources, poster: item.poster }, ready);
     this.currentIndex_ = index;
     this.updateState_();
   }
