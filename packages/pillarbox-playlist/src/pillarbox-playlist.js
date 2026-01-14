@@ -162,9 +162,7 @@ export class PillarboxPlaylist extends Plugin {
 
     options = this.options_ = videojs.obj.merge(this.options_, options);
     if (options.playlist && options.playlist.length) {
-      player.ready(() => {
-        this.load(...options.playlist);
-      });
+      player.ready(() => this.load(options.playlist));
     }
 
     this.autoadvance = Boolean(options.autoadvance);
