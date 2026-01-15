@@ -1,4 +1,5 @@
 /* eslint-disable */
+// cspell: disable
 
 import pillarbox from '@srgssr/pillarbox-web';
 import './previous-button.js';
@@ -43,17 +44,36 @@ class LegacyChaptersNavigation extends Component {
     this.on(this.player(), 'playerresize', this.updateButtons);
   }
 
-  addChapter(chapter) {
-    const srgssrChapters = this.player().textTracks().getTrackById('srgssr-chapters');
+  async getChaptersTrack() {
+    let srgssrChapters = this.player().textTracks().getTrackById('srgssr-chapters');
 
-    if (!srgssrChapters) return;
+    if (!srgssrChapters) {
+      srgssrChapters = await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(new pillarbox.TextTrack({
+            id: 'srgssr-chapters',
+            kind: 'metadata',
+            label: 'srgssr-chapters',
+            tech: this.player().tech(true),
+          }));
+        }, 100);
+      });
+
+      this.player().textTracks().addTrack(srgssrChapters);
+    }
+
+    return srgssrChapters;
+  }
+
+  async addChapter(chapter) {
+    let srgssrChapters = await this.getChaptersTrack();
 
     const startTime = (Number.isFinite(chapter.markIn)
       ? chapter.markIn : chapter.fullLengthMarkIn) / 1_000;
     const endTime = (Number.isFinite(chapter.markOut)
       ? chapter.markOut : chapter.fullLengthMarkOut) / 1_000;
 
-    this.player().textTracks().getTrackById('srgssr-chapters').addCue({
+    srgssrChapters.addCue({
       startTime,
       endTime,
       text: JSON.stringify(chapter),
@@ -65,7 +85,7 @@ class LegacyChaptersNavigation extends Component {
       metadata: chapter
     });
 
-    if (!this.player().hasClass('pbw-with-chapters')){
+    if (!this.player().hasClass('pbw-with-chapters')) {
       this.handleChapterVisibility();
     }
 
