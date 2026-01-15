@@ -56,7 +56,7 @@
     }
   }
 
-  &.vjs-has-started.vjs-user-inactive.vjs-playing .pbw-chapters-navigation {
+  &.vjs-has-started.vjs-fullscreen.vjs-user-inactive.vjs-playing .pbw-chapters-navigation {
     visibility: visible;
     opacity: 0;
     transition: visibility 1s, opacity 1s;
@@ -120,6 +120,13 @@
       place-content: center;
       place-items: center;
       filter: unset;
+    }
+  }
+
+  &.vjs-has-started.vjs-user-inactive.vjs-playing {
+    .pbw-chapters-bar {
+      opacity: unset;
+      pointer-events: unset;
     }
   }
 
