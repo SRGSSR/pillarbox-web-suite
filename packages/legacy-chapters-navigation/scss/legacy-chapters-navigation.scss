@@ -86,12 +86,19 @@
 
   .vjs-card-title {
     display: -webkit-box;
+    padding: .5em .6em;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
   }
+
+  .vjs-card-selected {
+    color: white;
+    background-color: #96001a;
+  }
+
 
   .vjs-control.pbw-chapter-button {
     --arrow-size: 3em;
