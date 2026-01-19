@@ -3,7 +3,7 @@
 
 
 .pillarbox-js.pbw-with-chapters {
-  --chapters-navigation-bottom: 9em;
+  --chapters-navigation-bottom: 11em;
   --chapters-navigation-bottom-tolerance: .9em;
   --chapters-navigation-bottom-position: calc(var(--chapters-navigation-bottom) + var(--chapters-navigation-bottom-tolerance));
 
@@ -36,6 +36,7 @@
     bottom: 0;
     z-index: 0;
     width: 100%;
+    padding: 0 4em;
   }
 
   &:not(.vjs-has-started) .pbw-chapters-navigation {
@@ -52,7 +53,7 @@
     }
 
     .pbw-chapters-navigation {
-      bottom: 6em;
+      bottom: 4em;
     }
   }
 
@@ -92,6 +93,9 @@
     -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
+    background-color: black;
+    border-bottom-right-radius: .5em;
+    border-bottom-left-radius: .5em;
   }
 
   .vjs-card-selected {
