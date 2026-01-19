@@ -1,0 +1,46 @@
+.vjs-countdown-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vjs-countdown {
+  display: flex;
+  justify-content: center;
+
+  .vjs-countdown-unit {
+    display: grid;
+    flex: 1;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 1fr auto;
+
+    .vjs-countdown-value, .vjs-countdown-separator {
+      grid-row: 1;
+      padding: 0.2em;
+      font-weight: bold;
+      font-size: clamp(1em, 10vw, 4em);
+      text-align: center;
+    }
+
+    .vjs-countdown-value {
+      grid-column: 1 / 2;
+    }
+
+    .vjs-countdown-separator {
+      grid-column: 2 / 2;
+    }
+
+    .vjs-countdown-label {
+      grid-row: 2;
+      grid-column: 1 / 2;
+      font-weight: bold;
+      font-size: clamp(.5em, 10vw, 1em);
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  .vjs-countdown-unit:last-child .vjs-countdown-separator {
+    display: none;
+  }
+}
