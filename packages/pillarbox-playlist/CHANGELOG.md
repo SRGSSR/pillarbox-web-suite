@@ -1,3 +1,8 @@
+## @srgssr/pillarbox-playlist-v3.3.1 (2026-01-19)
+
+* fix(pillarbox-playlist): pass playlist array correctly in constructor ([3add826](https://github.com/SRGSSR/pillarbox-web-suite/commit/3add826))
+* chore: update dependencies and adapt tests for Vitest 4 migration ([500890e](https://github.com/SRGSSR/pillarbox-web-suite/commit/500890e))
+
 ## [@srgssr/pillarbox-playlist-v3.3.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v3.2.0...@srgssr/pillarbox-playlist-v3.3.0) (2025-10-27)
 
 
