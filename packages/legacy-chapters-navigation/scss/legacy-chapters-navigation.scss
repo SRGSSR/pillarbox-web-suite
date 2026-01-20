@@ -83,6 +83,7 @@
   .vjs-card {
     flex: 1 0 auto;
     max-width: 12em;
+    background-color: black;
   }
 
   .vjs-card-title {
@@ -93,7 +94,6 @@
     -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
-    background-color: black;
     border-bottom-right-radius: .5em;
     border-bottom-left-radius: .5em;
   }
