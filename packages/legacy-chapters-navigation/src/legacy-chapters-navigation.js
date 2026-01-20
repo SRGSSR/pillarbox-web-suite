@@ -40,11 +40,15 @@ class LegacyChaptersNavigation extends Component {
     this.on(this.nextButton, ['click', 'tap'], this.scrollNext);
     this.on(this.chaptersBar, 'wheel', this.mouseWheelScroll);
     this.on(this.chaptersBar, 'scroll', this.updateButtons);
-    this.on(this.player(), 'loadeddata', this.handleChapterVisibility);
+    this.on(
+      this.player(),
+      ['emptied', 'error', 'loadeddata', 'playerreset'],
+      this.handleChapterVisibility
+    );
     this.on(this.player(), 'playerresize', this.updateButtons);
   }
 
-  async addChapter(chaptersTrack ,chapter) {
+  async addChapter(chaptersTrack, chapter) {
     const startTime = (Number.isFinite(chapter.markIn)
       ? chapter.markIn : chapter.fullLengthMarkIn) / 1_000;
     const endTime = (Number.isFinite(chapter.markOut)
@@ -72,10 +76,10 @@ class LegacyChaptersNavigation extends Component {
   handleChapterVisibility() {
     this.player().toggleClass(
       'pbw-with-chapters',
-      Boolean(this.chaptersBar.chapters().length)
+      Boolean(this.chaptersBar.children().length)
     );
 
-    if (!this.chaptersBar.chapters().length) {
+    if (!this.chaptersBar.children().length) {
       this.hide();
 
       return;
@@ -181,7 +185,11 @@ class LegacyChaptersNavigation extends Component {
     this.off(this.nextButton, ['click', 'tap'], this.scrollNext);
     this.off(this.chaptersBar, 'wheel', this.mouseWheelScroll);
     this.off(this.chaptersBar, 'scroll', this.updateButtons);
-    this.off(this.player(), 'loadeddata', this.handleChapterVisibility);
+    this.off(
+      this.player(),
+      ['emptied', 'error', 'loadeddata', 'playerreset'],
+      this.handleChapterVisibility
+    );
     this.off(this.player(), 'playerresize', this.updateButtons);
 
     super.dispose();

@@ -10,6 +10,26 @@ import ChaptersBar from '@srgssr/chapters-bar';
  * @override
  */
 pillarbox.registerComponent('ChaptersBar', class extends ChaptersBar {
+  constructor(player, options) {
+    super(player, options);
+
+    this.removeChapters = this.removeChapters.bind(this);
+
+    this.on(this.player(), ['emptied', 'error', 'playerreset'], this.removeChapters);
+  }
+
+  removeChapters() {
+    this.onEmptied();
+
+    const srgssrChapters = this.player().textTracks().getTrackById('srgssr-chapters');
+
+    if (!srgssrChapters) return;
+
+    Array.from(srgssrChapters.cues).forEach(chapter => {
+      srgssrChapters.removeCue(chapter);
+    });
+  }
+
   /**
    * @override
    */
@@ -49,5 +69,13 @@ pillarbox.registerComponent('ChaptersBar', class extends ChaptersBar {
     if (!this.activeChapter) return;
 
     this.el().scrollLeft = this.activeChapter.el().offsetLeft;
+  }
+
+  /**
+   * @override
+   */
+  dispose() {
+    this.off(this.player(), ['emptied', 'error', 'playerreset'], this.removeChapters);
+    super.dispose();
   }
 });
