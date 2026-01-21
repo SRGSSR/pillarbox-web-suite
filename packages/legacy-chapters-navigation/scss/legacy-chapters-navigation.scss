@@ -39,10 +39,6 @@
     padding: 0 4em;
   }
 
-  &:not(.vjs-has-started) .pbw-chapters-navigation {
-    display: none;
-  }
-
   &.vjs-has-started.vjs-fullscreen {
     .vjs-control-bar {
       bottom: 0;
@@ -69,9 +65,13 @@
     top: unset;
     right: unset;
     bottom: unset;
+    display: flex;
     flex-direction: row;
     gap: .5em;
     padding-bottom: 1em;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility .1s,opacity .1s;
   }
 
   &:not(.vjs-device-iphone, &.vjs-device-android) {
