@@ -7,7 +7,7 @@
   --chapters-navigation-bottom-tolerance: .9em;
   --chapters-navigation-bottom-position: calc(var(--chapters-navigation-bottom) + var(--chapters-navigation-bottom-tolerance));
 
-  &.vjs-has-started:not(.vjs-fullscreen) {
+  &:not(.vjs-fullscreen) {
     .vjs-tech {
       height: calc(100% - var(--chapters-navigation-bottom-position));
     }
