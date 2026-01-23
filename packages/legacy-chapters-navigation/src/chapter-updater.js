@@ -28,8 +28,8 @@ class ChapterUpdater extends Component {
     this.handleStopLongPolling = this.handleStopLongPolling.bind(this);
 
     this.on(
-      player,
-      'loadstart',
+      player.textTracks(),
+      'addtrack',
       this.handleChapterInitialization
     );
 
@@ -46,34 +46,9 @@ class ChapterUpdater extends Component {
     );
   }
 
-  /**
-   * @TODO: remove once https://github.com/SRGSSR/pillarbox-web/pull/362 is merged
-   */
-  async createTextTrack() {
-    const trackId = 'srgssr-chapters';
-    const removeTrack = this.player().textTracks().getTrackById(trackId);
+  async handleChapterInitialization({ track : chapterTrack }) {
+    if (chapterTrack.id !== 'srgssr-chapters') return;
 
-    if (removeTrack) {
-      this.player().textTracks().removeTrack(removeTrack);
-    }
-
-    const textTrack = await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(new pillarbox.TextTrack({
-          id: trackId,
-          kind: 'metadata',
-          label: trackId,
-          tech: this.player().tech(true),
-        }));
-      }, 100);
-    });
-
-    this.player().textTracks().addTrack(textTrack);
-
-    return textTrack;
-  }
-
-  async handleChapterInitialization() {
     const {
       mediaData: {
         urn,
@@ -87,7 +62,6 @@ class ChapterUpdater extends Component {
     // VOD
     if (!this.isLive) return;
 
-    const chapterTrack = await this.createTextTrack();
     const chapterList = await this.fetchChaptersList(this.cachedUrn) || [];
 
     chapterList.forEach(chapter => {
@@ -165,8 +139,8 @@ class ChapterUpdater extends Component {
     this.clearInterval(this.chapterUpdateInterval);
 
     this.off(
-      this.player(),
-      'loadstart',
+      this.player().textTracks(),
+      'addtrack',
       this.handleChapterInitialization
     );
 
