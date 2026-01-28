@@ -50,6 +50,10 @@ const playlist = [
   }
 ];
 
+function toLoadMediaParams(item) {
+  return [{ src: item.sources, poster: item.poster }, undefined];
+}
+
 window.HTMLMediaElement.prototype.load = () => {
 };
 
@@ -84,9 +88,7 @@ describe('PillarboxPlaylist', () => {
   describe('load', () => {
     it('should load a playlist', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -98,8 +100,7 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(0);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
-      expect(srcSpy).toHaveBeenCalledWith(playlist[0].sources);
-      expect(posterSpy).toHaveBeenCalledWith(playlist[0].poster);
+      expect(loadMediaSpy).toHaveBeenCalledWith(...toLoadMediaParams(playlist[0]));
     });
 
     it('should load a playlist from options', async() => {
@@ -134,9 +135,7 @@ describe('PillarboxPlaylist', () => {
   describe('select', () => {
     it('should select an item by index', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -146,15 +145,12 @@ describe('PillarboxPlaylist', () => {
       // Then
       expect(pillarboxPlaylist.currentIndex).toBe(3);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[3]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[3].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[3].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[3]));
     });
 
     it('should not load an item if its already selected', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -164,17 +160,13 @@ describe('PillarboxPlaylist', () => {
       // Then
       expect(pillarboxPlaylist.currentIndex).toBe(0);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
-      expect(srcSpy).toHaveBeenCalledTimes(1);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
-      expect(posterSpy).toHaveBeenCalledTimes(1);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
+      expect(loadMediaSpy).toHaveBeenCalledTimes(1);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[0]));
     });
 
     it('should not load an item if its outside of the playlist range', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -184,19 +176,15 @@ describe('PillarboxPlaylist', () => {
       // Then
       expect(pillarboxPlaylist.currentIndex).toBe(0);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
-      expect(srcSpy).toHaveBeenCalledTimes(1);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
-      expect(posterSpy).toHaveBeenCalledTimes(1);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
+      expect(loadMediaSpy).toHaveBeenCalledTimes(1);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[0]));
     });
   });
 
   describe('next', () => {
     it('should play next on a registered playlist', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -209,15 +197,12 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(1);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[1]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[1].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[1].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[1]));
     });
 
     it('should not play next if the current index is the last of the playlist', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -231,15 +216,12 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(3);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[3]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[3].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[3].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[3]));
     });
 
     it('should play first element if the current index is the last of the playlist and repeat mode all is enabled', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -254,17 +236,14 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(0);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[0]));
     });
   });
 
   describe('previous', () => {
     it('should play previous on a registered playlist', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -278,8 +257,7 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(1);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[1]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[1].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[1].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[1]));
     });
 
     it('should restart the current media if the current time is beyond the threshold', () => {
@@ -302,9 +280,7 @@ describe('PillarboxPlaylist', () => {
 
     it('should not play previous if the current index is the last of the playlist', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -318,15 +294,12 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(0);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[0]));
     });
 
     it('should play last element if the current index is the first of the playlist and repeat mode all is enabled', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -341,17 +314,14 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(3);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[3]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[3].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[3].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[3]));
     });
   });
 
   describe('autoadvance', () => {
     it('should play next element on ended if autoadvance is enabled', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -365,15 +335,12 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(1);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[1]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[1].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[1].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[1]));
     });
 
     it('should not play next element on ended if autoadvance is disabled', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -387,8 +354,7 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(0);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[0]));
     });
   });
 
@@ -414,9 +380,7 @@ describe('PillarboxPlaylist', () => {
 
     it('should play the first element if repeat is true when next is called and the current index is the last of the playlist', () => {
       // Given
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -431,8 +395,7 @@ describe('PillarboxPlaylist', () => {
       expect(pillarboxPlaylist.items.length).toBe(4);
       expect(pillarboxPlaylist.currentIndex).toBe(0);
       expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[0].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[0].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[0]));
     });
 
     it('should toggle repeat mode', () => {
@@ -781,9 +744,7 @@ describe('PillarboxPlaylist', () => {
       // Given
       const currentTimeSpy = vi.spyOn(player, 'currentTime').mockImplementation(() => {
       });
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -793,8 +754,7 @@ describe('PillarboxPlaylist', () => {
 
       // Then
       expect(pillarboxPlaylist.currentItem).toBe(playlist[3]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[3].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[3].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[3]));
       expect(currentTimeSpy).toHaveBeenLastCalledWith(playlist[3].startTime);
     });
 
@@ -802,9 +762,7 @@ describe('PillarboxPlaylist', () => {
       // Given
       const currentTimeSpy = vi.spyOn(player, 'currentTime').mockImplementation(() => {
       });
-      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
-      });
-      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      const loadMediaSpy = vi.spyOn(player, 'loadMedia').mockImplementation(() => {
       });
 
       // When
@@ -814,8 +772,7 @@ describe('PillarboxPlaylist', () => {
 
       // Then
       expect(pillarboxPlaylist.currentItem).toBe(playlist[2]);
-      expect(srcSpy).toHaveBeenLastCalledWith(playlist[2].sources);
-      expect(posterSpy).toHaveBeenLastCalledWith(playlist[2].poster);
+      expect(loadMediaSpy).toHaveBeenLastCalledWith(...toLoadMediaParams(playlist[2]));
       expect(currentTimeSpy).not.toHaveBeenCalled();
     });
   });

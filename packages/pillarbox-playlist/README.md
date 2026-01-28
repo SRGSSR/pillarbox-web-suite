@@ -79,7 +79,7 @@ The following table outlines the key methods available in this plugin:
 | `next()`                               | Advances to the next item in the playlist, with support for repeat mode.                                                                 |
 | `previous()`                           | Navigates to the previous item or restarts the current item based on playback position and threshold.                                    |
 | `shuffle()`                            | Randomizes the order of the playlist items using the Fisher-Yates shuffle algorithm.                                                     |
-| `select(index)`                        | Selects and plays the item at the specified index in the playlist.                                                                       |
+| `select(index, ready?)`                | Selects and plays the item at the specified index in the playlist.                                                                       |
 | `toggleRepeat(force?)`                 | Cycles through the repeat mode of the player, or sets it to the specified value if provided.                                             |
 | `toggleAutoadvance(force?)`            | Toggles the auto-advance mode of the player to the opposite of its current state, or sets it to the specified boolean value if provided. |
 
