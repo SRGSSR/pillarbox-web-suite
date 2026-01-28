@@ -259,9 +259,9 @@ describe('UserPreferences', () => {
       player.userPreferences.restoreTextTrack(textTrack);
 
       tracks.forEach(track => {
-        if (!['metadata', 'chapters'].includes(track.kind)) {
-          expect(track.mode).toBe('disabled');
-        }
+        if (['metadata', 'chapters'].includes(track.kind)) return;
+
+        expect(track.mode).toBe('disabled');
       });
     });
 
@@ -275,9 +275,9 @@ describe('UserPreferences', () => {
       player.userPreferences.restoreTextTrack(textTrack);
 
       tracks.forEach(track => {
-        if (!['metadata', 'chapters'].includes(track.kind)) {
-          expect(track.mode).toBe('disabled');
-        }
+        if (['metadata', 'chapters'].includes(track.kind)) return;
+
+        expect(track.mode).toBe('disabled');
       });
     });
 
@@ -316,9 +316,9 @@ describe('UserPreferences', () => {
       player.userPreferences.restoreTextTrack(textTrack);
 
       tracks.forEach(track => {
-        if (!['metadata', 'chapters'].includes(track.kind)) {
-          expect(track.mode).toBe('disabled');
-        }
+        if (['metadata', 'chapters'].includes(track.kind)) return;
+
+        expect(track.mode).toBe('disabled');
       });
     });
 
