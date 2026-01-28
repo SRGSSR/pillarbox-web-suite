@@ -1,3 +1,7 @@
+## @srgssr/pillarbox-playlist-v3.4.0 (2026-01-28)
+
+* feat(pillarbox-playlist): skip playlist item on error ([77dfcb7](https://github.com/SRGSSR/pillarbox-web-suite/commit/77dfcb7)), closes [#121](https://github.com/SRGSSR/pillarbox-web-suite/issues/121)
+
 ## @srgssr/pillarbox-playlist-v3.3.1 (2026-01-19)
 
 * fix(pillarbox-playlist): pass playlist array correctly in constructor ([3add826](https://github.com/SRGSSR/pillarbox-web-suite/commit/3add826))
