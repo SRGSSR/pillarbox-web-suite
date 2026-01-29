@@ -148,6 +148,26 @@ export class PillarboxPlaylist extends Plugin {
   onLoadedData_ = () => this.handleLoadedData();
 
   /**
+   * The skip on error configuration.
+   *
+   * @type {SkipOnErrorOptions}
+   */
+  skipOnError = {
+    enabled: true,
+    delay: 60
+  };
+
+  skipOnErrorTimeoutId_;
+  /**
+   * Handles the 'error' event when triggered. This method serves as a
+   * proxy to the main `loaded` handler, ensuring that additional logic can be
+   * executed or making it easier to detach the event listener later.
+   *
+   * @private
+   */
+  onError_ = () => this.handleError();
+
+  /**
    * Creates an instance of a pillarbox playlist.
    *
    * @param {import('video.js/dist/types/player.js').default} player - The player instance.
@@ -155,6 +175,7 @@ export class PillarboxPlaylist extends Plugin {
    * @param {Array} [options.playlist=[]] - An array of playlist items to be initially loaded into the player.
    * @param {Boolean} [options.repeat=false] - If true, the playlist will start over automatically after the last item ends.
    * @param {Boolean} [options.autoadvance=false] - If enabled, the player will automatically move to the next item after the current one ends.
+   * @param {SkipOnErrorOptions} [options.skipOnError={enabled: true, delay: 60}] - If enabled, the player will automatically move to the next item after an error occurs with the current item.
    * @param {Number} [options.previousNavigationThreshold=3] - Threshold in seconds for determining the behavior when navigating to the previous item.
    */
   constructor(player, options) {
@@ -162,25 +183,32 @@ export class PillarboxPlaylist extends Plugin {
 
     options = this.options_ = videojs.obj.merge(this.options_, options);
     if (options.playlist && options.playlist.length) {
-      player.ready(() => {
-        this.load(...options.playlist);
-      });
+      player.ready(() => this.load(options.playlist));
     }
 
+    this.initPlugin(options);
+  }
+
+  initPlugin(options) {
     this.autoadvance = Boolean(options.autoadvance);
     this.repeat = options.repeat ?? this.repeat;
+    this.skipOnError = options.skipOnError ?? this.skipOnError;
+
     this.previousNavigationThreshold =
       Number.isFinite(options.previousNavigationThreshold) ?
-      options.previousNavigationThreshold :
-      this.previousNavigationThreshold;
+        options.previousNavigationThreshold :
+        this.previousNavigationThreshold;
 
     this.player.on('ended', this.onEnded_);
     this.player.on('loadeddata', this.onLoadedData_);
+    this.player.on('error', this.onError_);
   }
 
   dispose() {
+    this.player.clearTimeout(this.skipOnErrorTimeoutId_);
     this.player.off('ended', this.onEnded_);
     this.player.off('loadeddata', this.onLoadedData_);
+    this.player.off('error', this.onError_);
   }
 
   /**
@@ -353,6 +381,7 @@ export class PillarboxPlaylist extends Plugin {
 
     const item = this.items_[index];
 
+    this.player.clearTimeout(this.skipOnErrorTimeoutId_);
     this.player.src(item.sources);
     this.player.poster(item.poster);
     this.currentIndex_ = index;
@@ -505,11 +534,32 @@ export class PillarboxPlaylist extends Plugin {
   static get VERSION() {
     return version;
   }
+
+  handleError() {
+    this.player.clearTimeout(this.skipOnErrorTimeoutId_);
+
+    if (this.skipOnError.enabled) {
+      this.skipOnErrorTimeoutId_ = this.player.setTimeout(() => {
+        const error = this.player.error();
+        const index = this.currentIndex;
+        const item = this.currentItem;
+
+        this.next();
+
+        this.trigger({ type: 'itemskipped', error, index, item });
+      }, this.skipOnError.delay);
+
+    }
+  }
 }
 
 PillarboxPlaylist.prototype.options_ = {
   autoadvance: false,
-  repeat: false
+  repeat: false,
+  skipOnError: {
+    enabled: true,
+    delay: 60
+  }
 };
 
 videojs.registerPlugin('pillarboxPlaylist', PillarboxPlaylist);
@@ -528,4 +578,10 @@ videojs.registerPlugin('pillarboxPlaylist', PillarboxPlaylist);
  *                          and other relevant metadata.
  */
 
-
+/**
+ * Configuration for automatic skipping of playlist items when an error occurs.
+ *
+ * @typedef {Object} SkipOnErrorOptions
+ * @property {boolean} enabled Whether the player should automatically skip to the next playlist item.
+ * @property {number} delay The delay in milliseconds before skipping to the next item after an error.
+ */

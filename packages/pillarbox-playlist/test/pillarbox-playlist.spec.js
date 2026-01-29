@@ -101,6 +101,34 @@ describe('PillarboxPlaylist', () => {
       expect(srcSpy).toHaveBeenCalledWith(playlist[0].sources);
       expect(posterSpy).toHaveBeenCalledWith(playlist[0].poster);
     });
+
+    it('should load a playlist from options', async() => {
+      // Given
+      player.dispose();
+      player = pillarbox(videoElement, {
+        plugins: {
+          pillarboxPlaylist: { playlist },
+        }
+      });
+      pillarboxPlaylist = player.pillarboxPlaylist();
+
+      const srcSpy = vi.spyOn(player, 'src').mockImplementation(() => {
+      });
+      const posterSpy = vi.spyOn(player, 'poster').mockImplementation(() => {
+      });
+
+      // When
+      await new Promise((resolve) => player.ready(() => resolve()));
+
+      // Then
+      expect(pillarboxPlaylist.hasPrevious()).toBeFalsy();
+      expect(pillarboxPlaylist.hasNext()).toBeTruthy();
+      expect(pillarboxPlaylist.items.length).toBe(4);
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
+      expect(srcSpy).toHaveBeenCalledWith(playlist[0].sources);
+      expect(posterSpy).toHaveBeenCalledWith(playlist[0].poster);
+    });
   });
 
   describe('select', () => {
@@ -791,4 +819,95 @@ describe('PillarboxPlaylist', () => {
       expect(currentTimeSpy).not.toHaveBeenCalled();
     });
   });
+
+  describe('skipOnError', () => {
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+    });
+
+    it('should skip to the next item when an error occurs and skipOnError is enabled', () => {
+      // Given
+      const triggerSpy = vi.spyOn(pillarboxPlaylist, 'trigger');
+
+      vi.spyOn(player, 'error').mockReturnValue({ code: 2, message: 'MEDIA_ERR_NETWORK' });
+
+      pillarboxPlaylist.skipOnError = {
+        enabled: true,
+        delay: 0
+      };
+
+      pillarboxPlaylist.load(playlist);
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+
+      // When
+      pillarboxPlaylist.handleError();
+      vi.runAllTimers();
+
+      // Then
+      expect(pillarboxPlaylist.currentIndex).toBe(1);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[1]);
+      expect(triggerSpy).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'itemskipped'
+        })
+      );
+
+    });
+
+    it('should not skip to the next item when an error occurs and skipOnError is disabled', () => {
+      // Given
+      const triggerSpy = vi.spyOn(pillarboxPlaylist, 'trigger');
+
+      vi.spyOn(player, 'error').mockReturnValue({ code: 3, message: 'MEDIA_ERR_DECODE' });
+
+      pillarboxPlaylist.skipOnError = {
+        enabled: false,
+        delay: 0
+      };
+
+      pillarboxPlaylist.load(playlist);
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+
+      // When
+      pillarboxPlaylist.handleError();
+      vi.runAllTimers();
+
+      // Then
+      expect(pillarboxPlaylist.currentIndex).toBe(0);
+      expect(pillarboxPlaylist.currentItem).toBe(playlist[0]);
+      expect(triggerSpy).not.toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'itemskipped'
+        })
+      );
+    });
+
+    it('should clear a pending skip timeout if another error occurs before timeout fires', () => {
+      // Given
+      const clearTimeoutSpy = vi.spyOn(player, 'clearTimeout');
+
+      vi.spyOn(player, 'error').mockReturnValue({ code: 4 });
+
+      pillarboxPlaylist.skipOnError = {
+        enabled: true,
+        delay: 0
+      };
+
+      pillarboxPlaylist.load(playlist);
+
+      // When
+      pillarboxPlaylist.handleError();
+      pillarboxPlaylist.handleError(); // second error before timer runs
+      vi.runAllTimers();
+
+      // Then
+      expect(clearTimeoutSpy).toHaveBeenCalled();
+      expect(pillarboxPlaylist.currentIndex).toBe(1);
+    });
+  });
+
 });

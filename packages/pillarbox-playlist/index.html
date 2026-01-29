@@ -46,6 +46,8 @@
     }
   });
 
+  player.pillarboxPlaylist().on('itemskipped', (e) => console.log(e));
+
   const sources = [
     'urn:rts:video:14827742',
     'urn:srf:video:05457f66-fd67-4131-8e0a-6d85743efc39',
@@ -70,6 +72,15 @@
       poster: mainChapter.imageUrl
     };
   })).then(playlist => {
+    const poisonPill = {
+      sources: [{ src: 'urn:srgssr:THIS_WILL_FAIL', type: 'srgssr/urn' }],
+      data: {
+        title: 'Poison Pill',
+        duration: 123,
+        live: false
+      }
+    };
+    playlist.splice(2, 0, poisonPill);
     // Load the video sources for the player
     player.pillarboxPlaylist().load(playlist);
   });

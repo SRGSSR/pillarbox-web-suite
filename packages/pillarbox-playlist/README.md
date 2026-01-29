@@ -17,7 +17,7 @@ To get started with this plugin, install it through the following command:
 ```bash
 npm install --save @srgssr/pillarbox-web @srgssr/pillarbox-playlist
 ```
-
+  
 For instructions on setting up Pillarbox, see
 the [Quick Start guide](https://github.com/SRGSSR/pillarbox-web#quick-start).
 
@@ -88,23 +88,25 @@ The following table outlines the key methods available in this plugin:
 When initializing the playlist plugin, you can pass an `options` object that configures the
 behavior of the plugin. Here are the available options:
 
-| Option                        | Type                             | Default | Description                                                                                 |
-|-------------------------------|----------------------------------|---------|---------------------------------------------------------------------------------------------|
-| `playlist`                    | [`PlaylistItem](#playlistitem)[] | `[]`    | An array of playlist items to be initially loaded into the player.                          |
-| `repeat`                      | `number`                         | 0       | Set the repeat mode of the playlist: 0 - No Repeat, 1 - Repeat All, 2 - Repeat one.         |
-| `autoadvance`                 | `boolean`                        | `false` | If enabled, the player will automatically move to the next item after the current one ends. |
-| `previousNavigationThreshold` | `number`                         | 3       | Threshold in seconds for determining the behavior when navigating to the previous item.     |
+| Option                        | Type                                 | Default                      | Description                                                                                 |
+|-------------------------------|--------------------------------------|------------------------------|---------------------------------------------------------------------------------------------|
+| `playlist`                    | [`PlaylistItem`](#playlistitem)[]    | `[]`                         | An array of playlist items to be initially loaded into the player.                          |
+| `repeat`                      | `number`                             | 0                            | Set the repeat mode of the playlist: 0 - No Repeat, 1 - Repeat All, 2 - Repeat one.         |
+| `autoadvance`                 | `boolean`                            | `false`                      | If enabled, the player will automatically move to the next item after the current one ends. |
+| `previousNavigationThreshold` | `number`                             | 3                            | Threshold in seconds for determining the behavior when navigating to the previous item.     |
+| `skipOnError`                 | [`SkipOnErrorOptions`](#skiponerror) | `{enabled: true, delay: 60}` | Configuration for automatic skipping of playlist items when an error occurs.                |
 
 #### Properties
 
 After initializing the plugin, you can modify or read these properties to control playlist behavior
 dynamically:
 
-| Property                      | Type      | Description                                                                                  |
-|-------------------------------|-----------|----------------------------------------------------------------------------------------------|
-| `repeat`                      | `number`  | Changes the repeat mode of the playlist: 0 - No Repeat, 1 - Repeat All, 2 - Repeat one.    . |
-| `autoadvance`                 | `boolean` | Toggles automatic advancement to the next item when the current item ends.                   |
-| `previousNavigationThreshold` | `number`  | Threshold in seconds for determining the behavior when navigating to the previous item.      |
+| Property                      | Type                                 | Description                                                                                  |
+|-------------------------------|--------------------------------------|----------------------------------------------------------------------------------------------|
+| `repeat`                      | `number`                             | Changes the repeat mode of the playlist: 0 - No Repeat, 1 - Repeat All, 2 - Repeat one.    . |
+| `autoadvance`                 | `boolean`                            | Toggles automatic advancement to the next item when the current item ends.                   |
+| `previousNavigationThreshold` | `number`                             | Threshold in seconds for determining the behavior when navigating to the previous item.      |
+| `skipOnError`                 | [`SkipOnErrorOptions`](#skiponerror) | Configuration for automatic skipping of playlist items when an error occurs.                 |
 
 The following properties are read-only:
 
@@ -124,6 +126,15 @@ Represents a single item in the playlist.
 | `poster`    | `string` | A URL for the poster image.                                                                                      |
 | `data`      | `Object` | Metadata for the playlist item, where you can store fields like `title`, `duration`, or other custom properties. |
 | `startTime` | `number` | The time (in seconds) at which playback should begin for this item.                                              |
+
+#### SkipOnError
+
+Configuration for automatic skipping of playlist items when an error occurs.
+
+| Property  | Type      | Description                                                                |
+|-----------|-----------|----------------------------------------------------------------------------|
+| `enabled` | `boolean` | Whether the player should automatically skip to the next playlist item.    |
+| `delay`   | `number`  | The delay in milliseconds before skipping to the next item after an error. |
 
 #### Constants
 
