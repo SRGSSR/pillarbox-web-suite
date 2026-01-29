@@ -44,6 +44,6 @@
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
   "peerDependencies": {
-    "@srgssr/pillarbox-web": "^1.12.1"
+    "@srgssr/pillarbox-web": "^1.30.0"
   }
 }

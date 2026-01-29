@@ -87,6 +87,7 @@ class LegacyChaptersNavigation extends Component {
           hasSubdivisions: false
         }
       });
+
       return;
     }
 

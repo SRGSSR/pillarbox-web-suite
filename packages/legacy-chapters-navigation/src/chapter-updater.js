@@ -133,6 +133,10 @@ class ChapterUpdater extends Component {
     chaptersToAdd.forEach(chapter => {
       legacyChaptersNavigation.addChapter(srgssrChaptersTrack, chapter);
     });
+
+    if(chapterList.length && legacyChaptersNavigation.chaptersBar.hasClass('vjs-hidden')) {
+      legacyChaptersNavigation.chaptersBar.show();
+    }
   }
 
   dispose() {
