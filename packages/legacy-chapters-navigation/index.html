@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LegacyChaptersNavigation Demo</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <video id="player" class="pillarbox-js" controls muted></video>
+
+    <script type="module">
+      import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
+      import pillarbox from '@srgssr/pillarbox-web';
+      import './scss/legacy-chapters-navigation.scss';
+      import './src/legacy-chapters-navigation.js';
+
+      // Handle URL parameters
+      const searchParams = new URLSearchParams(location.search);
+      const debug = searchParams.has('debug');
+      const ilHost = searchParams.get('ilHost') || undefined;
+      const language = searchParams.get('language');
+      const urn = searchParams.get('urn') || 'urn:srf:video:fe244549-2459-4d47-a45b-e307ca420154';
+
+      // Create a pillarbox player instance with the LegacyChaptersNavigation enabled
+      window.player = pillarbox('player', {
+        debug,
+        language,
+        srgOptions: {
+          dataProviderHost: ilHost
+        },
+        legacyChaptersNavigation: true,
+      });
+
+      // Load the video source for the player
+      player.src({
+        src: urn,
+        type: 'srgssr/urn',
+        disableTrackers: true
+      });
+
+      // Expose player for debugging
+      window.player = player;
+      window.pillarbox = pillarbox;
+    </script>
+  </body>
+
+</html>
