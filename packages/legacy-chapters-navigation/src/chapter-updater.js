@@ -79,9 +79,6 @@ class ChapterUpdater extends Component {
   handleStartLongPolling() {
     this.clearInterval(this.chapterUpdateInterval);
 
-    // VOD
-    if (!this.isLive) return;
-
     this.chapterUpdateInterval = this.setInterval(() => {
       const currentSource = this.player().currentSource();
 
