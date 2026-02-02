@@ -18,6 +18,46 @@ pillarbox.registerComponent('ChaptersBar', class extends ChaptersBar {
     this.on(this.player(), ['emptied', 'error', 'playerreset'], this.removeChapters);
   }
 
+  /**
+   * @override
+   *
+   * @param {Chapter} chapter the chapter to add
+   * @param {number} chapterIndex the index where the chapter should be added
+   */
+  addChapter({
+    startTime,
+    endTime,
+    metadata
+  }, chapterIndex) {
+    const cardLink = pillarbox.getComponent('CardLink');
+    const chardLinkChild = new cardLink(
+      this.player(),
+      {
+        id: metadata.urn,
+        name: metadata.urn,
+        metadata: {
+          ...metadata,
+          startTime,
+          endTime,
+          duration: metadata.duration / 1_000
+        },
+        clickHandler: this.onChapterClick(startTime),
+        urlHandler() {
+          const {
+            vendor,
+            mediaType,
+            urn
+          } = this.options().metadata;
+
+          return `https://www.${vendor.toLowerCase()}.ch/play/tv/-/${mediaType.toLowerCase()}/-?urn=${urn}`;
+        },
+        ...this.options().chapterOptions
+      }
+    );
+
+    this.addChild(chardLinkChild, undefined, chapterIndex);
+  }
+
   removeChapters() {
     this.onEmptied();
 
@@ -33,8 +73,33 @@ pillarbox.registerComponent('ChaptersBar', class extends ChaptersBar {
   /**
    * @override
    */
-  scrollToSelectedChapter(chapter) {
-    if (chapter && !chapter.isSelected()) return;
+  onAddChaptersTrack({ track }) {
+    if (!track || track.id !== 'srgssr-chapters') return;
+
+    const trackCues = Array.from(track.cues);
+
+    if (!trackCues.length) return;
+
+    const chapters = trackCues.map(({
+      startTime,
+      endTime,
+      text
+    }) => ({
+      startTime,
+      endTime,
+      metadata: JSON.parse(text)
+    }));
+
+    chapters.forEach(this.addChapter.bind(this));
+
+    this.show();
+  }
+
+  /**
+   * @override
+   */
+  scrollToSelectedChapter(chapter, forceScroll = false) {
+    if (chapter && !chapter.isSelected() && !forceScroll) return;
 
     this.el().scrollTo({
       left: chapter.el().offsetLeft,
