@@ -45,32 +45,12 @@ class LegacyChaptersNavigation extends Component {
       ['emptied', 'error', 'loadeddata', 'playerreset'],
       this.handleChapterVisibility
     );
+    this.on(
+      this.player().textTracks(),
+      'addtrack',
+      this.handleChapterVisibility
+    );
     this.on(this.player(), 'playerresize', this.updateButtons);
-  }
-
-  async addChapter(chaptersTrack, chapter) {
-    const startTime = (Number.isFinite(chapter.markIn)
-      ? chapter.markIn : chapter.fullLengthMarkIn) / 1_000;
-    const endTime = (Number.isFinite(chapter.markOut)
-      ? chapter.markOut : chapter.fullLengthMarkOut) / 1_000;
-
-    chaptersTrack.addCue({
-      startTime,
-      endTime,
-      text: JSON.stringify(chapter),
-    });
-
-    this.chaptersBar.addChapter({
-      startTime,
-      endTime,
-      metadata: chapter
-    });
-
-    if (!this.player().hasClass('pbw-with-chapters')) {
-      this.handleChapterVisibility();
-    }
-
-    this.updateButtons();
   }
 
   handleChapterVisibility() {
