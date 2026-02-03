@@ -71,11 +71,10 @@ class LegacyChaptersNavigation extends Component {
       return;
     }
 
+    // reset the scroll state and previous/next buttons
     if (!this.player().hasStarted()) {
-      this.player().one('play', () => {
-        this.scrollTo(0);
-        this.updateButtons();
-      });
+      this.scrollTo(0);
+      this.updateButtons();
     }
 
     this.show();
@@ -180,6 +179,11 @@ class LegacyChaptersNavigation extends Component {
     this.off(
       this.player(),
       ['emptied', 'error', 'loadeddata', 'playerreset'],
+      this.handleChapterVisibility
+    );
+    this.off(
+      this.player().textTracks(),
+      'addtrack',
       this.handleChapterVisibility
     );
     this.off(this.player(), 'playerresize', this.updateButtons);

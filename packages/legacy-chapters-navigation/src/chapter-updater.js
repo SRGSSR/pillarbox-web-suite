@@ -63,15 +63,15 @@ class ChapterUpdater extends Component {
     if (!this.isLive) return;
 
     const chapterList = await this.fetchChaptersList(this.cachedMainChapterUrn) || [];
+    const { legacyChaptersNavigation } = this.player();
 
     chapterList.forEach(chapter => {
-      this.player()
-        .legacyChaptersNavigation.addChapter(chapterTrack, chapter)
+      this.addChapter(legacyChaptersNavigation,chapterTrack, chapter)
     });
 
     if (chapterList.length) {
-      this.player()
-        .legacyChaptersNavigation.chaptersBar.show();
+      legacyChaptersNavigation.chaptersBar.show();
+      legacyChaptersNavigation.handleChapterVisibility();
     }
   }
 
