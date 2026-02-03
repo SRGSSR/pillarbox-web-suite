@@ -169,6 +169,11 @@ class LegacyChaptersNavigation extends Component {
       ['emptied', 'error', 'loadeddata', 'playerreset'],
       this.handleChapterVisibility
     );
+    this.off(
+      this.player().textTracks(),
+      'addtrack',
+      this.handleChapterVisibility
+    );
     this.off(this.player(), 'playerresize', this.updateButtons);
 
     super.dispose();
