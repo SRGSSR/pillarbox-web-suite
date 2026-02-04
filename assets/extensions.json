@@ -48,6 +48,10 @@
     "description": "A Chromecast plugin that supports supports subtitle and audio track selection, live streams with DVR capabilities and custom source resolution."
   },
   {
+    "name": "legacy-chapters-navigation",
+    "description": "Displays a component that allows to navigate through the list of chapters."
+  },
+  {
     "name": "countdown-display",
     "description": "A component for presenting a countdown overlay that leads into a playback transition."
   },
