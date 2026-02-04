@@ -1,9 +1,8 @@
 @import '@srgssr/svg-button/dist/svg-button.min.css';
 @import '@srgssr/chapters-bar/dist/chapters-bar.min.css';
 
-
 .pillarbox-js.pbw-with-chapters {
-  --chapters-navigation-bottom: 12em;
+  --chapters-navigation-bottom: 11em;
   --chapters-navigation-bottom-tolerance: .9em;
   --chapters-navigation-bottom-position: calc(var(--chapters-navigation-bottom) + var(--chapters-navigation-bottom-tolerance));
 
@@ -38,6 +37,22 @@
     width: 100%;
   }
 
+  .pbw-chapters-bar {
+    position: unset;
+    top: unset;
+    right: unset;
+    bottom: unset;
+    display: flex;
+    flex-direction: row;
+    gap: .1em;
+    width: calc(100% - 4em);
+    margin-inline: auto;
+    padding-block: .05em;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility .1s,opacity .1s;
+  }
+
   &.vjs-has-started.vjs-fullscreen {
     .vjs-control-bar {
       bottom: 0;
@@ -48,7 +63,7 @@
     }
 
     .pbw-chapters-navigation {
-      bottom: 6em;
+      bottom: 6.5em;
     }
   }
 
@@ -57,20 +72,6 @@
     opacity: 0;
     transition: visibility 1s, opacity 1s;
     pointer-events: none;
-  }
-
-  .pbw-chapters-bar {
-    position: unset;
-    top: unset;
-    right: unset;
-    bottom: unset;
-    display: flex;
-    flex-direction: row;
-    gap: .5em;
-    padding-bottom: 1em;
-    visibility: visible;
-    opacity: 1;
-    transition: visibility .1s,opacity .1s;
   }
 
   &:not(.vjs-device-iphone, &.vjs-device-android) {
@@ -82,15 +83,33 @@
   .vjs-card {
     flex: 1 0 auto;
     max-width: 12em;
+    border-radius: unset;
+
+    &:not(.vjs-card-selected) {
+      background-color: #000;
+    }
+  }
+
+  .vjs-card-figcaption {
+    padding: .5em;
   }
 
   .vjs-card-title {
     display: -webkit-box;
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
+  }
+
+  .vjs-card-img {
+    border-radius: unset;
+  }
+
+  .vjs-card-duration {
+    background: rgba(0, 0, 0, .4);
   }
 
   .vjs-control.pbw-chapter-button {
@@ -99,17 +118,18 @@
     bottom: 50%;
     z-index: 1;
     display: flex;
-    width: var(--arrow-size);
-    height: var(--arrow-size);
+    width: calc(var(--arrow-size) - 1em);
+    height: 100%;
     place-content: center;
     place-items: center;
-    background-color: #16191dbb;
-    border-radius: 50%;
+    background-color: #000;
+    box-shadow: 0 0 .3em #000;
     transform: translateY(50%);
     cursor: pointer;
 
     &.vjs-disabled {
       cursor: default;
+      opacity: .7;
     }
 
     .vjs-svg-icon {
@@ -131,11 +151,11 @@
   }
 
   .pbw-chapter-previous {
-    left: 0.5em;
+    left: 0;
   }
 
   .pbw-chapter-next {
-    right: 0.5em;
+    right: 0;
   }
 
   .pbw-chapter-button .icon-from-options {
