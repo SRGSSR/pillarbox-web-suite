@@ -99,10 +99,14 @@ class ChapterUpdater extends Component {
    * Returns a chapter list without the main chapter
    */
   async fetchChaptersList(urn) {
-    const { chapterList } = await this.player()
+    const { chapterList, chapterUrn } = await this.player()
       .options()
       .srgOptions
       .dataProvider(urn);
+
+    const chapter = chapterList.find(chapter => chapter.urn === chapterUrn);
+
+    if(!chapter || !['EPISODE', 'SCHEDULED_LIVESTREAM'].includes(chapter.type)) return [];
 
     return chapterList
       .filter(chapter => chapter.urn !== this.cachedMainChapterUrn);
