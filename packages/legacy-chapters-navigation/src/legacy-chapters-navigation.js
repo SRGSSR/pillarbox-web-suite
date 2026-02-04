@@ -61,6 +61,12 @@ class LegacyChaptersNavigation extends Component {
 
     if (!this.chaptersBar.children().length) {
       this.hide();
+      this.player().trigger({
+        type: 'srgssr/subdivisionVisibilityChanged',
+        data: {
+          hasSubdivisions: false
+        }
+      });
 
       return;
     }
@@ -72,6 +78,12 @@ class LegacyChaptersNavigation extends Component {
     }
 
     this.show();
+    this.player().trigger({
+      type: 'srgssr/subdivisionVisibilityChanged',
+      data: {
+        hasSubdivisions: true
+      }
+    });
   }
 
   mouseWheelScroll(e) {
