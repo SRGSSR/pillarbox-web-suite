@@ -111,6 +111,17 @@ npm run build -w @srgssr/your-element-name # Build a single page by name
 
 Refer to our [Contribution Guide](CONTRIBUTING.md) for more detailed information.
 
+### Using `nvm`
+
+This project includes an `.nvmrc` file that specifies the recommended Node.js version.
+
+If you use `nvm`, you can automatically switch to the correct Node version by running: `nvm use`
+If the required version is not installed yet, run: `nvm install`. This will install the Node.js
+version defined in `.nvmrc` and switch your shell to use it.
+
+For more details on installing and using the `.nvmrc` file see the official
+[`.nvmrc` documentation][nvmrc-doc].
+
 ## Licensing
 
 This project is licensed under the MIT License. See the [LICENSE](../LICENSE) file for more details.
