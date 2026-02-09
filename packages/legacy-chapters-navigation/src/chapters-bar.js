@@ -99,7 +99,7 @@ pillarbox.registerComponent('ChaptersBar', class extends ChaptersBar {
    * @override
    */
   scrollToSelectedChapter(chapter, forceScroll = false) {
-    if (chapter && !chapter.isSelected() && !forceScroll) return;
+    if (!chapter || (!chapter.isSelected() && !forceScroll)) return;
 
     this.el().scrollTo({
       left: chapter.el().offsetLeft,
