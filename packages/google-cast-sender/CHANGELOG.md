@@ -1,3 +1,9 @@
+## [@srgssr/google-cast-sender-v1.2.4](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.3...@srgssr/google-cast-sender-v1.2.4) (2026-02-23)
+
+### Enhancements and Bug Fixes 🐛
+
+* allow customization of idle icon in GoogleCastButton ([d772e9d](https://github.com/SRGSSR/pillarbox-web-suite/commit/d772e9d97e231bf4c6a711ae9fdd6ce3ef359b97))
+
 ## [@srgssr/google-cast-sender-v1.2.3](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.2...@srgssr/google-cast-sender-v1.2.3) (2026-02-23)
 
 ### Enhancements and Bug Fixes 🐛
