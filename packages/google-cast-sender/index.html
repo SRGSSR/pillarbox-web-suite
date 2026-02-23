@@ -27,7 +27,11 @@
       import pillarbox from "@srgssr/pillarbox-web";
       import "./scss/google-cast-sender.scss";
       import "./src/google-cast-sender.js";
-
+      import "./src/components/google-cast-button.js";
+      
+      import idleIcon from './assets/cast-idle.svg?raw';
+      import activeIcon from './assets/cast-active.svg?raw';
+      
       // Handle URL parameters
       const searchParams = new URLSearchParams(location.search);
       const debug = searchParams.has("debug");
@@ -47,6 +51,7 @@
         techOrder: ['chromecast', 'html5'],
         plugins: {
           googleCastSender: {
+            enableDefaultCastLauncher: false,
             receiverApplicationId: receiverId,
             sourceResolver: (source) => {
               if (!source.mediaData) return source;
@@ -60,6 +65,18 @@
           },
         },
       });
+
+      const controlBar = player.controlBar;
+      controlBar.addChild('GoogleCastButton', { 
+        idleIcon: {
+          icon: idleIcon,
+          iconName: 'custom-idle'
+        },
+        activeIcon: {
+          icon: activeIcon,
+          iconName: 'custom-active'
+        } 
+      }, controlBar.children().length - 1)
 
       // Load the video source for the player
       player.src({

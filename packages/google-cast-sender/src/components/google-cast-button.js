@@ -163,8 +163,4 @@ GoogleCastButton.prototype.options_ = {
 
 videojs.registerComponent('GoogleCastButton', GoogleCastButton);
 
-const controlBarChildren = videojs.getComponent('ControlBar').prototype.options_.children;
-
-controlBarChildren.splice(controlBarChildren.length - 1, 0, 'GoogleCastButton');
-
 export default GoogleCastButton;

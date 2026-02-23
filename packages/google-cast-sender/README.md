@@ -50,7 +50,7 @@ The component's behavior can be customized by passing options during player init
 |-----------------------------|------------|----------------------------------------------------|-----------------------------------------------------------------------------------------------------|
 | `androidReceiverCompatible` | `boolean`  | `true`                                             | Indicates whether the receiver application is compatible with Android TV devices.                   |
 | `autoJoinPolicy`            | `string`   | `chrome.cast.AutoJoinPolicy.TAB_AND_ORIGIN_SCOPED` | The policy for automatically joining a Cast session. See [AutoJoinPolicy docs][auto-join-policy].   |
-| `enableDefaultCastLauncher` | `boolean`  | `true`                                             | Indicates whether the default `GoogleCastLauncher` component should be displayed in the controlBar. |                                                       
+| `enableDefaultCastLauncher` | `boolean`  | `true`                                             | Indicates whether the default `GoogleCastLauncher` component should be displayed in the controlBar. |
 | `receiverApplicationId`     | `string`   | `chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID`  | The ID of the receiver application to use. The default receiver does not handle DRM content.        |
 | `script`                    | `object`   | `{ id: 'gstatic_cast_sender', src: '...' }`        | Configuration for the Google Cast sender script.                                                    |
 | `sourceResolver`            | `function` | `undefined`                                        | A function to resolve the source to be played on the cast device.                                   |
@@ -108,8 +108,8 @@ The plugin provides two ways to integrate a Cast button into your player.
 This is the standard Google Cast launcher wrapped as a Video.js component. It is **plug-and-play**
 and automatically manages Cast sessions.
 
-* **Pros**: Zero configuration required.
-* **Cons**: Limited customization and not fully accessible.
+- **Pros**: Zero configuration required.
+- **Cons**: Limited customization and not fully accessible.
 
 ##### Disable the default launcher
 
@@ -181,23 +181,19 @@ const player = videojs('player', {
     }
   }
 });
+
+const controlBar = player.controlBar;
+controlBar.addChild('GoogleCastButton', { 
+  idleIcon: {
+    icon: idleIcon,
+    iconName: 'custom-idle'
+  },
+  activeIcon: {
+    icon: activeIcon,
+    iconName: 'custom-active'
+  } 
+}, controlBar.children().length - 1)
 ```
-
-##### Placement & Removal
-
-Since the `GoogleCastButton` component is automatically injected into the control bar, you can 
-modify its placement like you would do with any other control bar component:
-
-* **Disable via options**:
-
-  ```js
-  const player = videojs('my-player', {
-    controlBar: {
-      googleCastButton: false
-    }
-  });
-  ```
-* **Reorder manually**: update the `controlBar.children` array with your desired button order.
 
 The default styles are included in the plugin’s CSS.
 
