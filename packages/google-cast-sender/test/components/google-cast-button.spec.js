@@ -91,21 +91,68 @@ describe('GoogleCastButton', () => {
       const event = { sessionState: window.cast.framework.SessionState.SESSION_STARTED };
 
       player.googleCastSender().sessionStateChangedListener(event);
-      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon.google-cast-active')).toBeDefined();
+      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon-google-cast-active')).toBeTruthy();
     });
 
     it('should handle SESSION_RESUMED', () => {
       const event = { sessionState: window.cast.framework.SessionState.SESSION_RESUMED };
 
       player.googleCastSender().sessionStateChangedListener(event);
-      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon.google-cast-active')).toBeDefined();
+      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon-google-cast-active')).toBeTruthy();
     });
 
     it('should handle SESSION_ENDED', () => {
       const event = { sessionState: window.cast.framework.SessionState.SESSION_ENDED };
 
       player.googleCastSender().sessionStateChangedListener(event);
-      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon.google-cast-idle')).toBeDefined();
+      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon-google-cast')).toBeTruthy();
+    });
+  });
+
+  describe('Custom icons', () => {
+
+    beforeEach(async() => {
+      player = videojs(videoElement, {
+        techOrder: ['chromecast', 'html5'],
+        plugins: { googleCastSender: { enableDefaultCastLauncher: false } },
+        controlBar: {
+          GoogleCastButton:  {
+            idleIcon: {
+              iconName: 'custom-idle-icon'
+            },
+            activeIcon: {
+              iconName: 'custom-active-icon'
+            }
+          }
+        }
+      });
+
+      await new Promise((resolve) => player.ready(resolve));
+      player.googleCastSender().onGCastApiAvailable(true);
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+      player.dispose();
+    });
+
+    it('should show the idle icon by default', () => {
+      expect(player.controlBar.GoogleCastButton).toBeDefined();
+      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon-custom-idle-icon')).toBeTruthy();
+    });
+
+    it('should show the custom active icon when the session starts', () => {
+      const event = { sessionState: window.cast.framework.SessionState.SESSION_STARTED };
+
+      player.googleCastSender().sessionStateChangedListener(event);
+      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon-custom-active-icon')).toBeTruthy();
+    });
+
+    it('should show the custom idle icon when the session starts', () => {
+      const event = { sessionState: window.cast.framework.SessionState.SESSION_ENDED };
+
+      player.googleCastSender().sessionStateChangedListener(event);
+      expect(player.controlBar.GoogleCastButton.el().querySelector('.vjs-icon-custom-idle-icon')).toBeTruthy();
     });
   });
 
