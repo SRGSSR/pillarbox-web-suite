@@ -1,3 +1,13 @@
+## [@srgssr/google-cast-sender-v1.2.3](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.2...@srgssr/google-cast-sender-v1.2.3) (2026-02-23)
+
+### Enhancements and Bug Fixes 🐛
+
+* use correct path for google cast button component ([133ba1e](https://github.com/SRGSSR/pillarbox-web-suite/commit/133ba1eb84e59d915c1be35ade77fa3938e8f91e))
+
+### Chore 🧹
+
+* update dependencies and adapt tests for Vitest 4 migration ([500890e](https://github.com/SRGSSR/pillarbox-web-suite/commit/500890efdf13d05a4d513dfa3b7d4d4336a05906))
+
 ## [@srgssr/google-cast-sender-v1.2.2](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.1...@srgssr/google-cast-sender-v1.2.2) (2025-11-10)
 
 
