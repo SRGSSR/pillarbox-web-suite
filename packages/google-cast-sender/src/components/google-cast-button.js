@@ -6,7 +6,7 @@ import { version } from '../../package.json';
 
 /**
  * @ignore
- * @type {typeof import('video.js').Component}
+ * @type {typeof import('@srgssr/svg-button').SvgButton}
  */
 const SvgButton = videojs.getComponent('SvgButton');
 
@@ -44,7 +44,7 @@ class GoogleCastButton extends SvgButton {
   #onCastStateChanged = ({ changes }) => {
     if ('sessionState' in changes) {
       this.toggleState(changes.sessionState.to).catch(reason =>
-        log.error(`There was a problem loading the provided SVG Icon`, reason));
+        log.error(`There was a problem loading the provided Idle Icon`, reason));
     }
   };
 
@@ -55,15 +55,29 @@ class GoogleCastButton extends SvgButton {
    *        The Video.js player instance.
    *
    * @param {Object} [options={}]
-   *        Configuration options for the button. Supports all options
-   *        from {@link SvgButton}, such as `icon`, `iconName`, and `controlText`.
+   *        Configuration options for the button.
+   *
+   * @param {boolean} [options.endSessionOnClick=false]
+   *        Whether clicking the button while casting should end the current
+   *        without opening the device picker.
+   *
+   * @param {Object} [options.idleIcon]
+   *        Icon configuration used when no cast session is active.
+   *        Supports the same options as {@link SvgButton}.
+   *
+   * @param {Object} [options.activeIcon]
+   *        Icon configuration used when a cast session is active.
+   *        Supports the same SVG options as {@link SvgButton}.
+   *
+   * @param {string} [options.controlText='Use Google Cast']
+   *        Accessible text announced to screen readers and shown as tooltip.
+   *
+   * @description
+   * SVG icon options must be provided via `idleIcon` and `activeIcon`.
+   * Root-level SVG icon options are ignored. The button automatically swaps
+   * icons based on cast session state.
    */
   constructor(player, options = {}) {
-    options = videojs.obj.merge(
-      options,
-      GoogleCastButton.prototype.options_.idleIcon
-    );
-
     super(player, options);
 
     if (!window.chrome) {
@@ -74,6 +88,8 @@ class GoogleCastButton extends SvgButton {
       log.error('The google-cast-sender plugin is required');
     }
 
+    this.appendIcon(this.options().idleIcon).catch((reason) =>
+      log.error(`There was a problem loading the provided Idle Icon`, reason));
     this.googleCastSender().on('statechanged', this.#onCastStateChanged);
   }
 
