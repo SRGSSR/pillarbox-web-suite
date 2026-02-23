@@ -22,8 +22,8 @@
       "require": "./dist/google-cast-sender.cjs"
     },
     "./button": {
-      "import": "./dist/ui/google-cast-button.js",
-      "require": "./dist/ui/google-cast-button.cjs"
+      "import": "./dist/button/google-cast-button.js",
+      "require": "./dist/button/google-cast-button.cjs"
     },
     "./*": "./*"
   },
