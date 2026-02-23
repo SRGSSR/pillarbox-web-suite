@@ -52,7 +52,7 @@ describe('GoogleCastButton', () => {
   describe('Google Cast supported', () => {
     let requestSessionSpy;
 
-    beforeEach(async () => {
+    beforeEach(async() => {
       player = videojs(videoElement, {
         techOrder: ['chromecast', 'html5'],
         controlBar: { GoogleCastButton: {} },
@@ -115,7 +115,7 @@ describe('GoogleCastButton', () => {
   describe('Google Cast supported with end current session on click', () => {
     let requestSessionSpy, endCurrentSessionSpy;
 
-    beforeEach(async () => {
+    beforeEach(async() => {
       player = videojs(videoElement, {
         techOrder: ['chromecast', 'html5'],
         controlBar: { GoogleCastButton: { endSessionOnClick: true } },
