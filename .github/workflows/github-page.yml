@@ -8,6 +8,11 @@ on:
 jobs:
   github-page:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -39,4 +44,3 @@ jobs:
           folder: dist
           force: false
           clean-exclude: pr-preview/
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
