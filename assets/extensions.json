@@ -50,5 +50,9 @@
   {
     "name": "countdown-display",
     "description": "A component for presenting a countdown overlay that leads into a playback transition."
+  },
+  {
+    "name": "live-dvr-time-display",
+    "description": "A component that displays the clock time based on the position in a live stream."
   }
 ]
