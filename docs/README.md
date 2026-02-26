@@ -128,3 +128,4 @@ This project is licensed under the MIT License. See the [LICENSE](../LICENSE) fi
 
 [token-settings]: https://github.com/settings/tokens
 [token-guide]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-with-a-personal-access-token
+[nvmrc-doc]: https://github.com/nvm-sh/nvm?tab=readme-ov-file#nvmrc
