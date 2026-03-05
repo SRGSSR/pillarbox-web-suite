@@ -54,5 +54,9 @@
   {
     "name": "live-dvr-time-display",
     "description": "A component that displays the clock time based on the position in a live stream."
+  },
+  {
+    "name": "srg-ssr-hotkeys",
+    "description": "Applies keyboard shortcuts to control the player as defined by the SRG SSR."
   }
 ]
