@@ -50,5 +50,9 @@
   {
     "name": "countdown-display",
     "description": "A component for presenting a countdown overlay that leads into a playback transition."
+  },
+  {
+    "name": "srg-ssr-hotkeys",
+    "description": "Applies keyboard shortcuts to control the player as defined by the SRG SSR."
   }
 ]
