@@ -223,6 +223,7 @@ export class PillarboxPlaylist extends Plugin {
    */
   load(items) {
     this.items_ = [...items];
+    this.currentIndex_ = -1;
     this.select(0);
   }
 
