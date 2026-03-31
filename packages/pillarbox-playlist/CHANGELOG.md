@@ -1,3 +1,9 @@
+## [@srgssr/pillarbox-playlist-v3.4.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/pillarbox-playlist-v3.4.0...@srgssr/pillarbox-playlist-v3.4.1) (2026-03-31)
+
+### Enhancements and Bug Fixes 🐛
+
+* **pillarbox-playlist:** load state ([baaa762](https://github.com/SRGSSR/pillarbox-web-suite/commit/baaa7627961a773f5559dea0570e498f7a1c12d2))
+
 ## @srgssr/pillarbox-playlist-v3.4.0 (2026-01-28)
 
 * feat(pillarbox-playlist): skip playlist item on error ([77dfcb7](https://github.com/SRGSSR/pillarbox-web-suite/commit/77dfcb7)), closes [#121](https://github.com/SRGSSR/pillarbox-web-suite/issues/121)
