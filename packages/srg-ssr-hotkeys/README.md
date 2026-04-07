@@ -51,6 +51,18 @@ const keydown = (event) => {
 document.body.addEventListener('keydown', keydown);
 ```
 
+## Supported Keyboard Shortcuts
+
+| Key(s) | Action | Notes |
+| --- | ---: | ---: |
+| ArrowRight | Seek forward 30 seconds | No-op if at live edge and stream is live |
+| ArrowLeft | Seek backward 10 seconds | |
+| 0–9 (number keys) | Seek to 0%–90% of duration | 0 = 0%, 1 = 10%, ..., 9 = 90% |
+| p / P | Toggle play / pause | |
+| + or ArrowUp | Increase volume by 0.1 (10%) | Volume is clamped by player; unmutes if volume > 0 |
+| - or ArrowDown | Decrease volume by 0.1 (10%) | Player is muted if volume ≤ 0 |
+| Default Video.js hotkeys | Includes all built-in [Video.js shortcuts](https://legacy.videojs.org/guides/options/#useractionshotkeys) | Handled via player.handleHotkeys(event) |
+
 ## Contributing
 
 For detailed contribution guidelines, refer to our [Contributing guide][contributing-guide].
