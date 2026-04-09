@@ -18,6 +18,7 @@ describe('HotkeysHelper', () => {
       duration: vi.fn().mockReturnValue(100),
       muted: vi.fn(),
       handleHotkeys: vi.fn(),
+      options: vi.fn().mockReturnValue({}),
 
       volume: vi.fn((val) => {
         if (val !== undefined) currentVolume = val;
@@ -85,11 +86,43 @@ describe('HotkeysHelper', () => {
       expect(playerMock.currentTime).toHaveBeenCalledWith(40);
     });
 
+    it('should seek backward to the configured value when ArrowLeft is pressed', () => {
+      eventMock.key = 'ArrowLeft';
+
+      playerMock.options.mockReturnValueOnce({
+        controlBar: {
+          skipButtons: {
+            backward: 5,
+          },
+        },
+      });
+
+      HotkeysHelper.seek(playerMock, eventMock);
+
+      expect(playerMock.currentTime).toHaveBeenCalledWith(45);
+    });
+
     it('should seek forward 30 seconds when ArrowRight is pressed', () => {
       eventMock.key = 'ArrowRight';
       HotkeysHelper.seek(playerMock, eventMock);
 
       expect(playerMock.currentTime).toHaveBeenCalledWith(80);
+    });
+
+    it('should seek forward to the configured value when ArrowRight is pressed', () => {
+      eventMock.key = 'ArrowRight';
+
+      playerMock.options.mockReturnValueOnce({
+        controlBar: {
+          skipButtons: {
+            forward: 5,
+          },
+        },
+      });
+
+      HotkeysHelper.seek(playerMock, eventMock);
+
+      expect(playerMock.currentTime).toHaveBeenCalledWith(55);
     });
 
     it('should clamp seek position to 0 if seeking backward past the beginning', () => {

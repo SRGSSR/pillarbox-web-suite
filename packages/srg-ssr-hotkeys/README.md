@@ -55,13 +55,17 @@ document.body.addEventListener('keydown', keydown);
 
 | Key(s) | Action | Notes |
 | --- | ---: | ---: |
-| ArrowRight | Seek forward 30 seconds | No-op if at live edge and stream is live |
-| ArrowLeft | Seek backward 10 seconds | |
-| 0–9 (number keys) | Seek to 0%–90% of duration | 0 = 0%, 1 = 10%, ..., 9 = 90% |
+| ArrowRight | Seek forward (configurable, default 30 seconds) | Uses [`skipButtons.backward`](https://legacy.videojs.org/guides/options/#skipbuttonsbackward) (default 30s); no-op if at live edge and stream is live |
+| ArrowLeft | Seek backward (configurable, default 10 seconds) | Uses [`skipButtons.backward`](https://legacy.videojs.org/guides/options/#skipbuttonsforward) (default 10s) |
+| 0–9 (number keys) | Seek to 0% - 90% of duration | 0 = 0%, 1 = 10%, ..., 9 = 90% |
 | p / P | Toggle play / pause | |
 | + or ArrowUp | Increase volume by 0.1 (10%) | Volume is clamped by player; unmutes if volume > 0 |
 | - or ArrowDown | Decrease volume by 0.1 (10%) | Player is muted if volume ≤ 0 |
 | Default Video.js hotkeys | Includes all built-in [Video.js shortcuts](https://legacy.videojs.org/guides/options/#useractionshotkeys) | Handled via player.handleHotkeys(event) |
+
+> [!WARNING]
+> By changing the default seek-amount values, developers take on the
+> responsibility of deviating from the SRG SSR specification.
 
 ## Contributing
 
