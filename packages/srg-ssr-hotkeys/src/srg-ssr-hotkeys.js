@@ -50,7 +50,7 @@ class HotkeysHelper {
   static seek(player, event) {
     if (!HotkeysHelper.#isArrowKey(event)) return;
 
-    const seekAmount = HotkeysHelper.#seekAmount(event);
+    const seekAmount = HotkeysHelper.#seekAmount(player, event);
     const seekPosition = player.currentTime() + seekAmount;
 
     if (
@@ -168,12 +168,27 @@ class HotkeysHelper {
   /**
    * Computes the amount of seconds to seek based on the specific arrow key.
    *
+   * @param {import('video.js/dist/types/player.js').default} player the player instance
    * @param {KeyboardEvent} event the keyboard event object
    *
    * @returns {number} -10 for 'ArrowLeft' or 30 for 'ArrowRight'
    */
-  static #seekAmount(event) {
-    return event.key === 'ArrowLeft' ? -10 : 30;
+  static #seekAmount(player, event) {
+    const {
+      controlBar : {
+        skipButtons : {
+          backward = 10,
+          forward = 30,
+        } = {}
+      } = {}
+    } = player.options();
+
+    const seekValues = {
+      ArrowLeft: (backward * -1),
+      ArrowRight: forward,
+    };
+
+    return seekValues[event.key];
   }
 }
 
