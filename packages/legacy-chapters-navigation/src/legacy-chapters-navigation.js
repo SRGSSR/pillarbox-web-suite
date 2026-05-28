@@ -100,7 +100,7 @@ class LegacyChaptersNavigation extends Component {
     if (!this.canSelectPrevious()) return;
 
     const chaptersBar = this.chaptersBar;
-    const position = chaptersBar.el().scrollLeft - chaptersBar.width();
+    const position = Math.max(0, chaptersBar.el().scrollLeft - this.scrollOffset(chaptersBar));
 
     this.scrollTo(position);
   }
@@ -109,9 +109,17 @@ class LegacyChaptersNavigation extends Component {
     if (!this.canSelectNext()) return;
 
     const chaptersBar = this.chaptersBar;
-    const position = chaptersBar.el().scrollLeft + chaptersBar.width();
+    const position = Math.max(0, chaptersBar.el().scrollLeft + this.scrollOffset(chaptersBar));
 
     this.scrollTo(position);
+  }
+
+  scrollOffset(chaptersBar) {
+    const chapterWidth = chaptersBar.el().scrollWidth / chaptersBar.chapters().length;
+    const visibleCount = Math.max(1, Math.floor(chaptersBar.width() / chapterWidth));
+    const offset = visibleCount * chapterWidth;
+
+    return offset;
   }
 
   scrollTo(position) {

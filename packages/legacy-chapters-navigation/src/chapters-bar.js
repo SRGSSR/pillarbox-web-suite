@@ -102,7 +102,7 @@ pillarbox.registerComponent('ChaptersBar', class extends ChaptersBar {
     if (!chapter || (!chapter.isSelected() && !forceScroll)) return;
 
     this.el().scrollTo({
-      left: chapter.el().offsetLeft,
+      left: chapter.el().offsetLeft - chapter.parentComponent_.el().offsetLeft,
       behavior: 'smooth'
     });
   }
