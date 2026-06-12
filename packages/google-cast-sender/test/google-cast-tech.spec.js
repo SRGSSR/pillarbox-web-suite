@@ -93,7 +93,7 @@ describe('Chromecast', () => {
         'load'
       );
 
-      vi.spyOn(tech, 'src').mockReturnValueOnce({ src: 'test.mp4'});
+      vi.spyOn(tech, 'src').mockReturnValueOnce({ src: 'test.mp4' });
       tech.remotePlayer.playerState = 'IDLE';
       tech.play();
       expect(loadSpy).toHaveBeenCalled();
@@ -275,13 +275,13 @@ describe('Chromecast', () => {
     });
 
     it('should return true if the receiver is IDLE', () => {
-      vi.spyOn(tech, 'src').mockReturnValueOnce({ src: 'test.mp4'});
+      vi.spyOn(tech, 'src').mockReturnValueOnce({ src: 'test.mp4' });
       tech.remotePlayer.playerState = 'IDLE';
       expect(tech.ended()).toBe(true);
     });
 
     it('should return false if the receiver is not IDLE', () => {
-      vi.spyOn(tech, 'src').mockReturnValueOnce({ src: 'test.mp4'});
+      vi.spyOn(tech, 'src').mockReturnValueOnce({ src: 'test.mp4' });
       tech.remotePlayer.playerState = 'PAUSED';
       expect(tech.ended()).toBe(false);
     });
@@ -465,12 +465,32 @@ describe('Chromecast', () => {
       expect(techMock.setSrc).toHaveBeenCalledWith({ castSessionResumed: false, ...source });
     });
 
-    it('should check if it can play a source', () => {
-      vi.spyOn(videojs.VhsSourceHandler, 'canPlayType').mockReturnValueOnce('maybe');
+    describe('canPlayType', () => {
+      it('should return false if there is no current cast session', () => {
+        window.cast.framework.CastContext.getInstance().getCurrentSession.mockReturnValueOnce(null);
 
-      const canPlay = Chromecast.nativeSourceHandler.canPlaySource({ type: 'video/mp4' });
+        expect(Chromecast.nativeSourceHandler.canPlayType('video/mp4')).toBe(false);
+      });
 
-      expect(canPlay).toBe('maybe');
+      it('should return VHS canPlayType result if it can play the type', () => {
+        const html5Mock = { nativeSourceHandler: { canPlayType: vi.fn().mockReturnValue('probably') } };
+
+        vi.spyOn(videojs, 'getTech').mockReturnValue(html5Mock);
+        vi.spyOn(videojs.VhsSourceHandler, 'canPlayType').mockReturnValueOnce('maybe');
+
+        expect(Chromecast.nativeSourceHandler.canPlayType('application/x-mpegURL')).toBe('maybe');
+        expect(html5Mock.nativeSourceHandler.canPlayType).not.toHaveBeenCalled();
+      });
+
+      it('should fallback to html5 if VHS cannot play the type', () => {
+        const html5Mock = { nativeSourceHandler: { canPlayType: vi.fn().mockReturnValue('probably') } };
+
+        vi.spyOn(videojs, 'getTech').mockReturnValue(html5Mock);
+        vi.spyOn(videojs.VhsSourceHandler, 'canPlayType').mockReturnValueOnce('');
+
+        expect(Chromecast.nativeSourceHandler.canPlayType('video/mp4')).toBe('probably');
+        expect(html5Mock.nativeSourceHandler.canPlayType).toHaveBeenCalledWith('video/mp4');
+      });
     });
   });
 });
