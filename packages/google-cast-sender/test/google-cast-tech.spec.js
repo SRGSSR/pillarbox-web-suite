@@ -62,6 +62,24 @@ describe('Chromecast', () => {
     });
   });
 
+  describe('setPoster', () => {
+    it('should do nothing if el() returns falsy', () => {
+      vi.spyOn(tech, 'el').mockReturnValue(null);
+
+      expect(() => tech.setPoster('https://test.url/poster.jpg')).not.toThrow();
+    });
+
+    it('should set the background image style on the tech element', () => {
+      const mockEl = { style: '' };
+
+      vi.spyOn(tech, 'el').mockReturnValue(mockEl);
+
+      tech.setPoster('https://test.url/poster.jpg');
+
+      expect(mockEl.style).toBe('background-image: url("https://test.url/poster.jpg")');
+    });
+  });
+
   describe('loadMedia', () => {
     it('should handle loadMedia error', async() => {
       const error = new Error('error');
