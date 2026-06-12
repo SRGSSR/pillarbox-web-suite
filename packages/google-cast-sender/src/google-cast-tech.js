@@ -457,6 +457,12 @@ class Chromecast extends Tech {
     return this.getMediaSession() ? this.getMediaSession().playbackRate : 1;
   }
 
+  setPoster(src) {
+    if (!this.el()) return;
+
+    this.el().style = `background-image: url("${src}")`;
+  }
+
   poster() {
     const remotePoster = this.remotePlayer && this.remotePlayer.imageUrl;
 
