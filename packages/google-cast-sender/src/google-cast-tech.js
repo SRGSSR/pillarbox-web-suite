@@ -916,7 +916,11 @@ class Chromecast extends Tech {
           return false;
         }
 
-        return videojs.VhsSourceHandler.canPlayType(type, options);
+        const canPlayType =
+          videojs.VhsSourceHandler.canPlayType(type, options) ||
+          videojs.getTech('html5').nativeSourceHandler.canPlayType(type);
+
+        return canPlayType;
       }
     };
   }
