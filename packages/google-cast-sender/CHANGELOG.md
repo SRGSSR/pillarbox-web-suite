@@ -1,3 +1,9 @@
+## [@srgssr/google-cast-sender-v1.2.5](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.4...@srgssr/google-cast-sender-v1.2.5) (2026-06-15)
+
+### Enhancements and Bug Fixes 🐛
+
+* **google-cast-sender:** null safe top level controlbar ([9f4c4fa](https://github.com/SRGSSR/pillarbox-web-suite/commit/9f4c4fa380bb11f7340a5145d0137f1cb37024ea))
+
 ## [@srgssr/google-cast-sender-v1.2.4](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.3...@srgssr/google-cast-sender-v1.2.4) (2026-02-23)
 
 ### Enhancements and Bug Fixes 🐛
