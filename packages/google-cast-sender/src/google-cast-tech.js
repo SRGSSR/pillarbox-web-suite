@@ -50,7 +50,7 @@ class Chromecast extends Tech {
 
     this.localPlayer = videojs(options.playerId);
     this.localPlayer.addClass('vjs-chromecast-connected');
-    this.localPlayer.controlBar.lockShowing();
+    this.localPlayer.controlBar?.lockShowing();
   }
 
   /**
@@ -393,7 +393,7 @@ class Chromecast extends Tech {
     }
 
     if (this.localPlayer) {
-      this.localPlayer.controlBar.unlockShowing();
+      this.localPlayer.controlBar?.unlockShowing();
       this.localPlayer.removeClass('vjs-chromecast-connected');
     }
 
