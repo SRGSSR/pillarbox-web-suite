@@ -102,6 +102,8 @@ describe('ChaptersBar', () => {
     });
 
     it('should do nothing if there are no chapters', () => {
+      player.textTracks().getTrackById.mockReturnValueOnce(null);
+
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
       const addChapterSpy = vi.spyOn(chaptersBar, 'addChapter');
 

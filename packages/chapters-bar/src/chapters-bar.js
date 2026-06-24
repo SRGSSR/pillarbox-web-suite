@@ -43,7 +43,7 @@ class ChaptersBar extends Component {
     this.onChapterChange = this.onChapterChange.bind(this);
     this.userActive = this.userActive.bind(this);
 
-    this.player().textTracks().on('addtrack', this.onAddChaptersTrack);
+    this.player().on('loadeddata', this.onAddChaptersTrack);
     this.player().on('emptied', this.onEmptied);
     this.player().on('useractive', this.userActive);
     this.player().on('srgssr/chapter', this.onChapterChange);
@@ -196,8 +196,8 @@ class ChaptersBar extends Component {
    *
    * @private
    */
-  onAddChaptersTrack({ track }) {
-    if (!track || track.id !== 'srgssr-chapters') return;
+  onAddChaptersTrack() {
+    if (!this.player().textTracks().getTrackById('srgssr-chapters')) return;
 
     const chapters = this.chapters();
 
