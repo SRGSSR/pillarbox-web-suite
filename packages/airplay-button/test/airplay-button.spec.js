@@ -41,8 +41,11 @@ describe('AirplayButton', () => {
 
 
   describe('Airplay supported', () => {
+    let initSpy;
+
     beforeAll(() => {
       window.WebKitPlaybackTargetAvailabilityEvent = true;
+      initSpy = vi.spyOn(AirplayButton.prototype, 'init');
     });
 
     beforeEach(async() => {
@@ -56,6 +59,7 @@ describe('AirplayButton', () => {
 
     afterEach(() => {
       player.dispose();
+      initSpy.mockClear();
     });
 
     it('should be registered and attached to the player', () => {
@@ -64,23 +68,10 @@ describe('AirplayButton', () => {
       expect(AirplayButton.VERSION).toBeDefined();
     });
 
-    it('should display the button according to the availability event', () => {
-      const event = new Event('webkitplaybacktargetavailabilitychanged');
-
-      // The button starts hidden despite compatibility
-      expect(player.airplayButton.hasClass('vjs-hidden')).toBeTruthy();
-
-      event.availability = 'available';
-      videoElement.dispatchEvent(event);
-
-      // The button becomes visible after AirPlay is available
+    it('should display the button if WebKitPlaybackTargetAvailabilityEvent is truthy', () => {
+      // The button becomes visible
+      expect(initSpy).toHaveBeenCalled();
       expect(player.airplayButton.hasClass('vjs-hidden')).toBeFalsy();
-
-      event.availability = 'not-available';
-      videoElement.dispatchEvent(event);
-
-      // The button becomes hidden after AirPlay is no longer available
-      expect(player.airplayButton.hasClass('vjs-hidden')).toBeTruthy();
     });
 
     it('should display the device picker when the button is clicked', () => {

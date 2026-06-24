@@ -14,20 +14,6 @@ const SvgButton = videojs.getComponent('SvgButton');
  */
 class AirplayButton extends SvgButton {
   /**
-   * Listener for detecting AirPlay device availability.
-   * If an AirPlay device is available, the button is shown.
-   *
-   * @param {{ availability: string }} event - The event object with availability info.
-   */
-  #onWebkitPlaybackTargetAvailabilityChangedListener = ({ availability }) => {
-    if (availability === 'available') {
-      this.show();
-    } else if (availability === 'not-available') {
-      this.hide();
-    }
-  };
-
-  /**
    * The media element associated to the player.
    *
    * @type {HTMLMediaElement|null}
@@ -46,10 +32,6 @@ class AirplayButton extends SvgButton {
   }
 
   dispose() {
-    this.#mediaElement?.removeEventListener(
-      'webkitplaybacktargetavailabilitychanged',
-      this.#onWebkitPlaybackTargetAvailabilityChangedListener
-    );
     this.#mediaElement = null;
 
     super.dispose();
@@ -61,14 +43,13 @@ class AirplayButton extends SvgButton {
    */
   init() {
     if (!AirplayButton.isAirplaySupported()) {
+       this.hide();
+
       return;
     }
 
-    this.#mediaElement = this.player().el().querySelector('audio, video');
-    this.#mediaElement.addEventListener(
-      'webkitplaybacktargetavailabilitychanged',
-      this.#onWebkitPlaybackTargetAvailabilityChangedListener
-    );
+    this.#mediaElement = this.player().tech(true).el();
+    this.show();
   }
 
   /**
