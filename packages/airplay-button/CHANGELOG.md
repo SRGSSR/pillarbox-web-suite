@@ -1,3 +1,14 @@
+## [@srgssr/airplay-button-v1.1.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/airplay-button-v1.1.0...@srgssr/airplay-button-v1.1.1) (2026-06-25)
+
+### Enhancements and Bug Fixes 🐛
+
+* **airplay-button:** display consistency ([db51340](https://github.com/SRGSSR/pillarbox-web-suite/commit/db513405f54080b5147df95361056e2ca0619a86))
+
+### Chore 🧹
+
+* add multi-target build system with run-all helper ([4567784](https://github.com/SRGSSR/pillarbox-web-suite/commit/45677845a9bce365f5b56c19e68f53baae303afe))
+* update dependencies and adapt tests for Vitest 4 migration ([500890e](https://github.com/SRGSSR/pillarbox-web-suite/commit/500890efdf13d05a4d513dfa3b7d4d4336a05906))
+
 ## [@srgssr/airplay-button-v1.1.0](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/airplay-button-v1.0.0...@srgssr/airplay-button-v1.1.0) (2025-08-13)
 
 
