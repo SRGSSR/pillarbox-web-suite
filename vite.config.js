@@ -6,5 +6,8 @@ import { defineConfig } from 'vite';
  * @see https://vitejs.dev/config/
  */
 export default defineConfig({
-  base: './'
+  base: './',
+  server: {
+    allowedHosts: ['www.localhost.com']
+  },
 });
