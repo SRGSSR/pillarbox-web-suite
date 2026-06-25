@@ -1,3 +1,15 @@
+## [@srgssr/chapters-bar-v1.0.2](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/chapters-bar-v1.0.1...@srgssr/chapters-bar-v1.0.2) (2026-06-25)
+
+### Enhancements and Bug Fixes 🐛
+
+* **chapter-bar:** chapter availatiblity ([809fdf4](https://github.com/SRGSSR/pillarbox-web-suite/commit/809fdf4d811de9c6a64c1106c17e9d894ba592ca))
+
+### Chore 🧹
+
+* add multi-target build system with run-all helper ([4567784](https://github.com/SRGSSR/pillarbox-web-suite/commit/45677845a9bce365f5b56c19e68f53baae303afe))
+* **scripts:** add allowed hosts to vite config ([c4b1a98](https://github.com/SRGSSR/pillarbox-web-suite/commit/c4b1a98f540877cf75f8f5af017a7c73bfe4b625))
+* update dependencies and adapt tests for Vitest 4 migration ([500890e](https://github.com/SRGSSR/pillarbox-web-suite/commit/500890efdf13d05a4d513dfa3b7d4d4336a05906))
+
 ## [@srgssr/chapters-bar-v1.0.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/chapters-bar-v1.0.0...@srgssr/chapters-bar-v1.0.1) (2025-09-15)
 
 
