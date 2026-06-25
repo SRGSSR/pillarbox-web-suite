@@ -1,3 +1,10 @@
+## [@srgssr/google-cast-sender-v1.2.6](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.5...@srgssr/google-cast-sender-v1.2.6) (2026-06-25)
+
+### Enhancements and Bug Fixes 🐛
+
+* **google-cast-sender:** can play type ([d90c0dd](https://github.com/SRGSSR/pillarbox-web-suite/commit/d90c0dd7ae76f637337612e2145d45068d5919df))
+* **google-cast-sender:** poster update ([952051e](https://github.com/SRGSSR/pillarbox-web-suite/commit/952051ea18f1ee02a8650069fa45aa1d003d517a))
+
 ## [@srgssr/google-cast-sender-v1.2.5](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.4...@srgssr/google-cast-sender-v1.2.5) (2026-06-15)
 
 ### Enhancements and Bug Fixes 🐛
