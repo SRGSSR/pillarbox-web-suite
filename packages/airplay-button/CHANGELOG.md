@@ -1,3 +1,13 @@
+## [@srgssr/airplay-button-v1.1.2](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/airplay-button-v1.1.1...@srgssr/airplay-button-v1.1.2) (2026-06-26)
+
+### Enhancements and Bug Fixes 🐛
+
+* **airplay-button:** force component release by updating player version ([83ba321](https://github.com/SRGSSR/pillarbox-web-suite/commit/83ba321d2602ecd838b2126a99b529be1d599494))
+
+### Chore 🧹
+
+* **scripts:** add allowed hosts to vite config ([c4b1a98](https://github.com/SRGSSR/pillarbox-web-suite/commit/c4b1a98f540877cf75f8f5af017a7c73bfe4b625))
+
 ## [@srgssr/airplay-button-v1.1.1](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/airplay-button-v1.1.0...@srgssr/airplay-button-v1.1.1) (2026-06-25)
 
 ### Enhancements and Bug Fixes 🐛
