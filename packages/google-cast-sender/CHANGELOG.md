@@ -1,3 +1,13 @@
+## [@srgssr/google-cast-sender-v1.2.7](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.6...@srgssr/google-cast-sender-v1.2.7) (2026-06-26)
+
+### Enhancements and Bug Fixes 🐛
+
+* **google-cast-sender:** force component release by updating player version ([8291694](https://github.com/SRGSSR/pillarbox-web-suite/commit/8291694a9dc8da3489ad7daa62edb81299930317))
+
+### Chore 🧹
+
+* **scripts:** add allowed hosts to vite config ([c4b1a98](https://github.com/SRGSSR/pillarbox-web-suite/commit/c4b1a98f540877cf75f8f5af017a7c73bfe4b625))
+
 ## [@srgssr/google-cast-sender-v1.2.6](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.5...@srgssr/google-cast-sender-v1.2.6) (2026-06-25)
 
 ### Enhancements and Bug Fixes 🐛
