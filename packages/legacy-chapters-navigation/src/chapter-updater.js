@@ -28,8 +28,8 @@ class ChapterUpdater extends Component {
     this.handleStopLongPolling = this.handleStopLongPolling.bind(this);
 
     this.on(
-      player.textTracks(),
-      'addtrack',
+      player,
+      'loadeddata',
       this.handleChapterInitialization
     );
 
@@ -46,8 +46,10 @@ class ChapterUpdater extends Component {
     );
   }
 
-  async handleChapterInitialization({ track: chapterTrack }) {
-    if (chapterTrack.id !== 'srgssr-chapters') return;
+  async handleChapterInitialization() {
+    const chapterTrack = this.player().textTracks().getTrackById('srgssr-chapters');
+
+    if (!chapterTrack || chapterTrack.id !== 'srgssr-chapters') return;
 
     const {
       mediaData: {

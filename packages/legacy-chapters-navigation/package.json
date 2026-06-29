@@ -40,10 +40,10 @@
     "build:umd": "vite build --config vite.config.umd.js",
     "github:page": "vite build",
     "release:ci": "semantic-release",
-    "start": " vite --port 4200 --open",
+    "start": " vite --port 4200 --open --host",
     "test": "vitest run --silent --coverage --coverage.reporter text"
   },
   "peerDependencies": {
-    "@srgssr/pillarbox-web": "^1.31.0"
+    "@srgssr/pillarbox-web": "^1.36.1"
   }
 }

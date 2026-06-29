@@ -73,10 +73,12 @@ pillarbox.registerComponent('ChaptersBar', class extends ChaptersBar {
   /**
    * @override
    */
-  onAddChaptersTrack({ track }) {
-    if (!track || track.id !== 'srgssr-chapters') return;
+  onAddChaptersTrack() {
+    const chapterTrack = this.player().textTracks().getTrackById('srgssr-chapters');
 
-    const trackCues = Array.from(track.cues);
+    if (!chapterTrack || !chapterTrack.cues.length) return;
+
+    const trackCues = Array.from(chapterTrack.cues);
 
     if (!trackCues.length) return;
 
