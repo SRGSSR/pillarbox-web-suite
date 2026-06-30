@@ -58,5 +58,13 @@
   {
     "name": "srg-ssr-hotkeys",
     "description": "Applies keyboard shortcuts to control the player as defined by the SRG SSR."
+  },
+  {
+    "name": "chapter-navigation",
+    "description": "Displays a component that allows you to navigate through the list of chapters."
+  },
+  {
+    "name": "legacy-chapters-navigation",
+    "description": "Displays a component that allows to navigate through the list of chapters."
   }
 ]
