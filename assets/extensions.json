@@ -58,5 +58,9 @@
   {
     "name": "srg-ssr-hotkeys",
     "description": "Applies keyboard shortcuts to control the player as defined by the SRG SSR."
+  },
+  {
+    "name": "drm-support",
+    "description": "This plugin checks a browser’s DRM and HDCP capabilities to determine which DRM systems and security levels it supports."
   }
 ]
