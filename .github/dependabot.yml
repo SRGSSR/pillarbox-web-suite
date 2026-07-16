@@ -5,7 +5,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    # Conventional Commits type, so commitlint and semantic-release parse the PRs.
     commit-message:
       prefix: "ci"
     groups:
@@ -23,9 +22,11 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "build"
-    # Internal workspace packages are versioned by semantic-release.
+    # Internal workspace packages are versioned by semantic-release, video.js is
+    # manually updated.
     ignore:
       - dependency-name: "@srgssr/*"
+      - dependency-name: "video.js"
     groups:
       node-dependencies:
         patterns:
