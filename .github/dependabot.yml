@@ -1,0 +1,35 @@
+version: 2
+updates:
+  # --- GitHub Actions ---
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Conventional Commits type, so commitlint and semantic-release parse the PRs.
+    commit-message:
+      prefix: "ci"
+    groups:
+      action-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # --- NPM ---
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "build"
+    # Internal workspace packages are versioned by semantic-release.
+    ignore:
+      - dependency-name: "@srgssr/*"
+    groups:
+      node-dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
