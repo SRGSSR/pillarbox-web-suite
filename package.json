@@ -50,7 +50,7 @@
     "@vitest/coverage-v8": "^4.0.8",
     "@vitest/eslint-plugin": "^1.4.2",
     "eslint": "^9.39.1",
-    "globals": "^16.5.0",
+    "globals": "^17.7.0",
     "husky": "^9.1.7",
     "jsdom": "^27.2.0",
     "node-plop": "^0.32.3",
