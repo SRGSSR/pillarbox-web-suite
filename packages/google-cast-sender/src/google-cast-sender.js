@@ -137,6 +137,11 @@ class GoogleCastSender extends Plugin {
    * @private
    */
   removeDefaultCastLauncher() {
+    if (
+      !this.#options.enableDefaultCastLauncher ||
+      !this.player.controlBar
+    ) return;
+
     this.player.controlBar.removeChild('GoogleCastLauncher');
   }
 
