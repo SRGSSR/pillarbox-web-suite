@@ -1,3 +1,5 @@
+## [@srgssr/google-cast-sender-v1.2.8](https://github.com/SRGSSR/pillarbox-web-suite/compare/%40srgssr%2Fgoogle-cast-sender-v1.2.7...%40srgssr%2Fgoogle-cast-sender-v1.2.8) (2026-08-04)
+
 ## [@srgssr/google-cast-sender-v1.2.7](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.6...@srgssr/google-cast-sender-v1.2.7) (2026-06-26)
 
 ### Enhancements and Bug Fixes 🐛
