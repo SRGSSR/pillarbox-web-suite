@@ -1,3 +1,10 @@
+# [@srgssr/chapters-bar-v1.0.3](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/chapters-bar-v1.0.2...@srgssr/chapters-bar-v1.0.3) (2026-08-13)
+
+
+### Bug Fixes
+
+* **release:** use default relese note generator preset ([4c5c0a8](https://github.com/SRGSSR/pillarbox-web-suite/commit/4c5c0a8e155d167ac9661c4c31d893a0bc0d27df))
+
 ## [@srgssr/chapters-bar-v1.0.2](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/chapters-bar-v1.0.1...@srgssr/chapters-bar-v1.0.2) (2026-06-25)
 
 ### Enhancements and Bug Fixes 🐛
