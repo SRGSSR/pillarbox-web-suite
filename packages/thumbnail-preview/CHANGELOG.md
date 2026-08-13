@@ -1,3 +1,10 @@
+# [@srgssr/thumbnail-preview-v1.0.4](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/thumbnail-preview-v1.0.3...@srgssr/thumbnail-preview-v1.0.4) (2026-08-13)
+
+
+### Bug Fixes
+
+* **release:** use default relese note generator preset ([4c5c0a8](https://github.com/SRGSSR/pillarbox-web-suite/commit/4c5c0a8e155d167ac9661c4c31d893a0bc0d27df))
+
 ## [@srgssr/thumbnail-preview-v1.0.3](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/thumbnail-preview-v1.0.2...@srgssr/thumbnail-preview-v1.0.3) (2025-10-22)
 
 
