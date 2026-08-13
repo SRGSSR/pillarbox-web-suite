@@ -1,3 +1,10 @@
+# [@srgssr/google-cast-sender-v1.2.9](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.8...@srgssr/google-cast-sender-v1.2.9) (2026-08-13)
+
+
+### Bug Fixes
+
+* **release:** use default relese note generator preset ([4c5c0a8](https://github.com/SRGSSR/pillarbox-web-suite/commit/4c5c0a8e155d167ac9661c4c31d893a0bc0d27df))
+
 ## [@srgssr/google-cast-sender-v1.2.8](https://github.com/SRGSSR/pillarbox-web-suite/compare/%40srgssr%2Fgoogle-cast-sender-v1.2.7...%40srgssr%2Fgoogle-cast-sender-v1.2.8) (2026-08-04)
 
 ## [@srgssr/google-cast-sender-v1.2.7](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/google-cast-sender-v1.2.6...@srgssr/google-cast-sender-v1.2.7) (2026-06-26)
