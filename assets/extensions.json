@@ -24,6 +24,10 @@
     "description": "Adds a configurable button to the control bar with a custom SVG icon and URL for linking to external destinations."
   },
   {
+    "name": "share",
+    "description": "Adds a configurable share button and modal for sharing media through social networks, email, links, and embed URLs."
+  },
+  {
     "name": "thumbnail-preview",
     "description": "Displays timestamp-aligned thumbnails during timeline hover using a sprite sheet and optional scaling configuration."
   },
