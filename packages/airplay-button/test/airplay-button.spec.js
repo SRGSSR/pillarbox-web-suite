@@ -37,6 +37,13 @@ describe('AirplayButton', () => {
     it('should hide the button if airplay is not supported', () => {
       expect(player.airplayButton.hasClass('vjs-hidden')).toBeTruthy();
     });
+
+    it('should not initialize legacy FairPlay if airplay is not supported', () => {
+      player.eme = { initLegacyFairplay: vi.fn() };
+      player.airplayButton.init();
+
+      expect(player.eme.initLegacyFairplay).not.toHaveBeenCalled();
+    });
   });
 
 
@@ -77,6 +84,13 @@ describe('AirplayButton', () => {
     it('should display the device picker when the button is clicked', () => {
       player.airplayButton.handleClick();
       expect(videoElement.webkitShowPlaybackTargetPicker).toHaveBeenCalled();
+    });
+
+    it('should initialize legacy FairPlay if eme is available', () => {
+      player.eme = { initLegacyFairplay: vi.fn() };
+      player.airplayButton.init();
+
+      expect(player.eme.initLegacyFairplay).toHaveBeenCalled();
     });
   });
 });
