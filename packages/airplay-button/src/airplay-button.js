@@ -43,10 +43,14 @@ class AirplayButton extends SvgButton {
    */
   init() {
     if (!AirplayButton.isAirplaySupported()) {
-       this.hide();
+      this.hide();
 
       return;
     }
+
+    // This is required for native Fairplay HLS Airplay. However this relies on
+    // a webkit legacy API (webkitneedkey) which can be become deprecated in the future by Apple.
+    this.player()?.eme?.initLegacyFairplay();
 
     this.#mediaElement = this.player().tech(true).el();
     this.show();
