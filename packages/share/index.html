@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Share Demo</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<video id="player" class="pillarbox-js" controls muted></video>
+
+<script type="module">
+  import pillarbox from '@srgssr/pillarbox-web';
+  import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
+  import './scss/share.scss';
+  import './src/share.js';
+
+  // Handle URL parameters
+  const searchParams = new URLSearchParams(location.search);
+  const debug = searchParams.has('debug');
+  const ilHost = searchParams.get('ilHost') || undefined;
+  const language = searchParams.get('language');
+  const urn = searchParams.get('urn') || 'urn:rts:video:8841634';
+
+  // Create a pillarbox player instance
+  window.player = pillarbox('player', {
+    debug,
+    language,
+    experimentalSvgIcons: true,
+    srgOptions: {
+      dataProviderHost: ilHost
+    },
+    ShareModal: {
+      title: 'Share',
+      shareUrlOptions: {
+        includeCurrentTime: true
+      },
+      shareButtonCollection: {
+        //
+        // Manage CTAs Order
+        // children: [
+        //   'FacebookShareButton',
+        //   'EmailShareButton',
+        //   'XShareButton',
+        //   'CopyLinkShareButton'
+        // ],
+        //
+        // Disable specific cta
+        // WhatsappShareButton: false,
+        //
+        FacebookShareButton: {
+          title: 'Share with a custom Facebook title',
+        },
+        CopyLinkShareButton: {
+          label: 'Custom',
+          title: 'Custom'
+        }
+      }
+    },
+    ShareToggle: true
+  });
+
+  // Load the video source for the player
+  window.player.src({
+    src: urn,
+    type: 'srgssr/urn',
+    disableTrackers: true
+  });
+
+  // Expose player for debugging
+  window["pillarbox"] = pillarbox;
+</script>
+</body>
+</html>

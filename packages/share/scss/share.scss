@@ -1,0 +1,225 @@
+@import '@srgssr/svg-button/dist/svg-button.min.css';
+
+.vjs-share-modal.vjs-modal-dialog {
+  position: absolute;
+  z-index: 50;
+  pointer-events: none;
+  inset: .666em 1.333em auto auto;
+}
+
+.vjs-share-modal.vjs-modal-dialog:not(.vjs-hidden) {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: .6em 0;
+  background: rgb(22 22 22 / 95%);
+  border-radius: .4em;
+  inset: 0;
+}
+
+.vjs-share-toggle.vjs-control.vjs-button {
+  position: absolute;
+  top: .666em;
+  right: 1.333em;
+  color: #fff;
+  visibility: visible;
+  cursor: pointer;
+  opacity: 1;
+  transition: visibility .1s, opacity .1s;
+}
+
+.video-js.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-share-toggle.vjs-control.vjs-button {
+  opacity: 0;
+  transition: visibility 1s, opacity 1s;
+  pointer-events: none;
+}
+
+.vjs-share-modal .vjs-modal-dialog-content {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 100%;
+  max-width: 28em;
+  height: auto;
+  max-height: 100%;
+  margin: auto;
+  padding: 1.4em 1.2em 3.7em;
+  overflow: auto;
+  border-radius: .4em;
+  pointer-events: auto;
+}
+
+.vjs-share-modal .vjs-close-button {
+  position: absolute;
+  top: .45em;
+  right: max(
+    1.333em,
+    calc((100% - 28em) / 2 + 1.333em)
+  );
+  z-index: 2;
+  display: none;
+  width: 2.6em;
+  height: 2.4em;
+  padding: 0;
+  color: #fff;
+  font-size: 1.1em;
+  line-height: 2.4em;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.vjs-share-modal.vjs-modal-dialog:not(.vjs-hidden) .vjs-close-button {
+  display: block;
+}
+
+.vjs-share-modal .vjs-close-button .vjs-svg-icon {
+  width: 1.35em;
+  height: 1.35em;
+}
+
+.vjs-share-title {
+  font-weight: 500;
+  font-size: 1.1em;
+  line-height: 22px;
+}
+
+.vjs-share-modal .vjs-title-bar.vjs-share-title {
+  padding-bottom: 0;
+  padding-left: 0;
+  background: none;
+}
+
+.vjs-share-url-options {
+  display: flex;
+  gap: .5rem;
+  margin: 1.1em 0;
+}
+
+.vjs-share-url-option-label {
+  display: flex;
+  align-items: center;
+  width: auto;
+  margin-right: 1em;
+  font-size: .8em;
+  line-height: 1.2em;
+  outline: none;
+  cursor: pointer;
+}
+
+.vjs-share-url-option-input:focus-visible,
+.vjs-share-button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.vjs-share-url-option-input {
+  width: 1.2em;
+  height: 1.2em;
+  margin: 0 .3em .1em 0;
+  background-color: rgb(51 51 51);
+  border: .1em solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  appearance: none;
+}
+
+.vjs-share-url-option-input:checked {
+  background-image: radial-gradient(circle, #fff 0 42%, transparent 44%);
+}
+
+.vjs-share-button-collection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9em 0;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.vjs-share-button-collection .vjs-share-button {
+  display: flex;
+  flex: 0 0 25%;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.2em 0 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.vjs-share-button-collection .vjs-share-button-link {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.6em;
+  height: 1.6em;
+  color: #fff;
+  font-size: 2em;
+  line-height: 2em;
+  text-decoration: none;
+  background-color: #333;
+  border-radius: 50%;
+  transform: scale(1);
+  backface-visibility: hidden;
+}
+
+.vjs-share-button-link > svg {
+  display: block;
+  width: .8em;
+  height: .8em;
+}
+
+.vjs-share-button-title {
+  display: none;
+  text-align: center;
+}
+
+.vjs-layout-medium .vjs-share-modal.vjs-modal-dialog:not(.vjs-hidden),
+.vjs-layout-large .vjs-share-modal.vjs-modal-dialog:not(.vjs-hidden),
+.vjs-layout-x-large .vjs-share-modal.vjs-modal-dialog:not(.vjs-hidden) {
+  width: fit-content;
+  max-width: calc(100% - 3.2em);
+  height: auto;
+  padding: 0;
+  inset: 1em 1.5em auto auto;
+}
+
+.vjs-layout-medium .vjs-share-modal .vjs-modal-dialog-content,
+.vjs-layout-large .vjs-share-modal .vjs-modal-dialog-content,
+.vjs-layout-x-large .vjs-share-modal .vjs-modal-dialog-content {
+  bottom: 0;
+  left: 0;
+  width: fit-content;
+  max-width: 100%;
+  padding: 1.4em 1.2em 2em;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.vjs-layout-medium .vjs-share-title,
+.vjs-layout-large .vjs-share-title,
+.vjs-layout-x-large .vjs-share-title {
+  margin-top: 0;
+}
+
+.vjs-layout-medium .vjs-share-url-options,
+.vjs-layout-large .vjs-share-url-options,
+.vjs-layout-x-large .vjs-share-url-options {
+  margin-top: 1.3rem;
+  margin-bottom: 1.9em;
+}
+
+.vjs-layout-medium .vjs-share-modal .vjs-close-button,
+.vjs-layout-large .vjs-share-modal .vjs-close-button,
+.vjs-layout-x-large .vjs-share-modal .vjs-close-button {
+  inset: .45em .55em auto auto;
+}
+
+.vjs-layout-large .vjs-share-button-title,
+.vjs-layout-x-large .vjs-share-button-title {
+  display: block;
+  margin-top: .8em;
+  font-size: 1.1em;
+  line-height: 1.4em;
+}
