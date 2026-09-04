@@ -1,3 +1,10 @@
+# [@srgssr/airplay-button-v1.1.4](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/airplay-button-v1.1.3...@srgssr/airplay-button-v1.1.4) (2026-09-04)
+
+
+### Bug Fixes
+
+* **airplay-button:** enable legacy FairPlay for DRM playback over AirPlay ([a3d47b1](https://github.com/SRGSSR/pillarbox-web-suite/commit/a3d47b1f62761ed4b22f4a08b3ff0ad340bde09c))
+
 # [@srgssr/airplay-button-v1.1.3](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/airplay-button-v1.1.2...@srgssr/airplay-button-v1.1.3) (2026-08-13)
 
 
