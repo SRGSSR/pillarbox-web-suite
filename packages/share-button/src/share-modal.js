@@ -17,14 +17,17 @@ class ShareModal extends ModalDialog {
    * Creates an instance of ShareModal.
    *
    * @param {import('video.js/dist/types/player.js').default} player The player instance.
-   * @param {Object} options Configuration options for the modal.
+   * @param {Object} options The modal options, on top of the `ModalDialog` ones.
+   * @param {string} [options.title='Share'] The title displayed at the top of the modal.
+   * @param {boolean} [options.pauseOnOpen=false] Whether opening the modal pauses the player.
+   * @param {boolean} [options.temporary=false] Whether the modal is disposed once closed.
+   * @param {Object} [options.shareUrlOptions={}] The `ShareUrlOptions` child configuration.
+   * @param {Object} [options.shareButtonCollection={}] The `ShareButtonCollection` child configuration.
    */
   constructor(player, options = {}) {
     super(player, options);
 
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
-    this.handleUrlOptionsChange = this.handleUrlOptionsChange.bind(this);
-    this.handleShare = this.handleShare.bind(this);
     this.fill();
     this.render();
   }
@@ -34,8 +37,6 @@ class ShareModal extends ModalDialog {
    */
   dispose() {
     this.unbindOutsideClick();
-    this.urlOptions_?.off('change', this.handleUrlOptionsChange);
-    this.collection_?.off('share', this.handleShare);
     super.dispose();
   }
 
@@ -62,8 +63,8 @@ class ShareModal extends ModalDialog {
       this.options().shareButtonCollection
     );
 
-    this.urlOptions_.on('change', this.handleUrlOptionsChange);
-    this.collection_.on('share', this.handleShare);
+    this.on(this.urlOptions_, 'change', this.updateUrlGenerator);
+    this.on('share', this.handleShare);
     this.updateUrlGenerator();
   }
 
@@ -103,15 +104,6 @@ class ShareModal extends ModalDialog {
   }
 
   /**
-   * Returns whether the modal is currently open.
-   *
-   * @returns {boolean} True when open.
-   */
-  isOpen() {
-    return this.opened();
-  }
-
-  /**
    * Updates the collection URL generator.
    */
   updateUrlGenerator() {
@@ -119,14 +111,8 @@ class ShareModal extends ModalDialog {
   }
 
   /**
-   * Handles URL option changes.
-   */
-  handleUrlOptionsChange() {
-    this.updateUrlGenerator();
-  }
-
-  /**
-   * Closes the modal after a share action.
+   * Closes the modal after a share action. The `share` event bubbles from the
+   * platform buttons.
    */
   handleShare() {
     this.close();

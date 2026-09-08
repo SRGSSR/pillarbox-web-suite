@@ -23,7 +23,7 @@
 <script type="module">
   import pillarbox from '@srgssr/pillarbox-web';
   import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
-  import './scss/share.scss';
+  import './scss/share-button.scss';
   import './src/share.js';
 
   // Handle URL parameters
@@ -41,7 +41,7 @@
     srgOptions: {
       dataProviderHost: ilHost
     },
-    ShareModal: {
+    shareModal: {
       title: 'Share',
       shareUrlOptions: {
         includeCurrentTime: true
@@ -50,25 +50,25 @@
         //
         // Manage CTAs Order
         // children: [
-        //   'FacebookShareButton',
-        //   'EmailShareButton',
-        //   'XShareButton',
-        //   'CopyLinkShareButton'
+        //   'facebookShareButton',
+        //   'emailShareButton',
+        //   'xShareButton',
+        //   'copyLinkShareButton'
         // ],
         //
         // Disable specific cta
-        // WhatsappShareButton: false,
+        // whatsappShareButton: false,
         //
-        FacebookShareButton: {
+        facebookShareButton: {
           title: 'Share with a custom Facebook title',
         },
-        CopyLinkShareButton: {
+        copyLinkShareButton: {
           label: 'Custom',
           title: 'Custom'
         }
       }
     },
-    ShareToggle: true
+    shareToggle: true
   });
 
   // Load the video source for the player
@@ -78,8 +78,8 @@
     disableTrackers: true
   });
 
-  // Expose player for debugging
-  window["pillarbox"] = pillarbox;
+  // Expose pillarbox for debugging
+  window.pillarbox = pillarbox;
 </script>
 </body>
 </html>
