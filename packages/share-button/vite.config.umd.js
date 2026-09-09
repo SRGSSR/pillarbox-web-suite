@@ -7,7 +7,7 @@ import { entry, name, outDir, output } from './.build.config.js';
  * Vite's configuration for the umd build.
  *
  * Outputs:
- * - 'dist/share.umd.min.js': Universal Module Definition version.
+ * - 'dist/share-button.umd.min.js': Universal Module Definition version.
  */
 export default defineConfig({
   esbuild: false,

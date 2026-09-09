@@ -44,7 +44,7 @@ describe('Share', () => {
     player.dispose();
     createPlayer({
       language: 'fr',
-      ShareModal: {
+      shareModal: {
         title: 'Partager la video',
         shareUrlOptions: {
           url: 'https://www.example.com/watch/video-14683290',
@@ -52,10 +52,10 @@ describe('Share', () => {
         },
         shareButtonCollection: {
           shareText: 'Regarde ca',
-          FacebookShareButton: { label: 'Facebook custom' }
+          facebookShareButton: { label: 'Facebook custom' }
         }
       },
-      ShareToggle: true
+      shareToggle: true
     });
     vi.spyOn(player, 'currentTime').mockReturnValue(83);
 
@@ -75,11 +75,11 @@ describe('Share', () => {
       .toContain('Épisode');
     expect(modal.el().querySelectorAll('.vjs-share-url-option-label')[1].textContent)
       .toContain('Position courante');
-    expect(modal.el().querySelector('.vjs-share-button--facebook').textContent)
+    expect(modal.el().querySelector('.vjs-share-button-facebook').textContent)
       .toContain('Facebook custom');
-    expect(modal.el().querySelector('.vjs-share-button--x a').href)
+    expect(modal.el().querySelector('.vjs-share-button-x').href)
       .toContain('startTime%3D83');
-    expect(modal.el().querySelector('.vjs-share-button--x a').href)
+    expect(modal.el().querySelector('.vjs-share-button-x').href)
       .toContain('text=Regarde%20ca');
   });
 });
