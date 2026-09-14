@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
-import babel from '@rollup/plugin-babel';
-import terser from '@rollup/plugin-terser';
+import babel from '@rolldown/plugin-babel';
+import babelConfig from '../../babel.config.json' with { type: 'json' };
 
 /**
  * Vite's configuration for the umd build.
@@ -9,7 +9,12 @@ import terser from '@rollup/plugin-terser';
  * - 'dist/thumbnail-preview.umd.min.js': Universal Module Definition version.
  */
 export default defineConfig({
-  esbuild: false,
+  plugins: [
+    babel({
+      presets: babelConfig.presets
+    })
+  ],
+  oxc: false,
   build: {
     emptyOutDir: false,
     sourcemap: true,
@@ -18,7 +23,7 @@ export default defineConfig({
       name: 'ThumbnailPreview',
       entry: 'src/thumbnail-preview.js'
     },
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         name: 'ThumbnailPreview',
         entryFileNames: 'thumbnail-preview.umd.min.js',
@@ -27,13 +32,6 @@ export default defineConfig({
         },
       },
       external: ['video.js'],
-      plugins: [
-        babel({
-          babelHelpers: 'bundled',
-          exclude: 'node_modules/**'
-        }),
-        terser()
-      ],
     },
   },
 });

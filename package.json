@@ -33,14 +33,13 @@
     "test:create": "vitest run --config scripts/vitest.scripts.config.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
+    "@babel/core": "^8.0.5",
+    "@babel/preset-env": "^8.0.5",
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.0",
     "@eslint/eslintrc": "^3.3.7",
     "@eslint/js": "^10.0.1",
-    "@rollup/plugin-babel": "^7.1.0",
-    "@rollup/plugin-terser": "^1.0.0",
+    "@rolldown/plugin-babel": "^0.2.4",
     "@semantic-release/changelog": "^7.0.0",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^11.0.1",
