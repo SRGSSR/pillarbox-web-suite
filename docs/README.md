@@ -51,7 +51,6 @@ element directory will be generated in the monorepo with the following structure
 |   `-- <your-element-name>.js      # Main JavaScript file for the element
 |-- test
 |   `-- <your-element-name>.test.js # A default vitest test for your element
-|-- .babelrc                        # Babel configuration specific to this element
 |-- index.html                      # Demo page to showcase the element
 |-- package.json                    # NPM package file, you might need to install additional dependencies
 |-- README.md                       # Documentation file for the element
