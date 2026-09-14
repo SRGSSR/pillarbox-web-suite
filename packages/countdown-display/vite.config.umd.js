@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
-import babel from '@rollup/plugin-babel';
-import terser from '@rollup/plugin-terser';
+import babel from '@rolldown/plugin-babel';
+import babelConfig from '../../babel.config.json' with { type: 'json' };
 import { entry, name, outDir, output } from './.build.config.js';
 
 /**
@@ -10,7 +10,12 @@ import { entry, name, outDir, output } from './.build.config.js';
  * - 'dist/countdown-display.umd.min.js': Universal Module Definition version.
  */
 export default defineConfig({
-  esbuild: false,
+  plugins: [
+    babel({
+      presets: babelConfig.presets
+    })
+  ],
+  oxc: false,
   build: {
     outDir: outDir,
     emptyOutDir: false,
@@ -20,7 +25,7 @@ export default defineConfig({
       name: name,
       entry: entry
     },
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         name: name,
         entryFileNames: `${output}.umd.min.js`,
@@ -29,13 +34,6 @@ export default defineConfig({
         },
       },
       external: ['video.js'],
-      plugins: [
-        babel({
-          babelHelpers: 'bundled',
-          exclude: 'node_modules/**'
-        }),
-        terser()
-      ],
     },
   },
 });

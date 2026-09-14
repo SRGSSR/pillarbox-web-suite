@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
-import babel from '@rollup/plugin-babel';
+import babel from '@rolldown/plugin-babel';
+import babelConfig from '../../babel.config.json' with { type: 'json' };
 
 
 /**
@@ -10,7 +11,12 @@ import babel from '@rollup/plugin-babel';
  * - 'dist/chapters-bar.cjs': CommonJS version with sourcemaps.
  */
 export default defineConfig({
-  esbuild: false,
+  plugins: [
+    babel({
+      presets: babelConfig.presets
+    })
+  ],
+  oxc: false,
   build: {
     emptyOutDir: false,
     sourcemap: true,
@@ -19,14 +25,8 @@ export default defineConfig({
       name: 'ChaptersBar',
       entry: 'src/chapters-bar.js'
     },
-    rollupOptions: {
-      external: ['@srgssr/pillarbox-web', 'video.js'],
-      plugins: [
-        babel({
-          babelHelpers: 'bundled',
-          exclude: 'node_modules/**'
-        })
-      ]
+    rolldownOptions: {
+      external: ['@srgssr/pillarbox-web', 'video.js']
     }
   }
 });
