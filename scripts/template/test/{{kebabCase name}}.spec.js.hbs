@@ -1,6 +1,9 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import {{platform}} from '{{importAlias}}';
 import {{properCase name}} from '../src/{{kebabCase name}}.js';
+{{#ifEq type 'Theme'}}
+import options from '../src/player-options.js';
+{{/ifEq}}
 
 window.HTMLMediaElement.prototype.load = () => {};
 
@@ -8,11 +11,14 @@ describe('{{properCase name}}', () => {
   let player, videoElement;
 
   beforeAll(() => {
-    document.body.innerHTML = '<video id="test-video" class="video-js"></video>';
+    document.body.innerHTML = '<video id="test-video" class="{{#ifEq type 'Theme'}}{{kebabCase name}}{{else}}video-js{{/ifEq}}"></video>';
     videoElement = document.querySelector('#test-video');
   });
 
   beforeEach(() => {
+{{#ifEq type 'Theme'}}
+    player = {{platform}}(videoElement, {{properCase name}}.options);
+{{else}}
 {{#ifEq type 'Plugin'}}
     player = {{platform}}(videoElement, {
       plugins: {
@@ -24,12 +30,20 @@ describe('{{properCase name}}', () => {
       {{camelCase name}}: true
     });
 {{/ifEq}}
+{{/ifEq}}
   });
 
   afterEach(() => {
     player.dispose();
   });
 
+{{#ifEq type 'Theme'}}
+  it('should create a player with the theme options', () => {
+    expect(player.options()).toMatchObject(options);
+    expect({{properCase name}}.options).toBe(options);
+    expect({{properCase name}}.VERSION).toBeDefined();
+  });
+{{else}}
   it('should be registered and attached to the player', () => {
 {{#ifEq type 'Plugin'}}
     expect({{platform}}.getPlugin('{{camelCase name}}')).toBe({{properCase name}});
@@ -39,4 +53,5 @@ describe('{{properCase name}}', () => {
     expect(player.{{camelCase name}}).toBeDefined();
     expect({{properCase name}}.VERSION).toBeDefined();
   });
+{{/ifEq}}
 });

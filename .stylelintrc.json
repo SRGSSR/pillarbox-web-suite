@@ -2,5 +2,13 @@
   "extends": [
     "stylelint-config-recommended-scss",
     "stylelint-config-rational-order"
+  ],
+  "overrides": [
+    {
+      "files": ["packages/*/scss/_preset.scss"],
+      "rules": {
+        "scss/at-extend-no-missing-placeholder": null
+      }
+    }
   ]
 }

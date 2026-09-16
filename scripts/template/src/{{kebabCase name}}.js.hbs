@@ -1,3 +1,36 @@
+{{#ifEq type 'Theme'}}
+import { version } from '../package.json';
+import options from './player-options.js';
+
+/**
+ * The {{titleCase name}} theme for the {{#ifEq platform 'pillarbox'}}Pillarbox{{else}}video.js{{/ifEq}} player.
+ *
+ * @example
+ * import {{platform}} from '{{importAlias}}';
+ * import {{properCase name}} from '@srgssr/{{kebabCase name}}';
+ *
+ * const player = {{platform}}('my-player', {{properCase name}}.options);
+ *
+ * @example
+ * // Override some of the theme options
+ * const player = {{platform}}('my-player', {{platform}}.obj.merge({{properCase name}}.options, {
+ *   playbackRates: [0.5, 1, 2]
+ * }));
+ *
+ * @example
+ * // Audio only mode
+ * const player = {{platform}}('my-player', {{platform}}.obj.merge({{properCase name}}.options, {
+ *   audioOnlyMode: true
+ * }));
+ *
+ * @property {Object} options The player options of the theme.
+ * @property {string} VERSION The version of the theme.
+ */
+const {{properCase name}} = {
+  options,
+  VERSION: version
+};
+{{else}}
 import {{platform}} from '{{importAlias}}';
 import { version } from '../package.json';
 {{#if wantLocalization}}import './lang';{{/if}}
@@ -63,6 +96,7 @@ class {{properCase name}} extends {{type}} {
 }
 
 {{platform}}.registerComponent('{{properCase name}}', {{properCase name}});
+{{/ifEq}}
 {{/ifEq}}
 
 export default {{properCase name}};
