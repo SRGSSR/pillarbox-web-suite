@@ -86,4 +86,48 @@ describe('Plop generator', () => {
       expect.fail(errorMessage);
     }
   });
+
+  it('should generate a pillarbox theme successfully', async() => {
+    await create({ platform: 'pillarbox', type: 'Theme' });
+    const packageJsonPath = path.join(testDir, 'package.json');
+
+    expect(fs.existsSync(packageJsonPath)).toBe(true);
+
+    try {
+      execSync('npm run build', { stdio: 'pipe', cwd: testDir });
+      execSync('npm run test', { stdio: 'pipe', cwd: testDir });
+    } catch (error) {
+      let errorMessage = 'Command failed:';
+
+      if (error.stdout) {
+        errorMessage += `\nstdout:\n${error.stdout.toString()}`;
+      }
+      if (error.stderr) {
+        errorMessage += `\nstderr:\n${error.stderr.toString()}`;
+      }
+      expect.fail(errorMessage);
+    }
+  });
+
+  it('should generate a video.js theme successfully', async() => {
+    await create({ platform: 'videojs', type: 'Theme' });
+    const packageJsonPath = path.join(testDir, 'package.json');
+
+    expect(fs.existsSync(packageJsonPath)).toBe(true);
+
+    try {
+      execSync('npm run build', { stdio: 'pipe', cwd: testDir });
+      execSync('npm run test', { stdio: 'pipe', cwd: testDir });
+    } catch (error) {
+      let errorMessage = 'Command failed:';
+
+      if (error.stdout) {
+        errorMessage += `\nstdout:\n${error.stdout.toString()}`;
+      }
+      if (error.stderr) {
+        errorMessage += `\nstderr:\n${error.stderr.toString()}`;
+      }
+      expect.fail(errorMessage);
+    }
+  });
 });

@@ -59,6 +59,26 @@ element directory will be generated in the monorepo with the following structure
 `-- vite.config.js                  # Vite configuration for building the element demo page
 ```
 
+For a theme, the structure is the following:
+
+```
+/packages/<your-theme-name>
+|-- scss
+|   |-- _preset.scss                # Style overrides applied after the default Pillarbox styles
+|   `-- <your-theme-name>.scss      # Main stylesheet, includes the default Pillarbox styles and the preset
+|-- src
+|   |-- player-options.js           # Player options merged into the Pillarbox defaults
+|   `-- <your-theme-name>.js        # Main JavaScript file for the theme
+|-- test
+|   `-- <your-theme-name>.spec.js   # A default vitest test for your theme
+|-- .babelrc                        # Babel configuration specific to this theme
+|-- index.html                      # Demo page to showcase the theme
+|-- package.json                    # NPM package file, you might need to install additional dependencies
+|-- README.md                       # Documentation file for the theme
+|-- vite.config.lib.js              # Vite configuration for building the theme as a library
+`-- vite.config.js                  # Vite configuration for building the theme demo page
+```
+
 After the structure is generated, navigate into the element's directory:
 
 ```bash

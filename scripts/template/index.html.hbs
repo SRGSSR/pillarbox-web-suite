@@ -18,13 +18,23 @@
   </style>
 </head>
 <body>
+{{#ifEq type 'Theme'}}
+<div id="container"></div>
+{{else}}
 <video id="player" class="pillarbox-js" controls muted></video>
+{{/ifEq}}
 
 <script type="module">
+{{#ifEq type 'Theme'}}
+  import pillarbox from '@srgssr/pillarbox-web';
+  import './scss/{{kebabCase name}}.scss';
+  import {{properCase name}} from './src/{{kebabCase name}}.js';
+{{else}}
   import '@srgssr/pillarbox-web/dist/pillarbox.min.css';
   import pillarbox from '@srgssr/pillarbox-web';{{#if wantScss}}
   import './scss/{{kebabCase name}}.scss';{{/if}}
   import './src/{{kebabCase name}}.js';
+{{/ifEq}}
 
   // Handle URL parameters
   const searchParams = new URLSearchParams(location.search);
@@ -32,6 +42,30 @@
   const ilHost = searchParams.get('ilHost') || undefined;
   const language = searchParams.get('language');
   const urn = searchParams.get('urn') || 'urn:rts:video:14683290';
+{{#ifEq type 'Theme'}}
+  const audioOnlyMode = searchParams.has('audioOnlyMode');
+
+  // An audio media is played from an audio element, which gets the audio layout
+  const element = document.createElement(urn.includes(':audio:') ? 'audio' : 'video');
+
+  element.id = 'player';
+  element.className = '{{kebabCase name}}';
+  element.controls = true;
+  element.muted = true;
+  document.querySelector('#container').replaceWith(element);
+
+  // Create a pillarbox player instance styled by the {{properCase name}} theme
+  // The audio only mode is a single bar as wide as the page
+  window.player = pillarbox('player', pillarbox.obj.merge({{properCase name}}.options, {
+    debug,
+    language,
+    audioOnlyMode,
+    fluid: audioOnlyMode,
+    srgOptions: {
+      dataProviderHost: ilHost
+    }
+  }));
+{{else}}
 
   // Create a pillarbox player instance with the {{properCase name}} enabled
   window.player = pillarbox('player', {
@@ -46,6 +80,7 @@
     {{camelCase name}}: true
 {{/ifEq}}
   });
+{{/ifEq}}
 
   // Load the video source for the player
   player.src({

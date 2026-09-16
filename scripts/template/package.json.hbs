@@ -30,14 +30,16 @@
   "keywords": [
     "video.js",
     "player"{{#ifEq platform 'videojs'}}{{#ifEq type 'Plugin'}},
-    "videojs-plugin"{{/ifEq}}{{else}},
+    "videojs-plugin"{{/ifEq}}{{#ifEq type 'Theme'}},
+    "videojs-theme"{{/ifEq}}{{else}},
     "pillarbox"{{#ifEq type 'Plugin'}},
-    "pillarbox-plugin"{{/ifEq}}{{/ifEq}}
+    "pillarbox-plugin"{{/ifEq}}{{#ifEq type 'Theme'}},
+    "pillarbox-theme"{{/ifEq}}{{/ifEq}}
   ],
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm-run-all clean build:*",{{#if wantScss}}
-    "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules",{{/if}}
+    "build:css": "sass ./scss/{{kebabCase name}}.scss:dist/{{kebabCase name}}.min.css --style compressed --source-map --load-path node_modules{{#ifEq type 'Theme'}} --load-path ../../node_modules{{/ifEq}}",{{/if}}
     "build:lib": "vite build --config vite.config.lib.js",
     "build:umd": "vite build --config vite.config.umd.js",
     "github:page": "vite build",

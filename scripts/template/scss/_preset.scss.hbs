@@ -1,0 +1,11 @@
+@use 'sass:meta';
+@use '{{#ifEq platform 'pillarbox'}}@srgssr/pillarbox-web/dist/pillarbox.min{{else}}video.js/dist/video-js{{/ifEq}}';
+@use 'variables';
+
+.{{kebabCase name}} {
+  @extend .{{#ifEq platform 'pillarbox'}}pillarbox-js{{else}}video-js{{/ifEq}};
+  @include meta.load-css('components/title-bar');
+  @include meta.load-css('components/control-bar');
+  @include meta.load-css('components/progress');
+  @include meta.load-css('components/volume');
+}

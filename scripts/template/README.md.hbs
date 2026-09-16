@@ -24,6 +24,66 @@ For instructions on setting up Pillarbox, see
 the [Quick Start guide](https://github.com/SRGSSR/pillarbox-web#quick-start).
 
 {{/ifEq}}
+{{#ifEq type 'Theme'}}
+Once the player is installed, import the theme and pass its options when creating a player:
+
+```javascript
+import {{platform}} from '{{importAlias}}';
+import {{properCase name}} from '@srgssr/{{kebabCase name}}';
+
+const player = {{platform}}('my-player', {{properCase name}}.options);
+```
+
+Give the player element the `{{kebabCase name}}` class, this class extends the `{{#ifEq platform 'pillarbox'}}pillarbox-js{{else}}video-js{{/ifEq}}` class:
+
+```html
+<video id="my-player" class="{{kebabCase name}}"></video>
+```
+
+The options are an opt-in, a page can create players with and without the theme, and any player
+can override them:
+
+```javascript
+const player = {{platform}}('my-player', {{platform}}.obj.merge({{properCase name}}.options, {
+  playbackRates: [0.5, 1, 2]
+}));
+```
+
+Use an `<audio>` element to get the audio layout of video.js, or enable the
+[audio only mode](https://docs.videojs.com/player#audioOnlyMode), where only the control bar is
+displayed:
+
+```javascript
+const player = {{platform}}('my-player', {{platform}}.obj.merge({{properCase name}}.options, {
+  audioOnlyMode: true
+}));
+```
+
+The theme stylesheet includes the {{#ifEq platform 'pillarbox'}}Pillarbox{{else}}video.js{{/ifEq}} styles, use it instead of `{{#ifEq platform 'pillarbox'}}pillarbox.min.css{{else}}video-js.css{{/ifEq}}`:
+
+```css
+@import "@srgssr/{{kebabCase name}}/dist/{{kebabCase name}}.min.css";
+```
+
+## Customizing the theme
+
+The theme is made of two parts:
+
+- `scss/_preset.scss`: the style overrides, organized like the video.js stylesheet: the variables in
+  `scss/_variables.scss` and one file per component in `scss/components`.
+- `src/player-options.js`: the player options exposed as `{{properCase name}}.options`, to pass
+  when creating a player.
+
+The colors are CSS custom properties declared with no specificity, override them on the player
+element:
+
+```css
+.{{kebabCase name}} {
+  --{{kebabCase name}}-accent: #f59e0b;
+}
+```
+
+{{else}}
 Once the player is installed you can activate the {{lowerCase type}} as follows:
 
 ```javascript
@@ -45,6 +105,7 @@ To apply the default styling, add the following line to your CSS file:
 ```
 
 {{/if}}
+{{/ifEq}}
 ## Contributing
 
 For detailed contribution guidelines, refer to our [Contributing guide][contributing-guide].
@@ -71,7 +132,9 @@ The demo page supports several URL parameters that modify the behavior of the vi
 - `debug`: Set this to enable debugging mode.
 - `ilHost`: Specifies the host for the data provider.
 - `language`: Sets the language for the player interface.
-- `urn`: Specifies the URN of the video to load. Default is `urn:rts:video:14683290`.
+- `urn`: Specifies the URN of the video to load. Default is `urn:rts:video:14683290`.{{#ifEq type 'Theme'}} An audio
+  URN is played from an `audio` element.
+- `audioOnlyMode`: Set this to enable the audio only mode of video.js.{{/ifEq}}
 
 You can combine parameters in the URL like so:
 
