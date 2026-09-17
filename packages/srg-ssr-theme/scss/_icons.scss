@@ -1,0 +1,40 @@
+@at-root {
+  @font-face {
+    font-weight: 400;
+    font-family: SrgSsrIcons;
+    font-style: normal;
+    src: inline-asset('assets/fonts/srg-ssr-icons.woff') format('woff');
+    // stylelint-disable-next-line plugin/no-unsupported-browser-features -- older browsers already block while the font loads
+    font-display: block;
+  }
+}
+
+.vjs-icon-placeholder::before {
+  font-family: SrgSsrIcons;
+}
+
+&:lang(en) .vjs-subs-caps-button .vjs-icon-placeholder::before,
+&:lang(fr-CA) .vjs-subs-caps-button .vjs-icon-placeholder::before {
+  content: '\f10b';
+}
+
+.vjs-icon-airplay::before {
+  content: '\f131';
+}
+
+.vjs-icon-playback-speed::before {
+  content: '\f132';
+}
+
+.vjs-icon-cam-on::before {
+  content: '\f12f';
+}
+
+.vjs-icon-cam-off::before {
+  content: '\f130';
+}
+
+.vjs-icon-google-cast::before,
+.vjs-icon-google-cast-active::before {
+  content: '\f126';
+}

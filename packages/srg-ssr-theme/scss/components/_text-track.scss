@@ -1,0 +1,26 @@
+& {
+  --srg-ssr-text-track-offset: calc(2 * var(--srg-ssr-control-size) + var(--srg-ssr-padding));
+}
+
+&.vjs-layout-tiny {
+  --srg-ssr-text-track-offset: calc(2 * var(--srg-ssr-control-size) + var(--srg-ssr-padding-tiny));
+}
+
+&.vjs-controls-disabled,
+&.vjs-user-inactive.vjs-playing {
+  --srg-ssr-text-track-offset: 1em;
+}
+
+.vjs-text-track-display {
+  bottom: var(--srg-ssr-text-track-offset);
+}
+
+video::-webkit-media-text-track-display,
+&.vjs-controls-disabled video::-webkit-media-text-track-display,
+&.vjs-user-inactive.vjs-playing video::-webkit-media-text-track-display {
+  transform: none;
+}
+
+video::-webkit-media-text-track-container {
+  transform: translateY(calc(-1 * var(--srg-ssr-text-track-offset)));
+}

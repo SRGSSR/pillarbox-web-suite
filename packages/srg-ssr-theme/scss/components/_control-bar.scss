@@ -1,0 +1,156 @@
+&:not(.vjs-audio-only-mode) {
+  .vjs-control-bar {
+    top: 0;
+    z-index: 1;
+    align-items: flex-end;
+    height: auto;
+    padding: 0 var(--srg-ssr-gutter) var(--srg-ssr-padding) calc(var(--srg-ssr-gutter) - var(--srg-ssr-gap));
+    background: none;
+    pointer-events: none;
+    container-type: size;
+  }
+
+  .vjs-control-bar > * {
+    pointer-events: auto;
+  }
+
+  &.vjs-has-started.vjs-user-inactive.vjs-playing:not(.vjs-audio) .vjs-control-bar > * {
+    pointer-events: none;
+  }
+
+  .vjs-control-bar::before,
+  .vjs-control-bar::after {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    content: '';
+    pointer-events: none;
+  }
+
+  .vjs-control-bar::before {
+    bottom: 0;
+    height: 11.4em;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .6) 35%);
+  }
+
+  .vjs-control-bar::after {
+    top: 0;
+    height: calc(var(--srg-ssr-control-size) + var(--srg-ssr-padding));
+    background: linear-gradient(rgba(0, 0, 0, .7), transparent);
+  }
+
+  .vjs-airplay-button,
+  .vjs-google-cast-button {
+    position: absolute;
+    top: var(--srg-ssr-padding);
+    right: var(--srg-ssr-gutter);
+  }
+
+  .vjs-airplay-button:not(.vjs-hidden) ~ .vjs-google-cast-button {
+    right: calc(var(--srg-ssr-gutter) + var(--srg-ssr-control-size) + var(--srg-ssr-gap));
+  }
+}
+
+&:not(.vjs-audio):not(.vjs-audio-only-mode) .vjs-control-bar > * {
+  margin-left: var(--srg-ssr-gap);
+}
+
+&.vjs-audio:not(.vjs-audio-only-mode) .vjs-control-bar {
+  // stylelint-disable plugin/no-unsupported-browser-features -- the fallback without grid is below
+  display: grid;
+  // stylelint-disable-next-line property-no-deprecated
+  grid-gap: var(--srg-ssr-gap) 2.4em;
+  grid-template-rows: var(--srg-ssr-control-size) var(--srg-ssr-audio-play-size);
+  grid-template-columns: auto 1fr auto;
+  gap: var(--srg-ssr-gap) 2.4em;
+  // stylelint-enable plugin/no-unsupported-browser-features
+  align-content: end;
+  padding: 0 var(--srg-ssr-gutter) 2em;
+
+  .vjs-custom-control-spacer,
+  .vjs-audio-button,
+  .vjs-subs-caps-button,
+  .vjs-descriptions-button,
+  .vjs-chapters-button,
+  .vjs-picture-in-picture-control,
+  .vjs-fullscreen-control {
+    display: none;
+  }
+}
+
+@supports not (display: grid) {
+  &.vjs-audio:not(.vjs-audio-only-mode) {
+    .vjs-skip-backward-button,
+    .vjs-play-control,
+    .vjs-skip-forward-button,
+    .vjs-volume-panel,
+    .vjs-playback-rate,
+    .vjs-time-control,
+    .vjs-progress-control,
+    .vjs-seek-to-live-control,
+    .vjs-live-control {
+      position: absolute;
+    }
+
+    .vjs-skip-backward-button,
+    .vjs-play-control,
+    .vjs-skip-forward-button {
+      bottom: 2em;
+      left: calc(50% - var(--srg-ssr-audio-play-size) / 2);
+    }
+
+    .vjs-volume-panel,
+    .vjs-playback-rate {
+      bottom: calc(2em + (var(--srg-ssr-audio-play-size) - var(--srg-ssr-control-size)) / 2);
+    }
+
+    .vjs-volume-panel {
+      left: var(--srg-ssr-gutter);
+    }
+
+    .vjs-playback-rate {
+      right: var(--srg-ssr-gutter);
+    }
+
+    .vjs-time-control,
+    .vjs-progress-control,
+    .vjs-seek-to-live-control,
+    .vjs-live-control {
+      bottom: calc(2em + var(--srg-ssr-audio-play-size) + var(--srg-ssr-gap));
+    }
+
+    .vjs-current-time {
+      left: var(--srg-ssr-gutter);
+    }
+
+    .vjs-duration,
+    .vjs-seek-to-live-control,
+    .vjs-live-control {
+      right: var(--srg-ssr-gutter);
+    }
+
+    .vjs-progress-control {
+      right: calc(var(--srg-ssr-gutter) + var(--srg-ssr-time-width));
+      left: calc(var(--srg-ssr-gutter) + var(--srg-ssr-time-width));
+    }
+  }
+}
+
+&.vjs-audio-only-mode .vjs-control-bar {
+  align-items: center;
+  height: auto;
+  padding: .4em var(--srg-ssr-gap) .4em 0;
+  background-color: var(--srg-ssr-black);
+
+  > * {
+    margin-left: var(--srg-ssr-gap);
+  }
+
+  .vjs-airplay-button,
+  .vjs-google-cast-button,
+  .vjs-audio-button,
+  .vjs-chapters-button {
+    display: none;
+  }
+}
