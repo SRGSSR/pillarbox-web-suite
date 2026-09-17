@@ -1,0 +1,17 @@
+& {
+  // stylelint-disable-next-line plugin/no-unsupported-browser-features -- only `clip` and the two-value syntax are partial
+  overflow: hidden;
+  font-family: SRG_SSR_Text_VF, sans-serif;
+}
+
+:focus,
+.vjs-slider:focus {
+  border-radius: .2em;
+  box-shadow: 0 0 .2em .3em var(--srg-ssr-focus), inset 0 0 .2em var(--srg-ssr-focus);
+}
+
+// stylelint-disable-next-line plugin/no-unsupported-browser-features -- the rule is dropped without support, keeping the focus ring
+:focus:not(:focus-visible),
+.vjs-slider:focus:not(:focus-visible) {
+  box-shadow: none;
+}
