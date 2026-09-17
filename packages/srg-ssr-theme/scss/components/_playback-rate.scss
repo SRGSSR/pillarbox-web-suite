@@ -1,0 +1,53 @@
+&.vjs-live .vjs-playback-rate {
+  display: none;
+}
+
+.vjs-playback-rate .vjs-icon-placeholder::before {
+  content: '\f132';
+}
+
+.vjs-playback-rate .vjs-playback-rate-value {
+  display: none;
+}
+
+&.vjs-audio:not(.vjs-audio-only-mode) .vjs-playback-rate {
+  position: absolute;
+  grid-area: 2 / 3;
+  align-self: center;
+  justify-self: end;
+}
+
+&.vjs-audio-only-mode {
+  .vjs-playback-rate {
+    width: 4.4em;
+  }
+
+  .vjs-playback-rate .vjs-icon-placeholder {
+    display: none;
+  }
+
+  .vjs-playback-rate > .vjs-menu-button::before {
+    position: absolute;
+    top: .4em;
+    right: 0;
+    bottom: .4em;
+    left: 0;
+    background-color: var(--srg-ssr-white);
+    border-radius: 1.2em;
+    content: '';
+  }
+
+  .vjs-playback-rate > .vjs-menu-button:is(:hover, :focus, :active)::before {
+    background-color: var(--srg-ssr-hover);
+  }
+
+  .vjs-playback-rate .vjs-playback-rate-value {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--srg-ssr-black);
+    font-weight: 500;
+    font-size: 1.2em;
+  }
+}

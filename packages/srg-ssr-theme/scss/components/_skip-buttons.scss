@@ -1,0 +1,29 @@
+&.vjs-audio:not(.vjs-audio-only-mode) {
+  .vjs-skip-backward-button,
+  .vjs-skip-forward-button {
+    grid-area: 2 / 2;
+    justify-self: center;
+    width: var(--srg-ssr-audio-play-size);
+    height: var(--srg-ssr-audio-play-size);
+  }
+
+  .vjs-skip-backward-button {
+    transform: translateX(calc(-1 * (var(--srg-ssr-audio-play-size) + var(--srg-ssr-gap))));
+  }
+
+  .vjs-skip-forward-button {
+    transform: translateX(calc(var(--srg-ssr-audio-play-size) + var(--srg-ssr-gap)));
+  }
+
+  .vjs-skip-backward-button .vjs-icon-placeholder::before,
+  .vjs-skip-forward-button .vjs-icon-placeholder::before {
+    font-size: 3.2em;
+  }
+}
+
+&.vjs-audio-only-mode {
+  .vjs-skip-backward-button,
+  .vjs-skip-forward-button {
+    width: var(--srg-ssr-audio-only-height);
+  }
+}

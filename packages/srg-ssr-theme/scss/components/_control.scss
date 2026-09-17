@@ -1,0 +1,24 @@
+.vjs-control {
+  height: var(--srg-ssr-control-size);
+}
+
+&.vjs-audio-only-mode .vjs-control {
+  height: var(--srg-ssr-audio-only-height);
+}
+
+.vjs-control:hover::before,
+.vjs-control:focus::before,
+.vjs-control:focus {
+  text-shadow: none;
+}
+
+.vjs-button > .vjs-icon-placeholder::before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4em;
+}
+
+.vjs-button:is(:hover, :focus, :active) .vjs-icon-placeholder {
+  color: var(--srg-ssr-hover);
+}

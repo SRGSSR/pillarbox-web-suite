@@ -1,0 +1,6 @@
+@use 'sass:meta';
+
+@import '@srgssr/airplay-button/dist/airplay-button.min.css';
+@import '@srgssr/google-cast-sender/dist/google-cast-sender.min.css';
+@import '@srgssr/live-dvr-time-display/dist/live-dvr-time-display.min.css';
+@include meta.load-css('preset');

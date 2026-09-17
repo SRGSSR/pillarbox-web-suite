@@ -1,0 +1,10 @@
+& {
+  overflow: hidden;
+  font-family: SRG_SSR_Text_VF, sans-serif;
+}
+
+:focus-visible,
+.vjs-slider:focus-visible {
+  border-radius: .2em;
+  box-shadow: 0 0 .2em .3em var(--srg-ssr-focus), inset 0 0 .2em var(--srg-ssr-focus);
+}

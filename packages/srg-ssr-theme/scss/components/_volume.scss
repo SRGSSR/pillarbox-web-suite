@@ -1,0 +1,29 @@
+.vjs-volume-panel {
+  align-items: center;
+}
+
+.vjs-volume-bar {
+  margin: auto .45em;
+}
+
+.vjs-volume-panel .vjs-volume-control.vjs-volume-horizontal {
+  transition-delay: 0s;
+  transition-duration: .1s;
+}
+
+&.vjs-audio:not(.vjs-audio-only-mode) .vjs-volume-panel {
+  position: absolute;
+  grid-area: 2 / 1 / 3 / 2;
+  align-self: center;
+  justify-self: start;
+}
+
+&.vjs-audio-only-mode {
+  .vjs-volume-panel.vjs-volume-panel-horizontal {
+    width: var(--srg-ssr-control-size);
+  }
+
+  .vjs-volume-control {
+    display: none;
+  }
+}

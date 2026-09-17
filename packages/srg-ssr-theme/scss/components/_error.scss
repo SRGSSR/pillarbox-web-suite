@@ -1,0 +1,15 @@
+.vjs-error-display .vjs-modal-dialog-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6em;
+}
+
+&.vjs-audio-only-mode.vjs-error {
+  min-height: var(--srg-ssr-control-size);
+}
+
+&.vjs-audio-only-mode .vjs-error-display .vjs-modal-dialog-content {
+  padding: 0;
+  font-size: 1.2em;
+}

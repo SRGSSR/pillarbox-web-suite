@@ -1,0 +1,38 @@
+.vjs-seek-to-live-control {
+  justify-content: center;
+  min-width: 0;
+  padding: 0;
+}
+
+.vjs-seek-to-live-control .vjs-icon-placeholder {
+  display: none;
+}
+
+.vjs-seek-to-live-text {
+  padding: .2em .4em;
+  font-size: 1.4em;
+  line-height: 1.25;
+  background: var(--srg-ssr-neutral);
+  border-radius: .15em;
+}
+
+.vjs-at-live-edge .vjs-seek-to-live-text {
+  background: var(--srg-ssr-live);
+}
+
+.vjs-at-live-edge ~ .vjs-skip-forward-button {
+  opacity: .6;
+  pointer-events: none;
+}
+
+&:not(.vjs-audio, .vjs-audio-only-mode) .vjs-seek-to-live-control {
+  position: absolute;
+  right: var(--srg-ssr-gutter);
+  bottom: calc(var(--srg-ssr-control-size) + var(--srg-ssr-padding));
+  width: var(--srg-ssr-time-width);
+}
+
+&.vjs-audio:not(.vjs-audio-only-mode) .vjs-seek-to-live-control {
+  grid-area: 1 / 3;
+  width: auto;
+}
