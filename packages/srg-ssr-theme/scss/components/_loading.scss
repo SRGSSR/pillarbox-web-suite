@@ -1,0 +1,25 @@
+.vjs-loading-spinner {
+  width: 6.4em;
+  height: 6.4em;
+  margin: 0;
+  border: 0;
+  opacity: 1;
+}
+
+.vjs-loading-spinner::after {
+  content: none;
+}
+
+&.vjs-seeking .vjs-loading-spinner::before,
+&.vjs-waiting .vjs-loading-spinner::before {
+  border: .4em solid var(--srg-ssr-red-dark);
+  border-top-color: rgba(255, 255, 255, .24);
+  border-radius: 50%;
+  animation: srg-ssr-spinner 1s ease-in-out infinite;
+}
+
+@keyframes srg-ssr-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
