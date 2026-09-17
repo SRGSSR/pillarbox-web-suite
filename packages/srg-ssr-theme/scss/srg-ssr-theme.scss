@@ -1,0 +1,7 @@
+@use 'sass:meta';
+
+@use '@srgssr/svg-button/scss/svg-button';
+@use '@srgssr/google-cast-sender/scss/google-cast-sender';
+@use '@srgssr/live-dvr-time-display/scss/live-dvr-time-display';
+
+@include meta.load-css('preset');

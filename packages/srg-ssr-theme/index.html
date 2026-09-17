@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SRG SSR Theme Demo</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<div id="container"></div>
+
+<script type="module">
+  import pillarbox from '@srgssr/pillarbox-web';
+  import './scss/srg-ssr-theme.scss';
+  import SrgSsrTheme from './src/srg-ssr-theme.js';
+
+  // Handle URL parameters
+  const searchParams = new URLSearchParams(location.search);
+  const debug = searchParams.has('debug');
+  const ilHost = searchParams.get('ilHost') || undefined;
+  const language = searchParams.get('language');
+  const urn = searchParams.get('urn') || 'urn:rts:video:14683290';
+  const audioOnlyMode = searchParams.has('audioOnlyMode');
+
+  // An audio media is played from an audio element, which gets the audio layout
+  const element = document.createElement(urn.includes(':audio:') ? 'audio' : 'video');
+
+  element.id = 'player';
+  element.className = 'srg-ssr-theme';
+  element.controls = true;
+  element.muted = true;
+  document.querySelector('#container').replaceWith(element);
+
+  // Create a pillarbox player instance styled by the SRG SSR theme
+  // The audio only mode is a single bar as wide as the page
+  const options = audioOnlyMode
+    ? pillarbox.obj.merge(SrgSsrTheme.options, { audioOnlyMode: true, fluid: true })
+    : SrgSsrTheme.options;
+
+  window.player = pillarbox('player', pillarbox.obj.merge(options, {
+    debug,
+    language,
+    srgOptions: {
+      dataProviderHost: ilHost
+    }
+  }));
+
+  // Load the video source for the player
+  player.src({
+    src: urn,
+    type: 'srgssr/urn',
+    disableTrackers: true
+  });
+
+  // Expose player for debugging
+  window.player = player;
+  window.pillarbox = pillarbox;
+</script>
+</body>
+</html>
