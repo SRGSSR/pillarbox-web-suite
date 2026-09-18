@@ -1,0 +1,88 @@
+&:not(.vjs-audio-only-mode) {
+  .vjs-control-bar {
+    top: 0;
+    z-index: 1;
+    gap: var(--srg-ssr-gap);
+    align-items: flex-end;
+    height: auto;
+    padding: 0 var(--srg-ssr-gutter) var(--srg-ssr-padding);
+    background: none;
+    pointer-events: none;
+    container-type: size;
+  }
+
+  .vjs-control-bar > * {
+    pointer-events: auto;
+  }
+
+  &.vjs-has-started.vjs-user-inactive.vjs-playing:not(.vjs-audio) .vjs-control-bar > * {
+    pointer-events: none;
+  }
+
+  .vjs-control-bar::before,
+  .vjs-control-bar::after {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    content: '';
+    pointer-events: none;
+  }
+
+  .vjs-control-bar::before {
+    bottom: 0;
+    height: 11.4em;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .6) 35%);
+  }
+
+  .vjs-control-bar::after {
+    top: 0;
+    height: calc(var(--srg-ssr-control-size) + var(--srg-ssr-padding));
+    background: linear-gradient(rgba(0, 0, 0, .7), transparent);
+  }
+
+  .vjs-airplay-button,
+  .vjs-google-cast-button {
+    position: absolute;
+    top: var(--srg-ssr-padding);
+    right: var(--srg-ssr-gutter);
+  }
+
+  .vjs-airplay-button:not(.vjs-hidden) ~ .vjs-google-cast-button {
+    right: calc(var(--srg-ssr-gutter) + var(--srg-ssr-control-size) + var(--srg-ssr-gap));
+  }
+}
+
+&.vjs-audio:not(.vjs-audio-only-mode) .vjs-control-bar {
+  display: grid;
+  grid-template-rows: var(--srg-ssr-control-size) var(--srg-ssr-audio-play-size);
+  grid-template-columns: auto 1fr auto;
+  align-content: end;
+  padding: 0 var(--srg-ssr-gutter) 2em;
+  column-gap: 2.4em;
+
+  .vjs-custom-control-spacer,
+  .vjs-audio-button,
+  .vjs-subs-caps-button,
+  .vjs-descriptions-button,
+  .vjs-chapters-button,
+  .vjs-picture-in-picture-control,
+  .vjs-fullscreen-control {
+    display: none;
+  }
+}
+
+&.vjs-audio-only-mode .vjs-control-bar {
+  gap: var(--srg-ssr-gap);
+  align-items: center;
+  height: auto;
+  padding: .4em var(--srg-ssr-gap);
+  background-color: var(--srg-ssr-black);
+
+  .vjs-airplay-button,
+  .vjs-google-cast-button,
+  .vjs-audio-button,
+  .vjs-chapters-button {
+    display: none;
+  }
+}

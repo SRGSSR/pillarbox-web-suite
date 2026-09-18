@@ -1,0 +1,99 @@
+&.vjs-layout-tiny {
+  .vjs-progress-control {
+    display: flex;
+  }
+
+  .vjs-play-progress::before {
+    display: none;
+  }
+
+  .vjs-current-time-display,
+  .vjs-duration-display {
+    font-size: 1.2em;
+  }
+
+  .vjs-menu-button-popup .vjs-menu .vjs-menu-content {
+    min-width: 20em;
+  }
+
+  &:not(.vjs-live) .vjs-playback-rate {
+    display: block;
+  }
+}
+
+&.vjs-layout-tiny:not(.vjs-audio-only-mode) {
+  .vjs-airplay-button,
+  .vjs-google-cast-button {
+    right: var(--srg-ssr-gutter-tiny);
+  }
+
+  .vjs-airplay-button:not(.vjs-hidden) ~ .vjs-google-cast-button {
+    right: calc(var(--srg-ssr-gutter-tiny) + var(--srg-ssr-control-size) + var(--srg-ssr-gap-tiny));
+  }
+}
+
+&.vjs-layout-tiny:not(.vjs-audio, .vjs-audio-only-mode) {
+  .vjs-control-bar {
+    gap: var(--srg-ssr-gap-tiny);
+    padding: 0 calc(var(--srg-ssr-gutter-tiny) + (var(--srg-ssr-time-width-tiny) - var(--srg-ssr-control-size)) / 2) var(--srg-ssr-padding-tiny);
+  }
+
+  .vjs-control-bar::before {
+    top: 0;
+    height: auto;
+    background: rgba(0, 0, 0, .6);
+  }
+
+  .vjs-time-control,
+  .vjs-progress-control,
+  .vjs-seek-to-live-control {
+    bottom: calc(var(--srg-ssr-control-size) + var(--srg-ssr-padding-tiny));
+    width: var(--srg-ssr-time-width-tiny);
+  }
+
+  .vjs-current-time {
+    left: var(--srg-ssr-gutter-tiny);
+  }
+
+  .vjs-duration,
+  .vjs-seek-to-live-control {
+    right: var(--srg-ssr-gutter-tiny);
+  }
+
+  .vjs-progress-control {
+    right: calc(var(--srg-ssr-gutter-tiny) + var(--srg-ssr-time-width-tiny) + var(--srg-ssr-gap));
+    left: calc(var(--srg-ssr-gutter-tiny) + var(--srg-ssr-time-width-tiny) + var(--srg-ssr-gap));
+    width: auto;
+  }
+
+  .vjs-skip-backward-button,
+  .vjs-play-control,
+  .vjs-skip-forward-button {
+    position: absolute;
+    top: calc(50% - (var(--srg-ssr-control-size) + var(--srg-ssr-padding-tiny) - var(--srg-ssr-padding)) / 2);
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .vjs-skip-backward-button {
+    margin-left: -8.4em;
+  }
+
+  .vjs-skip-forward-button {
+    margin-left: 8.4em;
+  }
+
+  .vjs-play-control {
+    width: 6.4em;
+    height: 6.4em;
+  }
+
+  .vjs-skip-backward-button .vjs-icon-placeholder::before,
+  .vjs-skip-forward-button .vjs-icon-placeholder::before {
+    font-size: 2.8em;
+  }
+
+  .vjs-play-control .vjs-icon-placeholder::before {
+    font-size: 4.2em;
+  }
+}

@@ -1,0 +1,75 @@
+.vjs-progress-control .vjs-progress-holder,
+.vjs-progress-control:hover .vjs-progress-holder {
+  height: .4em;
+  margin: 0;
+  font-size: 1em;
+}
+
+.vjs-slider {
+  background-color: rgba(255, 255, 255, .24);
+  border-radius: 1em;
+}
+
+.vjs-load-progress {
+  background: rgba(255, 255, 255, .5);
+  border-radius: 1em;
+}
+
+.vjs-load-progress div {
+  background: transparent;
+}
+
+.vjs-play-progress {
+  background: var(--srg-ssr-progress);
+  border-radius: 1em;
+}
+
+.vjs-play-progress::before,
+.vjs-progress-control:hover .vjs-play-progress::before {
+  top: -.4em;
+  font-size: 2em;
+  line-height: 1;
+  text-shadow: none;
+}
+
+.vjs-time-tooltip,
+.vjs-volume-tooltip {
+  padding: .4em .8em;
+  color: var(--srg-ssr-black);
+  font-weight: 500;
+  font-family: inherit;
+  white-space: nowrap;
+  text-shadow: none;
+  background: var(--srg-ssr-white);
+  border-radius: .4em;
+}
+
+.vjs-progress-control:hover .vjs-time-tooltip,
+.vjs-progress-control:hover .vjs-progress-holder:focus .vjs-time-tooltip,
+&.vjs-scrubbing.vjs-touch-enabled .vjs-progress-control .vjs-time-tooltip {
+  font-size: 1.4em;
+  font-variant-numeric: tabular-nums;
+}
+
+&:not(.vjs-audio, .vjs-audio-only-mode) .vjs-progress-control {
+  position: absolute;
+  right: calc(var(--srg-ssr-gutter) + var(--srg-ssr-time-width) + var(--srg-ssr-gap));
+  bottom: calc(var(--srg-ssr-control-size) + var(--srg-ssr-padding));
+  left: calc(var(--srg-ssr-gutter) + var(--srg-ssr-time-width) + var(--srg-ssr-gap));
+  width: auto;
+}
+
+&.vjs-audio:not(.vjs-audio-only-mode) .vjs-progress-control {
+  grid-area: 1 / 2;
+  width: auto;
+}
+
+&.vjs-audio-only-mode {
+  .vjs-progress-control .vjs-progress-holder {
+    margin: 0 1em;
+  }
+
+  .vjs-progress-control .vjs-mouse-display {
+    display: none;
+  }
+}

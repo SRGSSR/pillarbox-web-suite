@@ -1,0 +1,63 @@
+&:not(.vjs-live) .vjs-current-time,
+&:not(.vjs-live) .vjs-duration,
+&.vjs-liveui .vjs-current-time {
+  display: block;
+}
+
+.vjs-time-control {
+  padding: 0;
+  line-height: var(--srg-ssr-control-size);
+  text-align: center;
+  cursor: default;
+  user-select: none;
+}
+
+.vjs-current-time-display,
+.vjs-duration-display {
+  font-weight: 500;
+  font-size: 1.6em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+&:not(.vjs-audio, .vjs-audio-only-mode) {
+  .vjs-time-control {
+    position: absolute;
+    bottom: calc(var(--srg-ssr-control-size) + var(--srg-ssr-padding));
+    width: var(--srg-ssr-time-width);
+  }
+
+  .vjs-current-time {
+    left: var(--srg-ssr-gutter);
+  }
+
+  .vjs-duration {
+    right: var(--srg-ssr-gutter);
+  }
+}
+
+&.vjs-audio:not(.vjs-audio-only-mode) {
+  .vjs-time-control {
+    width: auto;
+  }
+
+  .vjs-current-time {
+    grid-area: 1 / 1;
+  }
+
+  .vjs-duration {
+    grid-area: 1 / 3;
+  }
+}
+
+&.vjs-audio-only-mode {
+  .vjs-time-control {
+    width: auto;
+    line-height: var(--srg-ssr-audio-only-height);
+  }
+
+  .vjs-current-time-display,
+  .vjs-duration-display {
+    font-size: 1.2em;
+  }
+}

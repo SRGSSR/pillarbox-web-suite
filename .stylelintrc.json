@@ -9,6 +9,16 @@
       "rules": {
         "scss/at-extend-no-missing-placeholder": null
       }
+    },
+    {
+      "files": [
+        "packages/srg-ssr-theme/scss/_icons.scss",
+        "packages/srg-ssr-theme/scss/components/**/*.scss"
+      ],
+      "rules": {
+        "nesting-selector-no-missing-scoping-root": null,
+        "font-family-no-missing-generic-family-keyword": null
+      }
     }
   ]
 }
