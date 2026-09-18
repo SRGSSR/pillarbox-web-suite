@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
-import babel from '@rollup/plugin-babel';
+import babel from '@rolldown/plugin-babel';
+import babelConfig from '../../babel.config.json' with { type: 'json' };
 import { entry, outDir, output } from './.build.config.js';
 
 
@@ -11,7 +12,12 @@ import { entry, outDir, output } from './.build.config.js';
  * - 'dist/live-dvr-time-display.cjs': CommonJS version with sourcemaps.
  */
 export default defineConfig({
-  esbuild: false,
+  plugins: [
+    babel({
+      presets: babelConfig.presets
+    })
+  ],
+  oxc: false,
   build: {
     outDir: outDir,
     emptyOutDir: false,
@@ -20,7 +26,7 @@ export default defineConfig({
       formats: ['es', 'cjs'],
       entry: entry
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ['video.js'],
       output: [
         {
@@ -31,12 +37,6 @@ export default defineConfig({
           format: 'cjs',
           entryFileNames: `${output}.cjs`
         }
-      ],
-      plugins: [
-        babel({
-          babelHelpers: 'bundled',
-          exclude: 'node_modules/**'
-        })
       ]
     }
   }
