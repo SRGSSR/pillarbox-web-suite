@@ -3,6 +3,16 @@
     "stylelint-config-recommended-scss",
     "stylelint-config-rational-order"
   ],
+  "plugins": ["stylelint-no-unsupported-browser-features"],
+  "rules": {
+    "plugin/no-unsupported-browser-features": [
+      true,
+      {
+        "severity": "warning",
+        "ignore": ["css-nesting"]
+      }
+    ]
+  },
   "overrides": [
     {
       "files": ["packages/*/scss/_preset.scss"],
