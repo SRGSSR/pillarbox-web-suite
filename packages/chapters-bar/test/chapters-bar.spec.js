@@ -90,34 +90,34 @@ describe('ChaptersBar', () => {
   });
 
   describe('onAddChaptersTrack', () => {
-    it('should add chapters and show the bar', () => {
+    it('should add chapters and show the bar', async() => {
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
       const addChapterSpy = vi.spyOn(chaptersBar, 'addChapter');
       const showSpy = vi.spyOn(chaptersBar, 'show');
 
-      chaptersBar.onAddChaptersTrack({ track: textTrack });
+      await chaptersBar.onAddChaptersTrack({ track: textTrack });
 
       expect(addChapterSpy).toHaveBeenCalledTimes(2);
       expect(showSpy).toHaveBeenCalled();
     });
 
-    it('should do nothing if there are no chapters', () => {
+    it('should do nothing if there are no chapters', async() => {
       player.textTracks().getTrackById.mockReturnValueOnce(null);
 
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
       const addChapterSpy = vi.spyOn(chaptersBar, 'addChapter');
 
-      chaptersBar.onAddChaptersTrack({});
+      await chaptersBar.onAddChaptersTrack({});
 
       expect(addChapterSpy).not.toHaveBeenCalled();
     });
   });
 
   describe('onEmptied', () => {
-    it('should hide the bar and clear all chapters', () => {
+    it('should hide the bar and clear all chapters', async() => {
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
 
-      chaptersBar.onAddChaptersTrack({ track: textTrack });
+      await chaptersBar.onAddChaptersTrack({ track: textTrack });
 
       expect(chaptersBar.children()).toHaveLength(2);
 
@@ -132,14 +132,14 @@ describe('ChaptersBar', () => {
   });
 
   describe('onChapterChange', () => {
-    it('should select the active chapter', () => {
+    it('should select the active chapter', async() => {
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
 
       player.trigger('loadeddata');
       const chapterChangeEvent = { data: { text: '{"urn":"urn:two"}' } };
       const scrollToSelectedChapterSpy = vi.spyOn(chaptersBar, 'scrollToSelectedChapter');
 
-      chaptersBar.onAddChaptersTrack({ track: textTrack });
+      await chaptersBar.onAddChaptersTrack({ track: textTrack });
       chaptersBar.onChapterChange(chapterChangeEvent);
 
       const firstChild = chaptersBar.getChildById('urn:one');
@@ -153,10 +153,10 @@ describe('ChaptersBar', () => {
   });
 
   describe('scrollToSelectedChapter', () => {
-    it('should scroll to the selected chapter if it is selected', () => {
+    it('should scroll to the selected chapter if it is selected', async() => {
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
 
-      chaptersBar.onAddChaptersTrack({ track: textTrack });
+      await chaptersBar.onAddChaptersTrack({ track: textTrack });
 
       const chapter = chaptersBar.getChildById('urn:one');
 
@@ -173,10 +173,10 @@ describe('ChaptersBar', () => {
       chaptersBar.dispose();
     });
 
-    it('should not scroll if the chapter is not selected', () => {
+    it('should not scroll if the chapter is not selected', async() => {
       const chaptersBar = new ChaptersBar(player, { chapterOptions: {} });
 
-      chaptersBar.onAddChaptersTrack({ track: textTrack });
+      await chaptersBar.onAddChaptersTrack({ track: textTrack });
 
       const chapter = chaptersBar.getChildById('urn:one');
 
