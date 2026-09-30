@@ -109,12 +109,14 @@ describe('UserPreferences', () => {
       expect(spyOnSave).not.toBeCalled();
     });
 
-    it('should save the playback rate', () => {
+    it('should save the playback rate', async() => {
       const spyOnSave = vi.spyOn(player.userPreferences, 'save');
 
       player.hasStarted(true);
       player.userPreferences.isEmptied = false;
       player.playbackRate(1.420);
+
+      await vi.waitFor(() => expect(spyOnSave).toBeCalled());
 
       expect(spyOnSave).toBeCalledWith({
         playbackRate: 1.420
