@@ -196,7 +196,10 @@ class ChaptersBar extends Component {
    *
    * @private
    */
-  onAddChaptersTrack() {
+  async onAddChaptersTrack() {
+    // https://github.com/videojs/video.js/issues/8519
+    await new Promise(resolve => setTimeout(resolve, 200));
+
     if (!this.player().textTracks().getTrackById('srgssr-chapters')) return;
 
     const chapters = this.chapters();
