@@ -1,3 +1,10 @@
+# [@srgssr/chapters-bar-v1.0.4](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/chapters-bar-v1.0.3...@srgssr/chapters-bar-v1.0.4) (2026-09-30)
+
+
+### Bug Fixes
+
+* **chapters-bar:** display chapters when reloading the page ([da919be](https://github.com/SRGSSR/pillarbox-web-suite/commit/da919be432ea6d34ff0e33dfd10b14c9ff210274))
+
 # [@srgssr/chapters-bar-v1.0.3](https://github.com/SRGSSR/pillarbox-web-suite/compare/@srgssr/chapters-bar-v1.0.2...@srgssr/chapters-bar-v1.0.3) (2026-08-13)
 
 
