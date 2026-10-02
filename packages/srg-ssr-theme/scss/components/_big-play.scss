@@ -1,0 +1,23 @@
+.vjs-big-play-button {
+  width: 6.4em;
+  height: 6.4em;
+  margin: 0;
+  font-size: 1em;
+  background-color: var(--srg-ssr-red);
+  border: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: background-color .25s;
+}
+
+&:hover .vjs-big-play-button,
+.vjs-big-play-button:focus {
+  background-color: var(--srg-ssr-red-dark);
+}
+
+.vjs-big-play-button .vjs-icon-placeholder::before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.6em;
+}

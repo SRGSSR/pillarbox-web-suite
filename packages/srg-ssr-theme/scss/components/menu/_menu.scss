@@ -1,0 +1,52 @@
+.vjs-menu li.vjs-menu-item {
+  align-items: center;
+  justify-content: flex-start;
+  height: 4.8em;
+  padding: 0 2.4em;
+  color: var(--srg-ssr-white);
+  font-size: 1em;
+  text-transform: none;
+  background: transparent;
+  border-radius: 0;
+}
+
+.vjs-menu li.vjs-menu-item:hover,
+.vjs-menu li.vjs-menu-item:focus,
+.vjs-menu li.vjs-menu-item:active {
+  background-color: var(--srg-ssr-menu-hover);
+}
+
+.vjs-menu li.vjs-selected {
+  font-weight: 700;
+}
+
+.vjs-menu li.vjs-menu-item::before {
+  flex: none;
+  width: 1.6em;
+  height: 1.6em;
+  margin-right: 2em;
+  content: '';
+}
+
+.vjs-menu li.vjs-selected::before {
+  $checkmark: inline-asset('assets/icons/checkmark.svg');
+
+  background-color: currentcolor;
+  // stylelint-disable plugin/no-unsupported-browser-features -- -webkit-mask is the fallback
+  -webkit-mask: $checkmark center / contain no-repeat;
+  mask: $checkmark center / contain no-repeat;
+  // stylelint-enable plugin/no-unsupported-browser-features
+}
+
+.vjs-menu-item-text {
+  // stylelint-disable-next-line plugin/no-unsupported-browser-features -- only `clip` and the two-value syntax are partial
+  overflow: hidden;
+  font-size: 1.6em;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.vjs-captions-menu-item .vjs-icon-placeholder::before {
+  display: none;
+}

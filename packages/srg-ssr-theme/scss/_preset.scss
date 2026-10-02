@@ -1,0 +1,26 @@
+@use 'sass:meta';
+@use 'video.js/dist/video-js';
+@use 'variables';
+
+.srg-ssr-theme {
+  @extend .video-js;
+  @include meta.load-css('icons');
+  @include meta.load-css('components/layout');
+  @include meta.load-css('components/big-play');
+  @include meta.load-css('components/menu/menu');
+  @include meta.load-css('components/menu/menu-popup');
+  @include meta.load-css('components/control-bar');
+  @include meta.load-css('components/control');
+  @include meta.load-css('components/control-spacer');
+  @include meta.load-css('components/progress');
+  @include meta.load-css('components/volume');
+  @include meta.load-css('components/live');
+  @include meta.load-css('components/time');
+  @include meta.load-css('components/play-pause');
+  @include meta.load-css('components/text-track');
+  @include meta.load-css('components/playback-rate');
+  @include meta.load-css('components/error');
+  @include meta.load-css('components/loading');
+  @include meta.load-css('components/adaptive');
+  @include meta.load-css('components/skip-buttons');
+}

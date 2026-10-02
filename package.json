@@ -17,6 +17,11 @@
     "packages/web-suite-utils",
     "packages/svg-button",
     "packages/card",
+    "packages/airplay-button",
+    "packages/google-cast-sender",
+    "packages/live-dvr-time-display",
+    "packages/srg-ssr-hotkeys",
+    "packages/user-preferences",
     "packages/*"
   ],
   "scripts": {
