@@ -1,3 +1,5 @@
+@use '../mixins';
+
 .vjs-progress-control .vjs-progress-holder,
 .vjs-progress-control:hover .vjs-progress-holder {
   height: .4em;
@@ -51,19 +53,23 @@
   font-variant-numeric: tabular-nums;
 }
 
-&:not(.vjs-audio):not(.vjs-audio-only-mode) .vjs-progress-control {
-  position: absolute;
-  right: calc(var(--srg-ssr-gutter) + var(--srg-ssr-time-width) + var(--srg-ssr-gap));
-  bottom: calc(var(--srg-ssr-control-size) + var(--srg-ssr-padding));
-  left: calc(var(--srg-ssr-gutter) + var(--srg-ssr-time-width) + var(--srg-ssr-gap));
-  width: auto;
-  margin-left: 0;
+@include mixins.video-layout {
+  .vjs-progress-control {
+    position: absolute;
+    right: calc(var(--srg-ssr-gutter) + var(--srg-ssr-time-width) + var(--srg-ssr-gap));
+    bottom: calc(var(--srg-ssr-control-size) + var(--srg-ssr-padding));
+    left: calc(var(--srg-ssr-gutter) + var(--srg-ssr-time-width) + var(--srg-ssr-gap));
+    width: auto;
+    margin-left: 0;
+  }
 }
 
-&.vjs-audio:not(.vjs-audio-only-mode) .vjs-progress-control {
-  // stylelint-disable-next-line plugin/no-unsupported-browser-features -- the fallback without grid is in _control-bar.scss
-  grid-area: 1 / 2;
-  width: auto;
+@include mixins.audio-layout {
+  .vjs-progress-control {
+    // stylelint-disable-next-line plugin/no-unsupported-browser-features -- the fallback without grid is in _control-bar.scss
+    grid-area: 1 / 2;
+    width: auto;
+  }
 }
 
 &.vjs-audio-only-mode {

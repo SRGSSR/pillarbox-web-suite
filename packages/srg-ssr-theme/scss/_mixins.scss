@@ -1,0 +1,12 @@
+@mixin audio-layout {
+  &.vjs-audio:not(.vjs-audio-only-mode),
+  &.vjs-audio-poster-mode {
+    @content;
+  }
+}
+
+@mixin video-layout {
+  &:not(.vjs-audio):not(.vjs-audio-poster-mode):not(.vjs-audio-only-mode) {
+    @content;
+  }
+}

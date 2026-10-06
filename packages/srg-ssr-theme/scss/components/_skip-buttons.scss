@@ -1,4 +1,6 @@
-&.vjs-audio:not(.vjs-audio-only-mode) {
+@use '../mixins';
+
+@include mixins.audio-layout {
   .vjs-skip-backward-button,
   .vjs-skip-forward-button {
     // stylelint-disable-next-line plugin/no-unsupported-browser-features -- the fallback without grid is in _control-bar.scss

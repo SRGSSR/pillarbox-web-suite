@@ -1,3 +1,5 @@
+@use '../mixins';
+
 &:not(.vjs-audio-only-mode) {
   .vjs-control-bar {
     top: 0;
@@ -14,8 +16,11 @@
     pointer-events: auto;
   }
 
-  &.vjs-has-started.vjs-user-inactive.vjs-playing:not(.vjs-audio) .vjs-control-bar > * {
-    pointer-events: none;
+  &.vjs-has-started.vjs-user-inactive.vjs-playing:not(.vjs-audio):not(.vjs-audio-poster-mode) {
+    .vjs-control-bar > *,
+    .vjs-control-bar::before {
+      pointer-events: none;
+    }
   }
 
   .vjs-control-bar::before,
@@ -32,6 +37,7 @@
     bottom: 0;
     height: 11.4em;
     background: linear-gradient(transparent, rgba(0, 0, 0, .6) 35%);
+    pointer-events: auto;
   }
 
   .vjs-control-bar::after {
@@ -52,35 +58,44 @@
   }
 }
 
-&:not(.vjs-audio):not(.vjs-audio-only-mode) .vjs-control-bar > * {
-  margin-left: var(--srg-ssr-gap);
-}
-
-&.vjs-audio:not(.vjs-audio-only-mode) .vjs-control-bar {
-  // stylelint-disable plugin/no-unsupported-browser-features -- the fallback without grid is below
-  display: grid;
-  // stylelint-disable-next-line property-no-deprecated
-  grid-gap: var(--srg-ssr-gap) 2.4em;
-  grid-template-rows: var(--srg-ssr-control-size) var(--srg-ssr-audio-play-size);
-  grid-template-columns: auto 1fr auto;
-  gap: var(--srg-ssr-gap) 2.4em;
-  // stylelint-enable plugin/no-unsupported-browser-features
-  align-content: end;
-  padding: 0 var(--srg-ssr-gutter) 2em;
-
-  .vjs-custom-control-spacer,
-  .vjs-audio-button,
-  .vjs-subs-caps-button,
-  .vjs-descriptions-button,
-  .vjs-chapters-button,
-  .vjs-picture-in-picture-control,
-  .vjs-fullscreen-control {
-    display: none;
+@include mixins.video-layout {
+  .vjs-control-bar > * {
+    margin-left: var(--srg-ssr-gap);
   }
 }
 
+@include mixins.audio-layout {
+  .vjs-control-bar {
+    // stylelint-disable plugin/no-unsupported-browser-features -- the fallback without grid is below
+    display: grid;
+    // stylelint-disable-next-line property-no-deprecated
+    grid-gap: var(--srg-ssr-gap) 2.4em;
+    grid-template-rows: var(--srg-ssr-control-size) var(--srg-ssr-audio-play-size);
+    grid-template-columns: auto 1fr auto;
+    gap: var(--srg-ssr-gap) 2.4em;
+    // stylelint-enable plugin/no-unsupported-browser-features
+    align-content: end;
+    padding: 0 var(--srg-ssr-gutter) 2em;
+
+    .vjs-custom-control-spacer,
+    .vjs-audio-button,
+    .vjs-subs-caps-button,
+    .vjs-descriptions-button,
+    .vjs-chapters-button,
+    .vjs-picture-in-picture-control,
+    .vjs-fullscreen-control {
+      display: none;
+    }
+  }
+}
+
+&.vjs-audio-poster-mode.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
+  visibility: visible;
+  opacity: 1;
+}
+
 @supports not (display: grid) {
-  &.vjs-audio:not(.vjs-audio-only-mode) {
+  @include mixins.audio-layout {
     .vjs-skip-backward-button,
     .vjs-play-control,
     .vjs-skip-forward-button,

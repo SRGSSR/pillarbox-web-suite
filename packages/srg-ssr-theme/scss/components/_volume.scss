@@ -1,3 +1,5 @@
+@use '../mixins';
+
 .vjs-volume-panel {
   align-items: center;
 }
@@ -11,12 +13,14 @@
   transition-duration: .1s;
 }
 
-&.vjs-audio:not(.vjs-audio-only-mode) .vjs-volume-panel {
-  position: absolute;
-  // stylelint-disable-next-line plugin/no-unsupported-browser-features -- the fallback without grid is in _control-bar.scss
-  grid-area: 2 / 1 / 3 / 2;
-  align-self: center;
-  justify-self: start;
+@include mixins.audio-layout {
+  .vjs-volume-panel {
+    position: absolute;
+    // stylelint-disable-next-line plugin/no-unsupported-browser-features -- the fallback without grid is in _control-bar.scss
+    grid-area: 2 / 1 / 3 / 2;
+    align-self: center;
+    justify-self: start;
+  }
 }
 
 &.vjs-audio-only-mode {

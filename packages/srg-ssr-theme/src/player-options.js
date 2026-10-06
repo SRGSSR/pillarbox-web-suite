@@ -9,7 +9,20 @@ import srgSsrHotkeys from '@srgssr/srg-ssr-hotkeys';
 export default {
   techOrder: ['chromecast', 'html5'],
   userActions: {
-    hotkeys: srgSsrHotkeys
+    hotkeys: srgSsrHotkeys,
+    // eslint-disable-next-line complexity
+    click() {
+      if (!this.hasClass('vjs-layout-tiny') || this.isAudio() || this.audioPosterMode()) {
+        return this.paused() ? this.play() : this.pause();
+      }
+
+      if (this.paused() && this.hasStarted()) {
+        this.toggleClass('srg-ssr-controls-hidden');
+      } else {
+        this.removeClass('srg-ssr-controls-hidden');
+        this.userActive(!this.userActive());
+      }
+    }
   },
   breakpoints: {
     tiny: 640,
