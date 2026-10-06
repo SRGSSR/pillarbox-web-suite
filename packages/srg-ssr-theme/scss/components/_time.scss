@@ -1,3 +1,5 @@
+@use '../mixins';
+
 &:not(.vjs-live) .vjs-current-time,
 &:not(.vjs-live) .vjs-duration,
 &.vjs-liveui .vjs-current-time {
@@ -20,7 +22,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-&:not(.vjs-audio):not(.vjs-audio-only-mode) {
+@include mixins.video-layout {
   .vjs-time-control {
     position: absolute;
     bottom: calc(var(--srg-ssr-control-size) + var(--srg-ssr-padding));
@@ -37,7 +39,7 @@
   }
 }
 
-&.vjs-audio:not(.vjs-audio-only-mode) {
+@include mixins.audio-layout {
   .vjs-time-control {
     width: auto;
   }

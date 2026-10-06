@@ -7,7 +7,8 @@
 }
 
 &.vjs-controls-disabled,
-&.vjs-user-inactive.vjs-playing {
+&.vjs-user-inactive.vjs-playing,
+&.vjs-paused.srg-ssr-controls-hidden {
   --srg-ssr-text-track-offset: 1em;
 }
 
@@ -17,7 +18,8 @@
 
 video::-webkit-media-text-track-display,
 &.vjs-controls-disabled video::-webkit-media-text-track-display,
-&.vjs-user-inactive.vjs-playing video::-webkit-media-text-track-display {
+&.vjs-user-inactive.vjs-playing video::-webkit-media-text-track-display,
+&.vjs-paused.srg-ssr-controls-hidden video::-webkit-media-text-track-display {
   transform: none;
 }
 

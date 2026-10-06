@@ -1,4 +1,6 @@
-&.vjs-audio:not(.vjs-audio-only-mode) {
+@use '../mixins';
+
+@include mixins.audio-layout {
   .vjs-play-control {
     // stylelint-disable-next-line plugin/no-unsupported-browser-features -- the fallback without grid is in _control-bar.scss
     grid-area: 2 / 2;
@@ -21,6 +23,10 @@
 
   .vjs-play-control .vjs-icon-placeholder::before {
     font-size: 3.2em;
+  }
+
+  .vjs-play-control:not(.vjs-playing):not(.vjs-ended) .vjs-icon-placeholder::before {
+    left: .058em;
   }
 }
 

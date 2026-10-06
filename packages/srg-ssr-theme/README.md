@@ -6,7 +6,7 @@ media in three rows:
 
 - **Top right corner**: the AirPlay and Google Cast buttons, the title is omitted.
 - **Progress row**: the current time, the progress control and the duration. On a live stream with
-  DVR the current time shows the time of day, through the
+  DVR the current time shows the clock time, through the
   [Live DVR Time Display](../live-dvr-time-display#readme) component.
 - **Bottom row**: every other control. In the tiny layout, 640px wide or less, the skip backward,
   play and skip forward buttons move to the center of the media.
@@ -57,8 +57,7 @@ const player = pillarbox('my-player', pillarbox.obj.merge(SrgSsrTheme.options, {
 ```
 
 For the [audio only mode](https://docs.videojs.com/player#audioOnlyMode) of video.js, where only
-the control bar is displayed, enable the mode. The controls are laid out in one row, and the
-player is as high as the bar:
+the control bar is displayed, enable the mode. The controls are laid out in one row:
 
 ```javascript
 const player = pillarbox('my-player', pillarbox.obj.merge(SrgSsrTheme.options, {

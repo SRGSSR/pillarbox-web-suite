@@ -9,7 +9,9 @@
   }
 }
 
-.vjs-icon-placeholder::before {
+.vjs-icon-placeholder::before,
+.vjs-big-play-button .vjs-icon-placeholder::before,
+.vjs-audio-button + .vjs-menu .vjs-main-desc-menu-item .vjs-menu-item-text .vjs-icon-placeholder::before {
   font-family: SrgSsrIcons;
 }
 
