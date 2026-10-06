@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import pillarbox from '@srgssr/pillarbox-web';
 import SrgSsrTheme from '../src/srg-ssr-theme.js';
 
@@ -34,6 +34,90 @@ describe('SrgSsrTheme', () => {
       createPlayer('player', SrgSsrTheme.options);
 
       expect(JSON.stringify(SrgSsrTheme.options.controlBar)).toBe(before);
+    });
+
+    describe('click', () => {
+      const { click } = SrgSsrTheme.options.userActions;
+
+      it('should toggle the user activity in the tiny layout', () => {
+        const player = createPlayer('player', SrgSsrTheme.options);
+        const play = vi.spyOn(player, 'play').mockImplementation(() => {});
+
+        player.addClass('vjs-layout-tiny');
+        player.userActive(true);
+        click.call(player);
+
+        expect(player.userActive()).toBe(false);
+
+        click.call(player);
+
+        expect(player.userActive()).toBe(true);
+        expect(play).not.toHaveBeenCalled();
+      });
+
+      it('should toggle the controls with a class when paused in the tiny layout', () => {
+        const player = createPlayer('player', SrgSsrTheme.options);
+
+        vi.spyOn(player, 'paused').mockReturnValue(true);
+        player.addClass('vjs-layout-tiny');
+        player.hasStarted(true);
+        player.userActive(true);
+        click.call(player);
+
+        expect(player.hasClass('srg-ssr-controls-hidden')).toBe(true);
+        expect(player.userActive()).toBe(true);
+
+        click.call(player);
+
+        expect(player.hasClass('srg-ssr-controls-hidden')).toBe(false);
+      });
+
+      it('should not hide the controls with a class once playing or before starting', () => {
+        const player = createPlayer('player', SrgSsrTheme.options);
+        const paused = vi.spyOn(player, 'paused').mockReturnValue(true);
+
+        player.addClass('vjs-layout-tiny');
+        click.call(player);
+
+        expect(player.hasClass('srg-ssr-controls-hidden')).toBe(false);
+
+        player.hasStarted(true);
+        click.call(player);
+        paused.mockReturnValue(false);
+        click.call(player);
+
+        expect(player.hasClass('srg-ssr-controls-hidden')).toBe(false);
+      });
+
+      it('should toggle the playback outside the tiny layout', () => {
+        const player = createPlayer('player', SrgSsrTheme.options);
+        const play = vi.spyOn(player, 'play').mockImplementation(() => {});
+        const pause = vi.spyOn(player, 'pause').mockImplementation(() => {});
+
+        player.removeClass('vjs-layout-tiny');
+        vi.spyOn(player, 'paused').mockReturnValueOnce(true).mockReturnValueOnce(false);
+        click.call(player);
+
+        expect(play).toHaveBeenCalledTimes(1);
+
+        click.call(player);
+
+        expect(pause).toHaveBeenCalledTimes(1);
+      });
+
+      it('should toggle the playback of an audio in the tiny layout', () => {
+        const player = createPlayer('player', SrgSsrTheme.options);
+        const play = vi.spyOn(player, 'play').mockImplementation(() => {});
+
+        vi.spyOn(player, 'paused').mockReturnValue(true);
+        vi.spyOn(player, 'audioPosterMode').mockReturnValue(true);
+        player.addClass('vjs-layout-tiny');
+        player.userActive(true);
+        click.call(player);
+
+        expect(play).toHaveBeenCalledTimes(1);
+        expect(player.userActive()).toBe(true);
+      });
     });
   });
 

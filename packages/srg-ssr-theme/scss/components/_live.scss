@@ -1,3 +1,5 @@
+@use '../mixins';
+
 .vjs-seek-to-live-control {
   justify-content: center;
   min-width: 0;
@@ -30,7 +32,7 @@
   background: var(--srg-ssr-live);
 }
 
-&:not(.vjs-audio):not(.vjs-audio-only-mode) {
+@include mixins.video-layout {
   .vjs-seek-to-live-control,
   .vjs-live-control {
     position: absolute;
@@ -40,7 +42,7 @@
   }
 }
 
-&.vjs-audio:not(.vjs-audio-only-mode) {
+@include mixins.audio-layout {
   .vjs-seek-to-live-control,
   .vjs-live-control {
     // stylelint-disable-next-line plugin/no-unsupported-browser-features -- the fallback without grid is in _control-bar.scss

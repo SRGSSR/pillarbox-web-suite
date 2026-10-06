@@ -1,3 +1,5 @@
+@use '../mixins';
+
 &.vjs-live .vjs-playback-rate {
   display: none;
 }
@@ -10,12 +12,14 @@
   display: none;
 }
 
-&.vjs-audio:not(.vjs-audio-only-mode) .vjs-playback-rate {
-  position: absolute;
-  // stylelint-disable-next-line plugin/no-unsupported-browser-features -- the fallback without grid is in _control-bar.scss
-  grid-area: 2 / 3 / 3 / 4;
-  align-self: center;
-  justify-self: end;
+@include mixins.audio-layout {
+  .vjs-playback-rate {
+    position: absolute;
+    // stylelint-disable-next-line plugin/no-unsupported-browser-features -- the fallback without grid is in _control-bar.scss
+    grid-area: 2 / 3 / 3 / 4;
+    align-self: center;
+    justify-self: end;
+  }
 }
 
 &.vjs-audio-only-mode {
