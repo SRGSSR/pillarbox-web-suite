@@ -1,0 +1,134 @@
+@use '../mixins';
+
+&.vjs-layout-tiny {
+  &:not(.vjs-live) .vjs-progress-control,
+  &.vjs-liveui .vjs-progress-control {
+    display: flex;
+  }
+
+  .vjs-play-progress::before {
+    display: none;
+  }
+
+  .vjs-current-time-display,
+  .vjs-duration-display {
+    font-size: 1.2em;
+  }
+
+  .vjs-menu-button-popup .vjs-menu .vjs-menu-content {
+    min-width: 16em;
+    padding: .4em 0;
+  }
+
+  .vjs-menu li.vjs-menu-item {
+    height: 3.6em;
+    padding: 0 1.6em;
+  }
+
+  .vjs-menu li.vjs-menu-item::before {
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 1.2em;
+  }
+
+  .vjs-menu-item-text {
+    font-size: 1.2em;
+  }
+
+  &:not(.vjs-live) .vjs-playback-rate {
+    display: block;
+  }
+
+  @include mixins.audio-layout {
+    --srg-ssr-gutter: var(--srg-ssr-gutter-tiny);
+
+    .vjs-airplay-button:not(.vjs-hidden) ~ .vjs-google-cast-button {
+      right: calc(var(--srg-ssr-gutter-tiny) + var(--srg-ssr-control-size) + var(--srg-ssr-gap-tiny));
+    }
+
+    // stylelint-disable-next-line plugin/no-unsupported-browser-features -- the controls overlap below 25.6em without support
+    @container (max-width: 25.6em) {
+      .vjs-volume-panel,
+      .vjs-playback-rate {
+        display: none;
+      }
+    }
+  }
+
+  @include mixins.video-layout {
+    --srg-ssr-gap: var(--srg-ssr-gap-tiny);
+    --srg-ssr-gutter: var(--srg-ssr-gutter-tiny);
+    --srg-ssr-time-width: var(--srg-ssr-time-width-tiny);
+    --srg-ssr-center-tiny: calc(50% - (var(--srg-ssr-control-size) + var(--srg-ssr-padding-tiny) - var(--srg-ssr-padding)) / 2);
+
+    .vjs-control-bar {
+      padding:
+        0
+        calc(var(--srg-ssr-gutter) + (var(--srg-ssr-time-width) - var(--srg-ssr-control-size)) / 2)
+        var(--srg-ssr-padding-tiny)
+        calc(var(--srg-ssr-gutter) + (var(--srg-ssr-time-width) - var(--srg-ssr-control-size)) / 2 - var(--srg-ssr-gap));
+    }
+
+    .vjs-control-bar::before {
+      top: 0;
+      height: auto;
+      background: rgba(0, 0, 0, .6);
+      pointer-events: none;
+    }
+
+    &.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar,
+    &.vjs-has-started.vjs-paused.srg-ssr-controls-hidden .vjs-control-bar {
+      visibility: visible;
+      opacity: 0;
+      transition: visibility 1s, opacity 1s;
+    }
+
+    &.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar > *,
+    &.vjs-has-started.vjs-paused.srg-ssr-controls-hidden .vjs-control-bar > * {
+      pointer-events: none;
+    }
+
+    .vjs-time-control,
+    .vjs-progress-control,
+    .vjs-seek-to-live-control,
+    .vjs-live-control {
+      bottom: calc(var(--srg-ssr-control-size) + var(--srg-ssr-padding-tiny));
+    }
+
+    .vjs-skip-backward-button,
+    .vjs-play-control,
+    .vjs-skip-forward-button {
+      position: absolute;
+      top: var(--srg-ssr-center-tiny);
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .vjs-loading-spinner {
+      top: var(--srg-ssr-center-tiny);
+    }
+
+    .vjs-skip-backward-button {
+      margin-left: -8.4em;
+    }
+
+    .vjs-skip-forward-button {
+      margin-left: 8.4em;
+    }
+
+    .vjs-play-control {
+      width: 6.4em;
+      height: 6.4em;
+      margin-left: 0;
+    }
+
+    .vjs-skip-backward-button .vjs-icon-placeholder::before,
+    .vjs-skip-forward-button .vjs-icon-placeholder::before {
+      font-size: 2.8em;
+    }
+
+    .vjs-play-control .vjs-icon-placeholder::before {
+      font-size: 4.2em;
+    }
+  }
+}

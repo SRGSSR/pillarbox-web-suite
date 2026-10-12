@@ -62,5 +62,9 @@
   {
     "name": "srg-ssr-hotkeys",
     "description": "Applies keyboard shortcuts to control the player as defined by the SRG SSR."
+  },
+  {
+    "name": "srg-ssr-theme",
+    "description": "The default video.js theme defined by the SRG SSR."
   }
 ]
