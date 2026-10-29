@@ -11,7 +11,7 @@ font classes.
 
 To use these components, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

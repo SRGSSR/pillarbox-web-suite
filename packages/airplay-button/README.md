@@ -7,7 +7,7 @@ the control bar when AirPlay is available, and opens the system picker on click.
 
 To use this button, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

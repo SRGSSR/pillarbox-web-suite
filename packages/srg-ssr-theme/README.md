@@ -23,7 +23,7 @@ Use an `<audio>` element to get the audio experience, which has a slightly diffe
 
 To use this theme, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

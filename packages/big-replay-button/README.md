@@ -8,7 +8,7 @@ button, and ensuring accessibility support.
 
 To use this component, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

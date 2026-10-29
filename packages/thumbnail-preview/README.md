@@ -8,7 +8,7 @@ breakpoint-specific coefficients to dynamically adjusts based on player size.
 
 To use this plugin, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

@@ -9,7 +9,7 @@ or other middleware logic. Finally, it also supports live streams with DVR capab
 
 To use this plugin, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

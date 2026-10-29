@@ -11,7 +11,7 @@ Add support for keyboard shortcuts to control the player as defined by the SRG S
 
 To use this component, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 
