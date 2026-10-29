@@ -6,7 +6,7 @@ The `ChaptersBar` component displays a scrollable list of video chapters, allowi
 
 To use this component, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

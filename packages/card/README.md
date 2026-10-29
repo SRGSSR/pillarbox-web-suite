@@ -6,7 +6,7 @@ The card component is a suite of three components Card, CardLink and StyledCardB
 
 To use this component, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 
