@@ -8,7 +8,7 @@ the [`srgssr/interval` event](https://web.pillarbox.ch/api/tutorial-Events.html#
 
 To use this component, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

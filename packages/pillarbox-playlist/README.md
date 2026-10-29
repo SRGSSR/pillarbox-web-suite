@@ -8,7 +8,7 @@ repeating content, and dynamic playlist modification.
 
 To use this plugin, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

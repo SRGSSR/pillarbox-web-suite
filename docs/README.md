@@ -11,7 +11,7 @@ These tools provide versatile options for customization and enhancement tailored
 
 To use the components in this suite, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

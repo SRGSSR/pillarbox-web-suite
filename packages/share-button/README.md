@@ -8,7 +8,7 @@ social networks, by email, or copy the link and the embed code.
 
 To use this component, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

@@ -13,7 +13,7 @@ corresponding to the position in the progress bar in a live stream with DVR.
 
 To use this component, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 

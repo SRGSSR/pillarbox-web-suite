@@ -6,7 +6,7 @@ This component persists user preferences across sessions using the browser's `lo
 
 To use this component, you need the following installed on your system:
 
-- Node.js
+- Node.js 24 or later
 
 ## Quick Start
 
