@@ -3,6 +3,8 @@ import '@srgssr/google-cast-sender';
 import '@srgssr/google-cast-sender/button';
 import '@srgssr/live-dvr-time-display';
 import '@srgssr/user-preferences';
+import './chapters-button.js';
+import './chapters-panel.js';
 import './playback-rate-button.js';
 import { version } from '../package.json';
 

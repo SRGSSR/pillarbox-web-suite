@@ -2,7 +2,7 @@
 
 The SRG SSR theme restyles the Pillarbox player with the design used by the SRG SSR players, and
 sets the player options that go with it. Every control is in the control bar, laid out over the
-media in three rows:
+media in four rows:
 
 - **Top right corner**: the AirPlay and Google Cast buttons, the title is omitted.
 - **Progress row**: the current time, the progress control and the duration. On a live stream with
@@ -10,6 +10,8 @@ media in three rows:
   [Live DVR Time Display](../live-dvr-time-display#readme) component.
 - **Bottom row**: every other control. In the tiny layout, 640px wide or less, the skip backward,
   play and skip forward buttons move to the center of the media.
+- **Chapters**: a media that exposes chapters gets a panel at the bottom of the player, built on the
+  [Chapters Bar](../chapters-bar#readme) component.
 - The [SRG SSR keyboard shortcuts](../srg-ssr-hotkeys#readme) are enabled.
 - The [user preferences](../user-preferences#readme) are also enabled. 
 - A custom set of icons.
@@ -77,6 +79,18 @@ const player = pillarbox('my-player', pillarbox.obj.merge(SrgSsrTheme.options, {
 }));
 ```
 
+To leave chapters out altogether, remove both the panel and the chapters button of the tiny
+layout from the control bar:
+
+```javascript
+const player = pillarbox('my-player', pillarbox.obj.merge(SrgSsrTheme.options, {
+  controlBar: {
+    srgSsrChaptersPanel: false,
+    srgSsrChaptersButton: false
+  }
+}));
+```
+
 The theme stylesheet includes the styles of video.js and of the components it relies on, use it
 instead of `pillarbox.min.css`, and give the player element the `srg-ssr-theme` class:
 
@@ -128,30 +142,34 @@ player element in a stylesheet loaded after the theme:
 }
 ```
 
-| Property                      | Default   | Description                                      |
-|-------------------------------|-----------|--------------------------------------------------|
-| `--srg-ssr-white`             | `#fff`    | Menu text, audio play button, rate pill, tooltip |
-| `--srg-ssr-black`             | `#000`    | Audio only bar, icons on light backgrounds       |
-| `--srg-ssr-hover`             | `#dadad2` | Controls under the pointer or focused            |
-| `--srg-ssr-menu`              | `#141411` | Menu background                                  |
-| `--srg-ssr-menu-hover`        | `#2e2d29` | Menu item under the pointer                      |
-| `--srg-ssr-neutral`           | `#6b6960` | Live button, menu scrollbar                      |
-| `--srg-ssr-red`               | `#e31f2b` | Big play button                                  |
-| `--srg-ssr-red-dark`          | `#c91024` | Big play button hover, loading spinner           |
-| `--srg-ssr-progress`          | `#af001e` | Played part of the progress bar                  |
-| `--srg-ssr-live`              | `#ff6669` | Live button at the live edge                     |
-| `--srg-ssr-focus`             | `#78aeda` | Keyboard focus ring                              |
-| `--srg-ssr-control-size`      | `4em`     | Height of the controls                           |
-| `--srg-ssr-gap`               | `.8em`    | Space between the controls                       |
-| `--srg-ssr-gutter`            | `3.2em`   | Space between the controls and the player edges  |
-| `--srg-ssr-padding`           | `.8em`    | Space below the bottom row                       |
-| `--srg-ssr-time-width`        | `9em`     | Width of the current time and duration           |
-| `--srg-ssr-gap-tiny`          | `.4em`    | `--srg-ssr-gap` in the tiny layout               |
-| `--srg-ssr-gutter-tiny`       | `.8em`    | `--srg-ssr-gutter` in the tiny layout            |
-| `--srg-ssr-padding-tiny`      | `.4em`    | `--srg-ssr-padding` in the tiny layout           |
-| `--srg-ssr-time-width-tiny`   | `7em`     | `--srg-ssr-time-width` in the tiny layout        |
-| `--srg-ssr-audio-play-size`   | `4.8em`   | Size of the play and skip buttons, audio layout  |
-| `--srg-ssr-audio-only-height` | `3.2em`   | Height of the controls, audio only mode          |
+| Property                           | Default   | Description                                      |
+|------------------------------------|-----------|--------------------------------------------------|
+| `--srg-ssr-white`                  | `#fff`    | Menu text, audio play button, rate pill, tooltip |
+| `--srg-ssr-black`                  | `#000`    | Audio only bar, icons on light backgrounds       |
+| `--srg-ssr-hover`                  | `#dadad2` | Controls under the pointer or focused            |
+| `--srg-ssr-menu`                   | `#141411` | Menu background                                  |
+| `--srg-ssr-menu-hover`             | `#2e2d29` | Menu item under the pointer                      |
+| `--srg-ssr-neutral`                | `#6b6960` | Live button, menu and chapters scrollbars        |
+| `--srg-ssr-red`                    | `#e31f2b` | Big play button                                  |
+| `--srg-ssr-red-dark`               | `#c91024` | Big play button hover, loading spinner           |
+| `--srg-ssr-progress`               | `#af001e` | Played part of the progress bar                  |
+| `--srg-ssr-live`                   | `#ff6669` | Live button at the live edge                     |
+| `--srg-ssr-focus`                  | `#78aeda` | Keyboard focus ring                              |
+| `--srg-ssr-control-size`           | `4em`     | Height of the controls                           |
+| `--srg-ssr-gap`                    | `.8em`    | Space between the controls                       |
+| `--srg-ssr-gutter`                 | `3.2em`   | Space between the controls and the player edges  |
+| `--srg-ssr-padding`                | `.8em`    | Space below the bottom row                       |
+| `--srg-ssr-time-width`             | `9em`     | Width of the current time and duration           |
+| `--srg-ssr-gap-tiny`               | `.4em`    | `--srg-ssr-gap` in the tiny layout               |
+| `--srg-ssr-gutter-tiny`            | `.8em`    | `--srg-ssr-gutter` in the tiny layout            |
+| `--srg-ssr-padding-tiny`           | `.4em`    | `--srg-ssr-padding` in the tiny layout           |
+| `--srg-ssr-time-width-tiny`        | `7em`     | `--srg-ssr-time-width` in the tiny layout        |
+| `--srg-ssr-chapters-height`        | `20em`    | Height of the chapters panel, once expanded      |
+| `--srg-ssr-chapters-header-height` | `3.2em`   | Height of the title bar of the chapters panel    |
+| `--srg-ssr-chapters-peek`          | `6.4em`   | Height of the chapters panel while peeking       |
+| `--srg-ssr-chapters-card-width`    | `17em`    | Width of a chapter card                          |
+| `--srg-ssr-audio-play-size`        | `4.8em`   | Size of the play and skip buttons, audio layout  |
+| `--srg-ssr-audio-only-height`      | `3.2em`   | Height of the controls, audio only mode          |
 
 ### Icons
 
@@ -194,7 +212,7 @@ The demo page supports several URL parameters that modify the behavior of the vi
 - `debug`: Set this to enable debugging mode.
 - `ilHost`: Specifies the host for the data provider.
 - `language`: Sets the language for the player interface.
-- `urn`: Specifies the URN of the media to load. Default is `urn:rts:video:14683290`. An audio
+- `urn`: Specifies the URN of the media to load. Default is `urn:rts:video:7d410b10-bc54-3acf-856b-6a651a9bb575`. An audio
   URN is played from an `audio` element.
 
 You can combine parameters in the URL like so:

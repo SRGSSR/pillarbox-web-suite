@@ -74,9 +74,10 @@ export default {
       'playbackRateButton',
       'subsCapsButton',
       'descriptionsButton',
-      'chaptersButton',
+      'srgSsrChaptersButton',
       'pictureInPictureToggle',
-      'fullscreenToggle'
+      'fullscreenToggle',
+      'srgSsrChaptersPanel'
     ]
   }
 };
