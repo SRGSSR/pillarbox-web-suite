@@ -60,13 +60,10 @@
     --srg-ssr-gutter: var(--srg-ssr-gutter-tiny);
     --srg-ssr-time-width: var(--srg-ssr-time-width-tiny);
     --srg-ssr-center-tiny: calc(50% - (var(--srg-ssr-control-size) + var(--srg-ssr-padding-tiny) - var(--srg-ssr-padding)) / 2);
+    --srg-ssr-inset-tiny: calc(var(--srg-ssr-gutter) + (var(--srg-ssr-time-width) - var(--srg-ssr-control-size)) / 2);
 
     .vjs-control-bar {
-      padding:
-        0
-        calc(var(--srg-ssr-gutter) + (var(--srg-ssr-time-width) - var(--srg-ssr-control-size)) / 2)
-        var(--srg-ssr-padding-tiny)
-        calc(var(--srg-ssr-gutter) + (var(--srg-ssr-time-width) - var(--srg-ssr-control-size)) / 2 - var(--srg-ssr-gap));
+      padding: 0 var(--srg-ssr-inset-tiny) var(--srg-ssr-padding-tiny) calc(var(--srg-ssr-inset-tiny) - var(--srg-ssr-gap));
     }
 
     .vjs-control-bar::before {

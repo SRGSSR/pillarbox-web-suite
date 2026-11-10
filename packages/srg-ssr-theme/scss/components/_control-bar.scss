@@ -3,11 +3,13 @@
 &:not(.vjs-audio-only-mode) {
   .vjs-control-bar {
     top: 0;
+    bottom: var(--srg-ssr-chapters-offset, 0em);
     z-index: 1;
     align-items: flex-end;
     height: auto;
     padding: 0 var(--srg-ssr-gutter) var(--srg-ssr-padding) calc(var(--srg-ssr-gutter) - var(--srg-ssr-gap));
     background: none;
+    transition: bottom .25s ease;
     pointer-events: none;
     container-type: size;
   }
@@ -59,7 +61,7 @@
 }
 
 @include mixins.video-layout {
-  .vjs-control-bar > * {
+  .vjs-control-bar > :not(.srg-ssr-chapters) {
     margin-left: var(--srg-ssr-gap);
   }
 }
@@ -81,7 +83,7 @@
     .vjs-audio-button,
     .vjs-subs-caps-button,
     .vjs-descriptions-button,
-    .vjs-chapters-button,
+    .srg-ssr-chapters-button,
     .vjs-picture-in-picture-control,
     .vjs-fullscreen-control {
       display: none;
@@ -165,7 +167,7 @@
   .vjs-airplay-button,
   .vjs-google-cast-button,
   .vjs-audio-button,
-  .vjs-chapters-button {
+  .srg-ssr-chapters-button {
     display: none;
   }
 }
