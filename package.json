@@ -63,7 +63,7 @@
     "rimraf": "^6.1.4",
     "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.108.1",
-    "semantic-release": "^25.0.9",
+    "semantic-release": "^26.0.1",
     "semantic-release-monorepo": "^8.0.2",
     "stylelint": "^17.16.0",
     "stylelint-config-rational-order": "^0.1.2",
