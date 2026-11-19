@@ -4,10 +4,12 @@
  * @see https://videojs.com/guides/options/
  * @see https://web.pillarbox.ch/api/tutorial-Options.html
  */
+import pillarbox from '@srgssr/pillarbox-web';
 import srgSsrHotkeys from '@srgssr/srg-ssr-hotkeys';
 
 export default {
   techOrder: ['chromecast', 'html5'],
+  disablePictureInPicture: pillarbox.browser.IS_FIREFOX,
   userActions: {
     hotkeys: srgSsrHotkeys,
     // eslint-disable-next-line complexity
@@ -74,9 +76,10 @@ export default {
       'playbackRateButton',
       'subsCapsButton',
       'descriptionsButton',
-      'chaptersButton',
+      'srgSsrChaptersButton',
       'pictureInPictureToggle',
-      'fullscreenToggle'
+      'fullscreenToggle',
+      'srgSsrChaptersPanel'
     ]
   }
 };

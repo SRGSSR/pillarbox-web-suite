@@ -23,4 +23,5 @@
   @include meta.load-css('components/loading');
   @include meta.load-css('components/adaptive');
   @include meta.load-css('components/skip-buttons');
+  @include meta.load-css('components/chapters');
 }
