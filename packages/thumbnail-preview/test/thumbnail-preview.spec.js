@@ -1,6 +1,5 @@
 import {
   afterEach,
-  beforeAll,
   beforeEach,
   describe,
   expect,
@@ -16,7 +15,7 @@ window.PointerEvent = MouseEvent;
 describe('ThumbnailPreview', () => {
   let player, videoElement;
 
-  beforeAll(() => {
+  beforeEach(() => {
     document.body.innerHTML = '<video id="test-video" class="video-js"></video>';
     videoElement = document.querySelector('#test-video');
   });
